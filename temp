@@ -1,0 +1,65 @@
+
+	else{
+		for(;i<KEY_ROWS;i++){
+			lpinr[i].port = keypad -> keypad_rows[i].port;	
+			lpinr[i].pin = keypad -> keypad_rows[i].pin;	
+			lpinr[i].direction = GPIO_OUT;	
+			switch(keypad -> connection){
+				case(pull_down):
+					lpinr[i].logic= GPIO_HIGH;	
+					break;
+					ret = E_NOT_OK;
+					break;
+				}	
+		}
+		i=0;
+		for(;i<KEY_COLUMNS;i++){
+			lpinc[i].port = keypad -> keypad_columns[i].port;	
+			lpinc[i].pin = keypad -> keypad_columns[i].pin;	
+			lpinc[i].direction = GPIO_IN;	
+			switch(keypad -> connection){
+				case(pull_down):
+					lpinc[i].logic= GPIO_LOW;	
+					break;
+				case(pull_up):
+					lpinc[i].logic= GPIO_HIGH;	
+					break;
+				default:
+					ret = E_NOT_OK;
+					break;
+				}
+			}
+		i=0;
+		for(;i<KEY_ROWS && ret != E_NOT_OK; i++)
+			ret = GPIO_pin_intialize(&(lpinr[i]));
+		for(;i<KEY_COLUMNS && ret != E_NOT_OK; i++)
+			ret = GPIO_direction_intialize(&(lpinc[i]));
+		}
+
+------------
+
+
+		for(;j<50;j++){
+			ret = seven_segment_write_number(&segment1, (uint8)(i%10));
+			GPIO_pin_write_logic(&seg_units_en,GPIO_HIGH);
+			__delay_ms(11);
+			GPIO_pin_write_logic(&seg_units_en,GPIO_LOW);
+			seven_segment_write_number(&segment1, (uint8)(i/10));
+			GPIO_pin_write_logic(&seg_tenth_en,GPIO_HIGH);
+			__delay_ms(11);
+			GPIO_pin_write_logic(&seg_tenth_en,GPIO_LOW);
+		}
+		i++;
+--------------
+final
+//			for(j=0;j<50;j++){
+//				ret = seven_segment_write_number(&segment1,(uint8)i%10);
+//				ret = GPIO_pin_write_logic(&seg_units_en, GPIO_HIGH);
+//				__delay_ms(10);
+//				ret = GPIO_pin_write_logic(&seg_units_en, GPIO_LOW);
+//				ret = seven_segment_write_number(&segment1, (uint8)i/10);
+//				ret = GPIO_pin_write_logic(&seg_tenth_en, GPIO_HIGH);
+//				__delay_ms(10);
+//				ret = GPIO_pin_write_logic(&seg_tenth_en, GPIO_LOW);
+//			}	
+//			(i==99)?(i=0):i++;
