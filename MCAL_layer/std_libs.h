@@ -9,6 +9,7 @@
 #define	STD_LIBS_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 #endif	/* STD_LIBS_H */

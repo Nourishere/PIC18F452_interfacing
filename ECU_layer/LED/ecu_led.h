@@ -24,6 +24,7 @@ typedef struct{
 	uint8 reserved :1;
 }LED_t;
 /******** function prototypes *****/
+STD_ReturnType LED_check_access(LED_t *led);
 STD_ReturnType LED_intialize(LED_t *led);
 STD_ReturnType LED_on(LED_t *led);
 STD_ReturnType LED_off(LED_t *led);

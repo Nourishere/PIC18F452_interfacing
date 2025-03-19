@@ -64,7 +64,19 @@ typedef struct{
 	uint8 logic :1;
 }pin_config_t;
 
+typedef struct{
+	uint8 port :3;
+	uint8 pin  :3;
+	uint8 logic :1;
+}pin_config_simple_t;
+
+typedef struct{
+	uint8 port :3;
+	uint8 pin  :3;
+}port_pin_t;
 /*************** function declarations *****/
+STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
+
 STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
@@ -77,17 +89,6 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-
-
-
-
-
-
-
-
-
-
-
 
 
 

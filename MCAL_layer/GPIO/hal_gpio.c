@@ -12,10 +12,8 @@ volatile uint8 * _TRIS_registers[] = {&TRISA,&TRISB,&TRISC,&TRISD,&TRISE};
 volatile uint8 * _LAT_registers[] = {&LATA,&LATB,&LATC,&LATD,&LATE};
 /*reference to port status register*/
 volatile uint8 * _PORT_registers[] = {&PORTA,&PORTB,&PORTC,&PORTD,&PORTE};
-
-/********** Function definitions **************/
-#if PIN_CONFIGURATION == ENABLED
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config){
+/********** Helper functions ******************/
+STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config){
 	STD_ReturnType ret = E_OK;
 	if ((NULL == _pin_config) || ( (_pin_config -> port == PORTA_I) && ( (_pin_config -> pin) > PORTA_PIN_MAX_NUMBER - 1) ) || 
 		( ((_pin_config -> port == PORTB_I) || (_pin_config -> port == PORTC_I) || (_pin_config -> port == PORTD_I) )
@@ -23,20 +21,27 @@ STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config){
 		 ((_pin_config -> pin) > PORTE_PIN_MAX_NUMBER - 1))	){
 		ret = E_NOT_OK;	
 	}
+	else{}
+	return ret;
+}
+/********** Function definitions **************/
+#if PIN_CONFIGURATION == ENABLED
+STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config){
+	STD_ReturnType ret = E_OK;
+	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) ){
+		ret = E_NOT_OK;	
+	}
 	else{
 		ret = GPIO_pin_direction_intialize(_pin_config);
 		ret = GPIO_pin_write_logic(_pin_config, _pin_config -> logic);
 	}
-
+    return ret;
 }
 #endif
 #if PIN_CONFIGURATION == ENABLED
 STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config){
 	STD_ReturnType ret = E_OK;
-	if ((NULL == _pin_config) || ( (_pin_config -> port == PORTA_I) && ( (_pin_config -> pin) > PORTA_PIN_MAX_NUMBER - 1) ) || 
-		( ((_pin_config -> port == PORTB_I) || (_pin_config -> port == PORTC_I) || (_pin_config -> port == PORTD_I) )
-		 && ( (_pin_config -> pin) > PORTBCD_PIN_MAX_NUMBER - 1) ) ||( (_pin_config -> port == PORTE_I) &&
-		 ((_pin_config -> pin) > PORTE_PIN_MAX_NUMBER - 1))	){
+	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) ){
 		ret = E_NOT_OK;	
 	}
 	else{
@@ -58,10 +63,7 @@ STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config){
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status ){
 
 	STD_ReturnType ret = E_OK;
-	if ((NULL == _pin_config) || ( (_pin_config -> port == PORTA_I) && ( (_pin_config -> pin) > PORTA_PIN_MAX_NUMBER - 1) ) || 
-		( ((_pin_config -> port == PORTB_I) || (_pin_config -> port == PORTC_I) || (_pin_config -> port == PORTD_I) )
-		 && ( (_pin_config -> pin) > PORTBCD_PIN_MAX_NUMBER - 1) ) ||( (_pin_config -> port == PORTE_I) &&
-		 ((_pin_config -> pin) > PORTE_PIN_MAX_NUMBER - 1)) || (NULL == dic_status)	){
+	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) || NULL == dic_status){
 		ret = E_NOT_OK;	
 	}
 	else{
@@ -75,10 +77,7 @@ STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, d
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic){
 
 	STD_ReturnType ret = E_OK;
-	if ((NULL == _pin_config) || ( (_pin_config -> port == PORTA_I) && ( (_pin_config -> pin) > PORTA_PIN_MAX_NUMBER - 1) ) || 
-		( ((_pin_config -> port == PORTB_I) || (_pin_config -> port == PORTC_I) || (_pin_config -> port == PORTD_I) )
-		 && ( (_pin_config -> pin) > PORTBCD_PIN_MAX_NUMBER - 1) ) ||( (_pin_config -> port == PORTE_I) &&
-		 ((_pin_config -> pin) > PORTE_PIN_MAX_NUMBER - 1))	){
+	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) ){
 		ret = E_NOT_OK;	
 	}
 	else{
@@ -101,10 +100,7 @@ STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t lo
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic){
 
 	STD_ReturnType ret = E_OK;
-	if ((NULL == _pin_config) || ( (_pin_config -> port == PORTA_I) && ( (_pin_config -> pin) > PORTA_PIN_MAX_NUMBER - 1) ) || 
-		( ((_pin_config -> port == PORTB_I) || (_pin_config -> port == PORTC_I) || (_pin_config -> port == PORTD_I) )
-		 && ( (_pin_config -> pin) > PORTBCD_PIN_MAX_NUMBER - 1) ) ||( (_pin_config -> port == PORTE_I) &&
-		 ((_pin_config -> pin) > PORTE_PIN_MAX_NUMBER - 1)) || (NULL == logic)	){
+	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) || NULL == logic){
 		ret = E_NOT_OK;	
 	}
 	else{
@@ -118,10 +114,7 @@ STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* lo
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config){
 
 	STD_ReturnType ret = E_OK;
-	if ((NULL == _pin_config) || ( (_pin_config -> port == PORTA_I) && ( (_pin_config -> pin) > PORTA_PIN_MAX_NUMBER - 1) ) || 
-		( ((_pin_config -> port == PORTB_I) || (_pin_config -> port == PORTC_I) || (_pin_config -> port == PORTD_I) )
-		 && ( (_pin_config -> pin) > PORTBCD_PIN_MAX_NUMBER - 1) ) ||( (_pin_config -> port == PORTE_I) &&
-		 ((_pin_config -> pin) > PORTE_PIN_MAX_NUMBER - 1))	){
+	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) ){
 		ret = E_NOT_OK;	
 	}
 	else{
