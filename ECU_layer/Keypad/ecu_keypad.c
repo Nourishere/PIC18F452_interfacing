@@ -43,7 +43,7 @@ static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], 
 
 	return ret;
 }
-STD_ReturnType keypad_intialize(const keypad_t *keypad){
+STD_ReturnType keypad_initialize(const keypad_t *keypad){
 	uint8 i = 0;
 	STD_ReturnType ret = E_OK;
 	pin_config_t lpinr[KEY_ROWS];
@@ -55,9 +55,9 @@ STD_ReturnType keypad_intialize(const keypad_t *keypad){
 		ret = keypad_linit(keypad, lpinc, COL);  	
 
 		for(;i<KEY_ROWS && ret != E_NOT_OK; i++)
-			ret = GPIO_pin_intialize(&(lpinr[i]));
+			ret = GPIO_pin_initialize(&(lpinr[i]));
 		for(;i<KEY_COLUMNS && ret != E_NOT_OK; i++)
-			ret = GPIO_pin_direction_intialize(&(lpinc[i]));
+			ret = GPIO_pin_direction_initialize(&(lpinc[i]));
 	}
 	return ret;
 }

@@ -15,8 +15,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/Relay/../../MCAL_layer/GPIO/hal_gpio.h: 78: STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 [v _GPIO_check_access `(uc ~T0 @X0 0 ef1`*CS263 ]
 "80
-[; ;ECU_layer/Relay/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_intialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+[; ;ECU_layer/Relay/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+[v _GPIO_pin_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
 "35 ECU_layer/Relay/ecu_relay.c
 [; ;ECU_layer/Relay/ecu_relay.c: 35:    GPIO_pin_write_logic(&lpin, GPIO_HIGH);
 [c E2776 0 1 .. ]
@@ -406,10 +406,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5761: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "8 ECU_layer/Relay/ecu_relay.c
-[; ;ECU_layer/Relay/ecu_relay.c: 8: STD_ReturnType relay_intialize(const relay_t * lrelay){
-[v _relay_intialize `(uc ~T0 @X0 1 ef1`*CS266 ]
+[; ;ECU_layer/Relay/ecu_relay.c: 8: STD_ReturnType relay_initialize(const relay_t * lrelay){
+[v _relay_initialize `(uc ~T0 @X0 1 ef1`*CS266 ]
 {
-[e :U _relay_intialize ]
+[e :U _relay_initialize ]
 [v _lrelay `*CS266 ~T0 @X0 1 r1 ]
 [f ]
 "9
@@ -454,8 +454,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/Relay/ecu_relay.c: 16:   else
 [e :U 270 ]
 "17
-[; ;ECU_layer/Relay/ecu_relay.c: 17:    GPIO_pin_intialize(&lpin);
-[e ( _GPIO_pin_intialize (1 -> &U _lpin `*CS263 ]
+[; ;ECU_layer/Relay/ecu_relay.c: 17:    GPIO_pin_initialize(&lpin);
+[e ( _GPIO_pin_initialize (1 -> &U _lpin `*CS263 ]
 [e :U 271 ]
 "18
 [; ;ECU_layer/Relay/ecu_relay.c: 18:  }

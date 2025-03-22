@@ -23,7 +23,7 @@ typedef struct{
 
 /**** function declarations ***/
 static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]);
-STD_ReturnType seven_segment_intialize(const seven_segment_t *seg);
+STD_ReturnType seven_segment_initialize(const seven_segment_t *seg);
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number);
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg,const pin_config_t *seg_tenth_en,
 const pin_config_t *seg_units_en, uint8 number);

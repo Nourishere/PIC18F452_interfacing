@@ -4237,6 +4237,65 @@ char *ctermid(char *);
 
 char *tempnam(const char *, const char *);
 # 11 "ECU_layer/7_Segment/../../MCAL_layer/GPIO/../std_libs.h" 2
+
+# 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 1 3
+# 25 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 3
+# 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/bits/alltypes.h" 1 3
+# 421 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 26 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 2 3
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+
+
+
+
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 13 "ECU_layer/7_Segment/../../MCAL_layer/GPIO/../std_libs.h" 2
 # 12 "ECU_layer/7_Segment/../../MCAL_layer/GPIO/../mcal_std_types.h" 2
 # 1 "ECU_layer/7_Segment/../../MCAL_layer/GPIO/../compiler.h" 1
 # 13 "ECU_layer/7_Segment/../../MCAL_layer/GPIO/../mcal_std_types.h" 2
@@ -4300,14 +4359,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4327,7 +4386,7 @@ typedef struct{
 
 
 static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]);
-STD_ReturnType seven_segment_intialize(const seven_segment_t *seg);
+STD_ReturnType seven_segment_initialize(const seven_segment_t *seg);
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number);
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg,const pin_config_t *seg_tenth_en,
 const pin_config_t *seg_units_en, uint8 number);
@@ -4348,7 +4407,7 @@ static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config
  }
  return ret;
 }
-STD_ReturnType seven_segment_intialize(const seven_segment_t *seg){
+STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  uint8 i = 0;
  pin_config_t lpin[4];
@@ -4362,7 +4421,7 @@ STD_ReturnType seven_segment_intialize(const seven_segment_t *seg){
    }
   }
   for(i=0;i<4;i++)
-   ret = GPIO_pin_intialize(&lpin[i]);
+   ret = GPIO_pin_initialize(&lpin[i]);
  }
  return ret;
 }
@@ -4396,7 +4455,7 @@ const pin_config_t *seg_units_en, uint8 number){
    ret = GPIO_pin_write_logic(seg_units_en, GPIO_LOW);
    ret = seven_segment_write_number(seg, (uint8)number/10);
    ret = GPIO_pin_write_logic(seg_tenth_en, GPIO_HIGH);
-   _delay((unsigned long)((10)*(8000000/4000.0)));
+       _delay((unsigned long)((10)*(8000000/4000.0)));
    ret = GPIO_pin_write_logic(seg_tenth_en, GPIO_LOW);
  }
  return ret;

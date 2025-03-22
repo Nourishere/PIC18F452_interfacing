@@ -6,13 +6,13 @@
  */
 #include "ecu_btn.h"
 //STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
-STD_ReturnType btn_intialize(const btn_t* btn){
+STD_ReturnType btn_initialize(const btn_t* btn){
 	STD_ReturnType ret = E_NOT_OK;
 	if (btn == NULL || (E_NOT_OK == GPIO_check_access(&(btn -> btn_pin))) || ((btn -> btn_pin.direction) == GPIO_OUT) ){
 		ret = E_NOT_OK;
 	}
 	else{
-		ret = GPIO_pin_direction_intialize(&(btn -> btn_pin));
+		ret = GPIO_pin_direction_initialize(&(btn -> btn_pin));
 	}
 	return ret; 
 }

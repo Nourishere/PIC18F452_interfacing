@@ -19,8 +19,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/7_Segment/../../MCAL_layer/GPIO/hal_gpio.h: 78: STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 [v _GPIO_check_access `(uc ~T0 @X0 0 ef1`*CS263 ]
 "80
-[; ;ECU_layer/7_Segment/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_intialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+[; ;ECU_layer/7_Segment/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+[v _GPIO_pin_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
 "52 ECU_layer/7_Segment/ecu_7_segment.c
 [; ;ECU_layer/7_Segment/ecu_7_segment.c: 52:     ret = GPIO_pin_write_logic(&lpin[c], GPIO_HIGH);
 [c E2776 0 1 .. ]
@@ -479,10 +479,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 267 ]
 }
 "24
-[; ;ECU_layer/7_Segment/ecu_7_segment.c: 24: STD_ReturnType seven_segment_intialize(const seven_segment_t *seg){
-[v _seven_segment_intialize `(uc ~T0 @X0 1 ef1`*CS266 ]
+[; ;ECU_layer/7_Segment/ecu_7_segment.c: 24: STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
+[v _seven_segment_initialize `(uc ~T0 @X0 1 ef1`*CS266 ]
 {
-[e :U _seven_segment_intialize ]
+[e :U _seven_segment_initialize ]
 [v _seg `*CS266 ~T0 @X0 1 r1 ]
 [f ]
 "25
@@ -544,8 +544,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 281  ]
 [e :U 280 ]
 "38
-[; ;ECU_layer/7_Segment/ecu_7_segment.c: 38:    ret = GPIO_pin_intialize(&lpin[i]);
-[e = _ret ( _GPIO_pin_intialize (1 -> &U *U + &U _lpin * -> _i `ux -> -> # *U &U _lpin `ui `ux `*CS263 ]
+[; ;ECU_layer/7_Segment/ecu_7_segment.c: 38:    ret = GPIO_pin_initialize(&lpin[i]);
+[e = _ret ( _GPIO_pin_initialize (1 -> &U *U + &U _lpin * -> _i `ux -> -> # *U &U _lpin `ui `ux `*CS263 ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 4 `i 280  ]
 [e :U 281 ]

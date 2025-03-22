@@ -4358,14 +4358,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4391,20 +4391,20 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config){
 }
 
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config){
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if ( ((STD_ReturnType)(0x00) == GPIO_check_access(_pin_config)) ){
   ret = (STD_ReturnType)(0x00);
  }
  else{
-  ret = GPIO_pin_direction_intialize(_pin_config);
+  ret = GPIO_pin_direction_initialize(_pin_config);
   ret = GPIO_pin_write_logic(_pin_config, _pin_config -> logic);
  }
     return ret;
 }
 
 
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config){
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if ( ((STD_ReturnType)(0x00) == GPIO_check_access(_pin_config)) ){
   ret = (STD_ReturnType)(0x00);
@@ -4491,7 +4491,7 @@ STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config){
 }
 
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 direction){
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 direction){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
 
  if ( (port > 5 - 1) || ((port == PORTA_I) && (direction > 0x7F)) ||

@@ -18,6 +18,6 @@
 #include "../MCAL_layer/std_libs.h"
 
 /****** function declarations ******/
-void ecu_init(void);
+STD_ReturnType ecu_init(void);
 #endif	/* ECU_INIT_H */
 

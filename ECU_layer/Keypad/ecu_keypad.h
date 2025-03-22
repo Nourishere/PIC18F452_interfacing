@@ -31,7 +31,7 @@ typedef struct{
 }keypad_t;
 /***** Function declarations ****/
 static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], uint8 rc); 
-STD_ReturnType keypad_intialize(const keypad_t *keypad);
+STD_ReturnType keypad_initialize(const keypad_t *keypad);
 STD_ReturnType keypad_read_number(const keypad_t *keypad, uint8 * value);
 
 #endif	/* ECU_KEYPAD_H */

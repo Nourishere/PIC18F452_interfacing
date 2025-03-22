@@ -24,11 +24,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [c E2776 0 1 .. ]
 [n E2776 . GPIO_LOW GPIO_HIGH  ]
 "80 ECU_layer/Keypad/../../MCAL_layer/GPIO/hal_gpio.h
-[; ;ECU_layer/Keypad/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_intialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+[; ;ECU_layer/Keypad/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+[v _GPIO_pin_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
 "81
-[; ;ECU_layer/Keypad/../../MCAL_layer/GPIO/hal_gpio.h: 81: STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_direction_intialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+[; ;ECU_layer/Keypad/../../MCAL_layer/GPIO/hal_gpio.h: 81: STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
+[v _GPIO_pin_direction_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
 "83
 [; ;ECU_layer/Keypad/../../MCAL_layer/GPIO/hal_gpio.h: 83: STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 [v _GPIO_pin_write_logic `(uc ~T0 @X0 0 ef2`*CS263`E2776 ]
@@ -582,10 +582,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 267 ]
 }
 "46
-[; ;ECU_layer/Keypad/ecu_keypad.c: 46: STD_ReturnType keypad_intialize(const keypad_t *keypad){
-[v _keypad_intialize `(uc ~T0 @X0 1 ef1`*CS266 ]
+[; ;ECU_layer/Keypad/ecu_keypad.c: 46: STD_ReturnType keypad_initialize(const keypad_t *keypad){
+[v _keypad_initialize `(uc ~T0 @X0 1 ef1`*CS266 ]
 {
-[e :U _keypad_intialize ]
+[e :U _keypad_initialize ]
 [v _keypad `*CS266 ~T0 @X0 1 r1 ]
 [f ]
 "47
@@ -625,8 +625,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 288  ]
 [e :U 285 ]
 "58
-[; ;ECU_layer/Keypad/ecu_keypad.c: 58:    ret = GPIO_pin_intialize(&(lpinr[i]));
-[e = _ret ( _GPIO_pin_intialize (1 -> &U *U + &U _lpinr * -> _i `ux -> -> # *U &U _lpinr `ui `ux `*CS263 ]
+[; ;ECU_layer/Keypad/ecu_keypad.c: 58:    ret = GPIO_pin_initialize(&(lpinr[i]));
+[e = _ret ( _GPIO_pin_initialize (1 -> &U *U + &U _lpinr * -> _i `ux -> -> # *U &U _lpinr `ui `ux `*CS263 ]
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 288 ]
 [e $ && < -> _i `i -> 4 `i != -> _ret `i -> -> -> 0 `i `uc `i 285  ]
@@ -638,8 +638,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 292  ]
 [e :U 289 ]
 "60
-[; ;ECU_layer/Keypad/ecu_keypad.c: 60:    ret = GPIO_pin_direction_intialize(&(lpinc[i]));
-[e = _ret ( _GPIO_pin_direction_intialize (1 -> &U *U + &U _lpinc * -> _i `ux -> -> # *U &U _lpinc `ui `ux `*CS263 ]
+[; ;ECU_layer/Keypad/ecu_keypad.c: 60:    ret = GPIO_pin_direction_initialize(&(lpinc[i]));
+[e = _ret ( _GPIO_pin_direction_initialize (1 -> &U *U + &U _lpinc * -> _i `ux -> -> # *U &U _lpinc `ui `ux `*CS263 ]
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 292 ]
 [e $ && < -> _i `i -> 4 `i != -> _ret `i -> -> -> 0 `i `uc `i 289  ]

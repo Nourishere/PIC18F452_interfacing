@@ -26,20 +26,20 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config){
 }
 /********** Function definitions **************/
 #if PIN_CONFIGURATION == ENABLED
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config){
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config){
 	STD_ReturnType ret = E_OK;
 	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) ){
 		ret = E_NOT_OK;	
 	}
 	else{
-		ret = GPIO_pin_direction_intialize(_pin_config);
+		ret = GPIO_pin_direction_initialize(_pin_config);
 		ret = GPIO_pin_write_logic(_pin_config, _pin_config -> logic);
 	}
     return ret;
 }
 #endif
 #if PIN_CONFIGURATION == ENABLED
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config){
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config){
 	STD_ReturnType ret = E_OK;
 	if ( (E_NOT_OK == GPIO_check_access(_pin_config)) ){
 		ret = E_NOT_OK;	
@@ -126,7 +126,7 @@ STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config){
 }
 #endif
 #if PORT_CONFIGURATION == ENABLED
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 direction){
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 direction){
 	STD_ReturnType ret = E_OK;
 	//portA is indexed 0
 	if ( (port > PORT_MAX_NUMBER - 1) || ((port == PORTA_I) && (direction > 0x7F)) || 

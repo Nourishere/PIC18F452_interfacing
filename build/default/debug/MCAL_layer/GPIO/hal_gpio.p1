@@ -53,8 +53,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [c E2784 0 1 2 3 4 .. ]
 [n E2784 . PORTA_I PORTB_I PORTC_I PORTD_I PORTE_I  ]
 "81 MCAL_layer/GPIO/hal_gpio.h
-[; ;MCAL_layer/GPIO/hal_gpio.h: 81: STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_direction_intialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+[; ;MCAL_layer/GPIO/hal_gpio.h: 81: STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
+[v _GPIO_pin_direction_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
 "36 MCAL_layer/GPIO/hal_gpio.c
 [; ;MCAL_layer/GPIO/hal_gpio.c: 36:   ret = GPIO_pin_write_logic(_pin_config, _pin_config -> logic);
 [c E2776 0 1 .. ]
@@ -522,10 +522,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 266 ]
 }
 "29
-[; ;MCAL_layer/GPIO/hal_gpio.c: 29: STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config){
-[v _GPIO_pin_intialize `(uc ~T0 @X0 1 ef1`*CS263 ]
+[; ;MCAL_layer/GPIO/hal_gpio.c: 29: STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config){
+[v _GPIO_pin_initialize `(uc ~T0 @X0 1 ef1`*CS263 ]
 {
-[e :U _GPIO_pin_intialize ]
+[e :U _GPIO_pin_initialize ]
 [v __pin_config `*CS263 ~T0 @X0 1 r1 ]
 [f ]
 "30
@@ -548,8 +548,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 270 ]
 {
 "35
-[; ;MCAL_layer/GPIO/hal_gpio.c: 35:   ret = GPIO_pin_direction_intialize(_pin_config);
-[e = _ret ( _GPIO_pin_direction_intialize (1 __pin_config ]
+[; ;MCAL_layer/GPIO/hal_gpio.c: 35:   ret = GPIO_pin_direction_initialize(_pin_config);
+[e = _ret ( _GPIO_pin_direction_initialize (1 __pin_config ]
 "36
 [; ;MCAL_layer/GPIO/hal_gpio.c: 36:   ret = GPIO_pin_write_logic(_pin_config, _pin_config -> logic);
 [e = _ret ( _GPIO_pin_write_logic (2 , __pin_config -> . *U __pin_config 3 `E2776 ]
@@ -566,10 +566,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 269 ]
 }
 "42
-[; ;MCAL_layer/GPIO/hal_gpio.c: 42: STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config){
-[v _GPIO_pin_direction_intialize `(uc ~T0 @X0 1 ef1`*CS263 ]
+[; ;MCAL_layer/GPIO/hal_gpio.c: 42: STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config){
+[v _GPIO_pin_direction_initialize `(uc ~T0 @X0 1 ef1`*CS263 ]
 {
-[e :U _GPIO_pin_direction_intialize ]
+[e :U _GPIO_pin_direction_initialize ]
 [v __pin_config `*CS263 ~T0 @X0 1 r1 ]
 [f ]
 "43
@@ -842,10 +842,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 294 ]
 }
 "129
-[; ;MCAL_layer/GPIO/hal_gpio.c: 129: STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 direction){
-[v _GPIO_port_direction_intialize `(uc ~T0 @X0 1 ef2`E2784`uc ]
+[; ;MCAL_layer/GPIO/hal_gpio.c: 129: STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 direction){
+[v _GPIO_port_direction_initialize `(uc ~T0 @X0 1 ef2`E2784`uc ]
 {
-[e :U _GPIO_port_direction_intialize ]
+[e :U _GPIO_port_direction_initialize ]
 [v _port `E2784 ~T0 @X0 1 r1 ]
 [v _direction `uc ~T0 @X0 1 r2 ]
 [f ]

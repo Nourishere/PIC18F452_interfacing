@@ -1,2 +1,26 @@
 build/default/production/ECU_layer/LCD/ecu_LCD.p1:  \
-ECU_layer/LCD/ecu_LCD.c 
+ECU_layer/LCD/ecu_LCD.c  \
+ECU_layer/LCD/ecu_LCD.h  \
+ECU_layer/LCD/../ecu_init.h  \
+ECU_layer/LCD/../LED/ecu_led.h  \
+ECU_layer/LCD/../LED/../../MCAL_layer/GPIO/hal_gpio.h  \
+ECU_layer/LCD/../LED/../../MCAL_layer/GPIO/../device_config.h  \
+ECU_layer/LCD/../LED/../../MCAL_layer/GPIO/../mcal_std_types.h  \
+ECU_layer/LCD/../LED/../../MCAL_layer/GPIO/../std_libs.h  \
+ECU_layer/LCD/../LED/../../MCAL_layer/GPIO/../compiler.h  \
+ECU_layer/LCD/../LED/../../MCAL_layer/GPIO/hal_gpio_cfg.h  \
+ECU_layer/LCD/../LED/ecu_led_cfg.h  \
+ECU_layer/LCD/../Push_Button/ecu_btn.h  \
+ECU_layer/LCD/../Push_Button/ecu_btn_cfg.h  \
+ECU_layer/LCD/../Push_Button/../../MCAL_layer/GPIO/hal_gpio.h  \
+ECU_layer/LCD/../Relay/ecu_relay.h  \
+ECU_layer/LCD/../Relay/../../MCAL_layer/GPIO/hal_gpio.h  \
+ECU_layer/LCD/../Relay/ecu_relay_cfg.h  \
+ECU_layer/LCD/../DC_Motor/ecu_dc_motor.h  \
+ECU_layer/LCD/../DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h  \
+ECU_layer/LCD/../7_Segment/ecu_7_segment.h  \
+ECU_layer/LCD/../7_Segment/../../MCAL_layer/GPIO/hal_gpio.h  \
+ECU_layer/LCD/../Keypad/ecu_keypad.h  \
+ECU_layer/LCD/../Keypad/../../MCAL_layer/GPIO/hal_gpio.h  \
+ECU_layer/LCD/../LCD/ecu_LCD.h  \
+ECU_layer/LCD/../../MCAL_layer/std_libs.h 

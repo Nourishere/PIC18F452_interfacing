@@ -4363,14 +4363,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4393,7 +4393,7 @@ typedef struct{
 }LED_t;
 
 STD_ReturnType LED_check_access(LED_t *led);
-STD_ReturnType LED_intialize(LED_t *led);
+STD_ReturnType LED_initialize(LED_t *led);
 STD_ReturnType LED_on(LED_t *led);
 STD_ReturnType LED_off(LED_t *led);
 STD_ReturnType LED_toggle(LED_t *led);
@@ -4418,7 +4418,7 @@ typedef struct{
  btn_mode_t btn_mode;
 }btn_t;
 
-STD_ReturnType btn_intialize(const btn_t* btn);
+STD_ReturnType btn_initialize(const btn_t* btn);
 STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s);
 # 13 "./ECU_layer/ecu_init.h" 2
 # 1 "./ECU_layer/Relay/ecu_relay.h" 1
@@ -4438,7 +4438,7 @@ typedef struct{
 }relay_t;
 
 
-STD_ReturnType relay_intialize(const relay_t * lrelay);
+STD_ReturnType relay_initialize(const relay_t * lrelay);
 STD_ReturnType relay_turn_on(const relay_t * lrelay);
 STD_ReturnType relay_turn_off(const relay_t * lrelay);
 # 14 "./ECU_layer/ecu_init.h" 2
@@ -4459,7 +4459,7 @@ typedef struct{
 
 static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l,pin_config_t * llpin1,pin_config_t * llpin2);
 
-STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l);
+STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_turn_right(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_turn_left(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_stop(const dc_motor_t * dc_motor_l);
@@ -4474,7 +4474,7 @@ typedef struct{
 
 
 static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]);
-STD_ReturnType seven_segment_intialize(const seven_segment_t *seg);
+STD_ReturnType seven_segment_initialize(const seven_segment_t *seg);
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number);
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg,const pin_config_t *seg_tenth_en,
 const pin_config_t *seg_units_en, uint8 number);
@@ -4496,14 +4496,14 @@ typedef struct{
 }keypad_t;
 
 static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], uint8 rc);
-STD_ReturnType keypad_intialize(const keypad_t *keypad);
+STD_ReturnType keypad_initialize(const keypad_t *keypad);
 STD_ReturnType keypad_read_number(const keypad_t *keypad, uint8 * value);
 # 17 "./ECU_layer/ecu_init.h" 2
 # 1 "./ECU_layer/LCD/ecu_LCD.h" 1
 # 11 "./ECU_layer/LCD/ecu_LCD.h"
 # 1 "./ECU_layer/ecu_init.h" 1
 # 12 "./ECU_layer/LCD/ecu_LCD.h" 2
-# 42 "./ECU_layer/LCD/ecu_LCD.h"
+# 44 "./ECU_layer/LCD/ecu_LCD.h"
 typedef struct{
  pin_config_t lcd_rs;
  pin_config_t lcd_en;
@@ -4516,7 +4516,7 @@ static STD_ReturnType lcd_send_4bits(const chr_LCD_t *lcd, uint8 val);
 static STD_ReturnType lcd_send_8bits(const chr_LCD_t *lcd, uint8 val);
 static STD_ReturnType lcd_send_en(const chr_LCD_t *lcd);
 static STD_ReturnType lcd_set_cursor(const chr_LCD_t *lcd, uint8 row, uint8 col);
-STD_ReturnType lcd_intialize(const chr_LCD_t * lcd);
+STD_ReturnType lcd_initialize(const chr_LCD_t * lcd);
 STD_ReturnType lcd_send_command(const chr_LCD_t * lcd, uint8 command);
 STD_ReturnType lcd_send_char_data(const chr_LCD_t * lcd, uint8 data);
 STD_ReturnType lcd_send_char_data_position(const chr_LCD_t * lcd, uint8 row, uint8 col, uint8 data);
@@ -4531,15 +4531,17 @@ static STD_ReturnType int_to_str(uint32 val, uint8* str);
 
 
 
-void ecu_init(void);
+STD_ReturnType ecu_init(void);
 # 12 "./application.h" 2
 
 
 extern seven_segment_t segment1;
 extern keypad_t keypad1;
+extern chr_LCD_t LCD1;
+extern LED_t LED1;
 
 
-void application_intialize();
+void application_initialize();
 # 8 "application.c" 2
 # 1 "/home/nour/programs/microchip/xc8/v2.50/pic/include/builtins.h" 1
 # 9 "application.c" 2
@@ -4550,31 +4552,28 @@ void application_intialize();
 
 
 pin_config_t seg_units_en = {
- PORTC_I,
- PIN2,
- GPIO_OUT,
- GPIO_LOW
-};
-pin_config_t seg_tenth_en = {
- PORTC_I,
+ PORTD_I,
  PIN1,
  GPIO_OUT,
- GPIO_LOW
+ GPIO_HIGH
 };
+
 uint8 i=90, j=0, knum=0, prev;
 int main(void){
     STD_ReturnType ret = (STD_ReturnType)(0x01);
-    application_intialize();
+    application_initialize();
+    ret = lcd_send_char_data_position(&LCD1,1,4,'A');
+
+
         while(1){
 
-   }
+  }
 
 }
 
-void application_intialize(){
+void application_initialize(){
     STD_ReturnType ret = (STD_ReturnType)(0x01);
- ecu_init();
 
-
+ ret = ecu_init();
 
 }

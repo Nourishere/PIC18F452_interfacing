@@ -4359,14 +4359,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4388,7 +4388,7 @@ typedef struct{
 
 static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l,pin_config_t * llpin1,pin_config_t * llpin2);
 
-STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l);
+STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_turn_right(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_turn_left(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_stop(const dc_motor_t * dc_motor_l);
@@ -4421,7 +4421,7 @@ static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l, pin_config_t
 
 
 
-STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l){
+STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  pin_config_t lpin1, lpin2;
  if( ((void*)0) == dc_motor_l)
@@ -4432,8 +4432,8 @@ STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l){
    ret = (STD_ReturnType)(0x00);
 
   else{
-   ret = GPIO_pin_intialize(&(lpin1));
-   ret = GPIO_pin_intialize(&(lpin2));
+   ret = GPIO_pin_initialize(&(lpin1));
+   ret = GPIO_pin_initialize(&(lpin2));
   }
  }
  return ret;

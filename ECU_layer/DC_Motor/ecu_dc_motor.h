@@ -25,7 +25,7 @@ typedef struct{
 /*** function declaration **/
 static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l,pin_config_t * llpin1,pin_config_t * llpin2);
 
-STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l);
+STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_turn_right(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_turn_left(const dc_motor_t * dc_motor_l);
 STD_ReturnType dc_motor_stop(const dc_motor_t * dc_motor_l);

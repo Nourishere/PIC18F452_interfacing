@@ -15,8 +15,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h: 78: STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 [v _GPIO_check_access `(uc ~T0 @X0 0 ef1`*CS263 ]
 "80
-[; ;ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_intialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+[; ;ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+[v _GPIO_pin_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+"44 ECU_layer/LED/ecu_led.c
+[; ;ECU_layer/LED/ecu_led.c: 44:    GPIO_pin_write_logic(&pin_local, GPIO_HIGH);
+[c E2776 0 1 .. ]
+[n E2776 . GPIO_LOW GPIO_HIGH  ]
+"83 ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h
+[; ;ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h: 83: STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
+[v _GPIO_pin_write_logic `(uc ~T0 @X0 0 ef2`*CS263`E2776 ]
+"85
+[; ;ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h: 85: STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
+[v _GPIO_pin_toggle_logic `(uc ~T0 @X0 0 ef1`*CS263 ]
 "52 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -399,10 +409,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5761: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "21 ECU_layer/LED/ecu_led.c
-[; ;ECU_layer/LED/ecu_led.c: 21: STD_ReturnType LED_intialize(LED_t *led){
-[v _LED_intialize `(uc ~T0 @X0 1 ef1`*S266 ]
+[; ;ECU_layer/LED/ecu_led.c: 21: STD_ReturnType LED_initialize(LED_t *led){
+[v _LED_initialize `(uc ~T0 @X0 1 ef1`*S266 ]
 {
-[e :U _LED_intialize ]
+[e :U _LED_initialize ]
 [v _led `*S266 ~T0 @X0 1 r1 ]
 [f ]
 "22
@@ -444,8 +454,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/LED/ecu_led.c: 28:   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
 [e $ ! == -> -> -> 1 `i `uc `i -> ( _GPIO_check_access (1 -> &U _pin_local `*CS263 `i 270  ]
 "29
-[; ;ECU_layer/LED/ecu_led.c: 29:    GPIO_pin_intialize(&pin_local);
-[e ( _GPIO_pin_intialize (1 -> &U _pin_local `*CS263 ]
+[; ;ECU_layer/LED/ecu_led.c: 29:    GPIO_pin_initialize(&pin_local);
+[e ( _GPIO_pin_initialize (1 -> &U _pin_local `*CS263 ]
 [e $U 271  ]
 "30
 [; ;ECU_layer/LED/ecu_led.c: 30:   else
@@ -512,8 +522,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/LED/ecu_led.c: 43:   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
 [e $ ! == -> -> -> 1 `i `uc `i -> ( _GPIO_check_access (1 -> &U _pin_local `*CS263 `i 275  ]
 "44
-[; ;ECU_layer/LED/ecu_led.c: 44:    GPIO_pin_intialize(&pin_local);
-[e ( _GPIO_pin_intialize (1 -> &U _pin_local `*CS263 ]
+[; ;ECU_layer/LED/ecu_led.c: 44:    GPIO_pin_write_logic(&pin_local, GPIO_HIGH);
+[e ( _GPIO_pin_write_logic (2 , -> &U _pin_local `*CS263 . `E2776 1 ]
 [e $U 276  ]
 "45
 [; ;ECU_layer/LED/ecu_led.c: 45:   else
@@ -580,8 +590,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/LED/ecu_led.c: 57:   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
 [e $ ! == -> -> -> 1 `i `uc `i -> ( _GPIO_check_access (1 -> &U _pin_local `*CS263 `i 280  ]
 "58
-[; ;ECU_layer/LED/ecu_led.c: 58:    GPIO_pin_intialize(&pin_local);
-[e ( _GPIO_pin_intialize (1 -> &U _pin_local `*CS263 ]
+[; ;ECU_layer/LED/ecu_led.c: 58:    GPIO_pin_write_logic(&pin_local, GPIO_LOW);
+[e ( _GPIO_pin_write_logic (2 , -> &U _pin_local `*CS263 . `E2776 0 ]
 [e $U 281  ]
 "59
 [; ;ECU_layer/LED/ecu_led.c: 59:   else
@@ -648,8 +658,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/LED/ecu_led.c: 71:   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
 [e $ ! == -> -> -> 1 `i `uc `i -> ( _GPIO_check_access (1 -> &U _pin_local `*CS263 `i 285  ]
 "72
-[; ;ECU_layer/LED/ecu_led.c: 72:    GPIO_pin_intialize(&pin_local);
-[e ( _GPIO_pin_intialize (1 -> &U _pin_local `*CS263 ]
+[; ;ECU_layer/LED/ecu_led.c: 72:    GPIO_pin_toggle_logic(&pin_local);
+[e ( _GPIO_pin_toggle_logic (1 -> &U _pin_local `*CS263 ]
 [e $U 286  ]
 "73
 [; ;ECU_layer/LED/ecu_led.c: 73:   else

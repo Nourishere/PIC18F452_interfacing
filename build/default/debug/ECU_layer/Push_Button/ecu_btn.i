@@ -4361,14 +4361,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4389,17 +4389,17 @@ typedef struct{
  btn_mode_t btn_mode;
 }btn_t;
 
-STD_ReturnType btn_intialize(const btn_t* btn);
+STD_ReturnType btn_initialize(const btn_t* btn);
 STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s);
 # 8 "ECU_layer/Push_Button/ecu_btn.c" 2
 
-STD_ReturnType btn_intialize(const btn_t* btn){
+STD_ReturnType btn_initialize(const btn_t* btn){
  STD_ReturnType ret = (STD_ReturnType)(0x00);
  if (btn == ((void*)0) || ((STD_ReturnType)(0x00) == GPIO_check_access(&(btn -> btn_pin))) || ((btn -> btn_pin.direction) == GPIO_OUT) ){
   ret = (STD_ReturnType)(0x00);
  }
  else{
-  ret = GPIO_pin_direction_intialize(&(btn -> btn_pin));
+  ret = GPIO_pin_direction_initialize(&(btn -> btn_pin));
  }
  return ret;
 }

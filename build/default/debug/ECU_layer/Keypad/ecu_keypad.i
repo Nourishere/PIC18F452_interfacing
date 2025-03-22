@@ -4359,14 +4359,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4394,7 +4394,7 @@ typedef struct{
 }keypad_t;
 
 static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], uint8 rc);
-STD_ReturnType keypad_intialize(const keypad_t *keypad);
+STD_ReturnType keypad_initialize(const keypad_t *keypad);
 STD_ReturnType keypad_read_number(const keypad_t *keypad, uint8 * value);
 # 8 "ECU_layer/Keypad/ecu_keypad.c" 2
 static const uint8 keypad_elements[4][4] =
@@ -4435,7 +4435,7 @@ static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], 
 
  return ret;
 }
-STD_ReturnType keypad_intialize(const keypad_t *keypad){
+STD_ReturnType keypad_initialize(const keypad_t *keypad){
  uint8 i = 0;
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  pin_config_t lpinr[4];
@@ -4447,9 +4447,9 @@ STD_ReturnType keypad_intialize(const keypad_t *keypad){
   ret = keypad_linit(keypad, lpinc, 1);
 
   for(;i<4 && ret != (STD_ReturnType)(0x00); i++)
-   ret = GPIO_pin_intialize(&(lpinr[i]));
+   ret = GPIO_pin_initialize(&(lpinr[i]));
   for(;i<4 && ret != (STD_ReturnType)(0x00); i++)
-   ret = GPIO_pin_direction_intialize(&(lpinc[i]));
+   ret = GPIO_pin_direction_initialize(&(lpinc[i]));
  }
  return ret;
 }

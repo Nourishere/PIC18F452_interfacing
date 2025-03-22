@@ -4359,14 +4359,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4386,7 +4386,7 @@ typedef struct{
 
 
 static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]);
-STD_ReturnType seven_segment_intialize(const seven_segment_t *seg);
+STD_ReturnType seven_segment_initialize(const seven_segment_t *seg);
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number);
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg,const pin_config_t *seg_tenth_en,
 const pin_config_t *seg_units_en, uint8 number);
@@ -4407,7 +4407,7 @@ static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config
  }
  return ret;
 }
-STD_ReturnType seven_segment_intialize(const seven_segment_t *seg){
+STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  uint8 i = 0;
  pin_config_t lpin[4];
@@ -4421,7 +4421,7 @@ STD_ReturnType seven_segment_intialize(const seven_segment_t *seg){
    }
   }
   for(i=0;i<4;i++)
-   ret = GPIO_pin_intialize(&lpin[i]);
+   ret = GPIO_pin_initialize(&lpin[i]);
  }
  return ret;
 }

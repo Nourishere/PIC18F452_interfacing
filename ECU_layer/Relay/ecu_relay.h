@@ -23,7 +23,7 @@ typedef struct{
 }relay_t;
 
 /******** function declarations *******/
-STD_ReturnType relay_intialize(const relay_t * lrelay);
+STD_ReturnType relay_initialize(const relay_t * lrelay);
 STD_ReturnType relay_turn_on(const relay_t * lrelay);
 STD_ReturnType relay_turn_off(const relay_t * lrelay);
 

@@ -12,6 +12,14 @@
 /*********  macros  *************/
 #define _4BIT_MODE 0
 #define _8BIT_MODE 1
+#define LCD_1ROW 1
+#define LCD_2ROWS 2
+#define LCD_4ROWS 4
+#define LCD_ROW1_BASE_LOC 0x80
+#define LCD_ROW2_BASE_LOC 0xC0
+#define LCD_ROW3_BASE_LOC 0x80
+#define LCD_ROW4_BASE_LOC 0x80
+//Commands
 #define LCD_CLS 0x01
 #define LCD_RET_HOME 0x02
 #define LCD_ENTRY_MODE 0x06
@@ -29,19 +37,13 @@
 #define LCD_8BIT_1LINE_5x10 0x34
 #define LCD_8BIT_2LINE_5x8  0x38
 #define LCD_8BIT_2LINE_5x10 0x3C
-#define LCD_BASE_CUR_ADD 0x80
-#define LCD_CGRAM_START 0x40
-#define LCD_1ROW 1
-#define LCD_2ROWS 2
-#define LCD_4ROWS 4
-#define LCD_ROW1_BASE_LOC 0x80
-#define LCD_ROW2_BASE_LOC 0xC0
-#define LCD_ROW3_BASE_LOC 0x80
-#define LCD_ROW4_BASE_LOC 0x80
+#define LCD_SET_DDRAM_START 0x80
+#define LCD_SET_CGRAM_START 0x40
+
 /********* data types ***********/
 typedef struct{
 	pin_config_t lcd_rs; /* register select */ 
-	pin_config_t lcd_en; 
+	pin_config_t lcd_en; /* enable pin */ 
 	uint8 bit_mode;
 	pin_config_t lcd_data[8];
 }chr_LCD_t;
@@ -51,7 +53,7 @@ static STD_ReturnType lcd_send_4bits(const chr_LCD_t *lcd, uint8 val);
 static STD_ReturnType lcd_send_8bits(const chr_LCD_t *lcd, uint8 val);
 static STD_ReturnType lcd_send_en(const chr_LCD_t *lcd);
 static STD_ReturnType lcd_set_cursor(const chr_LCD_t *lcd, uint8 row, uint8 col);
-STD_ReturnType lcd_intialize(const chr_LCD_t * lcd);
+STD_ReturnType lcd_initialize(const chr_LCD_t * lcd);
 STD_ReturnType lcd_send_command(const chr_LCD_t * lcd, uint8 command);
 STD_ReturnType lcd_send_char_data(const chr_LCD_t * lcd, uint8 data);
 STD_ReturnType lcd_send_char_data_position(const chr_LCD_t * lcd, uint8 row, uint8 col, uint8 data);

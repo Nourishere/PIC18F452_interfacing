@@ -1,11 +1,11 @@
 #include "ecu_relay.h"
 /*
- *@brief: intializes a relay object 
+ *@brief: initializes a relay object 
  *@param: a pointer to a relay_t struct
  *@return: returns status of operation 
  */
 
-STD_ReturnType relay_intialize(const relay_t * lrelay){
+STD_ReturnType relay_initialize(const relay_t * lrelay){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lrelay)
 		ret = E_NOT_OK;
@@ -14,7 +14,7 @@ STD_ReturnType relay_intialize(const relay_t * lrelay){
 		if (GPIO_check_access(&lpin) == E_NOT_OK)
 			ret = E_NOT_OK;
 		else
-			GPIO_pin_intialize(&lpin);
+			GPIO_pin_initialize(&lpin);
 	}
 	return ret;
 }

@@ -39,12 +39,12 @@ static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l, pin_config_t
 }
 
 /*
- *@brief: intialize a two pin motor
+ *@brief: initialize a two pin motor
  *@param: (dc_motor_l) which contains an array of two 
  *		  dc_motor_simple_t each containing port,pin, and init state.
  *@return: returns status for the operation
  */
-STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l){
+STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l){
 	STD_ReturnType ret = E_OK;
 	pin_config_t lpin1, lpin2;
 	if( NULL == dc_motor_l)
@@ -55,8 +55,8 @@ STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l){
 			ret = E_NOT_OK;
 			
 		else{
-			ret = GPIO_pin_intialize(&(lpin1));
-			ret = GPIO_pin_intialize(&(lpin2));
+			ret = GPIO_pin_initialize(&(lpin1));
+			ret = GPIO_pin_initialize(&(lpin2));
 		}
 	}
 	return ret;

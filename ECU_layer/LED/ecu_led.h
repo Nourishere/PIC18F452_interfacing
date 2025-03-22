@@ -25,12 +25,10 @@ typedef struct{
 }LED_t;
 /******** function prototypes *****/
 STD_ReturnType LED_check_access(LED_t *led);
-STD_ReturnType LED_intialize(LED_t *led);
+STD_ReturnType LED_initialize(LED_t *led);
 STD_ReturnType LED_on(LED_t *led);
 STD_ReturnType LED_off(LED_t *led);
 STD_ReturnType LED_toggle(LED_t *led);
-
-
 
 #endif	/* ECU_LED_H */
 

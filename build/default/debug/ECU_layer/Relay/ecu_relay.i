@@ -4353,14 +4353,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4381,7 +4381,7 @@ typedef struct{
 }relay_t;
 
 
-STD_ReturnType relay_intialize(const relay_t * lrelay);
+STD_ReturnType relay_initialize(const relay_t * lrelay);
 STD_ReturnType relay_turn_on(const relay_t * lrelay);
 STD_ReturnType relay_turn_off(const relay_t * lrelay);
 # 2 "ECU_layer/Relay/ecu_relay.c" 2
@@ -4391,7 +4391,7 @@ STD_ReturnType relay_turn_off(const relay_t * lrelay);
 
 
 
-STD_ReturnType relay_intialize(const relay_t * lrelay){
+STD_ReturnType relay_initialize(const relay_t * lrelay){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if(((void*)0) == lrelay)
   ret = (STD_ReturnType)(0x00);
@@ -4400,7 +4400,7 @@ STD_ReturnType relay_intialize(const relay_t * lrelay){
   if (GPIO_check_access(&lpin) == (STD_ReturnType)(0x00))
    ret = (STD_ReturnType)(0x00);
   else
-   GPIO_pin_intialize(&lpin);
+   GPIO_pin_initialize(&lpin);
  }
  return ret;
 }

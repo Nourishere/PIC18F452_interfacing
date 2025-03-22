@@ -19,8 +19,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 78: STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 [v _GPIO_check_access `(uc ~T0 @X0 0 ef1`*CS263 ]
 "80
-[; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_intialize `(uc ~T0 @X0 0 ef1`*CS263 ]
+[; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 80: STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+[v _GPIO_pin_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
 "77 ECU_layer/DC_Motor/ecu_dc_motor.c
 [; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 77:   ret = GPIO_pin_write_logic(&(lpin1), GPIO_HIGH);
 [c E2776 0 1 .. ]
@@ -470,10 +470,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 267 ]
 }
 "47
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 47: STD_ReturnType dc_motor_intialize(const dc_motor_t * dc_motor_l){
-[v _dc_motor_intialize `(uc ~T0 @X0 1 ef1`*CS266 ]
+[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 47: STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l){
+[v _dc_motor_initialize `(uc ~T0 @X0 1 ef1`*CS266 ]
 {
-[e :U _dc_motor_intialize ]
+[e :U _dc_motor_initialize ]
 [v _dc_motor_l `*CS266 ~T0 @X0 1 r1 ]
 [f ]
 "48
@@ -510,11 +510,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 273 ]
 {
 "58
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 58:    ret = GPIO_pin_intialize(&(lpin1));
-[e = _ret ( _GPIO_pin_intialize (1 -> &U _lpin1 `*CS263 ]
+[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 58:    ret = GPIO_pin_initialize(&(lpin1));
+[e = _ret ( _GPIO_pin_initialize (1 -> &U _lpin1 `*CS263 ]
 "59
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 59:    ret = GPIO_pin_intialize(&(lpin2));
-[e = _ret ( _GPIO_pin_intialize (1 -> &U _lpin2 `*CS263 ]
+[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 59:    ret = GPIO_pin_initialize(&(lpin2));
+[e = _ret ( _GPIO_pin_initialize (1 -> &U _lpin2 `*CS263 ]
 "60
 [; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 60:   }
 }

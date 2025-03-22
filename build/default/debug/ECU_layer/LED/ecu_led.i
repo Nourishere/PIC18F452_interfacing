@@ -4360,14 +4360,14 @@ typedef struct{
 
 STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_pin_intialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_direction_intialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
+STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
 
-STD_ReturnType GPIO_port_direction_intialize(port_index port, uint8 logic);
+STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status);
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
@@ -4390,13 +4390,13 @@ typedef struct{
 }LED_t;
 
 STD_ReturnType LED_check_access(LED_t *led);
-STD_ReturnType LED_intialize(LED_t *led);
+STD_ReturnType LED_initialize(LED_t *led);
 STD_ReturnType LED_on(LED_t *led);
 STD_ReturnType LED_off(LED_t *led);
 STD_ReturnType LED_toggle(LED_t *led);
 # 9 "ECU_layer/LED/ecu_led.c" 2
 # 21 "ECU_layer/LED/ecu_led.c"
-STD_ReturnType LED_intialize(LED_t *led){
+STD_ReturnType LED_initialize(LED_t *led){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if ( (((void*)0) == led) ){
   ret = (STD_ReturnType)(0x00);
@@ -4404,7 +4404,7 @@ STD_ReturnType LED_intialize(LED_t *led){
  else{
   pin_config_t pin_local = {.port = led -> port, .pin = led -> pin, .direction = GPIO_OUT, .logic = led -> LED_init_status};
   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
-   GPIO_pin_intialize(&pin_local);
+   GPIO_pin_initialize(&pin_local);
   else
    ret = (STD_ReturnType)(0x00);
  }
@@ -4419,7 +4419,7 @@ STD_ReturnType LED_on(LED_t *led){
  else{
   pin_config_t pin_local = {.port = led -> port, .pin = led -> pin, .direction = GPIO_OUT, .logic = led -> LED_init_status};
   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
-   GPIO_pin_intialize(&pin_local);
+   GPIO_pin_write_logic(&pin_local, GPIO_HIGH);
   else
    ret = (STD_ReturnType)(0x00);
  }
@@ -4433,7 +4433,7 @@ STD_ReturnType LED_off(LED_t *led){
  else{
   pin_config_t pin_local = {.port = led -> port, .pin = led -> pin, .direction = GPIO_OUT, .logic = led -> LED_init_status};
   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
-   GPIO_pin_intialize(&pin_local);
+   GPIO_pin_write_logic(&pin_local, GPIO_LOW);
   else
    ret = (STD_ReturnType)(0x00);
  }
@@ -4447,7 +4447,7 @@ STD_ReturnType LED_toggle(LED_t *led){
  else{
   pin_config_t pin_local = {.port = led -> port, .pin = led -> pin, .direction = GPIO_OUT, .logic = led -> LED_init_status};
   if((STD_ReturnType)(0x01) == GPIO_check_access(&pin_local))
-   GPIO_pin_intialize(&pin_local);
+   GPIO_pin_toggle_logic(&pin_local);
   else
    ret = (STD_ReturnType)(0x00);
  }

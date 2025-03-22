@@ -25,7 +25,7 @@ typedef struct{
 	btn_mode_t btn_mode;
 }btn_t;
 /* ****** Function declarations * */
-STD_ReturnType btn_intialize(const btn_t* btn);
+STD_ReturnType btn_initialize(const btn_t* btn);
 STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s);
 #endif	/* ECU_BTN_H */
 

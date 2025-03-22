@@ -21,7 +21,7 @@ static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config
 	}
 	return ret;
 }
-STD_ReturnType seven_segment_intialize(const seven_segment_t *seg){
+STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
 	STD_ReturnType ret = E_OK;
 	uint8 i = 0;
 	pin_config_t lpin[4];
@@ -35,7 +35,7 @@ STD_ReturnType seven_segment_intialize(const seven_segment_t *seg){
 			}
 		}
 		for(i=0;i<4;i++)
-			ret = GPIO_pin_intialize(&lpin[i]);
+			ret = GPIO_pin_initialize(&lpin[i]);
 	}	
 	return ret;
 }

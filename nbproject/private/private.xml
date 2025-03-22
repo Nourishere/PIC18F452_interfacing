@@ -5,12 +5,8 @@
         <group>
             <file>file:/home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/ecu_init.h</file>
             <file>file:/home/nour/MPLABXProjects/interfacing_main.X/application.c</file>
-            <file>file:/home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/GPIO/hal_gpio.c</file>
-            <file>file:/home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/7_Segment/ecu_7_segment.h</file>
             <file>file:/home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/LCD/ecu_LCD.h</file>
-            <file>file:/home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/7_Segment/ecu_7_segment.c</file>
             <file>file:/home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/ecu_init.c</file>
-            <file>file:/home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/GPIO/hal_gpio.h</file>
             <file>file:/home/nour/MPLABXProjects/interfacing_main.X/application.h</file>
             <file>file:/home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/LCD/ecu_LCD.c</file>
         </group>
