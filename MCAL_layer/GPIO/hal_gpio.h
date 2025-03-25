@@ -13,7 +13,7 @@
 #include <xc.h>
 #include "../mcal_std_types.h"
 #include "hal_gpio_cfg.h"
-//#include "/home/nour/programs/microchip/xc8/v2.50/pic/include/proc/pic18f452.h"
+
 /*************** macros ********************/
 #define PORT_MAX_NUMBER 5
 #define PORTA_PIN_MAX_NUMBER 7
@@ -27,8 +27,8 @@
 #define CLR_BIT(REG,BIT_POS) (REG &= ~(1 << BIT_POS))
 #define TOGG_BIT(REG,BIT_POS) (REG ^= (1 << BIT_POS))
 #define READ_BIT(REG,BIT_POS) ((REG  >> BIT_POS) & BIT_MASK)
-/*************** data types ****************/
 
+/*************** data types ****************/
 typedef enum{
 	GPIO_LOW,
 	GPIO_HIGH
@@ -89,11 +89,5 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-
-
-
-
-
-
 #endif	/* HAL_GPIO_H */
 
