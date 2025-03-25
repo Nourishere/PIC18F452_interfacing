@@ -7,6 +7,13 @@
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "ECU_layer/Relay/ecu_relay.c" 2
+
+
+
+
+
+
+
 # 1 "ECU_layer/Relay/ecu_relay.h" 1
 # 11 "ECU_layer/Relay/ecu_relay.h"
 # 1 "ECU_layer/Relay/../../MCAL_layer/GPIO/hal_gpio.h" 1
@@ -4313,7 +4320,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4321,7 +4327,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4339,13 +4344,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4355,7 +4358,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4373,19 +4376,16 @@ typedef enum {
  relay_off,
  relay_on
 }relay_status;
-
 typedef struct{
  uint8 port : 3;
  uint8 pin : 3;
  uint8 state : 1;
 }relay_t;
 
-
 STD_ReturnType relay_initialize(const relay_t * lrelay);
 STD_ReturnType relay_turn_on(const relay_t * lrelay);
 STD_ReturnType relay_turn_off(const relay_t * lrelay);
-# 2 "ECU_layer/Relay/ecu_relay.c" 2
-
+# 9 "ECU_layer/Relay/ecu_relay.c" 2
 
 
 
@@ -4408,7 +4408,6 @@ STD_ReturnType relay_initialize(const relay_t * lrelay){
 
 
 
-
 STD_ReturnType relay_turn_on(const relay_t * lrelay){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if(((void*)0) == lrelay)
@@ -4427,7 +4426,6 @@ STD_ReturnType relay_turn_on(const relay_t * lrelay){
 
 
 
-
 STD_ReturnType relay_turn_off(const relay_t * lrelay){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if(((void*)0) == lrelay)
@@ -4439,6 +4437,5 @@ STD_ReturnType relay_turn_off(const relay_t * lrelay){
   else
    GPIO_pin_write_logic(&lpin, GPIO_LOW);
  }
-
  return ret;
 }

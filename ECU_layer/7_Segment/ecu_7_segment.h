@@ -7,9 +7,9 @@
 #ifndef ECU_7_SEGMENT_H
 #define	ECU_7_SEGMENT_H
 #define _XTAL_FREQ 8000000
-/**** includes ****/
+/***************** includes ***************************/
 #include "../../MCAL_layer/GPIO/hal_gpio.h"
-/**** macros *****/
+/******************** macros **************************/
 #define OFF 0
 #define ON 1
 #define COM_cathode 0
@@ -18,15 +18,13 @@
 typedef struct{
 	port_pin_t seven_seg_pins[4];
 	uint8 start_status;		
-	uint8 seg_type;
 }seven_segment_t;
 
-/**** function declarations ***/
+/*************** function declarations *****************/
 static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]);
 STD_ReturnType seven_segment_initialize(const seven_segment_t *seg);
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number);
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg,const pin_config_t *seg_tenth_en,
-const pin_config_t *seg_units_en, uint8 number);
+												 const pin_config_t *seg_units_en, uint8 number);
 
 #endif	/* ECU_7_SEGMENT_H */
-

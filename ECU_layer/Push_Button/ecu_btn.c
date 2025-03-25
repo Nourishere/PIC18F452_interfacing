@@ -5,9 +5,14 @@
  * Created on November 26, 2024, 2:11 PM
  */
 #include "ecu_btn.h"
-//STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
+
+/*@brief: Initializes a push button.
+ *@param: A pointer to a type btn_t.
+ *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
+ */       
 STD_ReturnType btn_initialize(const btn_t* btn){
 	STD_ReturnType ret = E_NOT_OK;
+	// The button cannot be set for output for instace.
 	if (btn == NULL || (E_NOT_OK == GPIO_check_access(&(btn -> btn_pin))) || ((btn -> btn_pin.direction) == GPIO_OUT) ){
 		ret = E_NOT_OK;
 	}
@@ -16,6 +21,11 @@ STD_ReturnType btn_initialize(const btn_t* btn){
 	}
 	return ret; 
 }
+/*@brief: Reads the state of a push button.
+ *@param: A pointer to a type btn_t defining a push button 
+ *    	  and a pointer to a type btn_status containing the button state for return.
+ *@return: E_OK if operation is successful and E_NOT_OK otherwise.
+ */       
 STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s){
 	STD_ReturnType ret = E_NOT_OK;
 		logic_t btn_logic = GPIO_LOW;
@@ -24,25 +34,29 @@ STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s){
 	}
 	else{
 		GPIO_pin_read_logic(&(btn -> btn_pin), &btn_logic);
-		if (btn -> btn_mode == btn_AL){	
-			if (GPIO_HIGH == btn_logic){
-				*btn_s = btn_free; 	
-			}
-			else{
-				*btn_s = btn_pressed;	
-			}	
+		switch (btn -> btn_mode){	
+			case(btn_AL):
+				if (GPIO_HIGH == btn_logic){
+					*btn_s = btn_free; 	
+					break;
+				}
+				else{
+					*btn_s = btn_pressed;	
+					break;
+				}	
+			case(btn_AH):
+				if (GPIO_HIGH == btn_logic){
+					*btn_s = btn_pressed;	
+					break;
+				}
+				else{
+					*btn_s = btn_free;
+					break;
+				}
+			default:
+				ret = E_NOT_OK;
+				break;		
 		}
-		else if (btn -> btn_mode == btn_AH){
-			if (GPIO_HIGH == btn_logic){
-				*btn_s = btn_pressed;	
-			}
-			else{
-				*btn_s = btn_free;
-			}	
-
-		}
-		else{}
-		ret = E_OK;
 	}
 	return ret;
 }

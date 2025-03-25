@@ -13,6 +13,7 @@
 
 
 
+
 # 1 "ECU_layer/Keypad/ecu_keypad.h" 1
 # 11 "ECU_layer/Keypad/ecu_keypad.h"
 # 1 "ECU_layer/Keypad/../../MCAL_layer/GPIO/hal_gpio.h" 1
@@ -4319,7 +4320,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4327,7 +4327,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4345,13 +4344,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4361,7 +4358,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4396,12 +4393,23 @@ typedef struct{
 static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], uint8 rc);
 STD_ReturnType keypad_initialize(const keypad_t *keypad);
 STD_ReturnType keypad_read_number(const keypad_t *keypad, uint8 * value);
-# 8 "ECU_layer/Keypad/ecu_keypad.c" 2
+# 9 "ECU_layer/Keypad/ecu_keypad.c" 2
+
+
+
+
+
+
 static const uint8 keypad_elements[4][4] =
 {{'1','2','3','A'},
  {'4','5','6','B'},
  {'7','8','9','C'},
  {'*','0','#','D'}};
+
+
+
+
+
 static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], uint8 rc){
  uint8 i = 0;
  STD_ReturnType ret = (STD_ReturnType)(0x01);
@@ -4435,6 +4443,10 @@ static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], 
 
  return ret;
 }
+
+
+
+
 STD_ReturnType keypad_initialize(const keypad_t *keypad){
  uint8 i = 0;
  STD_ReturnType ret = (STD_ReturnType)(0x01);

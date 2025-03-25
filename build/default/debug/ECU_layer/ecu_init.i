@@ -4321,7 +4321,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4329,7 +4328,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4347,13 +4345,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4363,7 +4359,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4377,12 +4373,10 @@ STD_ReturnType GPIO_port_toggle_logic(port_index port);
 # 1 "ECU_layer/LED/ecu_led_cfg.h" 1
 # 13 "ECU_layer/LED/ecu_led.h" 2
 
-
 typedef enum{
  LED_OFF,
  LED_ON
 }LED_status;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4428,13 +4422,11 @@ typedef enum {
  relay_off,
  relay_on
 }relay_status;
-
 typedef struct{
  uint8 port : 3;
  uint8 pin : 3;
  uint8 state : 1;
 }relay_t;
-
 
 STD_ReturnType relay_initialize(const relay_t * lrelay);
 STD_ReturnType relay_turn_on(const relay_t * lrelay);
@@ -4446,14 +4438,9 @@ typedef enum{
  dc_motor_off,
  dc_motor_on
 }dc_motor_logic;
-
-
-
-
 typedef struct{
  pin_config_simple_t dc_motor_arr[2];
 }dc_motor_t;
-
 
 static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l,pin_config_t * llpin1,pin_config_t * llpin2);
 
@@ -4467,7 +4454,6 @@ STD_ReturnType dc_motor_stop(const dc_motor_t * dc_motor_l);
 typedef struct{
  port_pin_t seven_seg_pins[4];
  uint8 start_status;
- uint8 seg_type;
 }seven_segment_t;
 
 
@@ -4475,7 +4461,7 @@ static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config
 STD_ReturnType seven_segment_initialize(const seven_segment_t *seg);
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number);
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg,const pin_config_t *seg_tenth_en,
-const pin_config_t *seg_units_en, uint8 number);
+             const pin_config_t *seg_units_en, uint8 number);
 # 16 "ECU_layer/ecu_init.h" 2
 # 1 "ECU_layer/Keypad/ecu_keypad.h" 1
 # 19 "ECU_layer/Keypad/ecu_keypad.h"
@@ -4595,8 +4581,7 @@ seven_segment_t segment1 = {
  PIN2,
  PORTA_I,
  PIN3,
- 0,
- 1
+ 0
 };
 dc_motor_t motor1 = {
  PORTA_I,

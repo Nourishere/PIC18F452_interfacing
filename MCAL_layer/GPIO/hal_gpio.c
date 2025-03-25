@@ -6,6 +6,7 @@
  */
 
 #include "hal_gpio.h"
+
 /*reference to data direction registers*/
 volatile uint8 * _TRIS_registers[] = {&TRISA,&TRISB,&TRISC,&TRISD,&TRISE};
 /*reference to data latch register*/

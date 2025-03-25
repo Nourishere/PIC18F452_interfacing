@@ -78,8 +78,7 @@ seven_segment_t segment1 = {
 	PIN2,
 	PORTA_I,	
 	PIN3,
-	OFF,
-	COM_anode
+	OFF
 };
 dc_motor_t motor1 = {
 	PORTA_I,
@@ -140,4 +139,3 @@ STD_ReturnType ecu_init(void){
     ret = lcd_initialize(&LCD1);
     return ret;
 }
-

@@ -6,18 +6,11 @@
  */
 
 #include "ecu_led.h"
-/* ******** Helper functions ******* */
-//STD_ReturnType LED_check_access(LED_t *led){
-//	STD_ReturnType ret = E_OK;
-//	if ((NULL == led) || ( (led -> port == PORTA_I) && ( (led -> pin) > PORTA_PIN_MAX_NUMBER - 1) ) || 
-//		( ((led -> port == PORTB_I) || (led -> port == PORTC_I) || (led -> port == PORTD_I) )
-//		 && ( (led -> pin) > PORTBCD_PIN_MAX_NUMBER - 1) ) ||( (led -> port == PORTE_I) &&
-//		 ((led -> pin) > PORTE_PIN_MAX_NUMBER - 1))	){
-//		ret = E_NOT_OK;	
-//	}
-//	else{}
-//	return ret;
-//}
+
+/*@brief: Initializes an LED.
+ *@param: A pointer to a LED of type LED_t.
+ *@return: E_OK if initialization is successful and E_NOT_Ok otherwise.
+ */       
 STD_ReturnType LED_initialize(LED_t *led){
 	STD_ReturnType ret = E_OK;
 	if ( (NULL == led) ){
@@ -33,6 +26,10 @@ STD_ReturnType LED_initialize(LED_t *led){
 
     return ret;
 }
+/*@brief: Initializes an LED.
+ *@param: A pointer to a LED of type LED_t.
+ *@return: E_OK if operation is successful and E_NOT_Ok otherwise.
+ */       
 STD_ReturnType LED_on(LED_t *led){
 	STD_ReturnType ret = E_OK;
 	if ( (NULL == led) ){
@@ -47,6 +44,10 @@ STD_ReturnType LED_on(LED_t *led){
 	}
 	return ret;
 }
+/*@brief: Initializes an LED.
+ *@param: A pointer to a LED of type LED_t.
+ *@return: E_OK if operation is successful and E_NOT_Ok otherwise.
+ */       
 STD_ReturnType LED_off(LED_t *led){
 	STD_ReturnType ret = E_OK;
 	if ( (NULL == led) ){
@@ -61,6 +62,10 @@ STD_ReturnType LED_off(LED_t *led){
 	}
 	return ret;
 }
+/*@brief: Initializes an LED.
+ *@param: A pointer to a LED of type LED_t.
+ *@return: E_OK if operation is successful and E_NOT_Ok otherwise.
+ */       
 STD_ReturnType LED_toggle(LED_t *led){
 	STD_ReturnType ret = E_OK;
 	if ( (NULL == led) ){

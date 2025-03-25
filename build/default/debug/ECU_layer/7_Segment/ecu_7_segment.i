@@ -4319,7 +4319,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4327,7 +4326,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4345,13 +4343,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4361,7 +4357,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4381,7 +4377,6 @@ STD_ReturnType GPIO_port_toggle_logic(port_index port);
 typedef struct{
  port_pin_t seven_seg_pins[4];
  uint8 start_status;
- uint8 seg_type;
 }seven_segment_t;
 
 
@@ -4389,24 +4384,13 @@ static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config
 STD_ReturnType seven_segment_initialize(const seven_segment_t *seg);
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number);
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg,const pin_config_t *seg_tenth_en,
-const pin_config_t *seg_units_en, uint8 number);
+             const pin_config_t *seg_units_en, uint8 number);
 # 8 "ECU_layer/7_Segment/ecu_7_segment.c" 2
 
-static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- uint8 i = 0;
- if(seg == ((void*)0) || lpin == ((void*)0))
-  ret = (STD_ReturnType)(0x00);
- else{
-  for(;i<4;i++){
-   lpin[i] . port = seg -> seven_seg_pins[i].port;
-   lpin[i] . pin= seg -> seven_seg_pins[i].pin;
-   lpin[i] . direction = GPIO_OUT;
-   lpin[i] . logic = seg -> start_status;
-  }
- }
- return ret;
-}
+
+
+
+
 STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  uint8 i = 0;
@@ -4425,6 +4409,10 @@ STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
  }
  return ret;
 }
+
+
+
+
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  pin_config_t lpin[4];
@@ -4443,6 +4431,12 @@ STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 num
  }
  return ret;
 }
+
+
+
+
+
+
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg, const pin_config_t *seg_tenth_en,
 const pin_config_t *seg_units_en, uint8 number){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
@@ -4457,6 +4451,26 @@ const pin_config_t *seg_units_en, uint8 number){
    ret = GPIO_pin_write_logic(seg_tenth_en, GPIO_HIGH);
        _delay((unsigned long)((10)*(8000000/4000.0)));
    ret = GPIO_pin_write_logic(seg_tenth_en, GPIO_LOW);
+ }
+ return ret;
+}
+
+
+
+
+
+static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ uint8 i = 0;
+ if(seg == ((void*)0) || lpin == ((void*)0))
+  ret = (STD_ReturnType)(0x00);
+ else{
+  for(;i<4;i++){
+   lpin[i] . port = seg -> seven_seg_pins[i].port;
+   lpin[i] . pin= seg -> seven_seg_pins[i].pin;
+   lpin[i] . direction = GPIO_OUT;
+   lpin[i] . logic = seg -> start_status;
+  }
  }
  return ret;
 }

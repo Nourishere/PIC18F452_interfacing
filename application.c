@@ -11,7 +11,7 @@
   an clock speed of 8MHz/16MHz*/
  //#define _XTAL_FREQ 8000000
 //This macro is used in the __delay_ms() function
-#define _XTAL_FREQ 16000000
+
 pin_config_t seg_units_en = { 
 	PORTD_I,
 	PIN1,
@@ -27,7 +27,7 @@ int main(void){
 //    ret = lcd_send_command(&LCD1,LCD_8BIT_1LINE_5x10);
 //	ret = lcd_send_string(&LCD1,"Nour");
         while(1){
-         
+          
 		}
     
 }

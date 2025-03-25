@@ -5,22 +5,11 @@
  * Created on February 20, 2025, 9:30 AM
  */
 #include "ecu_7_segment.h"
-/** Helper function **/
-static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]){
-	STD_ReturnType ret = E_OK;
-	uint8 i = 0;
-	if(seg == NULL || lpin == NULL)
-		ret = E_NOT_OK;	
-	else{
-		for(;i<4;i++){
-			lpin[i] . port = seg -> seven_seg_pins[i].port;
-			lpin[i] . pin= seg -> seven_seg_pins[i].pin;
-			lpin[i] . direction = GPIO_OUT; 
-			lpin[i] . logic = seg -> start_status;
-		}
-	}
-	return ret;
-}
+
+/*@brief: Initializes a seven segment display.
+ *@param: A pointer to a seven_segment_t type specifying a seven segment.
+ *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
+ */       
 STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
 	STD_ReturnType ret = E_OK;
 	uint8 i = 0;
@@ -39,6 +28,10 @@ STD_ReturnType seven_segment_initialize(const seven_segment_t *seg){
 	}	
 	return ret;
 }
+/*@brief: Writes a number on a seven segment display.
+ *@param: A pointer to a seven_segment_t and an uint8 integer resembling the number to be written.
+ *@return: E_OK if operation is successful and E_NOT_OK otherwise.
+ */       
 STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 number){
 	STD_ReturnType ret = E_OK;
 	pin_config_t lpin[4];
@@ -57,6 +50,12 @@ STD_ReturnType seven_segment_write_number(const seven_segment_t * seg, uint8 num
 	}
 	return ret;
 }
+/*@brief: Writes a two digit number on a seven segment display.
+ *@param: Two pointers to two seven_segment_t types, an uint8 integer resembling the number to be written,
+		  two pointers to pin_config_t type resembling the enable signal for each seven segment display.
+		  (This function is still under testing and probably unstable.)
+ *@return: E_OK if operation is successful and E_NOT_OK otherwise.
+ */       
 STD_ReturnType seven_segment_write_2digit_number(const seven_segment_t * seg, const pin_config_t *seg_tenth_en,
 const pin_config_t *seg_units_en, uint8 number){
 	STD_ReturnType ret = E_OK;
@@ -71,6 +70,26 @@ const pin_config_t *seg_units_en, uint8 number){
 			ret = GPIO_pin_write_logic(seg_tenth_en, GPIO_HIGH);
     			__delay_ms(10);
 			ret = GPIO_pin_write_logic(seg_tenth_en, GPIO_LOW);
+	}
+	return ret;
+}
+/*@brief: Initializes a pin_config_t type from a seven_segment_t type. This funtion is used inside funtions 
+		  for operations done only on the pin_config_t type.
+ *@param: A pointer to a seven_segment_t type and a pointer to an array of pin_config_t structs.
+ *@return: E_OK if operation is successful and E_NOT_OK otherwise.
+ */       
+static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config_t lpin[]){
+	STD_ReturnType ret = E_OK;
+	uint8 i = 0;
+	if(seg == NULL || lpin == NULL)
+		ret = E_NOT_OK;	
+	else{
+		for(;i<4;i++){
+			lpin[i] . port = seg -> seven_seg_pins[i].port;
+			lpin[i] . pin= seg -> seven_seg_pins[i].pin;
+			lpin[i] . direction = GPIO_OUT; 
+			lpin[i] . logic = seg -> start_status;
+		}
 	}
 	return ret;
 }

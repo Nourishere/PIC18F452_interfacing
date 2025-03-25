@@ -1,7 +1,7 @@
 ### HEXMate logfile and output summary ###
 
 ### Command-line arguments ###
- /tmp/xcXMoeJEd/driver_tmp_3.o
+ /tmp/xcXmEileb/driver_tmp_3.o
  -Odist/default/debug/interfacing_main.X.debug.hex
  -logfile=dist/default/debug/interfacing_main.X.debug.hxl
  -addressing=1
@@ -14,21 +14,23 @@
 
 ### Memory Usage ###
  Input file ranges:
-  0h - 5h		(/tmp/xcXMoeJEd/driver_tmp_3.o)
-  600h - 614h		(/tmp/xcXMoeJEd/driver_tmp_3.o)
-  616h - 10A3h		(/tmp/xcXMoeJEd/driver_tmp_3.o)
-  3FFCh - 3FFFh		(/tmp/xcXMoeJEd/driver_tmp_3.o)
-  300000h - 30000Dh		(/tmp/xcXMoeJEd/driver_tmp_3.o)
+  0h - 5h		(/tmp/xcXmEileb/driver_tmp_3.o)
+  600h - 614h		(/tmp/xcXmEileb/driver_tmp_3.o)
+  616h - F9Ah		(/tmp/xcXmEileb/driver_tmp_3.o)
+  F9Ch - 10A3h		(/tmp/xcXmEileb/driver_tmp_3.o)
+  3FFCh - 3FFFh		(/tmp/xcXmEileb/driver_tmp_3.o)
+  300000h - 30000Dh		(/tmp/xcXmEileb/driver_tmp_3.o)
  Unused ranges:
   6h - 5FFh
   615h - 615h
+  F9Bh - F9Bh
   10A4h - 3FFBh
   4000h - 2FFFFFh
 
 ### Hex Memory Map ###
  Legend:
   -- = Unused memory
-  H1 = Input file             (/tmp/xcXMoeJEd/driver_tmp_3.o)
+  H1 = Input file             (/tmp/xcXmEileb/driver_tmp_3.o)
 ----------------------------------------------------------
          | 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 ----------------------------------------------------------
@@ -187,7 +189,7 @@
 00000F60 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000F70 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000F80 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000F90 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00000F90 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- H1 H1 H1 H1
 00000FA0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000FB0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000FC0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1

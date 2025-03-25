@@ -4,12 +4,24 @@
  *
  * Created on February 24, 2025, 7:25 AM
  */
+
 #include "ecu_keypad.h"
+
+/* Note on March 25, 2025, 23:28:08.
+   (This driver is still under testing and development. Many better features will be added in the near future.)
+*/
+
+/* An array resembling the structure of the keypad buttons */
 static const uint8 keypad_elements[KEY_ROWS][KEY_COLUMNS] =
 {{'1','2','3','A'},
  {'4','5','6','B'},
  {'7','8','9','C'},
  {'*','0','#','D'}};
+
+/*@brief:    
+ *@param: 
+ *@return:
+ */       
 static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], uint8 rc){
 	uint8 i = 0;
 	STD_ReturnType ret = E_OK;
@@ -43,6 +55,10 @@ static STD_ReturnType keypad_linit(const keypad_t *keypad, pin_config_t lpin[], 
 
 	return ret;
 }
+/*@brief:    
+ *@param: 
+ *@return:
+ */       
 STD_ReturnType keypad_initialize(const keypad_t *keypad){
 	uint8 i = 0;
 	STD_ReturnType ret = E_OK;

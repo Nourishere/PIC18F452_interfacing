@@ -6,7 +6,11 @@
  */
 #include "ecu_LCD.h"
 
-/*@brief: A function to check the accessed ports and pins of the lcd
+/* Note on March 25, 2025, 23:56:52.
+   (This driver is still under testing and debugging.)
+*/
+
+/*@brief: check the accessed ports and pins of the lcd
  *@param: Takes a pointer to an lcd of type chr_LCD_t 
  *@return: Returns E_OK if access is validated and E_NOT_OK otherwise
  */       

@@ -4321,7 +4321,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4329,7 +4328,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4347,13 +4345,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4363,7 +4359,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4393,8 +4389,13 @@ STD_ReturnType btn_initialize(const btn_t* btn);
 STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s);
 # 8 "ECU_layer/Push_Button/ecu_btn.c" 2
 
+
+
+
+
 STD_ReturnType btn_initialize(const btn_t* btn){
  STD_ReturnType ret = (STD_ReturnType)(0x00);
+
  if (btn == ((void*)0) || ((STD_ReturnType)(0x00) == GPIO_check_access(&(btn -> btn_pin))) || ((btn -> btn_pin.direction) == GPIO_OUT) ){
   ret = (STD_ReturnType)(0x00);
  }
@@ -4403,6 +4404,11 @@ STD_ReturnType btn_initialize(const btn_t* btn){
  }
  return ret;
 }
+
+
+
+
+
 STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s){
  STD_ReturnType ret = (STD_ReturnType)(0x00);
   logic_t btn_logic = GPIO_LOW;
@@ -4411,25 +4417,29 @@ STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s){
  }
  else{
   GPIO_pin_read_logic(&(btn -> btn_pin), &btn_logic);
-  if (btn -> btn_mode == btn_AL){
-   if (GPIO_HIGH == btn_logic){
-    *btn_s = btn_free;
-   }
-   else{
-    *btn_s = btn_pressed;
-   }
+  switch (btn -> btn_mode){
+   case(btn_AL):
+    if (GPIO_HIGH == btn_logic){
+     *btn_s = btn_free;
+     break;
+    }
+    else{
+     *btn_s = btn_pressed;
+     break;
+    }
+   case(btn_AH):
+    if (GPIO_HIGH == btn_logic){
+     *btn_s = btn_pressed;
+     break;
+    }
+    else{
+     *btn_s = btn_free;
+     break;
+    }
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
   }
-  else if (btn -> btn_mode == btn_AH){
-   if (GPIO_HIGH == btn_logic){
-    *btn_s = btn_pressed;
-   }
-   else{
-    *btn_s = btn_free;
-   }
-
-  }
-  else{}
-  ret = (STD_ReturnType)(0x01);
  }
  return ret;
 }

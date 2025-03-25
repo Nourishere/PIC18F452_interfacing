@@ -4320,7 +4320,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4328,7 +4327,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4346,13 +4344,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4362,7 +4358,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4376,12 +4372,10 @@ STD_ReturnType GPIO_port_toggle_logic(port_index port);
 # 1 "ECU_layer/LED/ecu_led_cfg.h" 1
 # 13 "ECU_layer/LED/ecu_led.h" 2
 
-
 typedef enum{
  LED_OFF,
  LED_ON
 }LED_status;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4395,7 +4389,11 @@ STD_ReturnType LED_on(LED_t *led);
 STD_ReturnType LED_off(LED_t *led);
 STD_ReturnType LED_toggle(LED_t *led);
 # 9 "ECU_layer/LED/ecu_led.c" 2
-# 21 "ECU_layer/LED/ecu_led.c"
+
+
+
+
+
 STD_ReturnType LED_initialize(LED_t *led){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if ( (((void*)0) == led) ){
@@ -4411,6 +4409,10 @@ STD_ReturnType LED_initialize(LED_t *led){
 
     return ret;
 }
+
+
+
+
 STD_ReturnType LED_on(LED_t *led){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if ( (((void*)0) == led) ){
@@ -4425,6 +4427,10 @@ STD_ReturnType LED_on(LED_t *led){
  }
  return ret;
 }
+
+
+
+
 STD_ReturnType LED_off(LED_t *led){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if ( (((void*)0) == led) ){
@@ -4439,6 +4445,10 @@ STD_ReturnType LED_off(LED_t *led){
  }
  return ret;
 }
+
+
+
+
 STD_ReturnType LED_toggle(LED_t *led){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  if ( (((void*)0) == led) ){
