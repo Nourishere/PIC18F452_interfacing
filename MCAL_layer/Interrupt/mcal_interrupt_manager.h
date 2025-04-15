@@ -11,4 +11,3 @@
 
 
 #endif	/* MCAL_INTERRUPT_MANAGER_H */
-
