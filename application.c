@@ -20,6 +20,7 @@ pin_config_t seg_units_en = {
 };
 
 uint8 i=90, j=0, knum=0, prev;
+
 int main(void){
     STD_ReturnType ret = E_OK;
     application_initialize();
