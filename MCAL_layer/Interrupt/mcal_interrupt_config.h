@@ -56,4 +56,3 @@
 
 
 #endif	/* MCAL_INTERRUPT_CONFIG_H */
-
