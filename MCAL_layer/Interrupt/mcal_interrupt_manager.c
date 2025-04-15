@@ -6,3 +6,4 @@
  */
 #include "mcal_interrupt_manager.h"
 #include "mcal_interrupt_manager.h"
+
