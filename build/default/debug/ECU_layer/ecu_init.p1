@@ -63,9 +63,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/Push_Button/ecu_btn.h: 22: typedef struct{
 [s S267 `S263 1 `E2867 1 `E2871 1 ]
 [n S267 . btn_pin btn_state btn_mode ]
-"56 ECU_layer/LCD/ecu_LCD.h
-[; ;ECU_layer/LCD/ecu_LCD.h: 56: STD_ReturnType lcd_initialize(const chr_LCD_t * lcd);
-[v _lcd_initialize `(uc ~T0 @X0 0 ef1`*CS272 ]
+"26 ECU_layer/LED/ecu_led.h
+[; ;ECU_layer/LED/ecu_led.h: 26: STD_ReturnType LED_initialize(LED_t *led);
+[v _LED_initialize `(uc ~T0 @X0 0 ef1`*S266 ]
 "52 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -717,21 +717,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 "121
-[; ;ECU_layer/ecu_init.c: 121: LED_t LED1 = {
-[v _LED1 `S266 ~T0 @X0 1 e ]
-[i _LED1
+[; ;ECU_layer/ecu_init.c: 121: LED_t LED_OK = {
+[v _LED_OK `S266 ~T0 @X0 1 e ]
+[i _LED_OK
 :U ..
 :U ..
--> . `E2784 3 `uc
--> . `E2791 1 `uc
+-> . `E2784 0 `uc
+-> . `E2791 0 `uc
 -> . `E2776 0 `uc
 ..
 ..
 ]
 "126
-[; ;ECU_layer/ecu_init.c: 126: LED_t LED2 = {
-[v _LED2 `S266 ~T0 @X0 1 e ]
-[i _LED2
+[; ;ECU_layer/ecu_init.c: 126: LED_t LED_NOK = {
+[v _LED_NOK `S266 ~T0 @X0 1 e ]
+[i _LED_NOK
 :U ..
 :U ..
 -> . `E2784 0 `uc
@@ -763,14 +763,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ECU_layer/ecu_init.c: 138:     STD_ReturnType ret = (STD_ReturnType)(0x01);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
-"139
-[; ;ECU_layer/ecu_init.c: 139:     ret = lcd_initialize(&LCD1);
-[e = _ret ( _lcd_initialize (1 -> &U _LCD1 `*CS272 ]
 "140
-[; ;ECU_layer/ecu_init.c: 140:     return ret;
+[; ;ECU_layer/ecu_init.c: 140:     ret = LED_initialize(&LED_OK);
+[e = _ret ( _LED_initialize (1 &U _LED_OK ]
+"141
+[; ;ECU_layer/ecu_init.c: 141:     ret = ret && LED_initialize(&LED_NOK);
+[e = _ret -> -> && != -> _ret `i -> 0 `i != -> ( _LED_initialize (1 &U _LED_NOK `i -> 0 `i `i `uc ]
+"142
+[; ;ECU_layer/ecu_init.c: 142:     return ret;
 [e ) _ret ]
 [e $UE 273  ]
-"141
-[; ;ECU_layer/ecu_init.c: 141: }
+"143
+[; ;ECU_layer/ecu_init.c: 143: }
 [e :UE 273 ]
 }

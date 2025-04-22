@@ -1,4 +1,4 @@
-# 1 "ECU_layer/DC_Motor/ecu_dc_motor.c"
+# 1 "MCAL_layer/Interrupt/mcal_interrupt_manager.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 285 "<built-in>" 3
@@ -6,19 +6,19 @@
 # 1 "<built-in>" 2
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "ECU_layer/DC_Motor/ecu_dc_motor.c" 2
+# 1 "MCAL_layer/Interrupt/mcal_interrupt_manager.c" 2
 
 
 
 
 
 
-# 1 "ECU_layer/DC_Motor/ecu_dc_motor.h" 1
-# 11 "ECU_layer/DC_Motor/ecu_dc_motor.h"
-# 1 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h" 1
-# 12 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h"
-# 1 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../device_config.h" 1
-# 13 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h" 2
+# 1 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 1
+# 10 "MCAL_layer/Interrupt/mcal_interrupt_manager.h"
+# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 1
+# 12 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 1 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 1
+# 11 "MCAL_layer/Interrupt/mcal_interrupt_config.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 1 3
 # 18 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4079,11 +4079,11 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 2 3
-# 14 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h" 2
-# 1 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../mcal_std_types.h" 1
-# 11 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../mcal_std_types.h"
-# 1 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../std_libs.h" 1
-# 10 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../std_libs.h"
+# 12 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 1 "MCAL_layer/Interrupt/../mcal_std_types.h" 1
+# 11 "MCAL_layer/Interrupt/../mcal_std_types.h"
+# 1 "MCAL_layer/Interrupt/../std_libs.h" 1
+# 10 "MCAL_layer/Interrupt/../std_libs.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/stdio.h" 1 3
 # 24 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/stdio.h" 3
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/bits/alltypes.h" 1 3
@@ -4236,7 +4236,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 11 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../std_libs.h" 2
+# 11 "MCAL_layer/Interrupt/../std_libs.h" 2
 
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 1 3
 # 25 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 3
@@ -4295,11 +4295,11 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 13 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../std_libs.h" 2
-# 12 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../mcal_std_types.h" 2
-# 1 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../compiler.h" 1
-# 13 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../mcal_std_types.h" 2
-# 24 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/../mcal_std_types.h"
+# 13 "MCAL_layer/Interrupt/../std_libs.h" 2
+# 12 "MCAL_layer/Interrupt/../mcal_std_types.h" 2
+# 1 "MCAL_layer/Interrupt/../compiler.h" 1
+# 13 "MCAL_layer/Interrupt/../mcal_std_types.h" 2
+# 24 "MCAL_layer/Interrupt/../mcal_std_types.h"
 typedef unsigned char uint8;
 typedef unsigned short uint16;
 typedef unsigned int uint32;
@@ -4307,10 +4307,16 @@ typedef signed char sint8;
 typedef signed int sint32;
 typedef signed short sint16;
 typedef uint8 STD_ReturnType;
-# 15 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h" 2
-# 1 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio_cfg.h" 1
-# 16 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h" 2
-# 32 "ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h"
+# 13 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 1
+# 12 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
+# 1 "MCAL_layer/Interrupt/../GPIO/../device_config.h" 1
+# 13 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
+
+
+# 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio_cfg.h" 1
+# 16 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
+# 32 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
 typedef enum{
  GPIO_LOW,
  GPIO_HIGH
@@ -4319,7 +4325,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4327,7 +4332,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4345,13 +4349,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4361,7 +4363,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4371,127 +4373,71 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-# 12 "ECU_layer/DC_Motor/ecu_dc_motor.h" 2
-
+# 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 13 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
+# 72 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
 typedef enum{
- dc_motor_off,
- dc_motor_on
-}dc_motor_logic;
-
-
-
+ falling,
+ rising
+}INTx_edge;
+typedef enum{
+ INT0_I,
+ INT1_I,
+ INT2_I
+}INTx_index;
 
 typedef struct{
- pin_config_simple_t dc_motor_arr[2];
-}dc_motor_t;
+ void (*ext_interrupt_handler) (void);
+ pin_config_t Ipin;
+ INTx_index index;
+ INTx_edge edge;
+
+ uint8 priority;
+
+}INT_INTx_t;
+
+typedef struct{
+ void (*ext_interrupt_handler) (void);
+ pin_config_t Ipin;
+ uint8 priority;
+}INT_RBx_t;
 
 
-static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l,pin_config_t * llpin1,pin_config_t * llpin2);
+void INT0_ISR();
+void INT1_ISR();
+void INT2_ISR();
+STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
+STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
+STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
 
-STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l);
-STD_ReturnType dc_motor_turn_right(const dc_motor_t * dc_motor_l);
-STD_ReturnType dc_motor_turn_left(const dc_motor_t * dc_motor_l);
-STD_ReturnType dc_motor_stop(const dc_motor_t * dc_motor_l);
-# 8 "ECU_layer/DC_Motor/ecu_dc_motor.c" 2
-# 20 "ECU_layer/DC_Motor/ecu_dc_motor.c"
-static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l, pin_config_t * llpin1, pin_config_t * llpin2){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if( ((void*)0) == dc_motor_l)
-  ret = (STD_ReturnType)(0x00);
- else{
+STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+static STD_ReturnType INT_RBx_priority_init(const INT_RBx_t *lint);
 
+static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
+static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
+# 11 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 2
+# 8 "MCAL_layer/Interrupt/mcal_interrupt_manager.c" 2
 
-
-
-  llpin1->port = dc_motor_l -> dc_motor_arr[0].port;
-  llpin1->pin= dc_motor_l -> dc_motor_arr[0].pin;
-  llpin1->direction= GPIO_OUT;
-  llpin1->logic= dc_motor_l -> dc_motor_arr[1].logic;
-  llpin2->port = dc_motor_l -> dc_motor_arr[1].port;
-  llpin2->pin= dc_motor_l -> dc_motor_arr[1].pin;
-  llpin2->direction= GPIO_OUT;
-  llpin2->logic= dc_motor_l -> dc_motor_arr[1].logic;
- }
- return ret;
+void __attribute__((picinterrupt(("")))) InterruptManager(void){
+ if(INTCONbits.INT0IF == 1 && INTCONbits.INT0IE == 1)
+        INT0_ISR();
+ if(INTCON3bits.INT1IF == 1 && INTCON3bits.INT1IE == 1)
+        INT1_ISR();
+ if(INTCON3bits.INT2IF == 1 && INTCON3bits.INT2IE == 1)
+        INT2_ISR();
 }
-
-
-
-
-
-
-
-STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- pin_config_t lpin1, lpin2;
- if( ((void*)0) == dc_motor_l)
-  ret = (STD_ReturnType)(0x00);
- else{
-  dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-  if((STD_ReturnType)(0x00) == GPIO_check_access(&(lpin1)) || (STD_ReturnType)(0x00) == GPIO_check_access(&(lpin2)))
-   ret = (STD_ReturnType)(0x00);
-
-  else{
-   ret = GPIO_pin_initialize(&(lpin1));
-   ret = GPIO_pin_initialize(&(lpin2));
-  }
- }
- return ret;
-}
-
-
-
-
-
-
-STD_ReturnType dc_motor_turn_right(const dc_motor_t * dc_motor_l){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- pin_config_t lpin1,lpin2;
- if(((void*)0) == dc_motor_l)
-  ret = (STD_ReturnType)(0x00);
- else{
-  dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-  ret = GPIO_pin_write_logic(&(lpin1), GPIO_HIGH);
-  ret = GPIO_pin_write_logic(&(lpin2), GPIO_LOW);
- }
-
- return ret;
-}
-
-
-
-
-
-
-STD_ReturnType dc_motor_turn_left(const dc_motor_t * dc_motor_l){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- pin_config_t lpin1,lpin2;
- if(((void*)0) == dc_motor_l)
-  ret = (STD_ReturnType)(0x00);
- else{
-  dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-  ret = GPIO_pin_write_logic(&(lpin1), GPIO_LOW);
-  ret = GPIO_pin_write_logic(&(lpin2), GPIO_HIGH);
- }
-
- return ret;
-}
-
-
-
-
-
-
-STD_ReturnType dc_motor_stop(const dc_motor_t * dc_motor_l){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- pin_config_t lpin1,lpin2;
- if(((void*)0) == dc_motor_l)
-  ret = (STD_ReturnType)(0x00);
- else{
-  dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-  ret = GPIO_pin_write_logic(&(lpin1), GPIO_LOW);
-  ret = GPIO_pin_write_logic(&(lpin2), GPIO_LOW);
- }
-
- return ret;
+void __attribute__((picinterrupt(("low_priority")))) InterruptManagerLow(void){
+ if(INTCONbits.INT0IF == 1 && INTCONbits.INT0IE == 1)
+        INT0_ISR();
+ if(INTCON3bits.INT1IF == 1 && INTCON3bits.INT1IE == 1)
+        INT1_ISR();
+ if(INTCON3bits.INT2IF == 1 && INTCON3bits.INT2IE == 1)
+        INT2_ISR();
 }

@@ -4520,22 +4520,91 @@ static STD_ReturnType int_to_str(uint32 val, uint8* str);
 STD_ReturnType ecu_init(void);
 # 12 "./application.h" 2
 
+# 1 "./MCAL_layer/Interrupt/mcal_external_interrupt.h" 1
+# 12 "./MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 1 "./MCAL_layer/Interrupt/mcal_interrupt_config.h" 1
+# 13 "./MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
+# 72 "./MCAL_layer/Interrupt/mcal_external_interrupt.h"
+typedef enum{
+ falling,
+ rising
+}INTx_edge;
+typedef enum{
+ INT0_I,
+ INT1_I,
+ INT2_I
+}INTx_index;
+
+typedef struct{
+ void (*ext_interrupt_handler) (void);
+ pin_config_t Ipin;
+ INTx_index index;
+ INTx_edge edge;
+
+ uint8 priority;
+
+}INT_INTx_t;
+
+typedef struct{
+ void (*ext_interrupt_handler) (void);
+ pin_config_t Ipin;
+ uint8 priority;
+}INT_RBx_t;
+
+
+void INT0_ISR();
+void INT1_ISR();
+void INT2_ISR();
+STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
+STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
+STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
+
+STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+static STD_ReturnType INT_RBx_priority_init(const INT_RBx_t *lint);
+
+static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
+static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
+# 14 "./application.h" 2
 
 extern seven_segment_t segment1;
 extern keypad_t keypad1;
 extern chr_LCD_t LCD1;
-extern LED_t LED1;
+extern LED_t LED_OK;
+extern LED_t LED_NOK;
 
 
-void application_initialize();
+STD_ReturnType application_initialize();
+
+
+void __INT0(void);
+void __INT1(void);
+void __INT2(void);
 # 8 "application.c" 2
 # 1 "/home/nour/programs/microchip/xc8/v2.50/pic/include/builtins.h" 1
 # 9 "application.c" 2
+uint8 Iflag;
 
 
 
 
 
+INT_INTx_t first_int = {
+ __INT0,
+ {PORTB_I,
+ PIN0,
+ GPIO_OUT,
+ GPIO_LOW},
+ INT0_I,
+ falling,
+ 1
+};
 
 pin_config_t seg_units_en = {
  PORTD_I,
@@ -4545,10 +4614,15 @@ pin_config_t seg_units_en = {
 };
 
 uint8 i=90, j=0, knum=0, prev;
+
 int main(void){
-    STD_ReturnType ret = (STD_ReturnType)(0x01);
-    application_initialize();
-    ret = lcd_send_char_data_position(&LCD1,1,4,'A');
+    STD_ReturnType ret = (STD_ReturnType)(0x00);
+    if(INT_INTx_initialize(&first_int))
+        LED_on(&LED_OK);
+    else
+        LED_on(&LED_NOK);
+
+
 
 
         while(1){
@@ -4557,9 +4631,18 @@ int main(void){
 
 }
 
-void application_initialize(){
+STD_ReturnType application_initialize(){
     STD_ReturnType ret = (STD_ReturnType)(0x01);
 
  ret = ecu_init();
 
+    return ret;
+}
+
+void __INT0(void){
+ Iflag++;
+}
+void __INT1(void){
+}
+void __INT2(void){
 }

@@ -26,4 +26,8 @@ ECU_layer/LCD/ecu_LCD.h  \
 ECU_layer/LCD/../ecu_init.h  \
 ECU_layer/../MCAL_layer/std_libs.h  \
 MCAL_layer/std_libs.h  \
+MCAL_layer/Interrupt/mcal_external_interrupt.h  \
+MCAL_layer/Interrupt/mcal_interrupt_config.h  \
+MCAL_layer/Interrupt/../mcal_std_types.h  \
+MCAL_layer/Interrupt/../GPIO/hal_gpio.h  \
 /home/nour/programs/microchip/xc8/v2.50/pic/include/builtins.h 

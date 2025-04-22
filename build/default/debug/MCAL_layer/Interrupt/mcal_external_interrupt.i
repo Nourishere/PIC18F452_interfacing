@@ -1,4 +1,4 @@
-# 1 "ECU_layer/Push_Button/ecu_btn.c"
+# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 285 "<built-in>" 3
@@ -6,21 +6,17 @@
 # 1 "<built-in>" 2
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "ECU_layer/Push_Button/ecu_btn.c" 2
+# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.c" 2
 
 
 
 
 
 
-# 1 "ECU_layer/Push_Button/ecu_btn.h" 1
-# 11 "ECU_layer/Push_Button/ecu_btn.h"
-# 1 "ECU_layer/Push_Button/ecu_btn_cfg.h" 1
-# 12 "ECU_layer/Push_Button/ecu_btn.h" 2
-# 1 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio.h" 1
-# 12 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio.h"
-# 1 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../device_config.h" 1
-# 13 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio.h" 2
+# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 1
+# 12 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 1 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 1
+# 11 "MCAL_layer/Interrupt/mcal_interrupt_config.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 1 3
 # 18 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4081,11 +4077,11 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 2 3
-# 14 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio.h" 2
-# 1 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../mcal_std_types.h" 1
-# 11 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../mcal_std_types.h"
-# 1 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../std_libs.h" 1
-# 10 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../std_libs.h"
+# 12 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 1 "MCAL_layer/Interrupt/../mcal_std_types.h" 1
+# 11 "MCAL_layer/Interrupt/../mcal_std_types.h"
+# 1 "MCAL_layer/Interrupt/../std_libs.h" 1
+# 10 "MCAL_layer/Interrupt/../std_libs.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/stdio.h" 1 3
 # 24 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/stdio.h" 3
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/bits/alltypes.h" 1 3
@@ -4238,7 +4234,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 11 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../std_libs.h" 2
+# 11 "MCAL_layer/Interrupt/../std_libs.h" 2
 
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 1 3
 # 25 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 3
@@ -4297,11 +4293,11 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 13 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../std_libs.h" 2
-# 12 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../mcal_std_types.h" 2
-# 1 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../compiler.h" 1
-# 13 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../mcal_std_types.h" 2
-# 24 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/../mcal_std_types.h"
+# 13 "MCAL_layer/Interrupt/../std_libs.h" 2
+# 12 "MCAL_layer/Interrupt/../mcal_std_types.h" 2
+# 1 "MCAL_layer/Interrupt/../compiler.h" 1
+# 13 "MCAL_layer/Interrupt/../mcal_std_types.h" 2
+# 24 "MCAL_layer/Interrupt/../mcal_std_types.h"
 typedef unsigned char uint8;
 typedef unsigned short uint16;
 typedef unsigned int uint32;
@@ -4309,10 +4305,16 @@ typedef signed char sint8;
 typedef signed int sint32;
 typedef signed short sint16;
 typedef uint8 STD_ReturnType;
-# 15 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio.h" 2
-# 1 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio_cfg.h" 1
-# 16 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio.h" 2
-# 32 "ECU_layer/Push_Button/../../MCAL_layer/GPIO/hal_gpio.h"
+# 13 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 1
+# 12 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
+# 1 "MCAL_layer/Interrupt/../GPIO/../device_config.h" 1
+# 13 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
+
+
+# 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio_cfg.h" 1
+# 16 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
+# 32 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
 typedef enum{
  GPIO_LOW,
  GPIO_HIGH
@@ -4321,7 +4323,6 @@ typedef enum{
  GPIO_OUT,
  GPIO_IN,
 }direction_t;
-
 typedef enum{
  PORTA_I,
  PORTB_I,
@@ -4329,7 +4330,6 @@ typedef enum{
  PORTD_I,
  PORTE_I
 }port_index;
-
 typedef enum{
   PIN0,
   PIN1,
@@ -4347,13 +4347,11 @@ typedef struct{
  uint8 direction :1;
  uint8 logic :1;
 }pin_config_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
  uint8 logic :1;
 }pin_config_simple_t;
-
 typedef struct{
  uint8 port :3;
  uint8 pin :3;
@@ -4363,7 +4361,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
 
 STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
 STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config);
-STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status );
+STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status);
 STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic);
 STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config);
@@ -4373,63 +4371,390 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-# 13 "ECU_layer/Push_Button/ecu_btn.h" 2
+# 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 13 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
+# 72 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+typedef enum{
+ falling,
+ rising
+}INTx_edge;
+typedef enum{
+ INT0_I,
+ INT1_I,
+ INT2_I
+}INTx_index;
 
-typedef enum{
- btn_pressed,
- btn_free
-}btn_status;
-typedef enum{
- btn_AL,
- btn_AH
-}btn_mode_t;
 typedef struct{
- pin_config_t btn_pin;
- btn_status btn_state;
- btn_mode_t btn_mode;
-}btn_t;
+ void (*ext_interrupt_handler) (void);
+ pin_config_t Ipin;
+ INTx_index index;
+ INTx_edge edge;
 
-STD_ReturnType btn_initialize(const btn_t* btn);
-STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s);
-# 8 "ECU_layer/Push_Button/ecu_btn.c" 2
+ uint8 priority;
 
-STD_ReturnType btn_initialize(const btn_t* btn){
- STD_ReturnType ret = (STD_ReturnType)(0x00);
- if (btn == ((void*)0) || ((STD_ReturnType)(0x00) == GPIO_check_access(&(btn -> btn_pin))) || ((btn -> btn_pin.direction) == GPIO_OUT) ){
+}INT_INTx_t;
+
+typedef struct{
+ void (*ext_interrupt_handler) (void);
+ pin_config_t Ipin;
+ uint8 priority;
+}INT_RBx_t;
+
+
+void INT0_ISR();
+void INT1_ISR();
+void INT2_ISR();
+STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
+STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
+STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
+static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
+
+STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+static STD_ReturnType INT_RBx_priority_init(const INT_RBx_t *lint);
+
+static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
+static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
+# 8 "MCAL_layer/Interrupt/mcal_external_interrupt.c" 2
+
+
+void (*INT0_handler) (void) = ((void*)0);
+void (*INT1_handler) (void) = ((void*)0);
+void (*INT2_handler) (void) = ((void*)0);
+
+void INT0_ISR(){
+ INTCONbits.INT0IF=0;
+ if(INT0_handler)
+  INT0_handler();
+}
+void INT1_ISR(){
+ INTCON3bits.INT1IF=0;
+ if(INT1_handler)
+  INT1_handler();
+}
+void INT2_ISR(){
+ INTCON3bits.INT2IF=0;
+ if(INT2_handler)
+  INT2_handler();
+}
+
+
+
+
+STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint || (STD_ReturnType)(0x00) ==INT_INTx_check_access(lint))
   ret = (STD_ReturnType)(0x00);
- }
  else{
-  ret = GPIO_pin_direction_initialize(&(btn -> btn_pin));
+
+  ret = INT_INTx_disable(lint)&&
+
+  INT_INTx_clear_flag(lint)&&
+
+  INT_INTx_pin_initialize(lint)&&
+
+  INT_INTx_set_callback_routine(lint)&&
+
+
+  INT_INTx_priority_initialize(lint)&&
+
+
+  INT_INTx_edge_initialize(lint)&&
+
+  INT_INTx_enable(lint);
  }
  return ret;
 }
-STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s){
- STD_ReturnType ret = (STD_ReturnType)(0x00);
-  logic_t btn_logic = GPIO_LOW;
- if (btn == ((void*)0) || (btn_s == ((void*)0)) || ((STD_ReturnType)(0x00) == GPIO_check_access(&(btn -> btn_pin))) ){
+
+
+
+
+
+STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else{
+  switch(lint -> index){
+   case(INT0_I):
+    INTCONbits.INT0IE=1;
+
+    INTCONbits.GIEH=1;
+    INTCONbits.GIEL=1;
+
+
+
+    break;
+   case(INT1_I):
+    INTCONbits.INT0IE=1;
+
+    INTCONbits.GIEH=1;
+    INTCONbits.GIEL=1;
+
+
+
+    break;
+   case(INT2_I):
+    INTCON3bits.INT2IE=1;
+
+    INTCONbits.GIEH=1;
+    INTCONbits.GIEL=1;
+
+
+
+    break;
+   default:
+    ret=(STD_ReturnType)(0x00);
+    break;
+   }
+  }
+ return ret;
+}
+
+
+
+
+STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else{
+  switch(lint -> index){
+   case(INT0_I):
+    INTCONbits.INT0IE=0;
+    break;
+   case(INT1_I):
+    INTCONbits.INT0IE=0;
+    break;
+   case(INT2_I):
+    INTCONbits.INT0IE=0;
+    break;
+   default:
+    ret=(STD_ReturnType)(0x00);
+    break;
+   }
+  }
+ return ret;
+}
+# 160 "MCAL_layer/Interrupt/mcal_external_interrupt.c"
+STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else{
+
+
+ }
+ return ret;
+}
+
+
+
+
+STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else{
+
+
+ }
+ return ret;
+}
+
+
+
+
+
+
+
+static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else{
+            RCONbits.IPEN=1;
+  switch(lint -> index){
+                        case(INT0_I):
+
+   case(INT1_I):
+    switch(lint -> priority){
+     case(1):
+      INTCON3bits.INT1IP=1;
+      break;
+     case(0):
+      INTCON3bits.INT1IP=0;
+      break;
+     default:
+      ret = (STD_ReturnType)(0x00);
+      break;
+     }
+    break;
+   case(INT2_I):
+    switch(lint -> priority){
+     case(1):
+      INTCON3bits.INT2IP=1;
+      break;
+     case(0):
+      INTCON3bits.INT2IP=0;
+      break;
+     default:
+      ret = (STD_ReturnType)(0x00);
+      break;
+     }
+    break;
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
+  }
+ }
+ return ret;
+}
+# 267 "MCAL_layer/Interrupt/mcal_external_interrupt.c"
+static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else{
+  switch(lint -> index){
+   case(INT0_I):
+    switch(lint -> edge){
+     case(falling):
+      INTCON2bits.INTEDG0=0;
+      break;
+     case(rising):
+      INTCON2bits.INTEDG0=1;
+      break;
+     default:
+      ret = (STD_ReturnType)(0x00);
+      break;
+     }
+    break;
+   case(INT1_I):
+    switch(lint -> edge){
+     case(falling):
+      INTCON2bits.INTEDG1=0;
+      break;
+     case(rising):
+      INTCON2bits.INTEDG1=1;
+      break;
+     default:
+      ret = (STD_ReturnType)(0x00);
+      break;
+     }
+    break;
+   case(INT2_I):
+    switch(lint -> edge){
+     case(falling):
+      INTCON2bits.INTEDG2=0;
+      break;
+     case(rising):
+      INTCON2bits.INTEDG2=1;
+      break;
+     default:
+      ret = (STD_ReturnType)(0x00);
+      break;
+     }
+    break;
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
+  }
+ }
+ return ret;
+}
+
+
+
+
+
+static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint || ((STD_ReturnType)(0x00) == INT_INTx_check_access(lint)) )
+  ret = (STD_ReturnType)(0x00);
+ else{
+  ret = GPIO_pin_direction_initialize(&(lint -> Ipin));
+ }
+ return ret;
+}
+
+
+
+
+static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else{
+  switch(lint -> index){
+   case(INT0_I):
+    INTCONbits.INT0IF=0;
+    break;
+   case(INT1_I):
+    INTCON3bits.INT1IF=0;
+    break;
+   case(INT2_I):
+    INTCON3bits.INT2IF=0;
+    break;
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
+  }
+ }
+ return ret;
+}
+
+
+
+
+static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint || (lint -> Ipin.port != PORTB_I) || ( (lint -> Ipin.pin != PIN0)
+  && (lint -> Ipin.pin != PIN1) && (lint -> Ipin.pin != PIN2)) ){
   ret = (STD_ReturnType)(0x00);
  }
- else{
-  GPIO_pin_read_logic(&(btn -> btn_pin), &btn_logic);
-  if (btn -> btn_mode == btn_AL){
-   if (GPIO_HIGH == btn_logic){
-    *btn_s = btn_free;
-   }
-   else{
-    *btn_s = btn_pressed;
-   }
-  }
-  else if (btn -> btn_mode == btn_AH){
-   if (GPIO_HIGH == btn_logic){
-    *btn_s = btn_pressed;
-   }
-   else{
-    *btn_s = btn_free;
-   }
+ return ret;
+}
 
-  }
-  else{}
-  ret = (STD_ReturnType)(0x01);
+
+
+
+static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint || (lint -> Ipin.port != PORTB_I) || (lint -> Ipin.pin < PIN3)){
+  ret = (STD_ReturnType)(0x00);
+ }
+ return ret;
+}
+
+
+
+
+
+static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint || ((void*)0) == lint -> ext_interrupt_handler)
+  ret = (STD_ReturnType)(0x00);
+ else{
+  switch(lint -> index){
+   case(INT0_I):
+    INT0_handler = lint -> ext_interrupt_handler;
+    break;
+   case(INT1_I):
+    INT1_handler = lint -> ext_interrupt_handler;
+    break;
+   case(INT2_I):
+    INT2_handler = lint -> ext_interrupt_handler;
+    break;
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
+   }
  }
  return ret;
 }

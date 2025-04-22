@@ -4517,11 +4517,7 @@ static STD_ReturnType byte_to_str(uint8 val, uint8* str);
 static STD_ReturnType short_to_str(uint16 val, uint8* str);
 static STD_ReturnType int_to_str(uint32 val, uint8* str);
 # 8 "ECU_layer/LCD/ecu_LCD.c" 2
-
-
-
-
-
+# 17 "ECU_layer/LCD/ecu_LCD.c"
 static STD_ReturnType lcd_check_access(const chr_LCD_t *lcd){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  uint8 i;

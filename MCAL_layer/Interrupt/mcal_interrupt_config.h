@@ -10,17 +10,21 @@
 /************ includes *****************/
 #include <xc.h>
 #include "../mcal_std_types.h"
-
+#include "../GPIO/hal_gpio.h"
 /************ Macros *******************/
-#define INT_PRI_EN 1
-#define INT_PRI_DIS 0
-#define INT_PR INT_PRI_EN
 #define INT_EN 1
 #define INT_DIS 0
 #define INT_ACTIVE 1
 #define INT_DEAD 0
 #define INT_PEN 1
 #define INT_PDIS 0
+#define INT_PLOW 0
+#define INT_PHIGH 1
+// External interrupt config
+#define INT_INTx INT_EN
+#define INT_PORTB INT_EN
+#define INT_PR INT_EN
+
 
 /********* function-like macros ********/
 /* The bits GIEH and GIE are the same. GIEH is used when the priority feature is on (IPEN=1).
@@ -29,27 +33,27 @@
 */
 
 /* priority feature enable */
-#define INT_PREN() RCON.IPEN=1
+#define INT_PREN() RCONbits.IPEN=1
 /* priority feature disable */
-#define INT_PRDIS() RCON.IPEN=0
-#if INT_PR
+#define INT_PRDIS() RCONbits.IPEN=0
+#if INT_PR == INT_EN
 /* global high priority enable */
-#define INT_GHPEN() INTCON.GIEH=1
+#define INT_GHPEN() INTCONbits.GIEH=1
 /* global high priority disable */
-#define INT_GHPDIS() INTCON.GIEH=0
+#define INT_GHPDIS() INTCONbits.GIEH=0
 /* global low priority enable */
-#define INT_GLPEN() INTCON.GIEL=1
+#define INT_GLPEN() INTCONbits.GIEL=1
 /* global low priority disable */
-#define INT_GLPDIS() INTCON.GIEL=0
+#define INT_GLPDIS() INTCONbits.GIEL=0
 #else
 /* global enable */
-#define INT_GEN() INTCON.GIE=1
+#define INT_GEN() INTCONbits.GIE=1
 /* global disable */
-#define INT_GDIS() INTCON.GIE=0
+#define INT_GDIS() INTCONbits.GIE=0
 /* peripheral interrupt enable */
-#define INT_PEEN() INTCON.PEIE=1
+#define INT_PEEN() INTCONbits.PEIE=1
 /* peripheral interrupt disable */
-#define INT_PEDIS() INTCON.PEIE=0
+#define INT_PEDIS() INTCONbits.PEIE=0
 #endif
 
 /******** function declarations ********/
