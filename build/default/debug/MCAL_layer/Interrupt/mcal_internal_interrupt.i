@@ -4383,15 +4383,15 @@ typedef enum{
  rising
 }INTx_edge;
 typedef enum{
+ NA = -1,
  INT0_I,
  INT1_I,
- INT2_I
+ INT2_I,
 }INTx_index;
 
 typedef struct{
  void (*ext_interrupt_handler) (void);
  pin_config_t Ipin;
- INTx_index index;
  INTx_edge edge;
 
  uint8 priority;
@@ -4401,13 +4401,17 @@ typedef struct{
 typedef struct{
  void (*ext_interrupt_handler) (void);
  pin_config_t Ipin;
+
  uint8 priority;
+
 }INT_RBx_t;
 
 
 void INT0_ISR();
 void INT1_ISR();
 void INT2_ISR();
+void RB_ISR();
+
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
@@ -4420,10 +4424,11 @@ static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
 STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
-static STD_ReturnType INT_RBx_priority_init(const INT_RBx_t *lint);
+static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
 
 static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
+static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 # 11 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 2
 # 9 "MCAL_layer/Interrupt/mcal_internal_interrupt.c" 2
 

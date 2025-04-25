@@ -4530,15 +4530,15 @@ typedef enum{
  rising
 }INTx_edge;
 typedef enum{
+ NA = -1,
  INT0_I,
  INT1_I,
- INT2_I
+ INT2_I,
 }INTx_index;
 
 typedef struct{
  void (*ext_interrupt_handler) (void);
  pin_config_t Ipin;
- INTx_index index;
  INTx_edge edge;
 
  uint8 priority;
@@ -4548,13 +4548,17 @@ typedef struct{
 typedef struct{
  void (*ext_interrupt_handler) (void);
  pin_config_t Ipin;
+
  uint8 priority;
+
 }INT_RBx_t;
 
 
 void INT0_ISR();
 void INT1_ISR();
 void INT2_ISR();
+void RB_ISR();
+
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
@@ -4567,10 +4571,11 @@ static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
 STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
-static STD_ReturnType INT_RBx_priority_init(const INT_RBx_t *lint);
+static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
 
 static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
+static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 # 14 "./application.h" 2
 
 extern seven_segment_t segment1;
@@ -4595,15 +4600,16 @@ uint8 Iflag;
 
 
 
-INT_INTx_t first_int = {
- __INT0,
- {PORTB_I,
- PIN0,
- GPIO_OUT,
- GPIO_LOW},
- INT0_I,
- falling,
- 1
+INT_RBx_t first_int = {
+ ((void*)0),
+ {PORTB_I, PIN3, GPIO_IN, GPIO_LOW},
+ 0
+};
+INT_INTx_t second_int = {
+ ((void*)0),
+ {PORTB_I, PIN1, GPIO_IN, GPIO_LOW},
+        rising,
+ 0
 };
 
 pin_config_t seg_units_en = {
@@ -4617,7 +4623,7 @@ uint8 i=90, j=0, knum=0, prev;
 
 int main(void){
     STD_ReturnType ret = (STD_ReturnType)(0x00);
-    if(INT_INTx_initialize(&first_int))
+    if(INT_INTx_initialize(&second_int))
         LED_on(&LED_OK);
     else
         LED_on(&LED_NOK);
@@ -4645,4 +4651,6 @@ void __INT0(void){
 void __INT1(void){
 }
 void __INT2(void){
+}
+void __RB(void){
 }
