@@ -12,15 +12,16 @@ uint8 Iflag;
  //#define _XTAL_FREQ 8000000
 //This macro is used in the __delay_ms() function
 
-INT_INTx_t first_int = {
-	__INT0,
-	{PORTB_I,
-	PIN0,
-	GPIO_OUT, /* Is it going to matter? */
-	GPIO_LOW},
-	INT0_I,
-	falling,
-	INT_PHIGH 
+INT_RBx_t first_int = {
+	NULL,
+	{PORTB_I, PIN3, GPIO_IN, GPIO_LOW},
+	INT_PLOW
+};
+INT_INTx_t second_int = {
+	NULL,
+	{PORTB_I, PIN1, GPIO_IN, GPIO_LOW},
+        rising,
+	INT_PLOW
 };
 
 pin_config_t seg_units_en = { 
@@ -34,7 +35,7 @@ uint8 i=90, j=0, knum=0, prev;
 
 int main(void){
     STD_ReturnType ret = E_NOT_OK;
-    if(INT_INTx_initialize(&first_int))
+    if(INT_INTx_initialize(&second_int))
         LED_on(&LED_OK);
     else
         LED_on(&LED_NOK);
@@ -63,5 +64,6 @@ void __INT1(void){
 }
 void __INT2(void){
 }
-
+void __RB(void){
+}
 
