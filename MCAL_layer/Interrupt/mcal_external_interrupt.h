@@ -26,7 +26,7 @@
 #define INT_INT0_FALL() INTCON2bits.INTEDG0=0
 
 /* Enable INT1 */
-#define INT_INT1_EN() INTCONbits.INT0IE=1
+#define INT_INT1_EN() INTCON3bits.INT1IE=1
 /* Disables INT1 */
 #define INT_INT1_DIS() INTCON3bits.INT1IE=0
 /* Clear INT1 flag bit */
@@ -74,15 +74,15 @@ typedef enum{
 	rising
 }INTx_edge;
 typedef enum{
+	NA = -1,
 	INT0_I,
 	INT1_I,
-	INT2_I
+	INT2_I,
 }INTx_index;
 
 typedef struct{
 	void (*ext_interrupt_handler) (void); /* use NULL if you do not want a callback */
 	pin_config_t Ipin;
-	INTx_index index;
 	INTx_edge edge;
 #if INT_PR == INT_EN
 	uint8 priority; /* macro defined */	
@@ -92,13 +92,17 @@ typedef struct{
 typedef struct{/* Index is given in Ipin */
 	void (*ext_interrupt_handler) (void); /* use NULL if you do not want a callback */
 	pin_config_t Ipin;
-	uint8 priority; 
+#if INT_PR == INT_EN
+	uint8 priority; /* macro defined */	
+#endif
 }INT_RBx_t;
 
 /******** function declarations ********/
 void INT0_ISR();
 void INT1_ISR();
 void INT2_ISR();
+void RB_ISR();
+
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
@@ -111,9 +115,10 @@ static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
 STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
-static STD_ReturnType INT_RBx_priority_init(const INT_RBx_t *lint);
+static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
 
 static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
+static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 #endif	/* MCAL_EXTERNAL_INTERRUPT_H */
 

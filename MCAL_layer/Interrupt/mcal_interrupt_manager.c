@@ -13,6 +13,8 @@ void __interrupt() InterruptManager(void){
         INT1_ISR();
 	if(INTCON3bits.INT2IF == INT_EN && INTCON3bits.INT2IE == INT_EN)
         INT2_ISR();
+	if(INTCONbits.RBIF == INT_EN && INTCONbits.RBIE == INT_EN)
+		RB_ISR();
 }
 void __interrupt(low_priority) InterruptManagerLow(void){
 	if(INTCONbits.INT0IF == INT_EN && INTCONbits.INT0IE == INT_EN)
@@ -21,6 +23,8 @@ void __interrupt(low_priority) InterruptManagerLow(void){
         INT1_ISR();
 	if(INTCON3bits.INT2IF == INT_EN && INTCON3bits.INT2IE == INT_EN)
         INT2_ISR();
+	if(INTCONbits.RBIF == INT_EN && INTCONbits.RBIE == INT_EN)
+		RB_ISR();
 }
 #else
 void __interrupt() InterruptManager(void){
@@ -30,5 +34,7 @@ void __interrupt() InterruptManager(void){
         INT1_ISR();
 	if(INTCON3bits.INT2IF == INT_EN && INTCON3bits.INT2IE == INT_EN)
         INT2_ISR();
+	if(INTCONbits.RBIF == INT_EN && INTCONbits.RBIE == INT_EN)
+		RB_ISR();
 }
 #endif

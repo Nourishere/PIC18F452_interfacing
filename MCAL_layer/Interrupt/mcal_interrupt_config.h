@@ -23,7 +23,7 @@
 // External interrupt config
 #define INT_INTx INT_EN
 #define INT_PORTB INT_EN
-#define INT_PR INT_EN
+#define INT_PR INT_PHIGH
 
 
 /********* function-like macros ********/
