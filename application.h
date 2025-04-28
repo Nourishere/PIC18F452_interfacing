@@ -21,7 +21,7 @@ extern LED_t LED_NOK;
 //I want to modify this for error checking later
 STD_ReturnType application_initialize();
 #endif	/* APPLICATION_H */
-
+void __RB(void);
 void __INT0(void);
 void __INT1(void);
 void __INT2(void);
