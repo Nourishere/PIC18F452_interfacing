@@ -14,6 +14,7 @@ uint8 Iflag;
 
 INT_RBx_t first_int = {
 	NULL,
+        NULL,
 	{PORTB_I, PIN3, GPIO_IN, GPIO_LOW},
 	INT_PLOW
 };
@@ -61,9 +62,12 @@ void __INT0(void){
 	Iflag++;
 }
 void __INT1(void){
+    Iflag++;
 }
 void __INT2(void){
+    Iflag++;
 }
 void __RB(void){
+    Iflag++;
 }
 
