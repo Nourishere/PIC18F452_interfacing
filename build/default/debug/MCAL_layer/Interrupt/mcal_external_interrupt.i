@@ -4395,7 +4395,8 @@ typedef struct{
 }INT_INTx_t;
 
 typedef struct{
- void (*ext_interrupt_handler) (void);
+ void (*ext_interrupt_handler_high) (void);
+ void (*ext_interrupt_handler_low) (void);
  pin_config_t Ipin;
 
  uint8 priority;
@@ -4406,7 +4407,10 @@ typedef struct{
 void INT0_ISR();
 void INT1_ISR();
 void INT2_ISR();
-void RB_ISR();
+void RB4_ISR(uint8 fl);
+void RB5_ISR(uint8 fl);
+void RB6_ISR(uint8 fl);
+void RB7_ISR(uint8 fl);
 
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
@@ -4416,6 +4420,7 @@ static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
+static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint);
 
 STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
@@ -4431,7 +4436,14 @@ static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 void (*INT0_handler) (void) = ((void*)0);
 void (*INT1_handler) (void) = ((void*)0);
 void (*INT2_handler) (void) = ((void*)0);
-void (*RB_handler) (void) = ((void*)0);
+void (*RB4_handler_high) (void) = ((void*)0);
+void (*RB4_handler_low) (void) = ((void*)0);
+void (*RB5_handler_high) (void) = ((void*)0);
+void (*RB5_handler_low) (void) = ((void*)0);
+void (*RB6_handler_high) (void) = ((void*)0);
+void (*RB6_handler_low) (void) = ((void*)0);
+void (*RB7_handler_high) (void) = ((void*)0);
+void (*RB7_handler_low) (void) = ((void*)0);
 
 void INT0_ISR(){
  INTCONbits.INT0IF=0;
@@ -4448,10 +4460,49 @@ void INT2_ISR(){
  if(INT2_handler)
   INT2_handler();
 }
-void RB_ISR(){
+void RB4_ISR(uint8 fl){
  INTCONbits.RBIF=0;
- if(RB_handler)
-  RB_handler();
+ if(fl){
+  if(RB4_handler_high)
+   RB4_handler_high();
+ else{
+  if(RB4_handler_low)
+   RB4_handler_low();
+ }
+    }
+}
+void RB5_ISR(uint8 fl){
+ INTCONbits.RBIF=0;
+ if(fl){
+  if(RB5_handler_high)
+   RB5_handler_high();
+ else{
+  if(RB5_handler_low)
+   RB5_handler_low();
+ }
+    }
+}
+void RB6_ISR(uint8 fl){
+ INTCONbits.RBIF=0;
+ if(fl){
+  if(RB6_handler_high)
+   RB6_handler_high();
+ else{
+  if(RB6_handler_low)
+   RB6_handler_low();
+ }
+    }
+}
+void RB7_ISR(uint8 fl){
+ INTCONbits.RBIF=0;
+ if(fl){
+  if(RB7_handler_high)
+   RB7_handler_high();
+ else{
+  if(RB7_handler_low)
+   RB7_handler_low();
+ }
+    }
 }
 
 
@@ -4570,8 +4621,11 @@ STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint){
  else{
   INTCONbits.RBIE=1;
 
-  INTCONbits.GIEH=1;
-  INTCONbits.GIEL=1;
+ if (lint -> priority == 1)
+     INTCONbits.GIEH=1;
+    else
+        INTCONbits.GIEL=1;
+
 
 
 
@@ -4607,8 +4661,7 @@ STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
 
   ret = GPIO_pin_direction_initialize(&(lint -> Ipin));
 
-  if(lint -> ext_interrupt_handler != ((void*)0))
-   RB_handler = (lint -> ext_interrupt_handler);
+  ret = ret && INT_RBx_set_callback_routine(lint);
 
 
   ret = ret && INT_RBx_priority_initialize(lint);
@@ -4680,6 +4733,7 @@ static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint){
  if(((void*)0) == lint)
   ret = (STD_ReturnType)(0x00);
  else{
+        RCONbits.IPEN=1;
   switch(lint -> priority){
     case(1):
      INTCON2bits.RBIP=1;
@@ -4834,6 +4888,78 @@ static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
     ret = (STD_ReturnType)(0x00);
     break;
    }
+ }
+ return ret;
+}
+static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lint)
+  ret = (STD_ReturnType)(0x00);
+ else if(((void*)0) == lint -> ext_interrupt_handler_high &&
+      ((void*)0) == lint -> ext_interrupt_handler_low){
+  }
+ else if (((void*)0) == lint -> ext_interrupt_handler_high){
+
+  switch(lint -> Ipin.pin){
+   case(PIN4):
+    RB4_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   case(PIN5):
+    RB5_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   case(PIN6):
+    RB6_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   case(PIN7):
+    RB7_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
+  }
+ }
+ else if (((void*)0) == lint -> ext_interrupt_handler_low){
+
+  switch(lint -> Ipin.pin){
+   case(PIN4):
+    RB4_handler_high = (lint -> ext_interrupt_handler_high);
+    break;
+   case(PIN5):
+    RB5_handler_high = (lint -> ext_interrupt_handler_high);
+    break;
+   case(PIN6):
+    RB6_handler_high = (lint -> ext_interrupt_handler_high);
+    break;
+   case(PIN7):
+    RB7_handler_high = (lint -> ext_interrupt_handler_high);
+    break;
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
+  }
+ }
+ else{
+  switch(lint -> Ipin.pin){
+   case(PIN4):
+    RB4_handler_high = (lint -> ext_interrupt_handler_high);
+    RB4_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   case(PIN5):
+    RB5_handler_high = (lint -> ext_interrupt_handler_high);
+    RB5_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   case(PIN6):
+    RB6_handler_high = (lint -> ext_interrupt_handler_high);
+    RB6_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   case(PIN7):
+    RB7_handler_high = (lint -> ext_interrupt_handler_high);
+    RB7_handler_low= (lint -> ext_interrupt_handler_low);
+    break;
+   default:
+    ret = (STD_ReturnType)(0x00);
+    break;
+  }
  }
  return ret;
 }

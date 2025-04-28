@@ -4607,7 +4607,6 @@ uint8 Iflag;
 
 INT_RBx_t first_int = {
  ((void*)0),
-        ((void*)0),
  {PORTB_I, PIN3, GPIO_IN, GPIO_LOW},
  0
 };
