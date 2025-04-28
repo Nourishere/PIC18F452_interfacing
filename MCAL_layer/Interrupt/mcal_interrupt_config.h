@@ -32,6 +32,18 @@
  * If you wish to use the priority feature, set the macro INT_PR and use the macro function INT_PREN().
 */
 
+/* Macro to check on RBx flags and choose ISR */
+#define CHECK_PIN_CHANGE(pin, flag, handler)  \
+    do { \
+        if (PORTBbits.pin == GPIO_HIGH && flag == 1) { \
+            flag = 0; \
+            handler(0); \
+        } else if (PORTBbits.pin == GPIO_LOW && flag == 0) { \
+            flag = 1; \
+            handler(1); \
+        } \
+    } while (0)
+
 /* priority feature enable */
 #define INT_PREN() RCONbits.IPEN=1
 /* priority feature disable */

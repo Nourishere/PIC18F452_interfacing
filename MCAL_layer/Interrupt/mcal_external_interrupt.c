@@ -10,10 +10,14 @@
 void (*INT0_handler) (void) = NULL;
 void (*INT1_handler) (void) = NULL;
 void (*INT2_handler) (void) = NULL;
-void (*RB4_handler) (void) = NULL;
-void (*RB5_handler) (void) = NULL;
-void (*RB6_handler) (void) = NULL;
-void (*RB7_handler) (void) = NULL;
+void (*RB4_handler_high) (void) = NULL; /* handles change to high interrupts */
+void (*RB4_handler_low)  (void) = NULL;
+void (*RB5_handler_high) (void) = NULL;
+void (*RB5_handler_low)  (void) = NULL;
+void (*RB6_handler_high) (void) = NULL;
+void (*RB6_handler_low)  (void) = NULL;
+void (*RB7_handler_high) (void) = NULL;
+void (*RB7_handler_low)  (void) = NULL;
 
 void INT0_ISR(){
 	INT_INT0_CLRF();
@@ -30,25 +34,49 @@ void INT2_ISR(){
 	if(INT2_handler)
 		INT2_handler(); 
 }
-void RB4_ISR(){
+void RB4_ISR(uint8 fl){
 	INT_RB_CLRF();
-	if(RB4_handler)
-		RB4_handler();
+	if(fl){
+		if(RB4_handler_high)
+			RB4_handler_high();
+    }
+	else{
+		if(RB4_handler_low)
+			RB4_handler_low();
+	}	
 }
-void RB5_ISR(){
+void RB5_ISR(uint8 fl){
 	INT_RB_CLRF();
-	if(RB5_handler)
-		RB5_handler();
+	if(fl){
+		if(RB5_handler_high)
+			RB5_handler_high();
+    }
+	else{
+		if(RB5_handler_low)
+			RB5_handler_low();
+	}	
 }
-void RB6_ISR(){
+void RB6_ISR(uint8 fl){
 	INT_RB_CLRF();
-	if(RB6_handler)
-		RB6_handler();
+	if(fl){
+		if(RB6_handler_high)
+			RB6_handler_high();
+    }
+	else{
+		if(RB6_handler_low)
+			RB6_handler_low();
+	}	
 }
-void RB7_ISR(){
+void RB7_ISR(uint8 fl){
 	INT_RB_CLRF();
-	if(RB7_handler)
-		RB7_handler();
+	if(fl){
+		if(RB7_handler_high)
+			RB7_handler_high();
+	}	
+	else{
+		if(RB7_handler_low)
+			RB7_handler_low();
+    }
 }
 /*@brief: Initialize a INTx interrupt pin.
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
@@ -93,7 +121,7 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 		switch(ind) {
 			case(INT0_I):
 				INT_INT0_EN();	
-#if (INT_PR == INT_PHIGH)
+#if INT_PR == INT_EN
                                 INT_GHPEN();
 #else
 				INT_GEN();
@@ -101,7 +129,7 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 				break;	
 			case(INT1_I):
 				INT_INT1_EN();	
-#if (INT_PR == INT_PHIGH)
+#if INT_PR == INT_EN
 				if (lint -> priority == INT_PHIGH)
                                     INT_GHPEN();
                                 else
@@ -112,7 +140,7 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 				break;	
 			case(INT2_I):
 				INT_INT2_EN();
-#if (INT_PR == INT_PHIGH)
+#if INT_PR == INT_EN
 				if (lint -> priority == INT_PHIGH)
                                     INT_GHPEN();
                                 else
@@ -207,8 +235,7 @@ STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
 		/* initialize interrupt pin */
 		ret = GPIO_pin_direction_initialize(&(lint -> Ipin));
 		/* initialize interrupt callback routine */
-		if(lint -> ext_interrupt_handler != NULL)
-			RB_handler = (lint -> ext_interrupt_handler);
+		ret = ret && INT_RBx_set_callback_routine(lint);
 		/* initialize priority */
 #if (INT_PR == INT_EN)
 		ret = ret && INT_RBx_priority_initialize(lint);
@@ -438,25 +465,70 @@ static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
 	}
 	return ret;
 }
-static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
+static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
 		ret = E_NOT_OK;
-	else if(NULL == lint -> ext_callback_routine){/* Do nothing and skip the else, return E_OK */
+	else if(NULL == lint -> ext_interrupt_handler_high && 
+		    NULL == lint -> ext_interrupt_handler_low){/* Do nothing and skip the else, return E_OK */
 		}
-	else{
+	else if (NULL == lint -> ext_interrupt_handler_high){
+		/* Initialize only low-triggered change interrupts */
 		switch(lint -> Ipin.pin){
 			case(PIN4):
-				RB4_handler = (lint -> ext_interrupt_handler);
+				RB4_handler_low= (lint -> ext_interrupt_handler_low);
 				break;
 			case(PIN5):
-				RB5_handler = (lint -> ext_interrupt_handler);
+				RB5_handler_low= (lint -> ext_interrupt_handler_low);
 				break;
 			case(PIN6):
-				RB6_handler = (lint -> ext_interrupt_handler);
+				RB6_handler_low= (lint -> ext_interrupt_handler_low);
 				break;
 			case(PIN7):
-				RB7_handler = (lint -> ext_interrupt_handler);
+				RB7_handler_low= (lint -> ext_interrupt_handler_low);
+				break;
+			default:
+				ret = E_NOT_OK;
+				break;
+		}
+	}
+	else if (NULL == lint -> ext_interrupt_handler_low){
+		/* Initialize only high-triggered change interrupts */
+		switch(lint -> Ipin.pin){
+			case(PIN4):
+				RB4_handler_high = (lint -> ext_interrupt_handler_high);
+				break;
+			case(PIN5):
+				RB5_handler_high = (lint -> ext_interrupt_handler_high);
+				break;
+			case(PIN6):
+				RB6_handler_high = (lint -> ext_interrupt_handler_high);
+				break;
+			case(PIN7):
+				RB7_handler_high = (lint -> ext_interrupt_handler_high);
+				break;
+			default:
+				ret = E_NOT_OK;
+				break;
+		}
+	}
+	else{ /* Initialize both callbacks */
+		switch(lint -> Ipin.pin){
+			case(PIN4):
+				RB4_handler_high = (lint -> ext_interrupt_handler_high);
+				RB4_handler_low= (lint -> ext_interrupt_handler_low);
+				break;
+			case(PIN5):
+				RB5_handler_high = (lint -> ext_interrupt_handler_high);
+				RB5_handler_low= (lint -> ext_interrupt_handler_low);
+				break;
+			case(PIN6):
+				RB6_handler_high = (lint -> ext_interrupt_handler_high);
+				RB6_handler_low= (lint -> ext_interrupt_handler_low);
+				break;
+			case(PIN7):
+				RB7_handler_high = (lint -> ext_interrupt_handler_high);
+				RB7_handler_low= (lint -> ext_interrupt_handler_low);
 				break;
 			default:
 				ret = E_NOT_OK;

@@ -54,6 +54,7 @@
 #define INT_INT2_LP() INTCON3bits.INT2IP=0
 #endif
 #endif
+
 #if INT_PORTB == INT_EN
 /* Enables the PORTB (RB(4-7)) change interrupt */
 #define INT_RB_EN() INTCONbits.RBIE=1
@@ -67,12 +68,13 @@
 #define INT_RB_LP() INTCON2bits.RBIP=0
 #endif
 #endif
-/******** Data types *******************/
 
+/******** Data types *******************/
 typedef enum{
 	falling,
 	rising
 }INTx_edge;
+
 typedef enum{
 	NA = -1,
 	INT0_I,
@@ -90,7 +92,8 @@ typedef struct{
 }INT_INTx_t;
 
 typedef struct{/* Index is given in Ipin */
-	void (*ext_interrupt_handler) (void); /* use NULL if you do not want a callback */
+	void (*ext_interrupt_handler_high) (void); /* use NULL if you do not want a high-triggered callback */
+	void (*ext_interrupt_handler_low) (void); /* use NULL if you do not want a low-triggered callback */
 	pin_config_t Ipin;
 #if INT_PR == INT_EN
 	uint8 priority; /* macro defined */	
@@ -101,22 +104,26 @@ typedef struct{/* Index is given in Ipin */
 void INT0_ISR();
 void INT1_ISR();
 void INT2_ISR();
-void RB_ISR();
+void RB4_ISR(uint8 fl);
+void RB5_ISR(uint8 fl);
+void RB6_ISR(uint8 fl);
+void RB7_ISR(uint8 fl);
 
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
+/* RB change interrupt pins are RB(4-7) */
+STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+
 static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
-/* RB change interrupt pins are RB(4-7) */
-STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint);
 static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
-
 static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
 static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
