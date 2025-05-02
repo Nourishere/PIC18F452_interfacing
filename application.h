@@ -11,6 +11,7 @@
 #include "ECU_layer/ecu_init.h"
 #include "MCAL_layer/std_libs.h"
 #include "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+#include "MCAL_layer/EEPROM/mcal_eeprom.h"
 /******** Data types ****************/
 extern seven_segment_t segment1;
 extern keypad_t keypad1;

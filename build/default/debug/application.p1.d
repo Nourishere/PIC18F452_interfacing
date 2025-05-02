@@ -30,4 +30,8 @@ MCAL_layer/Interrupt/mcal_external_interrupt.h  \
 MCAL_layer/Interrupt/mcal_interrupt_config.h  \
 MCAL_layer/Interrupt/../mcal_std_types.h  \
 MCAL_layer/Interrupt/../GPIO/hal_gpio.h  \
+MCAL_layer/EEPROM/mcal_eeprom.h  \
+MCAL_layer/EEPROM/../Interrupt/mcal_interrupt_config.h  \
+MCAL_layer/EEPROM/../std_libs.h  \
+MCAL_layer/EEPROM/../mcal_std_types.h  \
 /home/nour/programs/microchip/xc8/v2.50/pic/include/builtins.h 

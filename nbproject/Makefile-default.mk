@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ECU_layer/7_Segment/ecu_7_segment.c ECU_layer/DC_Motor/ecu_dc_motor.c ECU_layer/Keypad/ecu_keypad.c ECU_layer/LCD/ecu_LCD.c ECU_layer/LED/ecu_led.c ECU_layer/Push_Button/ecu_btn.c ECU_layer/Relay/ecu_relay.c ECU_layer/ecu_init.c MCAL_layer/GPIO/hal_gpio.c MCAL_layer/Interrupt/mcal_internal_interrupt.c MCAL_layer/Interrupt/mcal_external_interrupt.c MCAL_layer/Interrupt/mcal_interrupt_manager.c MCAL_layer/device_config.c application.c
+SOURCEFILES_QUOTED_IF_SPACED=ECU_layer/7_Segment/ecu_7_segment.c ECU_layer/DC_Motor/ecu_dc_motor.c ECU_layer/Keypad/ecu_keypad.c ECU_layer/LCD/ecu_LCD.c ECU_layer/LED/ecu_led.c ECU_layer/Push_Button/ecu_btn.c ECU_layer/Relay/ecu_relay.c ECU_layer/ecu_init.c MCAL_layer/EEPROM/mcal_eeprom.c MCAL_layer/GPIO/hal_gpio.c MCAL_layer/Interrupt/mcal_internal_interrupt.c MCAL_layer/Interrupt/mcal_external_interrupt.c MCAL_layer/Interrupt/mcal_interrupt_manager.c MCAL_layer/device_config.c application.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ECU_layer/7_Segment/ecu_7_segment.p1 ${OBJECTDIR}/ECU_layer/DC_Motor/ecu_dc_motor.p1 ${OBJECTDIR}/ECU_layer/Keypad/ecu_keypad.p1 ${OBJECTDIR}/ECU_layer/LCD/ecu_LCD.p1 ${OBJECTDIR}/ECU_layer/LED/ecu_led.p1 ${OBJECTDIR}/ECU_layer/Push_Button/ecu_btn.p1 ${OBJECTDIR}/ECU_layer/Relay/ecu_relay.p1 ${OBJECTDIR}/ECU_layer/ecu_init.p1 ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_internal_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_external_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_interrupt_manager.p1 ${OBJECTDIR}/MCAL_layer/device_config.p1 ${OBJECTDIR}/application.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/ECU_layer/7_Segment/ecu_7_segment.p1.d ${OBJECTDIR}/ECU_layer/DC_Motor/ecu_dc_motor.p1.d ${OBJECTDIR}/ECU_layer/Keypad/ecu_keypad.p1.d ${OBJECTDIR}/ECU_layer/LCD/ecu_LCD.p1.d ${OBJECTDIR}/ECU_layer/LED/ecu_led.p1.d ${OBJECTDIR}/ECU_layer/Push_Button/ecu_btn.p1.d ${OBJECTDIR}/ECU_layer/Relay/ecu_relay.p1.d ${OBJECTDIR}/ECU_layer/ecu_init.p1.d ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1.d ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_internal_interrupt.p1.d ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_external_interrupt.p1.d ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_interrupt_manager.p1.d ${OBJECTDIR}/MCAL_layer/device_config.p1.d ${OBJECTDIR}/application.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ECU_layer/7_Segment/ecu_7_segment.p1 ${OBJECTDIR}/ECU_layer/DC_Motor/ecu_dc_motor.p1 ${OBJECTDIR}/ECU_layer/Keypad/ecu_keypad.p1 ${OBJECTDIR}/ECU_layer/LCD/ecu_LCD.p1 ${OBJECTDIR}/ECU_layer/LED/ecu_led.p1 ${OBJECTDIR}/ECU_layer/Push_Button/ecu_btn.p1 ${OBJECTDIR}/ECU_layer/Relay/ecu_relay.p1 ${OBJECTDIR}/ECU_layer/ecu_init.p1 ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1 ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_internal_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_external_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_interrupt_manager.p1 ${OBJECTDIR}/MCAL_layer/device_config.p1 ${OBJECTDIR}/application.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/ECU_layer/7_Segment/ecu_7_segment.p1.d ${OBJECTDIR}/ECU_layer/DC_Motor/ecu_dc_motor.p1.d ${OBJECTDIR}/ECU_layer/Keypad/ecu_keypad.p1.d ${OBJECTDIR}/ECU_layer/LCD/ecu_LCD.p1.d ${OBJECTDIR}/ECU_layer/LED/ecu_led.p1.d ${OBJECTDIR}/ECU_layer/Push_Button/ecu_btn.p1.d ${OBJECTDIR}/ECU_layer/Relay/ecu_relay.p1.d ${OBJECTDIR}/ECU_layer/ecu_init.p1.d ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1.d ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1.d ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_internal_interrupt.p1.d ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_external_interrupt.p1.d ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_interrupt_manager.p1.d ${OBJECTDIR}/MCAL_layer/device_config.p1.d ${OBJECTDIR}/application.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ECU_layer/7_Segment/ecu_7_segment.p1 ${OBJECTDIR}/ECU_layer/DC_Motor/ecu_dc_motor.p1 ${OBJECTDIR}/ECU_layer/Keypad/ecu_keypad.p1 ${OBJECTDIR}/ECU_layer/LCD/ecu_LCD.p1 ${OBJECTDIR}/ECU_layer/LED/ecu_led.p1 ${OBJECTDIR}/ECU_layer/Push_Button/ecu_btn.p1 ${OBJECTDIR}/ECU_layer/Relay/ecu_relay.p1 ${OBJECTDIR}/ECU_layer/ecu_init.p1 ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_internal_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_external_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_interrupt_manager.p1 ${OBJECTDIR}/MCAL_layer/device_config.p1 ${OBJECTDIR}/application.p1
+OBJECTFILES=${OBJECTDIR}/ECU_layer/7_Segment/ecu_7_segment.p1 ${OBJECTDIR}/ECU_layer/DC_Motor/ecu_dc_motor.p1 ${OBJECTDIR}/ECU_layer/Keypad/ecu_keypad.p1 ${OBJECTDIR}/ECU_layer/LCD/ecu_LCD.p1 ${OBJECTDIR}/ECU_layer/LED/ecu_led.p1 ${OBJECTDIR}/ECU_layer/Push_Button/ecu_btn.p1 ${OBJECTDIR}/ECU_layer/Relay/ecu_relay.p1 ${OBJECTDIR}/ECU_layer/ecu_init.p1 ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1 ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_internal_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_external_interrupt.p1 ${OBJECTDIR}/MCAL_layer/Interrupt/mcal_interrupt_manager.p1 ${OBJECTDIR}/MCAL_layer/device_config.p1 ${OBJECTDIR}/application.p1
 
 # Source Files
-SOURCEFILES=ECU_layer/7_Segment/ecu_7_segment.c ECU_layer/DC_Motor/ecu_dc_motor.c ECU_layer/Keypad/ecu_keypad.c ECU_layer/LCD/ecu_LCD.c ECU_layer/LED/ecu_led.c ECU_layer/Push_Button/ecu_btn.c ECU_layer/Relay/ecu_relay.c ECU_layer/ecu_init.c MCAL_layer/GPIO/hal_gpio.c MCAL_layer/Interrupt/mcal_internal_interrupt.c MCAL_layer/Interrupt/mcal_external_interrupt.c MCAL_layer/Interrupt/mcal_interrupt_manager.c MCAL_layer/device_config.c application.c
+SOURCEFILES=ECU_layer/7_Segment/ecu_7_segment.c ECU_layer/DC_Motor/ecu_dc_motor.c ECU_layer/Keypad/ecu_keypad.c ECU_layer/LCD/ecu_LCD.c ECU_layer/LED/ecu_led.c ECU_layer/Push_Button/ecu_btn.c ECU_layer/Relay/ecu_relay.c ECU_layer/ecu_init.c MCAL_layer/EEPROM/mcal_eeprom.c MCAL_layer/GPIO/hal_gpio.c MCAL_layer/Interrupt/mcal_internal_interrupt.c MCAL_layer/Interrupt/mcal_external_interrupt.c MCAL_layer/Interrupt/mcal_interrupt_manager.c MCAL_layer/device_config.c application.c
 
 
 
@@ -151,6 +151,14 @@ ${OBJECTDIR}/ECU_layer/ecu_init.p1: ECU_layer/ecu_init.c  nbproject/Makefile-${C
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/ECU_layer/ecu_init.p1 ECU_layer/ecu_init.c 
 	@-${MV} ${OBJECTDIR}/ECU_layer/ecu_init.d ${OBJECTDIR}/ECU_layer/ecu_init.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/ECU_layer/ecu_init.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1: MCAL_layer/EEPROM/mcal_eeprom.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/MCAL_layer/EEPROM" 
+	@${RM} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1.d 
+	@${RM} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1 MCAL_layer/EEPROM/mcal_eeprom.c 
+	@-${MV} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.d ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1: MCAL_layer/GPIO/hal_gpio.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/MCAL_layer/GPIO" 
@@ -264,6 +272,14 @@ ${OBJECTDIR}/ECU_layer/ecu_init.p1: ECU_layer/ecu_init.c  nbproject/Makefile-${C
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/ECU_layer/ecu_init.p1 ECU_layer/ecu_init.c 
 	@-${MV} ${OBJECTDIR}/ECU_layer/ecu_init.d ${OBJECTDIR}/ECU_layer/ecu_init.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/ECU_layer/ecu_init.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1: MCAL_layer/EEPROM/mcal_eeprom.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/MCAL_layer/EEPROM" 
+	@${RM} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1.d 
+	@${RM} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1 MCAL_layer/EEPROM/mcal_eeprom.c 
+	@-${MV} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.d ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/MCAL_layer/EEPROM/mcal_eeprom.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/MCAL_layer/GPIO/hal_gpio.p1: MCAL_layer/GPIO/hal_gpio.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/MCAL_layer/GPIO" 

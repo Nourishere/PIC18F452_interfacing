@@ -4373,11 +4373,12 @@ STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
 # 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
 # 13 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
-# 72 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 73 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
 typedef enum{
  falling,
  rising
 }INTx_edge;
+
 typedef enum{
  NA = -1,
  INT0_I,
@@ -4390,7 +4391,7 @@ typedef struct{
  pin_config_t Ipin;
  INTx_edge edge;
 
- uint8 priority;
+
 
 }INT_INTx_t;
 
@@ -4399,7 +4400,7 @@ typedef struct{
  void (*ext_interrupt_handler_low) (void);
  pin_config_t Ipin;
 
- uint8 priority;
+
 
 }INT_RBx_t;
 
@@ -4415,18 +4416,18 @@ void RB7_ISR(uint8 fl);
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
+
+STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+
 static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint);
-
-STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
 static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
-
 static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
 static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
@@ -4465,43 +4466,43 @@ void RB4_ISR(uint8 fl){
  if(fl){
   if(RB4_handler_high)
    RB4_handler_high();
+    }
  else{
   if(RB4_handler_low)
    RB4_handler_low();
  }
-    }
 }
 void RB5_ISR(uint8 fl){
  INTCONbits.RBIF=0;
  if(fl){
   if(RB5_handler_high)
    RB5_handler_high();
+    }
  else{
   if(RB5_handler_low)
    RB5_handler_low();
  }
-    }
 }
 void RB6_ISR(uint8 fl){
  INTCONbits.RBIF=0;
  if(fl){
   if(RB6_handler_high)
    RB6_handler_high();
+    }
  else{
   if(RB6_handler_low)
    RB6_handler_low();
  }
-    }
 }
 void RB7_ISR(uint8 fl){
  INTCONbits.RBIF=0;
  if(fl){
   if(RB7_handler_high)
    RB7_handler_high();
+ }
  else{
   if(RB7_handler_low)
    RB7_handler_low();
- }
     }
 }
 
@@ -4523,7 +4524,7 @@ STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint){
   INT_INTx_set_callback_routine(lint)&&
 
 
-  INT_INTx_priority_initialize(lint)&&
+
 
 
   INT_INTx_edge_initialize(lint)&&
@@ -4548,31 +4549,31 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
    case(INT0_I):
     INTCONbits.INT0IE=1;
 
-                                INTCONbits.GIEH=1;
 
 
+    INTCONbits.GIE=1;
 
     break;
    case(INT1_I):
     INTCON3bits.INT1IE=1;
 
-    if (lint -> priority == 1)
-                                    INTCONbits.GIEH=1;
-                                else
-                                    INTCONbits.GIEL=1;
 
 
+
+
+
+    INTCONbits.GIE=1;
 
     break;
    case(INT2_I):
     INTCON3bits.INT2IE=1;
 
-    if (lint -> priority == 1)
-                                    INTCONbits.GIEH=1;
-                                else
-                                    INTCONbits.GIEL=1;
 
 
+
+
+
+    INTCONbits.GIE=1;
 
     break;
    default:
@@ -4621,12 +4622,12 @@ STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint){
  else{
   INTCONbits.RBIE=1;
 
- if (lint -> priority == 1)
-     INTCONbits.GIEH=1;
-    else
-        INTCONbits.GIEL=1;
 
 
+
+
+
+  INTCONbits.GIE=1;
 
 
   }
@@ -4664,96 +4665,14 @@ STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
   ret = ret && INT_RBx_set_callback_routine(lint);
 
 
-  ret = ret && INT_RBx_priority_initialize(lint);
+
 
 
   ret = ret && INT_RBx_enable(lint);
  }
  return ret;
 }
-
-
-
-
-
-
-
-static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- INTx_index ind = NA;
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-            RCONbits.IPEN=1;
-   ind = INT_INTx_get_index(lint);
-  switch(ind){
-            case(INT0_I):
-                    break;
-   case(INT1_I):
-    switch(lint -> priority){
-     case(1):
-      INTCON3bits.INT1IP=1;
-      break;
-     case(0):
-      INTCON3bits.INT1IP=0;
-      break;
-     default:
-      ret = (STD_ReturnType)(0x00);
-      break;
-     }
-    break;
-   case(INT2_I):
-    switch(lint -> priority){
-     case(1):
-      INTCON3bits.INT2IP=1;
-      break;
-     case(0):
-      INTCON3bits.INT2IP=0;
-      break;
-     default:
-      ret = (STD_ReturnType)(0x00);
-      break;
-     }
-    break;
-   default:
-    ret = (STD_ReturnType)(0x00);
-    break;
-  }
- }
- return ret;
-}
-
-
-
-
-
-
-static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-        RCONbits.IPEN=1;
-  switch(lint -> priority){
-    case(1):
-     INTCON2bits.RBIP=1;
-     break;
-    case(0):
-     INTCON2bits.RBIP=0;
-     break;
-    default:
-     ret = (STD_ReturnType)(0x00);
-     break;
-    }
-  }
- return ret;
-}
-
-
-
-
-
-
+# 331 "MCAL_layer/Interrupt/mcal_external_interrupt.c"
 static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  INTx_index ind = NA;

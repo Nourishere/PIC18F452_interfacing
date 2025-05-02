@@ -31,6 +31,9 @@
         <itemPath>ECU_layer/ecu_init.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MCAL_layer" displayName="MCAL_layer" projectFiles="true">
+        <logicalFolder name="EEPROM" displayName="EEPROM" projectFiles="true">
+          <itemPath>MCAL_layer/EEPROM/mcal_eeprom.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="GPIO" displayName="GPIO" projectFiles="true">
           <itemPath>MCAL_layer/GPIO/hal_gpio.h</itemPath>
           <itemPath>MCAL_layer/GPIO/hal_gpio_cfg.h</itemPath>
@@ -85,6 +88,9 @@
         <itemPath>ECU_layer/ecu_init.c</itemPath>
       </logicalFolder>
       <logicalFolder name="MCAL_layer" displayName="MCAL_layer" projectFiles="true">
+        <logicalFolder name="EEPROM" displayName="EEPROM" projectFiles="true">
+          <itemPath>MCAL_layer/EEPROM/mcal_eeprom.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="GPIO" displayName="GPIO" projectFiles="true">
           <itemPath>MCAL_layer/GPIO/hal_gpio.c</itemPath>
         </logicalFolder>

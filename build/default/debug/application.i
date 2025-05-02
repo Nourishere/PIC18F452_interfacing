@@ -4524,11 +4524,12 @@ STD_ReturnType ecu_init(void);
 # 12 "./MCAL_layer/Interrupt/mcal_external_interrupt.h"
 # 1 "./MCAL_layer/Interrupt/mcal_interrupt_config.h" 1
 # 13 "./MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
-# 72 "./MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 73 "./MCAL_layer/Interrupt/mcal_external_interrupt.h"
 typedef enum{
  falling,
  rising
 }INTx_edge;
+
 typedef enum{
  NA = -1,
  INT0_I,
@@ -4541,7 +4542,7 @@ typedef struct{
  pin_config_t Ipin;
  INTx_edge edge;
 
- uint8 priority;
+
 
 }INT_INTx_t;
 
@@ -4550,7 +4551,7 @@ typedef struct{
  void (*ext_interrupt_handler_low) (void);
  pin_config_t Ipin;
 
- uint8 priority;
+
 
 }INT_RBx_t;
 
@@ -4566,22 +4567,29 @@ void RB7_ISR(uint8 fl);
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
+
+STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
+STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+
 static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint);
-
-STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
 static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
-
 static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
 static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 # 14 "./application.h" 2
+# 1 "./MCAL_layer/EEPROM/mcal_eeprom.h" 1
+# 41 "./MCAL_layer/EEPROM/mcal_eeprom.h"
+STD_ReturnType EEPROM_read(uint8 addr, uint8* data);
+STD_ReturnType EEPROM_write(uint8 addr, uint8 data);
+sint8 EEPROM_check(void);
+STD_ReturnType EEPROM_erase(void);
+# 15 "./application.h" 2
 
 extern seven_segment_t segment1;
 extern keypad_t keypad1;
@@ -4605,41 +4613,16 @@ uint8 Iflag;
 
 
 
-INT_RBx_t first_int = {
- ((void*)0),
-        ((void*)0),
- {PORTB_I, PIN3, GPIO_IN, GPIO_LOW},
- 0
-};
-INT_INTx_t second_int = {
- ((void*)0),
- {PORTB_I, PIN1, GPIO_IN, GPIO_LOW},
-        rising,
- 0
-};
-
-pin_config_t seg_units_en = {
- PORTD_I,
- PIN1,
- GPIO_OUT,
- GPIO_HIGH
-};
-
-uint8 i=90, j=0, knum=0, prev;
+sint8 x=7;
 
 int main(void){
     STD_ReturnType ret = (STD_ReturnType)(0x00);
-    if(INT_INTx_initialize(&second_int))
-        LED_on(&LED_OK);
-    else
-        LED_on(&LED_NOK);
+ x = EEPROM_check();
+        if(x==-1)
+            LED_on(&LED_OK);
+    while(1){
 
-
-
-
-        while(1){
-
-  }
+ }
 
 }
 

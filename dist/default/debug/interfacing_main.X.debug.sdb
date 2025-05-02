@@ -180,41 +180,10 @@ PIN7 7
 GPIO_OUT 0
 GPIO_IN 1
 ]
-"20 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_interrupt_manager.c
+"51 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_interrupt_manager.c
 [e E2776 . `uc
 GPIO_LOW 0
 GPIO_HIGH 1
-]
-"15 /home/nour/MPLABXProjects/interfacing_main.X/application.c
-[e E2784 . `uc
-PORTA_I 0
-PORTB_I 1
-PORTC_I 2
-PORTD_I 3
-PORTE_I 4
-]
-[e E2791 . `uc
-PIN0 0
-PIN1 1
-PIN2 2
-PIN3 3
-PIN4 4
-PIN5 5
-PIN6 6
-PIN7 7
-]
-[e E2780 . `uc
-GPIO_OUT 0
-GPIO_IN 1
-]
-[e E2776 . `uc
-GPIO_LOW 0
-GPIO_HIGH 1
-]
-"21
-[e E3011 . `uc
-falling 0
-rising 1
 ]
 "7 /home/nour/programs/microchip/xc8/v3.00/pic/sources/c99/common/awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
@@ -248,7 +217,7 @@ rising 1
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 /home/nour/programs/microchip/xc8/v3.00/pic/sources/c99/common/Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"37 /home/nour/MPLABXProjects/interfacing_main.X/application.c
+"17 /home/nour/MPLABXProjects/interfacing_main.X/application.c
 [v _main main `(i  1 e 2 0 ]
 "35 /home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/7_Segment/ecu_7_segment.c
 [v _seven_segment_write_number seven_segment_write_number `(uc  1 e 1 0 ]
@@ -280,6 +249,12 @@ rising 1
 [v _LED_initialize LED_initialize `(uc  1 e 1 0 ]
 "33
 [v _LED_on LED_on `(uc  1 e 1 0 ]
+"15 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/EEPROM/mcal_eeprom.c
+[v _EEPROM_read EEPROM_read `(uc  1 e 1 0 ]
+"37
+[v _EEPROM_write EEPROM_write `(uc  1 e 1 0 ]
+"98
+[v _EEPROM_check EEPROM_check `(c  1 e 1 0 ]
 "21 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/GPIO/hal_gpio.c
 [v _GPIO_check_access GPIO_check_access `(uc  1 e 1 0 ]
 "37
@@ -294,34 +269,24 @@ rising 1
 [v _GPIO_pin_toggle_logic GPIO_pin_toggle_logic `(uc  1 e 1 0 ]
 "22 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_external_interrupt.c
 [v _INT0_ISR INT0_ISR `(v  1 e 1 0 ]
-[v i2_INT0_ISR INT0_ISR `(v  1 e 1 0 ]
 "27
 [v _INT1_ISR INT1_ISR `(v  1 e 1 0 ]
-[v i2_INT1_ISR INT1_ISR `(v  1 e 1 0 ]
 "32
 [v _INT2_ISR INT2_ISR `(v  1 e 1 0 ]
-[v i2_INT2_ISR INT2_ISR `(v  1 e 1 0 ]
+"37
+[v _RB4_ISR RB4_ISR `(v  1 e 1 0 ]
 "48
 [v _RB5_ISR RB5_ISR `(v  1 e 1 0 ]
-[v i2_RB5_ISR RB5_ISR `(v  1 e 1 0 ]
 "59
 [v _RB6_ISR RB6_ISR `(v  1 e 1 0 ]
-[v i2_RB6_ISR RB6_ISR `(v  1 e 1 0 ]
 "70
 [v _RB7_ISR RB7_ISR `(v  1 e 1 0 ]
-[v i2_RB7_ISR RB7_ISR `(v  1 e 1 0 ]
-"85
-[v _INT_INTx_initialize INT_INTx_initialize `(uc  1 e 1 0 ]
 "114
 [v _INT_INTx_enable INT_INTx_enable `(uc  1 e 1 0 ]
 "163
 [v _INT_INTx_disable INT_INTx_disable `(uc  1 e 1 0 ]
 "191
 [v _INT_RBx_enable INT_RBx_enable `(uc  1 e 1 0 ]
-"255
-[v _INT_INTx_priority_initialize INT_INTx_priority_initialize `(uc  1 s 1 INT_INTx_priority_initialize ]
-"305
-[v _INT_RBx_priority_initialize INT_RBx_priority_initialize `(uc  1 s 1 INT_RBx_priority_initialize ]
 "331
 [v _INT_INTx_edge_initialize INT_INTx_edge_initialize `(uc  1 s 1 INT_INTx_edge_initialize ]
 "389
@@ -336,15 +301,13 @@ rising 1
 [v _INT_RBx_set_callback_routine INT_RBx_set_callback_routine `(uc  1 s 1 INT_RBx_set_callback_routine ]
 "544
 [v _INT_INTx_get_index INT_INTx_get_index `(E2851  1 s 1 INT_INTx_get_index ]
-"11 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_interrupt_manager.c
+"42 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_interrupt_manager.c
 [v _InterruptManager InterruptManager `IIH(v  1 e 1 0 ]
-"26
-[v _InterruptManagerLow InterruptManagerLow `IIL(v  1 e 1 0 ]
 "50 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
 [v _PORTA PORTA `VEuc  1 e 1 @3968 ]
 "195
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
-[s S1579 . 1 `uc 1 RB0 1 0 :1:0 
+[s S1593 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -354,7 +317,7 @@ rising 1
 `uc 1 RB7 1 0 :1:7 
 ]
 "230
-[s S1588 . 1 `uc 1 INT0 1 0 :1:0 
+[s S1602 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 CCP2 1 0 :1:3 
@@ -363,14 +326,14 @@ rising 1
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S1597 . 1 `uc 1 . 1 0 :3:0 
+[s S1611 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2A 1 0 :1:3 
 ]
-[s S1600 . 1 `uc 1 . 1 0 :3:0 
+[s S1614 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S1603 . 1 `S1579 1 . 1 0 `S1588 1 . 1 0 `S1597 1 . 1 0 `S1600 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES1603  1 e 1 @3969 ]
+[u S1617 . 1 `S1593 1 . 1 0 `S1602 1 . 1 0 `S1611 1 . 1 0 `S1614 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES1617  1 e 1 @3969 ]
 "320
 [v _PORTC PORTC `VEuc  1 e 1 @3970 ]
 "487
@@ -397,43 +360,28 @@ rising 1
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 "2108
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S1150 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+[s S839 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 WREN 1 0 :1:2 
+`uc 1 WRERR 1 0 :1:3 
+`uc 1 FREE 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CFGS 1 0 :1:6 
+`uc 1 EEPGD 1 0 :1:7 
 ]
-"4586
-[s S1152 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 NOT_POR 1 0 :1:1 
+"2644
+[s S848 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 EEFS 1 0 :1:6 
 ]
-[s S1155 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 NOT_PD 1 0 :1:2 
-]
-[s S1158 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 NOT_TO 1 0 :1:3 
-]
-[s S1161 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 NOT_RI 1 0 :1:4 
-]
-[s S1164 . 1 `uc 1 nBOR 1 0 :1:0 
-`uc 1 nPOR 1 0 :1:1 
-`uc 1 nPD 1 0 :1:2 
-`uc 1 nTO 1 0 :1:3 
-`uc 1 nRI 1 0 :1:4 
-`uc 1 . 1 0 :2:5 
-`uc 1 IPEN 1 0 :1:7 
-]
-[s S1172 . 1 `uc 1 . 1 0 :7:0 
-`uc 1 NOT_IPEN 1 0 :1:7 
-]
-[s S1175 . 1 `uc 1 BOR 1 0 :1:0 
-`uc 1 POR 1 0 :1:1 
-`uc 1 PD 1 0 :1:2 
-`uc 1 TO 1 0 :1:3 
-`uc 1 RI 1 0 :1:4 
-`uc 1 . 1 0 :2:5 
-`uc 1 nIPEN 1 0 :1:7 
-]
-[u S1183 . 1 `S1150 1 . 1 0 `S1152 1 . 1 0 `S1155 1 . 1 0 `S1158 1 . 1 0 `S1161 1 . 1 0 `S1164 1 . 1 0 `S1172 1 . 1 0 `S1175 1 . 1 0 ]
-[v _RCONbits RCONbits `VES1183  1 e 1 @4048 ]
-[s S1018 . 1 `uc 1 INT1IF 1 0 :1:0 
+[u S851 . 1 `S839 1 . 1 0 `S848 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES851  1 e 1 @4006 ]
+"2689
+[v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
+"2696
+[v _EEDATA EEDATA `VEuc  1 e 1 @4008 ]
+"2703
+[v _EEADR EEADR `VEuc  1 e 1 @4009 ]
+[s S1178 . 1 `uc 1 INT1IF 1 0 :1:0 
 `uc 1 INT2IF 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 INT1IE 1 0 :1:3 
@@ -443,7 +391,7 @@ rising 1
 `uc 1 INT2IP 1 0 :1:7 
 ]
 "5163
-[s S1027 . 1 `uc 1 INT1F 1 0 :1:0 
+[s S1187 . 1 `uc 1 INT1F 1 0 :1:0 
 `uc 1 INT2F 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 INT1E 1 0 :1:3 
@@ -452,13 +400,13 @@ rising 1
 `uc 1 INT1P 1 0 :1:6 
 `uc 1 INT2P 1 0 :1:7 
 ]
-[u S1036 . 1 `S1018 1 . 1 0 `S1027 1 . 1 0 ]
-[v _INTCON3bits INTCON3bits `VES1036  1 e 1 @4080 ]
-[s S1226 . 1 `uc 1 . 1 0 :7:0 
+[u S1196 . 1 `S1178 1 . 1 0 `S1187 1 . 1 0 ]
+[v _INTCON3bits INTCON3bits `VES1196  1 e 1 @4080 ]
+[s S1298 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "5255
-[s S1229 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S1301 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -467,14 +415,14 @@ rising 1
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S1238 . 1 `uc 1 . 1 0 :2:0 
+[s S1310 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IP 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S1243 . 1 `S1226 1 . 1 0 `S1229 1 . 1 0 `S1238 1 . 1 0 ]
-[v _INTCON2bits INTCON2bits `VES1243  1 e 1 @4081 ]
-[s S968 . 1 `uc 1 RBIF 1 0 :1:0 
+[u S1315 . 1 `S1298 1 . 1 0 `S1301 1 . 1 0 `S1310 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES1315  1 e 1 @4081 ]
+[s S872 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -484,7 +432,7 @@ rising 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "5342
-[s S977 . 1 `uc 1 . 1 0 :1:0 
+[s S881 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -493,22 +441,18 @@ rising 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S986 . 1 `uc 1 . 1 0 :6:0 
+[s S890 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S990 . 1 `S968 1 . 1 0 `S977 1 . 1 0 `S986 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES990  1 e 1 @4082 ]
+[u S894 . 1 `S872 1 . 1 0 `S881 1 . 1 0 `S890 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES894  1 e 1 @4082 ]
+"5452
+[v _INTCON1bits INTCON1bits `VES894  1 e 1 @4082 ]
 "9 /home/nour/MPLABXProjects/interfacing_main.X/application.c
 [v _Iflag Iflag `uc  1 e 1 0 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"21
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v _second_int second_int `S1077  1 e 5 0 ]
+"15
+[v _x x `c  1 e 1 0 ]
 [s S493 . 1 `uc 1 port 1 0 :3:0 
 `uc 1 pin 1 0 :3:3 
 `uc 1 LED_init_status 1 0 :1:6 
@@ -553,10 +497,10 @@ rising 1
 [v _RB5f RB5f `VEuc  1 s 1 RB5f ]
 [v _RB6f RB6f `VEuc  1 s 1 RB6f ]
 [v _RB7f RB7f `VEuc  1 s 1 RB7f ]
-"37 /home/nour/MPLABXProjects/interfacing_main.X/application.c
+"17 /home/nour/MPLABXProjects/interfacing_main.X/application.c
 [v _main main `(i  1 e 2 0 ]
 {
-"51
+"26
 } 0
 "33 /home/nour/MPLABXProjects/interfacing_main.X/ECU_layer/LED/ecu_led.c
 [v _LED_on LED_on `(uc  1 e 1 0 ]
@@ -567,14 +511,14 @@ rising 1
 `uc 1 logic 1 0 :1:7 
 ]
 "39
-[v LED_on@pin_local pin_local `S30  1 a 1 2 ]
+[v LED_on@pin_local pin_local `S30  1 a 1 14 ]
 [s S493 . 1 `uc 1 port 1 0 :3:0 
 `uc 1 pin 1 0 :3:3 
 `uc 1 LED_init_status 1 0 :1:6 
 `uc 1 reserved 1 0 :1:7 
 ]
 "33
-[v LED_on@led led `*.30S493  1 p 1 0 ]
+[v LED_on@led led `*.30S493  1 p 1 12 ]
 "38
 [v LED_on@F2875 F2875 `S30  1 s 1 F2875 ]
 "46
@@ -583,196 +527,55 @@ rising 1
 [v _GPIO_pin_write_logic GPIO_pin_write_logic `(uc  1 e 1 0 ]
 {
 "98
-[v GPIO_pin_write_logic@ret ret `uc  1 a 1 15 ]
+[v GPIO_pin_write_logic@ret ret `uc  1 a 1 11 ]
 [s S30 . 1 `uc 1 port 1 0 :3:0 
 `uc 1 pin 1 0 :3:3 
 `uc 1 direction 1 0 :1:6 
 `uc 1 logic 1 0 :1:7 
 ]
 "97
-[v GPIO_pin_write_logic@_pin_config _pin_config `*.30CS30  1 p 1 8 ]
-[v GPIO_pin_write_logic@logic logic `E2776  1 p 1 9 ]
+[v GPIO_pin_write_logic@_pin_config _pin_config `*.30CS30  1 p 1 4 ]
+[v GPIO_pin_write_logic@logic logic `E2776  1 p 1 5 ]
 "115
-} 0
-"85 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_external_interrupt.c
-[v _INT_INTx_initialize INT_INTx_initialize `(uc  1 e 1 0 ]
-{
-"86
-[v INT_INTx_initialize@ret ret `uc  1 a 1 1 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"85
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_initialize@lint lint `*.30CS1077  1 p 1 15 ]
-"108
-} 0
-"442
-[v _INT_INTx_set_callback_routine INT_INTx_set_callback_routine `(uc  1 s 1 INT_INTx_set_callback_routine ]
-{
-"443
-[v INT_INTx_set_callback_routine@ret ret `uc  1 a 1 11 ]
-"444
-[v INT_INTx_set_callback_routine@ind ind `E2851  1 a 1 10 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"442
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_set_callback_routine@lint lint `*.30CS1077  1 p 1 7 ]
-"467
-} 0
-"255
-[v _INT_INTx_priority_initialize INT_INTx_priority_initialize `(uc  1 s 1 INT_INTx_priority_initialize ]
-{
-"256
-[v INT_INTx_priority_initialize@ret ret `uc  1 a 1 11 ]
-"257
-[v INT_INTx_priority_initialize@ind ind `E2851  1 a 1 10 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"255
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_priority_initialize@lint lint `*.30CS1077  1 p 1 7 ]
-"298
-} 0
-"114
-[v _INT_INTx_enable INT_INTx_enable `(uc  1 e 1 0 ]
-{
-"115
-[v INT_INTx_enable@ret ret `uc  1 a 1 11 ]
-"116
-[v INT_INTx_enable@ind ind `E2851  1 a 1 10 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"114
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_enable@lint lint `*.30CS1077  1 p 1 7 ]
-"158
-} 0
-"331
-[v _INT_INTx_edge_initialize INT_INTx_edge_initialize `(uc  1 s 1 INT_INTx_edge_initialize ]
-{
-"332
-[v INT_INTx_edge_initialize@ret ret `uc  1 a 1 11 ]
-"333
-[v INT_INTx_edge_initialize@ind ind `E2851  1 a 1 10 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"331
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_edge_initialize@lint lint `*.30CS1077  1 p 1 7 ]
-"384
-} 0
-"163
-[v _INT_INTx_disable INT_INTx_disable `(uc  1 e 1 0 ]
-{
-"164
-[v INT_INTx_disable@ret ret `uc  1 a 1 11 ]
-"165
-[v INT_INTx_disable@ind ind `E2851  1 a 1 10 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"163
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_disable@lint lint `*.30CS1077  1 p 1 7 ]
-"186
-} 0
-"389
-[v _INT_INTx_clear_flag INT_INTx_clear_flag `(uc  1 s 1 INT_INTx_clear_flag ]
-{
-"390
-[v INT_INTx_clear_flag@ret ret `uc  1 a 1 11 ]
-"391
-[v INT_INTx_clear_flag@ind ind `E2851  1 a 1 10 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"389
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_clear_flag@lint lint `*.30CS1077  1 p 1 7 ]
-"412
-} 0
-"544
-[v _INT_INTx_get_index INT_INTx_get_index `(E2851  1 s 1 INT_INTx_get_index ]
-{
-"545
-[v INT_INTx_get_index@ind ind `E2851  1 a 1 6 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"544
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_get_index@lint lint `*.30CS1077  1 p 1 5 ]
-"566
-} 0
-"417
-[v _INT_INTx_check_access INT_INTx_check_access `(uc  1 s 1 INT_INTx_check_access ]
-{
-"418
-[v INT_INTx_check_access@ret ret `uc  1 a 1 6 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"417
-[s S1077 . 5 `*.37(v 1 ext_interrupt_handler 2 0 `S30 1 Ipin 1 2 `E2847 1 edge 1 3 `uc 1 priority 1 4 ]
-[v INT_INTx_check_access@lint lint `*.30CS1077  1 p 1 5 ]
-"424
-} 0
-"54 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/GPIO/hal_gpio.c
-[v _GPIO_pin_direction_initialize GPIO_pin_direction_initialize `(uc  1 e 1 0 ]
-{
-"55
-[v GPIO_pin_direction_initialize@ret ret `uc  1 a 1 14 ]
-[s S30 . 1 `uc 1 port 1 0 :3:0 
-`uc 1 pin 1 0 :3:3 
-`uc 1 direction 1 0 :1:6 
-`uc 1 logic 1 0 :1:7 
-]
-"54
-[v GPIO_pin_direction_initialize@_pin_config _pin_config `*.30CS30  1 p 1 8 ]
-"72
 } 0
 "21
 [v _GPIO_check_access GPIO_check_access `(uc  1 e 1 0 ]
 {
 "22
-[v GPIO_check_access@ret ret `uc  1 a 1 7 ]
+[v GPIO_check_access@ret ret `uc  1 a 1 3 ]
 [s S30 . 1 `uc 1 port 1 0 :3:0 
 `uc 1 pin 1 0 :3:3 
 `uc 1 direction 1 0 :1:6 
 `uc 1 logic 1 0 :1:7 
 ]
 "21
-[v GPIO_check_access@_pin_config _pin_config `*.30CS30  1 p 1 5 ]
+[v GPIO_check_access@_pin_config _pin_config `*.30CS30  1 p 1 1 ]
 "31
 } 0
-"26 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_interrupt_manager.c
-[v _InterruptManagerLow InterruptManagerLow `IIL(v  1 e 1 0 ]
+"98 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/EEPROM/mcal_eeprom.c
+[v _EEPROM_check EEPROM_check `(c  1 e 1 0 ]
 {
-"40
+"100
+[v EEPROM_check@data data `[256]uc  1 a 256 0 ]
+"101
+[v EEPROM_check@i i `uc  1 a 1 5 ]
+"99
+[v EEPROM_check@fe fe `uc  1 a 1 4 ]
+"126
+} 0
+"15
+[v _EEPROM_read EEPROM_read `(uc  1 e 1 0 ]
+{
+[v EEPROM_read@addr addr `uc  1 p 1 wreg ]
+[v EEPROM_read@addr addr `uc  1 p 1 wreg ]
+[v EEPROM_read@data data `*.39uc  1 p 2 1 ]
+[v EEPROM_read@addr addr `uc  1 p 1 3 ]
+"30
+} 0
+"42 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_interrupt_manager.c
+[v _InterruptManager InterruptManager `IIH(v  1 e 1 0 ]
+{
+"56
 } 0
 "70 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_external_interrupt.c
 [v _RB7_ISR RB7_ISR `(v  1 e 1 0 ]
@@ -795,6 +598,13 @@ rising 1
 [v RB5_ISR@fl fl `uc  1 p 1 wreg ]
 "58
 } 0
+"37
+[v _RB4_ISR RB4_ISR `(v  1 e 1 0 ]
+{
+[v RB4_ISR@fl fl `uc  1 p 1 wreg ]
+[v RB4_ISR@fl fl `uc  1 p 1 wreg ]
+"47
+} 0
 "32
 [v _INT2_ISR INT2_ISR `(v  1 e 1 0 ]
 {
@@ -807,47 +617,6 @@ rising 1
 } 0
 "22
 [v _INT0_ISR INT0_ISR `(v  1 e 1 0 ]
-{
-"26
-} 0
-"11 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_interrupt_manager.c
-[v _InterruptManager InterruptManager `IIH(v  1 e 1 0 ]
-{
-"25
-} 0
-"70 /home/nour/MPLABXProjects/interfacing_main.X/MCAL_layer/Interrupt/mcal_external_interrupt.c
-[v i2_RB7_ISR RB7_ISR `(v  1 e 1 0 ]
-{
-[v i2RB7_ISR@fl fl `uc  1 p 1 wreg ]
-[v i2RB7_ISR@fl fl `uc  1 p 1 wreg ]
-"80
-} 0
-"59
-[v i2_RB6_ISR RB6_ISR `(v  1 e 1 0 ]
-{
-[v i2RB6_ISR@fl fl `uc  1 p 1 wreg ]
-[v i2RB6_ISR@fl fl `uc  1 p 1 wreg ]
-"69
-} 0
-"48
-[v i2_RB5_ISR RB5_ISR `(v  1 e 1 0 ]
-{
-[v i2RB5_ISR@fl fl `uc  1 p 1 wreg ]
-[v i2RB5_ISR@fl fl `uc  1 p 1 wreg ]
-"58
-} 0
-"32
-[v i2_INT2_ISR INT2_ISR `(v  1 e 1 0 ]
-{
-"36
-} 0
-"27
-[v i2_INT1_ISR INT1_ISR `(v  1 e 1 0 ]
-{
-"31
-} 0
-"22
-[v i2_INT0_ISR INT0_ISR `(v  1 e 1 0 ]
 {
 "26
 } 0

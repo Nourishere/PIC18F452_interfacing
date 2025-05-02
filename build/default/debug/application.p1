@@ -1,40 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[v F3030 `(v ~T0 @X0 0 tf ]
-[v F3032 `(v ~T0 @X0 0 tf ]
-"58 ./ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h
-[; ;./ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h: 58: typedef struct{
-[s S263 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S263 . port pin direction logic ]
-"92 ./MCAL_layer/Interrupt/mcal_external_interrupt.h
-[; ;./MCAL_layer/Interrupt/mcal_external_interrupt.h: 92: typedef struct{
-[s S274 `*F3030 1 `*F3032 1 `S263 1 `uc 1 ]
-[n S274 . ext_interrupt_handler_high ext_interrupt_handler_low Ipin priority ]
-[v F3091 `(v ~T0 @X0 0 tf ]
-[v F3092 `(v ~T0 @X0 0 tf ]
-"15 application.c
-[; ;application.c: 15: INT_RBx_t first_int = {
-[c E2784 0 1 2 3 4 .. ]
-[n E2784 . PORTA_I PORTB_I PORTC_I PORTD_I PORTE_I  ]
-[c E2791 0 1 2 3 4 5 6 7 .. ]
-[n E2791 . PIN0 PIN1 PIN2 PIN3 PIN4 PIN5 PIN6 PIN7  ]
-[c E2780 0 1 .. ]
-[n E2780 . GPIO_OUT GPIO_IN  ]
-[c E2776 0 1 .. ]
-[n E2776 . GPIO_LOW GPIO_HIGH  ]
-[v F3023 `(v ~T0 @X0 0 tf ]
-"21
-[; ;application.c: 21: INT_INTx_t second_int = {
-[c E3011 0 1 .. ]
-[n E3011 . falling rising  ]
-"83 ./MCAL_layer/Interrupt/mcal_external_interrupt.h
-[; ;./MCAL_layer/Interrupt/mcal_external_interrupt.h: 83: typedef struct{
-[s S273 `*F3023 1 `S263 1 `E3011 1 `uc 1 ]
-[n S273 . ext_interrupt_handler Ipin edge priority ]
-[v F3094 `(v ~T0 @X0 0 tf ]
 [p mainexit ]
-"110
-[; ;./MCAL_layer/Interrupt/mcal_external_interrupt.h: 110: STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
-[v _INT_INTx_initialize `(uc ~T0 @X0 0 ef1`*CS273 ]
+"43 ./MCAL_layer/EEPROM/mcal_eeprom.h
+[; ;./MCAL_layer/EEPROM/mcal_eeprom.h: 43: sint8 EEPROM_check(void);
+[v _EEPROM_check `(c ~T0 @X0 0 ef ]
 "18 ./ECU_layer/LED/ecu_led.h
 [; ;./ECU_layer/LED/ecu_led.h: 18: typedef struct{
 [s S266 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -42,12 +10,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "27
 [; ;./ECU_layer/LED/ecu_led.h: 27: STD_ReturnType LED_on(LED_t *led);
 [v _LED_on `(uc ~T0 @X0 0 ef1`*S266 ]
-"18 ./application.h
-[; ;./application.h: 18: extern LED_t LED_OK;
+"19 ./application.h
+[; ;./application.h: 19: extern LED_t LED_OK;
 [v _LED_OK `S266 ~T0 @X0 0 e ]
-"19
-[; ;./application.h: 19: extern LED_t LED_NOK;
-[v _LED_NOK `S266 ~T0 @X0 0 e ]
 "21 ./ECU_layer/ecu_init.h
 [; ;./ECU_layer/ecu_init.h: 21: STD_ReturnType ecu_init(void);
 [v _ecu_init `(uc ~T0 @X0 0 ef ]
@@ -436,182 +401,116 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;application.c: 9: uint8 Iflag;
 [v _Iflag `uc ~T0 @X0 1 e ]
 "15
-[; ;application.c: 15: INT_RBx_t first_int = {
-[v _first_int `S274 ~T0 @X0 1 e ]
-[i _first_int
-:U ..
-:U ..
--> -> -> 0 `i `*v `*F3091
--> -> -> 0 `i `*v `*F3092
-:U ..
-:U ..
--> . `E2784 1 `uc
--> . `E2791 3 `uc
--> . `E2780 1 `uc
--> . `E2776 0 `uc
-..
-..
--> -> 0 `i `uc
-..
-..
+[; ;application.c: 15: sint8 x=7;
+[v _x `c ~T0 @X0 1 e ]
+[i _x
+-> -> 7 `i `c
 ]
-"21
-[; ;application.c: 21: INT_INTx_t second_int = {
-[v _second_int `S273 ~T0 @X0 1 e ]
-[i _second_int
-:U ..
-:U ..
--> -> -> 0 `i `*v `*F3094
-:U ..
-:U ..
--> . `E2784 1 `uc
--> . `E2791 1 `uc
--> . `E2780 1 `uc
--> . `E2776 0 `uc
-..
-..
-. `E3011 1
--> -> 0 `i `uc
-..
-..
-]
-"28
-[; ;application.c: 28: pin_config_t seg_units_en = {
-[v _seg_units_en `S263 ~T0 @X0 1 e ]
-[i _seg_units_en
-:U ..
-:U ..
--> . `E2784 3 `uc
--> . `E2791 1 `uc
--> . `E2780 0 `uc
--> . `E2776 1 `uc
-..
-..
-]
-"35
-[; ;application.c: 35: uint8 i=90, j=0, knum=0, prev;
-[v _i `uc ~T0 @X0 1 e ]
-[i _i
--> -> 90 `i `uc
-]
-[v _j `uc ~T0 @X0 1 e ]
-[i _j
--> -> 0 `i `uc
-]
-[v _knum `uc ~T0 @X0 1 e ]
-[i _knum
--> -> 0 `i `uc
-]
-[v _prev `uc ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"37
-[; ;application.c: 37: int main(void){
+"17
+[; ;application.c: 17: int main(void){
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"38
-[; ;application.c: 38:     STD_ReturnType ret = (STD_ReturnType)(0x00);
+"18
+[; ;application.c: 18:     STD_ReturnType ret = (STD_ReturnType)(0x00);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 0 `i `uc ]
-"39
-[; ;application.c: 39:     if(INT_INTx_initialize(&second_int))
-[e $ ! != -> ( _INT_INTx_initialize (1 -> &U _second_int `*CS273 `i -> 0 `i 276  ]
-"40
-[; ;application.c: 40:         LED_on(&LED_OK);
+"19
+[; ;application.c: 19:  x = EEPROM_check();
+[e = _x ( _EEPROM_check ..  ]
+"20
+[; ;application.c: 20:         if(x==-1)
+[e $ ! == -> _x `i -U -> 1 `i 276  ]
+"21
+[; ;application.c: 21:             LED_on(&LED_OK);
 [e ( _LED_on (1 &U _LED_OK ]
-[e $U 277  ]
-"41
-[; ;application.c: 41:     else
 [e :U 276 ]
-"42
-[; ;application.c: 42:         LED_on(&LED_NOK);
-[e ( _LED_on (1 &U _LED_NOK ]
-[e :U 277 ]
-"47
-[; ;application.c: 47:         while(1){
-[e :U 279 ]
-{
-"49
-[; ;application.c: 49:   }
-}
+"22
+[; ;application.c: 22:     while(1){
 [e :U 278 ]
-[e $U 279  ]
-[e :U 280 ]
-"51
-[; ;application.c: 51: }
+{
+"24
+[; ;application.c: 24:  }
+}
+[e :U 277 ]
+[e $U 278  ]
+[e :U 279 ]
+"26
+[; ;application.c: 26: }
 [e :UE 275 ]
 }
-"53
-[; ;application.c: 53: STD_ReturnType application_initialize(){
+"28
+[; ;application.c: 28: STD_ReturnType application_initialize(){
 [v _application_initialize `(uc ~T0 @X0 1 ef ]
 {
 [e :U _application_initialize ]
 [f ]
-"54
-[; ;application.c: 54:     STD_ReturnType ret = (STD_ReturnType)(0x01);
+"29
+[; ;application.c: 29:     STD_ReturnType ret = (STD_ReturnType)(0x01);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
-"56
-[; ;application.c: 56:  ret = ecu_init();
+"31
+[; ;application.c: 31:  ret = ecu_init();
 [e = _ret ( _ecu_init ..  ]
-"58
-[; ;application.c: 58:     return ret;
+"33
+[; ;application.c: 33:     return ret;
 [e ) _ret ]
-[e $UE 281  ]
-"59
-[; ;application.c: 59: }
-[e :UE 281 ]
+[e $UE 280  ]
+"34
+[; ;application.c: 34: }
+[e :UE 280 ]
 }
-"61
-[; ;application.c: 61: void __INT0(void){
+"36
+[; ;application.c: 36: void __INT0(void){
 [v ___INT0 `(v ~T0 @X0 1 ef ]
 {
 [e :U ___INT0 ]
 [f ]
-"62
-[; ;application.c: 62:  Iflag++;
+"37
+[; ;application.c: 37:  Iflag++;
 [e ++ _Iflag -> -> 1 `i `uc ]
-"63
-[; ;application.c: 63: }
-[e :UE 282 ]
+"38
+[; ;application.c: 38: }
+[e :UE 281 ]
 }
-"64
-[; ;application.c: 64: void __INT1(void){
+"39
+[; ;application.c: 39: void __INT1(void){
 [v ___INT1 `(v ~T0 @X0 1 ef ]
 {
 [e :U ___INT1 ]
 [f ]
-"65
-[; ;application.c: 65:     Iflag++;
+"40
+[; ;application.c: 40:     Iflag++;
 [e ++ _Iflag -> -> 1 `i `uc ]
-"66
-[; ;application.c: 66: }
-[e :UE 283 ]
+"41
+[; ;application.c: 41: }
+[e :UE 282 ]
 }
-"67
-[; ;application.c: 67: void __INT2(void){
+"42
+[; ;application.c: 42: void __INT2(void){
 [v ___INT2 `(v ~T0 @X0 1 ef ]
 {
 [e :U ___INT2 ]
 [f ]
-"68
-[; ;application.c: 68:     Iflag++;
+"43
+[; ;application.c: 43:     Iflag++;
 [e ++ _Iflag -> -> 1 `i `uc ]
-"69
-[; ;application.c: 69: }
-[e :UE 284 ]
+"44
+[; ;application.c: 44: }
+[e :UE 283 ]
 }
-"70
-[; ;application.c: 70: void __RB(void){
+"45
+[; ;application.c: 45: void __RB(void){
 [v ___RB `(v ~T0 @X0 1 ef ]
 {
 [e :U ___RB ]
 [f ]
-"71
-[; ;application.c: 71:     Iflag++;
+"46
+[; ;application.c: 46:     Iflag++;
 [e ++ _Iflag -> -> 1 `i `uc ]
-"72
-[; ;application.c: 72: }
-[e :UE 285 ]
+"47
+[; ;application.c: 47: }
+[e :UE 284 ]
 }
