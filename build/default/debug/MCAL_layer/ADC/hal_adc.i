@@ -1,4 +1,4 @@
-# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.c"
+# 1 "MCAL_layer/ADC/hal_adc.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 285 "<built-in>" 3
@@ -6,17 +6,19 @@
 # 1 "<built-in>" 2
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.c" 2
+# 1 "MCAL_layer/ADC/hal_adc.c" 2
 
 
 
 
 
 
-# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 1
-# 12 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
-# 1 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 1
-# 11 "MCAL_layer/Interrupt/mcal_interrupt_config.h"
+# 1 "MCAL_layer/ADC/hal_acd.h" 1
+# 11 "MCAL_layer/ADC/hal_acd.h"
+# 1 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 1
+# 12 "MCAL_layer/ADC/../GPIO/hal_gpio.h"
+# 1 "MCAL_layer/ADC/../GPIO/../device_config.h" 1
+# 13 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 1 3
 # 18 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4077,11 +4079,11 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 2 3
-# 12 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
-# 1 "MCAL_layer/Interrupt/../mcal_std_types.h" 1
-# 11 "MCAL_layer/Interrupt/../mcal_std_types.h"
-# 1 "MCAL_layer/Interrupt/../std_libs.h" 1
-# 10 "MCAL_layer/Interrupt/../std_libs.h"
+# 14 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
+# 1 "MCAL_layer/ADC/../GPIO/../mcal_std_types.h" 1
+# 11 "MCAL_layer/ADC/../GPIO/../mcal_std_types.h"
+# 1 "MCAL_layer/ADC/../GPIO/../std_libs.h" 1
+# 10 "MCAL_layer/ADC/../GPIO/../std_libs.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/stdio.h" 1 3
 # 24 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/stdio.h" 3
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/bits/alltypes.h" 1 3
@@ -4234,7 +4236,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 11 "MCAL_layer/Interrupt/../std_libs.h" 2
+# 11 "MCAL_layer/ADC/../GPIO/../std_libs.h" 2
 
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 1 3
 # 25 "/home/nour/programs/microchip/xc8/v3.00/pic/include/c99/string.h" 3
@@ -4293,11 +4295,11 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 13 "MCAL_layer/Interrupt/../std_libs.h" 2
-# 12 "MCAL_layer/Interrupt/../mcal_std_types.h" 2
-# 1 "MCAL_layer/Interrupt/../compiler.h" 1
-# 13 "MCAL_layer/Interrupt/../mcal_std_types.h" 2
-# 24 "MCAL_layer/Interrupt/../mcal_std_types.h"
+# 13 "MCAL_layer/ADC/../GPIO/../std_libs.h" 2
+# 12 "MCAL_layer/ADC/../GPIO/../mcal_std_types.h" 2
+# 1 "MCAL_layer/ADC/../GPIO/../compiler.h" 1
+# 13 "MCAL_layer/ADC/../GPIO/../mcal_std_types.h" 2
+# 24 "MCAL_layer/ADC/../GPIO/../mcal_std_types.h"
 typedef unsigned char uint8;
 typedef unsigned short uint16;
 typedef unsigned int uint32;
@@ -4305,16 +4307,10 @@ typedef signed char sint8;
 typedef signed int sint32;
 typedef signed short sint16;
 typedef uint8 STD_ReturnType;
-# 13 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
-# 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 1
-# 12 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
-# 1 "MCAL_layer/Interrupt/../GPIO/../device_config.h" 1
-# 13 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
-
-
-# 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio_cfg.h" 1
-# 16 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
-# 32 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
+# 15 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
+# 1 "MCAL_layer/ADC/../GPIO/hal_gpio_cfg.h" 1
+# 16 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
+# 32 "MCAL_layer/ADC/../GPIO/hal_gpio.h"
 typedef enum{
  GPIO_LOW,
  GPIO_HIGH
@@ -4371,601 +4367,34 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-# 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
-# 13 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
-# 73 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 12 "MCAL_layer/ADC/hal_acd.h" 2
+# 1 "MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h" 1
+# 13 "MCAL_layer/ADC/hal_acd.h" 2
+# 68 "MCAL_layer/ADC/hal_acd.h"
 typedef enum{
- falling,
- rising
-}INTx_edge;
-
+ ADC_ch0,
+ ADC_ch1,
+ ADC_ch2,
+ ADC_ch3,
+ ADC_ch4,
+ ADC_ch5,
+ ADC_ch6,
+ ADC_ch7
+}ADC_CH_t;
 typedef enum{
- NA = -1,
- INT0_I,
- INT1_I,
- INT2_I,
-}INTx_index;
-
+ ADC_CCLOCK_FOSC_DIV_2,
+ ADC_CCLOCK_FOSC_DIV_8,
+ ADC_CCLOCK_FOSC_DIV_32,
+ ADC_CCLOCK_FRC,
+ ADC_CCLOCK_FOSC_DIV_4,
+ ADC_CCLOCK_FOSC_DIV_16,
+ ADC_CCLOCK_FOSC_DIV_64
+}ADC_CCLK_t;
 typedef struct{
- void (*ext_interrupt_handler) (void);
- pin_config_t Ipin;
- INTx_edge edge;
-
- uint8 priority;
-
-}INT_INTx_t;
-
-typedef struct{
- void (*ext_interrupt_handler_high) (void);
- void (*ext_interrupt_handler_low) (void);
- pin_config_t Ipin;
-
- uint8 priority;
-
-}INT_RBx_t;
-
-
-void INT0_ISR();
-void INT1_ISR();
-void INT2_ISR();
-void RB4_ISR(uint8 fl);
-void RB5_ISR(uint8 fl);
-void RB6_ISR(uint8 fl);
-void RB7_ISR(uint8 fl);
-
-STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
-STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
-STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
-
-STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
-
-static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
-static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint);
-static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
-static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
-static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
-static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
-# 8 "MCAL_layer/Interrupt/mcal_external_interrupt.c" 2
-
-
-void (*INT0_handler) (void) = ((void*)0);
-void (*INT1_handler) (void) = ((void*)0);
-void (*INT2_handler) (void) = ((void*)0);
-
-
-
-
-
-void (*RB4_handler_low) (void) = ((void*)0);
-void (*RB4_handler_high) (void) = ((void*)0);
-void (*RB5_handler_high) (void) = ((void*)0);
-void (*RB5_handler_low) (void) = ((void*)0);
-void (*RB6_handler_high) (void) = ((void*)0);
-void (*RB6_handler_low) (void) = ((void*)0);
-void (*RB7_handler_high) (void) = ((void*)0);
-void (*RB7_handler_low) (void) = ((void*)0);
-
-
-void INT0_ISR(){
- INTCONbits.INT0IF=0;
- if(INT0_handler)
-  INT0_handler();
-}
-void INT1_ISR(){
- INTCON3bits.INT1IF=0;
- if(INT1_handler)
-  INT1_handler();
-}
-void INT2_ISR(){
- INTCON3bits.INT2IF=0;
- if(INT2_handler)
-  INT2_handler();
-}
-
-
-void RB4_ISR(uint8 fl){
- INTCONbits.RBIF=0;
- if(fl){
-  if(RB4_handler_high)
-   RB4_handler_high();
-    }
- else{
-  if(RB4_handler_low)
-   RB4_handler_low();
- }
-}
-void RB5_ISR(uint8 fl){
- INTCONbits.RBIF=0;
- if(fl){
-  if(RB5_handler_high)
-   RB5_handler_high();
-    }
- else{
-  if(RB5_handler_low)
-   RB5_handler_low();
- }
-}
-void RB6_ISR(uint8 fl){
- INTCONbits.RBIF=0;
- if(fl){
-  if(RB6_handler_high)
-   RB6_handler_high();
-    }
- else{
-  if(RB6_handler_low)
-   RB6_handler_low();
- }
-}
-void RB7_ISR(uint8 fl){
- INTCONbits.RBIF=0;
- if(fl){
-  if(RB7_handler_high)
-   RB7_handler_high();
- }
- else{
-  if(RB7_handler_low)
-   RB7_handler_low();
-    }
-}
-
-
-
-
-
-
-
-STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint || (STD_ReturnType)(0x00) == INT_INTx_check_access(lint))
-  ret = (STD_ReturnType)(0x00);
- else{
-
-  ret = INT_INTx_disable(lint)&&
-
-  INT_INTx_clear_flag(lint)&&
-
-  GPIO_pin_direction_initialize(&(lint -> Ipin))&&
-
-  INT_INTx_set_callback_routine(lint)&&
-
-
-  INT_INTx_priority_initialize(lint)&&
-
-
-  INT_INTx_edge_initialize(lint)&&
-
-  INT_INTx_enable(lint);
- }
- return ret;
-}
-
-
-
-
-
-STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- INTx_index ind = NA;
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-  ind = INT_INTx_get_index(lint);
-  switch(ind) {
-   case(INT0_I):
-    INTCONbits.INT0IE=1;
-
-                                INTCONbits.GIEH=1;
-
-
-
-    break;
-   case(INT1_I):
-    INTCON3bits.INT1IE=1;
-
-    if (lint -> priority == 1)
-                                    INTCONbits.GIEH=1;
-                                else
-                                    INTCONbits.GIEL=1;
-
-
-
-    break;
-   case(INT2_I):
-    INTCON3bits.INT2IE=1;
-
-    if (lint -> priority == 1)
-                                    INTCONbits.GIEH=1;
-                                else
-                                    INTCONbits.GIEL=1;
-
-
-
-    break;
-   default:
-    ret=(STD_ReturnType)(0x00);
-    break;
-   }
-  }
- return ret;
-}
-
-
-
-
-STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- INTx_index ind = NA;
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-  ind = INT_INTx_get_index(lint);
-  switch(ind){
-   case(INT0_I):
-    INTCONbits.INT0IE=0;
-    break;
-   case(INT1_I):
-    INTCON3bits.INT1IE=0;
-    break;
-   case(INT2_I):
-    INTCON3bits.INT2IE=0;
-    break;
-   default:
-    ret=(STD_ReturnType)(0x00);
-    break;
-   }
-  }
- return ret;
-}
-
-
-
-
-
-
-
-STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-  INTCONbits.RBIE=1;
-
- if (lint -> priority == 1)
-     INTCONbits.GIEH=1;
-    else
-        INTCONbits.GIEL=1;
-
-
-
-
-  }
- return ret;
-}
-
-
-
-
-STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-  INTCONbits.RBIE=0;
- }
- return ret;
-}
-
-
-
-
-
-STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint || (STD_ReturnType)(0x00) == INT_RBx_check_access(lint))
-  ret = (STD_ReturnType)(0x00);
- else{
-
-  INTCONbits.RBIE=0;
-
-  INTCONbits.RBIF=0;
-
-  ret = GPIO_pin_direction_initialize(&(lint -> Ipin));
-
-  ret = ret && INT_RBx_set_callback_routine(lint);
-
-
-  ret = ret && INT_RBx_priority_initialize(lint);
-
-
-  ret = ret && INT_RBx_enable(lint);
- }
- return ret;
-}
-# 272 "MCAL_layer/Interrupt/mcal_external_interrupt.c"
-static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- INTx_index ind = NA;
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-            RCONbits.IPEN=1;
-   ind = INT_INTx_get_index(lint);
-  switch(ind){
-            case(INT0_I):
-                    break;
-   case(INT1_I):
-    switch(lint -> priority){
-     case(1):
-      INTCON3bits.INT1IP=1;
-      break;
-     case(0):
-      INTCON3bits.INT1IP=0;
-      break;
-     default:
-      ret = (STD_ReturnType)(0x00);
-      break;
-     }
-    break;
-   case(INT2_I):
-    switch(lint -> priority){
-     case(1):
-      INTCON3bits.INT2IP=1;
-      break;
-     case(0):
-      INTCON3bits.INT2IP=0;
-      break;
-     default:
-      ret = (STD_ReturnType)(0x00);
-      break;
-     }
-    break;
-   default:
-    ret = (STD_ReturnType)(0x00);
-    break;
-  }
- }
- return ret;
-}
-# 324 "MCAL_layer/Interrupt/mcal_external_interrupt.c"
-static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-        RCONbits.IPEN=1;
-  switch(lint -> priority){
-    case(1):
-     INTCON2bits.RBIP=1;
-     break;
-    case(0):
-     INTCON2bits.RBIP=0;
-     break;
-    default:
-     ret = (STD_ReturnType)(0x00);
-     break;
-    }
-  }
- return ret;
-}
-
-
-
-
-
-
-
-static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- INTx_index ind = NA;
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-  ind = INT_INTx_get_index(lint);
-  switch(ind){
-   case(INT0_I):
-    switch(lint -> edge){
-     case(falling):
-      INTCON2bits.INTEDG0=0;
-      break;
-     case(rising):
-      INTCON2bits.INTEDG0=1;
-      break;
-     default:
-      ret = (STD_ReturnType)(0x00);
-      break;
-     }
-    break;
-   case(INT1_I):
-    switch(lint -> edge){
-     case(falling):
-      INTCON2bits.INTEDG1=0;
-      break;
-     case(rising):
-      INTCON2bits.INTEDG1=1;
-      break;
-     default:
-      ret = (STD_ReturnType)(0x00);
-      break;
-     }
-    break;
-   case(INT2_I):
-    switch(lint -> edge){
-     case(falling):
-      INTCON2bits.INTEDG2=0;
-      break;
-     case(rising):
-      INTCON2bits.INTEDG2=1;
-      break;
-     default:
-      ret = (STD_ReturnType)(0x00);
-      break;
-     }
-    break;
-   default:
-    ret = (STD_ReturnType)(0x00);
-    break;
-  }
- }
- return ret;
-}
-
-
-
-
-
-static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- INTx_index ind = NA;
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-  ind = INT_INTx_get_index(lint);
-  switch(ind){
-   case(INT0_I):
-    INTCONbits.INT0IF=0;
-    break;
-   case(INT1_I):
-    INTCON3bits.INT1IF=0;
-    break;
-   case(INT2_I):
-    INTCON3bits.INT2IF=0;
-    break;
-   default:
-    ret = (STD_ReturnType)(0x00);
-    break;
-  }
- }
- return ret;
-}
-
-
-
-
-
-static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint || (lint -> Ipin.port != PORTB_I) || ( (lint -> Ipin.pin != PIN0)
-  && (lint -> Ipin.pin != PIN1) && (lint -> Ipin.pin != PIN2)) ){
-  ret = (STD_ReturnType)(0x00);
- }
- return ret;
-}
-
-
-
-
-
-
-
-static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint || (lint -> Ipin.port != PORTB_I) || (lint -> Ipin.pin < PIN3)
-  || (lint -> Ipin.direction == GPIO_OUT)){
-  ret = (STD_ReturnType)(0x00);
- }
- return ret;
-}
-
-
-
-
-
-
-
-static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- INTx_index ind = NA;
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else if (((void*)0) == lint -> ext_interrupt_handler){
-  }
- else{
-  ind = INT_INTx_get_index(lint);
-  switch(ind){
-   case(INT0_I):
-    INT0_handler = lint -> ext_interrupt_handler;
-    break;
-   case(INT1_I):
-    INT1_handler = lint -> ext_interrupt_handler;
-    break;
-   case(INT2_I):
-    INT2_handler = lint -> ext_interrupt_handler;
-    break;
-   default:
-    ret = (STD_ReturnType)(0x00);
-    break;
-   }
- }
- return ret;
-}
-
-
-
-
-
-
-
-static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint){
- STD_ReturnType ret = (STD_ReturnType)(0x01);
- if(((void*)0) == lint)
-  ret = (STD_ReturnType)(0x00);
- else{
-  switch(lint -> Ipin.pin){
-   case(PIN4):
-    RB4_handler_high = (lint -> ext_interrupt_handler_high);
-    RB4_handler_low = (lint -> ext_interrupt_handler_low);
-    break;
-   case(PIN5):
-    RB5_handler_high = (lint -> ext_interrupt_handler_high);
-    RB5_handler_low = (lint -> ext_interrupt_handler_low);
-    break;
-   case(PIN6):
-    RB6_handler_high = (lint -> ext_interrupt_handler_high);
-    RB6_handler_low = (lint -> ext_interrupt_handler_low);
-    break;
-   case(PIN7):
-    RB7_handler_high = (lint -> ext_interrupt_handler_high);
-    RB7_handler_low = (lint -> ext_interrupt_handler_low);
-    break;
-   default:
-    ret = (STD_ReturnType)(0x00);
-    break;
-  }
- }
- return ret;
-}
-
-
-
-
-
-
-static INTx_index INT_INTx_get_index(const INT_INTx_t *lint){
- INTx_index ind = NA;
- if(((void*)0) == lint){
-  ind = NA;
- }
- else{
-  switch(lint -> Ipin.pin){
-   case(PIN0):
-    ind = INT0_I;
-    break;
-   case(PIN1):
-    ind = INT1_I;
-    break;
-   case(PIN2):
-    ind = INT2_I;
-    break;
-   default:
-    ind = NA;
-    break;
-  }
- }
- return ind;
-}
+ void (*ADC_interrupt_handler) (void);
+ ADC_CH_t channel;
+ ADC_CCLK_t coversion_clock;
+}ADC_t;
+# 8 "MCAL_layer/ADC/hal_adc.c" 2
+
+(ADCON1bits.ADFM=1);

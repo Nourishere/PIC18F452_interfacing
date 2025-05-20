@@ -4377,7 +4377,6 @@ STD_ReturnType GPIO_port_toggle_logic(port_index port);
 # 41 "MCAL_layer/EEPROM/mcal_eeprom.h"
 STD_ReturnType EEPROM_read(uint8 addr, uint8* data);
 STD_ReturnType EEPROM_write(uint8 addr, uint8 data);
-sint8 EEPROM_check(void);
 STD_ReturnType EEPROM_erase(void);
 # 9 "MCAL_layer/EEPROM/mcal_eeprom.c" 2
 
@@ -4414,16 +4413,17 @@ STD_ReturnType EEPROM_write(uint8 addr, uint8 data){
  if(addr > 0xFF)
   ret = (STD_ReturnType)(0x00);
  else{
-# 54 "MCAL_layer/EEPROM/mcal_eeprom.c"
-  if(INTCON1bits.GIE==1){
-   INTCONbits.GIE=0;
-   flg=1;
-  }
-  if(INTCON1bits.PEIE==1){
-         INTCONbits.PEIE=0;
-   flp=1;
-  }
 
+
+  if(INTCON1bits.GIEH==1){
+   INTCONbits.GIEH=0;
+   flh=1;
+  }
+  if(INTCON1bits.GIEL==1){
+   INTCONbits.GIEL=0;
+   fll=1;
+  }
+# 63 "MCAL_layer/EEPROM/mcal_eeprom.c"
   EEADR=(uint8)addr;
   EEDATA=(uint8)data;
   EECON1bits.EEPGD=0;
@@ -4435,11 +4435,19 @@ STD_ReturnType EEPROM_write(uint8 addr, uint8 data){
 
   for(;EECON1bits.WR;){
    }
-# 83 "MCAL_layer/EEPROM/mcal_eeprom.c"
-  if(flg)
-         INTCONbits.GIE=1;
-  if(flp)
-         INTCONbits.PEIE=1;
+
+
+  if(flh){
+   INTCONbits.GIEH=1;
+  }
+  if(fll){
+   INTCONbits.GIEL=1;
+  }
+
+
+
+
+
 
 
  }
@@ -4451,43 +4459,10 @@ STD_ReturnType EEPROM_write(uint8 addr, uint8 data){
 
 
 
-sint8 EEPROM_check(void){
- uint8 ff=0;uint8 fe=0;sint8 ret=9;
- uint8 data[256];
- uint8 i = 0;
- while(i<256){
-  data[i]=0xFF;
-  i++;
- }
-        i=0;
- while(i<256){
-  EEPROM_read(i,&data[i]);
-  switch(data[i]){
-   case(0xFF):
-    fe++;
-    break;
-   default:
-    ff++;
-    break;
-  }
-  i++;
- }
- if(fe==256)
-  ret=-1;
- else if(ff==256)
-  ret=1;
- else
-  ret=0;
-    return -1;
-}
-
-
-
-
 STD_ReturnType EEPROM_erase(void){
  STD_ReturnType ret = (STD_ReturnType)(0x01);
  uint8 i = 0;uint8 *data = ((void*)0);
- while(i < 256){
+ while(i <= 255){
   ret = ret && EEPROM_write(i,0xFF);
   i++;
  }

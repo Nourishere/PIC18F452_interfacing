@@ -4395,7 +4395,7 @@ typedef struct{
  pin_config_t Ipin;
  INTx_edge edge;
 
-
+ uint8 priority;
 
 }INT_INTx_t;
 
@@ -4404,7 +4404,7 @@ typedef struct{
  void (*ext_interrupt_handler_low) (void);
  pin_config_t Ipin;
 
-
+ uint8 priority;
 
 }INT_RBx_t;
 

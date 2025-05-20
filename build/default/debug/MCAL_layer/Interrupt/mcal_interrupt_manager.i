@@ -4393,7 +4393,7 @@ typedef struct{
  pin_config_t Ipin;
  INTx_edge edge;
 
-
+ uint8 priority;
 
 }INT_INTx_t;
 
@@ -4402,7 +4402,7 @@ typedef struct{
  void (*ext_interrupt_handler_low) (void);
  pin_config_t Ipin;
 
-
+ uint8 priority;
 
 }INT_RBx_t;
 
@@ -4437,8 +4437,10 @@ static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 # 8 "MCAL_layer/Interrupt/mcal_interrupt_manager.c" 2
 
 static volatile uint8 RB4f=1,RB5f=1,RB6f=1,RB7f=1;
-# 42 "MCAL_layer/Interrupt/mcal_interrupt_manager.c"
+
 void __attribute__((picinterrupt(("")))) InterruptManager(void){
+
+
  if(INTCONbits.INT0IF == 1 && INTCONbits.INT0IE == 1)
         INT0_ISR();
  if(INTCON3bits.INT1IF == 1 && INTCON3bits.INT1IE == 1)
@@ -4446,10 +4448,33 @@ void __attribute__((picinterrupt(("")))) InterruptManager(void){
  if(INTCON3bits.INT2IF == 1 && INTCON3bits.INT2IE == 1)
         INT2_ISR();
 
+
+
  if(INTCONbits.RBIF == 1 && INTCONbits.RBIE == 1){
-  do { if (PORTBbits.RB4 == GPIO_HIGH && RB4f == 1) { RB4f = 0; RB4_ISR(0); } else if (PORTBbits.RB4 == GPIO_LOW && RB4f == 0) { RB4f = 1; RB4_ISR(1); } } while (0);
-  do { if (PORTBbits.RB5 == GPIO_HIGH && RB5f == 1) { RB5f = 0; RB5_ISR(0); } else if (PORTBbits.RB5 == GPIO_LOW && RB5f == 0) { RB5f = 1; RB5_ISR(1); } } while (0);
-  do { if (PORTBbits.RB6 == GPIO_HIGH && RB6f == 1) { RB6f = 0; RB6_ISR(0); } else if (PORTBbits.RB6 == GPIO_LOW && RB6f == 0) { RB6f = 1; RB6_ISR(1); } } while (0);
-  do { if (PORTBbits.RB7 == GPIO_HIGH && RB7f == 1) { RB7f = 0; RB7_ISR(0); } else if (PORTBbits.RB7 == GPIO_LOW && RB7f == 0) { RB7f = 1; RB7_ISR(1); } } while (0);
+  do { if (PORTBbits.RB4 == GPIO_HIGH && RB4f == 1) { RB4f = 0; RB4_ISR(1); } else if (PORTBbits.RB4 == GPIO_LOW && RB4f == 0) { RB4f = 1; RB4_ISR(0); } } while (0);
+  do { if (PORTBbits.RB5 == GPIO_HIGH && RB5f == 1) { RB5f = 0; RB5_ISR(1); } else if (PORTBbits.RB5 == GPIO_LOW && RB5f == 0) { RB5f = 1; RB5_ISR(0); } } while (0);
+  do { if (PORTBbits.RB6 == GPIO_HIGH && RB6f == 1) { RB6f = 0; RB6_ISR(1); } else if (PORTBbits.RB6 == GPIO_LOW && RB6f == 0) { RB6f = 1; RB6_ISR(0); } } while (0);
+  do { if (PORTBbits.RB7 == GPIO_HIGH && RB7f == 1) { RB7f = 0; RB7_ISR(1); } else if (PORTBbits.RB7 == GPIO_LOW && RB7f == 0) { RB7f = 1; RB7_ISR(0); } } while (0);
  }
+
+}
+void __attribute__((picinterrupt(("low_priority")))) InterruptManagerLow(void){
+
+
+ if(INTCONbits.INT0IF == 1 && INTCONbits.INT0IE == 1)
+        INT0_ISR();
+ if(INTCON3bits.INT1IF == 1 && INTCON3bits.INT1IE == 1)
+        INT1_ISR();
+ if(INTCON3bits.INT2IF == 1 && INTCON3bits.INT2IE == 1)
+        INT2_ISR();
+
+
+
+ if(INTCONbits.RBIF == 1 && INTCONbits.RBIE == 1){
+  do { if (PORTBbits.RB4 == GPIO_HIGH && RB4f == 1) { RB4f = 0; RB4_ISR(1); } else if (PORTBbits.RB4 == GPIO_LOW && RB4f == 0) { RB4f = 1; RB4_ISR(0); } } while (0);
+  do { if (PORTBbits.RB5 == GPIO_HIGH && RB5f == 1) { RB5f = 0; RB5_ISR(1); } else if (PORTBbits.RB5 == GPIO_LOW && RB5f == 0) { RB5f = 1; RB5_ISR(0); } } while (0);
+  do { if (PORTBbits.RB6 == GPIO_HIGH && RB6f == 1) { RB6f = 0; RB6_ISR(1); } else if (PORTBbits.RB6 == GPIO_LOW && RB6f == 0) { RB6f = 1; RB6_ISR(0); } } while (0);
+  do { if (PORTBbits.RB7 == GPIO_HIGH && RB7f == 1) { RB7f = 0; RB7_ISR(1); } else if (PORTBbits.RB7 == GPIO_LOW && RB7f == 0) { RB7f = 1; RB7_ISR(0); } } while (0);
+ }
+
 }

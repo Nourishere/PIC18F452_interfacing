@@ -717,58 +717,60 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 "121
-[; ;ECU_layer/ecu_init.c: 121: LED_t LED_OK = {
-[v _LED_OK `S266 ~T0 @X0 1 e ]
-[i _LED_OK
+[; ;ECU_layer/ecu_init.c: 121: LED_t LED_main = {
+[v _LED_main `S266 ~T0 @X0 1 e ]
+[i _LED_main
 :U ..
 :U ..
--> . `E2784 0 `uc
--> . `E2791 0 `uc
+-> . `E2784 3 `uc
+-> . `E2791 2 `uc
 -> . `E2776 0 `uc
 ..
 ..
 ]
 "126
-[; ;ECU_layer/ecu_init.c: 126: LED_t LED_NOK = {
-[v _LED_NOK `S266 ~T0 @X0 1 e ]
-[i _LED_NOK
+[; ;ECU_layer/ecu_init.c: 126: LED_t LED_INT_HIGHPR= {
+[v _LED_INT_HIGHPR `S266 ~T0 @X0 1 e ]
+[i _LED_INT_HIGHPR
 :U ..
 :U ..
--> . `E2784 0 `uc
+-> . `E2784 3 `uc
 -> . `E2791 1 `uc
 -> . `E2776 0 `uc
 ..
 ..
 ]
 "131
-[; ;ECU_layer/ecu_init.c: 131: pin_config_t testing = {
-[v _testing `S263 ~T0 @X0 1 e ]
-[i _testing
+[; ;ECU_layer/ecu_init.c: 131: LED_t LED_INT_LOWPR= {
+[v _LED_INT_LOWPR `S266 ~T0 @X0 1 e ]
+[i _LED_INT_LOWPR
 :U ..
 :U ..
 -> . `E2784 3 `uc
--> . `E2791 1 `uc
--> . `E2780 0 `uc
--> . `E2776 1 `uc
+-> . `E2791 0 `uc
+-> . `E2776 0 `uc
 ..
 ..
 ]
-"137
-[; ;ECU_layer/ecu_init.c: 137: STD_ReturnType ecu_init(void){
+"136
+[; ;ECU_layer/ecu_init.c: 136: STD_ReturnType ecu_init(void){
 [v _ecu_init `(uc ~T0 @X0 1 ef ]
 {
 [e :U _ecu_init ]
 [f ]
-"138
-[; ;ECU_layer/ecu_init.c: 138:     STD_ReturnType ret = (STD_ReturnType)(0x01);
+"137
+[; ;ECU_layer/ecu_init.c: 137:     STD_ReturnType ret = (STD_ReturnType)(0x01);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
+"138
+[; ;ECU_layer/ecu_init.c: 138:     ret = LED_initialize(&LED_main);
+[e = _ret ( _LED_initialize (1 &U _LED_main ]
+"139
+[; ;ECU_layer/ecu_init.c: 139:     ret = LED_initialize(&LED_INT_LOWPR);
+[e = _ret ( _LED_initialize (1 &U _LED_INT_LOWPR ]
 "140
-[; ;ECU_layer/ecu_init.c: 140:     ret = LED_initialize(&LED_OK);
-[e = _ret ( _LED_initialize (1 &U _LED_OK ]
-"141
-[; ;ECU_layer/ecu_init.c: 141:     ret = ret && LED_initialize(&LED_NOK);
-[e = _ret -> -> && != -> _ret `i -> 0 `i != -> ( _LED_initialize (1 &U _LED_NOK `i -> 0 `i `i `uc ]
+[; ;ECU_layer/ecu_init.c: 140:     ret = LED_initialize(&LED_INT_HIGHPR);
+[e = _ret ( _LED_initialize (1 &U _LED_INT_HIGHPR ]
 "142
 [; ;ECU_layer/ecu_init.c: 142:     return ret;
 [e ) _ret ]

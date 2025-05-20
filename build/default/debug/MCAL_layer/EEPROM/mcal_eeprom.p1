@@ -534,32 +534,32 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;MCAL_layer/EEPROM/mcal_eeprom.c: 42:  else{
 [e :U 270 ]
 {
-"54
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 54:   if(INTCON1bits.GIE==1){
-[e $ ! == -> . . _INTCON1bits 1 7 `i -> 1 `i 272  ]
+"45
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 45:   if(INTCON1bits.GIEH==1){
+[e $ ! == -> . . _INTCON1bits 2 2 `i -> 1 `i 272  ]
 {
-"55
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 55:    INTCONbits.GIE=0;
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-"56
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 56:    flg=1;
-[e = _flg -> -> 1 `i `uc ]
-"57
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 57:   }
+"46
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 46:    INTCONbits.GIEH=0;
+[e = . . _INTCONbits 2 2 -> -> 0 `i `uc ]
+"47
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 47:    flh=1;
+[e = _flh -> -> 1 `i `uc ]
+"48
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 48:   }
 }
 [e :U 272 ]
-"58
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 58:   if(INTCON1bits.PEIE==1){
-[e $ ! == -> . . _INTCON1bits 1 6 `i -> 1 `i 273  ]
+"49
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 49:   if(INTCON1bits.GIEL==1){
+[e $ ! == -> . . _INTCON1bits 2 1 `i -> 1 `i 273  ]
 {
-"59
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 59:          INTCONbits.PEIE=0;
-[e = . . _INTCONbits 1 6 -> -> 0 `i `uc ]
-"60
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 60:    flp=1;
-[e = _flp -> -> 1 `i `uc ]
-"61
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 61:   }
+"50
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 50:    INTCONbits.GIEL=0;
+[e = . . _INTCONbits 2 1 -> -> 0 `i `uc ]
+"51
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 51:    fll=1;
+[e = _fll -> -> 1 `i `uc ]
+"52
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 52:   }
 }
 [e :U 273 ]
 "63
@@ -599,19 +599,27 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ != -> . . _EECON1bits 0 1 `i -> 0 `i 274  ]
 [e :U 275 ]
 }
-"83
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 83:   if(flg)
-[e $ ! != -> _flg `i -> 0 `i 278  ]
-"84
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 84:          INTCONbits.GIE=1;
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+"76
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 76:   if(flh){
+[e $ ! != -> _flh `i -> 0 `i 278  ]
+{
+"77
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 77:    INTCONbits.GIEH=1;
+[e = . . _INTCONbits 2 2 -> -> 1 `i `uc ]
+"78
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 78:   }
+}
 [e :U 278 ]
-"85
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 85:   if(flp)
-[e $ ! != -> _flp `i -> 0 `i 279  ]
-"86
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 86:          INTCONbits.PEIE=1;
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+"79
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 79:   if(fll){
+[e $ ! != -> _fll `i -> 0 `i 279  ]
+{
+"80
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 80:    INTCONbits.GIEL=1;
+[e = . . _INTCONbits 2 1 -> -> 1 `i `uc ]
+"81
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 81:   }
+}
 [e :U 279 ]
 "89
 [; ;MCAL_layer/EEPROM/mcal_eeprom.c: 89:  }
@@ -626,168 +634,45 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 269 ]
 }
 "98
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 98: sint8 EEPROM_check(void){
-[v _EEPROM_check `(c ~T0 @X0 1 ef ]
-{
-[e :U _EEPROM_check ]
-[f ]
-"99
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 99:  uint8 ff=0;uint8 fe=0;sint8 ret=9;
-[v _ff `uc ~T0 @X0 1 a ]
-[e = _ff -> -> 0 `i `uc ]
-[v _fe `uc ~T0 @X0 1 a ]
-[e = _fe -> -> 0 `i `uc ]
-[v _ret `c ~T0 @X0 1 a ]
-[e = _ret -> -> 9 `i `c ]
-"100
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 100:  uint8 data[256];
-[v _data `uc ~T0 @X0 -> 256 `i a ]
-"101
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 101:  uint8 i = 0;
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-"102
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 102:  while(i<256){
-[e $U 281  ]
-[e :U 282 ]
-{
-"103
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 103:   data[i]=0xFF;
-[e = *U + &U _data * -> _i `ux -> -> # *U &U _data `ui `ux -> -> 255 `i `uc ]
-"104
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 104:   i++;
-[e ++ _i -> -> 1 `i `uc ]
-"105
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 105:  }
-}
-[e :U 281 ]
-"102
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 102:  while(i<256){
-[e $ < -> _i `i -> 256 `i 282  ]
-[e :U 283 ]
-"106
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 106:         i=0;
-[e = _i -> -> 0 `i `uc ]
-"107
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 107:  while(i<256){
-[e $U 284  ]
-[e :U 285 ]
-{
-"108
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 108:   EEPROM_read(i,&data[i]);
-[e ( _EEPROM_read (2 , _i &U *U + &U _data * -> _i `ux -> -> # *U &U _data `ui `ux ]
-"109
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 109:   switch(data[i]){
-[e $U 288  ]
-{
-"110
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 110:    case(0xFF):
-[e :U 289 ]
-"111
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 111:     fe++;
-[e ++ _fe -> -> 1 `i `uc ]
-"112
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 112:     break;
-[e $U 287  ]
-"113
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 113:    default:
-[e :U 290 ]
-"114
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 114:     ff++;
-[e ++ _ff -> -> 1 `i `uc ]
-"115
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 115:     break;
-[e $U 287  ]
-"116
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 116:   }
-}
-[e $U 287  ]
-[e :U 288 ]
-[e [\ *U + &U _data * -> _i `ux -> -> # *U &U _data `ui `ux , $ -> 255 `i 289
- 290 ]
-[e :U 287 ]
-"117
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 117:   i++;
-[e ++ _i -> -> 1 `i `uc ]
-"118
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 118:  }
-}
-[e :U 284 ]
-"107
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 107:  while(i<256){
-[e $ < -> _i `i -> 256 `i 285  ]
-[e :U 286 ]
-"119
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 119:  if(fe==256)
-[e $ ! == -> _fe `i -> 256 `i 291  ]
-"120
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 120:   ret=-1;
-[e = _ret -> -U -> 1 `i `c ]
-[e $U 292  ]
-"121
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 121:  else if(ff==256)
-[e :U 291 ]
-[e $ ! == -> _ff `i -> 256 `i 293  ]
-"122
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 122:   ret=1;
-[e = _ret -> -> 1 `i `c ]
-[e $U 294  ]
-"123
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 123:  else
-[e :U 293 ]
-"124
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 124:   ret=0;
-[e = _ret -> -> 0 `i `c ]
-[e :U 294 ]
-[e :U 292 ]
-"125
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 125:     return -1;
-[e ) -> -U -> 1 `i `c ]
-[e $UE 280  ]
-"126
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 126: }
-[e :UE 280 ]
-}
-"131
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 131: STD_ReturnType EEPROM_erase(void){
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 98: STD_ReturnType EEPROM_erase(void){
 [v _EEPROM_erase `(uc ~T0 @X0 1 ef ]
 {
 [e :U _EEPROM_erase ]
 [f ]
-"132
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 132:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+"99
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 99:  STD_ReturnType ret = (STD_ReturnType)(0x01);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
-"133
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 133:  uint8 i = 0;uint8 *data = ((void*)0);
+"100
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 100:  uint8 i = 0;uint8 *data = ((void*)0);
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [v _data `*uc ~T0 @X0 1 a ]
 [e = _data -> -> -> 0 `i `*v `*uc ]
-"134
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 134:  while(i < 256){
-[e $U 296  ]
-[e :U 297 ]
+"101
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 101:  while(i <= 255){
+[e $U 281  ]
+[e :U 282 ]
 {
-"135
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 135:   ret = ret && EEPROM_write(i,0xFF);
+"102
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 102:   ret = ret && EEPROM_write(i,0xFF);
 [e = _ret -> -> && != -> _ret `i -> 0 `i != -> ( _EEPROM_write (2 , _i -> -> 255 `i `uc `i -> 0 `i `i `uc ]
-"136
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 136:   i++;
+"103
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 103:   i++;
 [e ++ _i -> -> 1 `i `uc ]
-"137
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 137:  }
+"104
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 104:  }
 }
-[e :U 296 ]
-"134
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 134:  while(i < 256){
-[e $ < -> _i `i -> 256 `i 297  ]
-[e :U 298 ]
-"138
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 138:  return ret;
+[e :U 281 ]
+"101
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 101:  while(i <= 255){
+[e $ <= -> _i `i -> 255 `i 282  ]
+[e :U 283 ]
+"105
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 105:  return ret;
 [e ) _ret ]
-[e $UE 295  ]
-"139
-[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 139: }
-[e :UE 295 ]
+[e $UE 280  ]
+"106
+[; ;MCAL_layer/EEPROM/mcal_eeprom.c: 106: }
+[e :UE 280 ]
 }

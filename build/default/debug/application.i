@@ -4542,7 +4542,7 @@ typedef struct{
  pin_config_t Ipin;
  INTx_edge edge;
 
-
+ uint8 priority;
 
 }INT_INTx_t;
 
@@ -4551,7 +4551,7 @@ typedef struct{
  void (*ext_interrupt_handler_low) (void);
  pin_config_t Ipin;
 
-
+ uint8 priority;
 
 }INT_RBx_t;
 
@@ -4587,7 +4587,6 @@ static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 # 41 "./MCAL_layer/EEPROM/mcal_eeprom.h"
 STD_ReturnType EEPROM_read(uint8 addr, uint8* data);
 STD_ReturnType EEPROM_write(uint8 addr, uint8 data);
-sint8 EEPROM_check(void);
 STD_ReturnType EEPROM_erase(void);
 # 15 "./application.h" 2
 
@@ -4596,11 +4595,15 @@ extern keypad_t keypad1;
 extern chr_LCD_t LCD1;
 extern LED_t LED_OK;
 extern LED_t LED_NOK;
+extern LED_t LED_main;
+extern LED_t LED_INT_HIGHPR;
+extern LED_t LED_INT_LOWPR;
 
 
 STD_ReturnType application_initialize();
 
-void __RB(void);
+void __RB_HIGH(void);
+void __RB_LOW(void);
 void __INT0(void);
 void __INT1(void);
 void __INT2(void);
@@ -4612,16 +4615,15 @@ uint8 Iflag;
 
 
 
-
-sint8 x=7;
-
+STD_ReturnType ret;
 int main(void){
-    STD_ReturnType ret = (STD_ReturnType)(0x00);
- x = EEPROM_check();
-        if(x==-1)
-            LED_on(&LED_OK);
+        ret = application_initialize();
+ if((STD_ReturnType)(0x00) == ret){
+  return -1;
+ }
     while(1){
-
+  LED_toggle(&LED_main);
+  _delay((unsigned long)((1000)*(8000000/4000.0)));
  }
 
 }
@@ -4630,19 +4632,12 @@ STD_ReturnType application_initialize(){
     STD_ReturnType ret = (STD_ReturnType)(0x01);
 
  ret = ecu_init();
-
     return ret;
 }
 
 void __INT0(void){
- Iflag++;
 }
 void __INT1(void){
-    Iflag++;
 }
 void __INT2(void){
-    Iflag++;
-}
-void __RB(void){
-    Iflag++;
 }
