@@ -11,34 +11,30 @@ uint8 Iflag;
   an clock speed of 8MHz/16MHz */
  //#define _XTAL_FREQ 8000000
 //This macro is used in the __delay_ms() function
-
-
+STD_ReturnType ret;
 int main(void){
-    STD_ReturnType ret = E_NOT_OK;
+        ret = application_initialize();
+	if(E_NOT_OK == ret){
+		return -1; 
+	}
     while(1){
-      
+		LED_toggle(&LED_main);      
+		__delay_ms(1000);
 	}
     
 }
 
 STD_ReturnType application_initialize(){
     STD_ReturnType ret = E_OK;
-    /* If you may initialize functions that are locally defined */
+    /* If you may initialize types that are locally defined */
 	ret = ecu_init();
-       
     return ret;
 }
 
 void __INT0(void){
-	Iflag++;
 }
 void __INT1(void){
-    Iflag++;
 }
 void __INT2(void){
-    Iflag++;
-}
-void __RB(void){
-    Iflag++;
 }
 
