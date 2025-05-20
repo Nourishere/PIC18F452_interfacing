@@ -98,7 +98,7 @@ STD_ReturnType EEPROM_write(uint8 addr, uint8 data){
 STD_ReturnType EEPROM_erase(void){
 	STD_ReturnType ret = E_OK;
 	uint8 i = 0;uint8 *data = NULL;
-	while(i < 256){
+	while(i <= 255){
 		ret = ret && EEPROM_write(i,0xFF);
 		i++;
 	}
