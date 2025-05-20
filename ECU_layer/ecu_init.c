@@ -118,26 +118,26 @@ btn_t btn2 = {
 	.btn_state = btn_free, 
 	.btn_mode = btn_AL /* the button itself is connected to GND */
 };
-LED_t LED_OK = {
-  .port = PORTA_I,
-  .pin = PIN0,
+LED_t LED_main = {
+  .port = PORTD_I,
+  .pin = PIN2,
   .LED_init_status = GPIO_LOW
 };
-LED_t LED_NOK = {
-  .port = PORTA_I,
+LED_t LED_INT_HIGHPR= {
+  .port = PORTD_I,
   .pin = PIN1,
   .LED_init_status = GPIO_LOW
 };
-pin_config_t testing = {
-	PORTD_I,	
-	PIN1,
-	GPIO_OUT,
-	GPIO_HIGH
+LED_t LED_INT_LOWPR= {
+  .port = PORTD_I,
+  .pin = PIN0,
+  .LED_init_status = GPIO_LOW
 };
 STD_ReturnType ecu_init(void){
     STD_ReturnType ret = E_OK;
-    //ret = lcd_initialize(&LCD1);
-    ret = LED_initialize(&LED_OK);
-    ret = ret && LED_initialize(&LED_NOK);
+    ret = LED_initialize(&LED_main);
+    ret = LED_initialize(&LED_INT_LOWPR);
+    ret = LED_initialize(&LED_INT_HIGHPR);
+    
     return ret;
 }
