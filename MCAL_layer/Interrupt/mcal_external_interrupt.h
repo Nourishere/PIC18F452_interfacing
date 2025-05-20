@@ -92,8 +92,8 @@ typedef struct{
 }INT_INTx_t;
 
 typedef struct{/* Index is given in Ipin */
-	void (*ext_interrupt_handler_high) (void); /* use NULL if you do not want a high-triggered callback */
-	void (*ext_interrupt_handler_low) (void); /* use NULL if you do not want a low-triggered callback */
+	void (*ext_interrupt_handler_high) (void); /* use NULL if you do not want a high-triggered (rising) callback */
+	void (*ext_interrupt_handler_low) (void); /* use NULL if you do not want a low-triggered (falling) callback */
 	pin_config_t Ipin;
 #if INT_PR == INT_EN
 	uint8 priority; /* macro defined */	

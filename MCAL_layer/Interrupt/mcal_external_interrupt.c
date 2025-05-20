@@ -10,8 +10,13 @@
 void (*INT0_handler) (void) = NULL;
 void (*INT1_handler) (void) = NULL;
 void (*INT2_handler) (void) = NULL;
-void (*RB4_handler_high) (void) = NULL; /* handles change to high interrupts */
+/* low handlers are for rising edges while
+ * low are for falling edges 
+ * If you wish to use the RB interrupts as
+ * change interrupts, use NULL for both callback
+ */
 void (*RB4_handler_low)  (void) = NULL;
+void (*RB4_handler_high) (void) = NULL;
 void (*RB5_handler_high) (void) = NULL;
 void (*RB5_handler_low)  (void) = NULL;
 void (*RB6_handler_high) (void) = NULL;
@@ -19,6 +24,7 @@ void (*RB6_handler_low)  (void) = NULL;
 void (*RB7_handler_high) (void) = NULL;
 void (*RB7_handler_low)  (void) = NULL;
 
+#if INT_INTx == INT_EN
 void INT0_ISR(){
 	INT_INT0_CLRF();
 	if(INT0_handler)
@@ -34,6 +40,8 @@ void INT2_ISR(){
 	if(INT2_handler)
 		INT2_handler(); 
 }
+#endif
+#if INT_PORTB == INT_EN
 void RB4_ISR(uint8 fl){
 	INT_RB_CLRF();
 	if(fl){
@@ -78,10 +86,13 @@ void RB7_ISR(uint8 fl){
 			RB7_handler_low();
     }
 }
+#endif
+
 /*@brief: Initialize a INTx interrupt pin.
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
+#if INT_INTx == INT_EN
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint || E_NOT_OK == INT_INTx_check_access(lint))
@@ -184,10 +195,13 @@ STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint){
 		} 
 	return ret;
 }
+#endif
+
 /*@brief: Enable RBx interrupt pins. 
  *@param: A pointer to a struct of type INT_RBx_t which describes the RBx interrupt pins.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
+#if INT_PORTB == INT_EN
 STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
@@ -222,6 +236,7 @@ STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint){
 /*@brief: Initialize the RBx interrupt pins.
  *@param: A pointer to a struct of type INT_RBx_t which describes an RBx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
+ *@note: The selected pin for the RB interrupt must be configured as input.
 */
 STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
@@ -245,6 +260,7 @@ STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
 	}
 	return ret;
 }
+#endif
 /** Helper functions **/
 #if INT_PR == INT_EN
 /*@brief:(H) Initialize the priority bits of a INTx interrupt pin.
@@ -252,6 +268,7 @@ STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
+#if INT_INTx == INT_EN
 static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	INTx_index ind = NA;
@@ -296,12 +313,14 @@ static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
 	}
 	return ret;
 }
+#endif
 
 /*@brief:(H) Initialize the priority bits of a RBx interrupt pins.
  *		 (Priority preconfiguration should be enabled)
  *@param: A pointer to a struct of type INT_RBx_t which describes an RBx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
+#if INT_PORTB == INT_EN
 static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
@@ -323,11 +342,12 @@ static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint){
 	return ret;
 }
 #endif
-
+#endif
 /*@brief:(H) Initialize the edge bits of a INTx interrupt pin.
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
+#if INT_INTx == INT_EN
 static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	INTx_index ind = NA;
@@ -382,6 +402,7 @@ static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint){
 	}
 	return ret;
 }
+
 /*@brief:(H) Clear the flag of an INTx interrupt pin.
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
@@ -410,6 +431,7 @@ static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint){
 	}	
 	return ret;
 }
+
 /*@brief:(H) Checks on the pin_config_t struct for undefined pin configuration.
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
@@ -422,10 +444,13 @@ static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint){
 	}
 	return ret;	
 }
+#endif
+
 /*@brief:(H) Checks on the pin_config_t struct for undefined pin configuration.
  *@param: A pointer to a struct of type INT_RBx_t which describes an RBx change interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
+#if INT_PORTB == INT_EN
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint || (lint -> Ipin.port != PORTB_I) || (lint -> Ipin.pin < PIN3)
@@ -434,11 +459,13 @@ static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint){
 	}
 	return ret;
 }
+#endif
 /*@brief:(H) Checks on the callback function within the INT_INTx_t struct. If there is a function
  * 		  given, it is aliased with one of the three predefined functions in this source file's header.
- *@param: A pointer to a struct of type INT_RBx_t which describes an RBx change interrupt pin.
+ *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
+#if INT_INTx == INT_EN
 static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	INTx_index ind = NA;
@@ -465,70 +492,34 @@ static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
 	}
 	return ret;
 }
+#endif
+/*@brief:(H) Checks on the callback function within the INT_RBx_t struct. If there is a function
+ * 		  given, it is aliased with one of the three predefined functions in this source file's header.
+ *@param: A pointer to a struct of type INT_RBx_t which describes an RBx change interrupt pin.
+ *@return: E_OK upon success and E_NOT_OK otherwise.
+*/
+#if INT_PORTB == INT_EN
 static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
 		ret = E_NOT_OK;
-	else if(NULL == lint -> ext_interrupt_handler_high && 
-		    NULL == lint -> ext_interrupt_handler_low){/* Do nothing and skip the else, return E_OK */
-		}
-	else if (NULL == lint -> ext_interrupt_handler_high){
-		/* Initialize only low-triggered change interrupts */
-		switch(lint -> Ipin.pin){
-			case(PIN4):
-				RB4_handler_low= (lint -> ext_interrupt_handler_low);
-				break;
-			case(PIN5):
-				RB5_handler_low= (lint -> ext_interrupt_handler_low);
-				break;
-			case(PIN6):
-				RB6_handler_low= (lint -> ext_interrupt_handler_low);
-				break;
-			case(PIN7):
-				RB7_handler_low= (lint -> ext_interrupt_handler_low);
-				break;
-			default:
-				ret = E_NOT_OK;
-				break;
-		}
-	}
-	else if (NULL == lint -> ext_interrupt_handler_low){
-		/* Initialize only high-triggered change interrupts */
-		switch(lint -> Ipin.pin){
-			case(PIN4):
-				RB4_handler_high = (lint -> ext_interrupt_handler_high);
-				break;
-			case(PIN5):
-				RB5_handler_high = (lint -> ext_interrupt_handler_high);
-				break;
-			case(PIN6):
-				RB6_handler_high = (lint -> ext_interrupt_handler_high);
-				break;
-			case(PIN7):
-				RB7_handler_high = (lint -> ext_interrupt_handler_high);
-				break;
-			default:
-				ret = E_NOT_OK;
-				break;
-		}
-	}
 	else{ /* Initialize both callbacks */
 		switch(lint -> Ipin.pin){
 			case(PIN4):
 				RB4_handler_high = (lint -> ext_interrupt_handler_high);
-				RB4_handler_low= (lint -> ext_interrupt_handler_low);
+				RB4_handler_low = (lint -> ext_interrupt_handler_low);
 				break;
 			case(PIN5):
 				RB5_handler_high = (lint -> ext_interrupt_handler_high);
-				RB5_handler_low= (lint -> ext_interrupt_handler_low);
+				RB5_handler_low = (lint -> ext_interrupt_handler_low);
 				break;
 			case(PIN6):
 				RB6_handler_high = (lint -> ext_interrupt_handler_high);
-				RB6_handler_low= (lint -> ext_interrupt_handler_low);
+				RB6_handler_low = (lint -> ext_interrupt_handler_low);
 				break;
 			case(PIN7):
 				RB7_handler_high = (lint -> ext_interrupt_handler_high);
-				RB7_handler_low= (lint -> ext_interrupt_handler_low);
+				RB7_handler_low = (lint -> ext_interrupt_handler_low);
 				break;
 			default:
 				ret = E_NOT_OK;
@@ -537,10 +528,12 @@ static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint){
 	}
 	return ret;
 }
+#endif
 /*@brief:(H) Find the index of an INTx interrupt from its pin configuration. 
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: Returns the index of the INTx interrupt upon success and NA (-1) otherwise. 
 */
+#if INT_INTx == INT_EN
 static INTx_index INT_INTx_get_index(const INT_INTx_t *lint){
 	INTx_index ind = NA;	
 	if(NULL == lint){
@@ -564,3 +557,4 @@ static INTx_index INT_INTx_get_index(const INT_INTx_t *lint){
 	}
 	return ind;
 }
+#endif
