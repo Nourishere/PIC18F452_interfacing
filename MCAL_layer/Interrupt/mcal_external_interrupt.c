@@ -210,9 +210,9 @@ STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint){
 		INT_RB_EN();
 #if INT_PR == INT_EN
 	if (lint -> priority == INT_PHIGH)
-    	INT_GHPEN();
+            INT_GHPEN();
     else
-        INT_GLPEN();
+            INT_GLPEN();
 #else
 		INT_GEN();
 		/**/

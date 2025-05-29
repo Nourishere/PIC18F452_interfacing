@@ -1,7 +1,8 @@
 /* 
  * File:   mcal_external_interrupt.h
  * Author: nour
- *
+ * Brief:  This header file contains the configurations
+ * 		   for all external-triggered interrupts. 
  * Created on April 15, 2025, 2:26 PM
  */
 
@@ -12,6 +13,8 @@
 #include "mcal_interrupt_config.h"
 
 /************ Macros *******************/
+
+
 /********* function-like macros ********/
 #if INT_INTx == INT_EN
 /* Enable INT0 */
