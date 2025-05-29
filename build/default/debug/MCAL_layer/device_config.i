@@ -14,7 +14,7 @@
 
 
 
-# 1 "MCAL_layer/device_config.h" 1
+# 1 "MCAL_layer/mcal_drivers_config.h" 1
 # 9 "MCAL_layer/device_config.c" 2
 
 

@@ -14,13 +14,9 @@
 
 
 # 1 "MCAL_layer/Interrupt/mcal_internal_interrupt.h" 1
-# 8 "MCAL_layer/Interrupt/mcal_internal_interrupt.c" 2
-# 1 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 1
-# 10 "MCAL_layer/Interrupt/mcal_interrupt_manager.h"
-# 1 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 1
-# 12 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 12 "MCAL_layer/Interrupt/mcal_internal_interrupt.h"
 # 1 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 1
-# 11 "MCAL_layer/Interrupt/mcal_interrupt_config.h"
+# 12 "MCAL_layer/Interrupt/mcal_interrupt_config.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 1 3
 # 18 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4081,7 +4077,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 2 3
-# 12 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 13 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
 # 1 "MCAL_layer/Interrupt/../mcal_std_types.h" 1
 # 11 "MCAL_layer/Interrupt/../mcal_std_types.h"
 # 1 "MCAL_layer/Interrupt/../std_libs.h" 1
@@ -4309,16 +4305,15 @@ typedef signed char sint8;
 typedef signed int sint32;
 typedef signed short sint16;
 typedef uint8 STD_ReturnType;
-# 13 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
 # 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 1
 # 12 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
-# 1 "MCAL_layer/Interrupt/../GPIO/../device_config.h" 1
+# 1 "MCAL_layer/Interrupt/../GPIO/../mcal_drivers_config.h" 1
 # 13 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
 
-
 # 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio_cfg.h" 1
-# 16 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
-# 32 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
+# 15 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
+# 31 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
 typedef enum{
  GPIO_LOW,
  GPIO_HIGH
@@ -4375,66 +4370,78 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-# 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
-# 13 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
-# 73 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
-typedef enum{
- falling,
- rising
-}INTx_edge;
+# 15 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 13 "MCAL_layer/Interrupt/mcal_internal_interrupt.h" 2
+# 35 "MCAL_layer/Interrupt/mcal_internal_interrupt.h"
+void ADC_ISR(void);
 
-typedef enum{
- NA = -1,
- INT0_I,
- INT1_I,
- INT2_I,
-}INTx_index;
-
-typedef struct{
- void (*ext_interrupt_handler) (void);
- pin_config_t Ipin;
- INTx_edge edge;
-
- uint8 priority;
-
-}INT_INTx_t;
-
-typedef struct{
- void (*ext_interrupt_handler_high) (void);
- void (*ext_interrupt_handler_low) (void);
- pin_config_t Ipin;
-
- uint8 priority;
-
-}INT_RBx_t;
+STD_ReturnType INT_ADC_init(uint8 priority);
+STD_ReturnType INT_ADC_deinit(void);
+STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result));
+# 8 "MCAL_layer/Interrupt/mcal_internal_interrupt.c" 2
 
 
-void INT0_ISR();
-void INT1_ISR();
-void INT2_ISR();
-void RB4_ISR(uint8 fl);
-void RB5_ISR(uint8 fl);
-void RB6_ISR(uint8 fl);
-void RB7_ISR(uint8 fl);
+void (*ADC_callback) (uint16 * result) = ((void*)0);
+uint16 ADC_output;
 
-STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
-STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
-STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
+void ADC_ISR(void){
+ (PIR1bits.ADIF=0);
+ if(ADC_callback){
+  ADC_output = (uint16) ( (((uint16)(ADRESH)) << 8) | ((uint16) (ADRESL)) );
+  ADC_callback(&ADC_output);
+ }
+}
 
-STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
-STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
 
-static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_pin_initialize(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_clear_flag(const INT_INTx_t *lint);
-static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint);
-static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint);
-static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint);
-static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
-static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
-static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
-# 11 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 2
-# 9 "MCAL_layer/Interrupt/mcal_internal_interrupt.c" 2
 
+
+
+STD_ReturnType INT_ADC_init(uint8 priority){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+  (PIR1bits.ADIF=0);
+  (PIE1bits.ADIE=0);
+
+  if(priority != 1 && priority != 0)
+   ret = (STD_ReturnType)(0x00);
+  else{
+            RCONbits.IPEN=1;
+
+   if(priority == 1){
+    (IPR1bits.ADIP=1);
+    INTCONbits.GIEH=1;
+   }
+   else if(priority == 0){
+    (IPR1bits.ADIP=0);
+    INTCONbits.GIEL=1;
+   }
+
+   else
+    ret = (STD_ReturnType)(0x00);
+
+           }
+# 56 "MCAL_layer/Interrupt/mcal_internal_interrupt.c"
+  (PIE1bits.ADIE=1);
+
+ return ret;
+}
+
+
+
+
+
+STD_ReturnType INT_ADC_deinit(void){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ (PIR1bits.ADIF=0);
+ (PIE1bits.ADIE=0);
+ return ret;
+}
+
+
+
+
+
+STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result)){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+  ADC_callback = callback;
+ return ret;
+}

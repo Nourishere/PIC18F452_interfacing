@@ -13,12 +13,10 @@
 
 
 
-# 1 "MCAL_layer/ADC/hal_acd.h" 1
-# 11 "MCAL_layer/ADC/hal_acd.h"
-# 1 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 1
-# 12 "MCAL_layer/ADC/../GPIO/hal_gpio.h"
-# 1 "MCAL_layer/ADC/../GPIO/../device_config.h" 1
-# 13 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
+
+
+# 1 "MCAL_layer/ADC/hal_adc.h" 1
+# 13 "MCAL_layer/ADC/hal_adc.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 1 3
 # 18 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4079,7 +4077,11 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 2 3
-# 14 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
+# 14 "MCAL_layer/ADC/hal_adc.h" 2
+# 1 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 1
+# 12 "MCAL_layer/ADC/../GPIO/hal_gpio.h"
+# 1 "MCAL_layer/ADC/../GPIO/../mcal_drivers_config.h" 1
+# 13 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
 # 1 "MCAL_layer/ADC/../GPIO/../mcal_std_types.h" 1
 # 11 "MCAL_layer/ADC/../GPIO/../mcal_std_types.h"
 # 1 "MCAL_layer/ADC/../GPIO/../std_libs.h" 1
@@ -4307,10 +4309,10 @@ typedef signed char sint8;
 typedef signed int sint32;
 typedef signed short sint16;
 typedef uint8 STD_ReturnType;
-# 15 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
+# 14 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
 # 1 "MCAL_layer/ADC/../GPIO/hal_gpio_cfg.h" 1
-# 16 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
-# 32 "MCAL_layer/ADC/../GPIO/hal_gpio.h"
+# 15 "MCAL_layer/ADC/../GPIO/hal_gpio.h" 2
+# 31 "MCAL_layer/ADC/../GPIO/hal_gpio.h"
 typedef enum{
  GPIO_LOW,
  GPIO_HIGH
@@ -4367,11 +4369,21 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-# 12 "MCAL_layer/ADC/hal_acd.h" 2
+# 15 "MCAL_layer/ADC/hal_adc.h" 2
 # 1 "MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h" 1
-# 13 "MCAL_layer/ADC/hal_acd.h" 2
-# 68 "MCAL_layer/ADC/hal_acd.h"
+# 12 "MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h"
+# 1 "MCAL_layer/ADC/../Interrupt/mcal_interrupt_config.h" 1
+# 13 "MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h" 2
+# 35 "MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h"
+void ADC_ISR(void);
+
+STD_ReturnType INT_ADC_init(uint8 priority);
+STD_ReturnType INT_ADC_deinit(void);
+STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result));
+# 16 "MCAL_layer/ADC/hal_adc.h" 2
+# 78 "MCAL_layer/ADC/hal_adc.h"
 typedef enum{
+ ADC_default=-1,
  ADC_ch0,
  ADC_ch1,
  ADC_ch2,
@@ -4390,11 +4402,211 @@ typedef enum{
  ADC_CCLOCK_FOSC_DIV_16,
  ADC_CCLOCK_FOSC_DIV_64
 }ADC_CCLK_t;
+typedef enum{
+ nDone = -1,
+ Done,
+}ADC_status_t;
 typedef struct{
- void (*ADC_interrupt_handler) (void);
- ADC_CH_t channel;
- ADC_CCLK_t coversion_clock;
-}ADC_t;
-# 8 "MCAL_layer/ADC/hal_adc.c" 2
 
-(ADCON1bits.ADFM=1);
+ void (*ADC_interrupt_handler) (uint16 * result);
+
+ uint8 priority;
+
+
+ ADC_CH_t channel;
+ ADC_CCLK_t conversion_clock;
+ uint8 combination;
+}ADC_t;
+
+typedef uint16 ADC_result_size;
+
+STD_ReturnType ADC_init(const ADC_t * lADC);
+STD_ReturnType ADC_deinit(const ADC_t * lADC);
+STD_ReturnType ADC_select_channel(ADC_CH_t lCH);
+STD_ReturnType ADC_convert(const ADC_t * lADC, ADC_CH_t lCH);
+STD_ReturnType ADC_result(const ADC_t * lADC, ADC_result_size * result);
+STD_ReturnType ADC_status(const ADC_t * lADC, ADC_status_t * status);
+static STD_ReturnType ADC_set_pin_config(ADC_CH_t channel);
+# 10 "MCAL_layer/ADC/hal_adc.c" 2
+
+
+
+
+
+
+STD_ReturnType ADC_init(const ADC_t * lADC){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lADC || lADC -> channel == ADC_default)
+  ret = (STD_ReturnType)(0x00);
+ else{
+
+  (ADCON0bits.ADON=0);
+
+  ret = ADC_select_channel(lADC -> channel) &&
+
+  ADC_set_pin_config(lADC -> channel);
+
+
+  (ADCON1bits.ADFM=1);
+
+
+
+
+
+
+  (ADCON1bits.ADCS2 = ((uint8)(lADC -> conversion_clock >> 2) & 0x01)); (ADCON0bits.ADCS1 = ((uint8)(lADC -> conversion_clock >> 1) & 0x01)); (ADCON0bits.ADCS0 = ((uint8)(lADC -> conversion_clock) & 0x01));;
+
+
+
+
+  ret = ret && INT_ADC_init(lADC -> priority);
+
+
+
+
+
+
+
+  ret = ret && INT_ADC_set_callback_routine(lADC-> ADC_interrupt_handler) &&
+
+
+
+
+  (ADCON1bits.PCFG = ((uint8)(lADC -> combination-1) & 0x0F));
+
+  (ADCON0bits.ADON=1);
+ }
+ return ret;
+}
+
+
+
+
+STD_ReturnType ADC_deinit(const ADC_t * lADC){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lADC)
+  ret = (STD_ReturnType)(0x00);
+ else{
+
+  (ADCON0bits.ADON=0);
+
+  ret = INT_ADC_deinit();
+ }
+ return ret;
+}
+
+
+
+
+
+STD_ReturnType ADC_select_channel(ADC_CH_t lCH){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+  (ADCON0bits.CHS=(uint8)lCH & 0x07);
+  ret = ADC_set_pin_config(lCH);
+ return ret;
+}
+
+
+
+
+
+
+
+STD_ReturnType ADC_convert(const ADC_t * lADC, ADC_CH_t lCH){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if((((void*)0) == lADC) || (lADC -> channel == ADC_default) )
+  ret = (STD_ReturnType)(0x00);
+ else{
+
+  if(lCH == ADC_default)
+   ret = ADC_select_channel(lADC -> channel);
+  else
+   ret = ADC_select_channel(lCH);
+
+   (ADCON0bits.GO_nDONE=1);
+ }
+ return ret;
+}
+
+
+
+
+
+
+
+STD_ReturnType ADC_result(const ADC_t * lADC, ADC_result_size * result){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lADC || ((void*)0) == result)
+  ret = (STD_ReturnType)(0x00);
+ else{
+
+  while((ADCON0bits.GO_nDONE));
+
+
+  *result = (ADC_result_size) ( (((ADC_result_size)(ADRESH)) << 8) | ((ADC_result_size) (ADRESL)) );
+
+
+
+ }
+ return ret;
+}
+
+
+
+
+
+
+
+STD_ReturnType ADC_status (const ADC_t * lADC, ADC_status_t * status){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ if(((void*)0) == lADC || ((void*)0) == status)
+  ret = (STD_ReturnType)(0x00);
+ else{
+  if((ADCON0bits.GO_nDONE) == 1)
+   *status = Done;
+  else
+   *status = nDone;
+ }
+ return ret;
+}
+
+
+
+
+
+static STD_ReturnType ADC_set_pin_config(ADC_CH_t channel){
+ STD_ReturnType ret = (STD_ReturnType)(0x01);
+ switch(channel){
+  case(ADC_default):
+   ret = (STD_ReturnType)(0x00);
+   break;
+  case(ADC_ch0):
+   TRISAbits.RA0=1;
+   break;
+  case(ADC_ch1):
+   TRISAbits.RA1=1;
+   break;
+  case(ADC_ch2):
+   TRISAbits.RA2=1;
+   break;
+  case(ADC_ch3):
+   TRISAbits.RA3=1;
+   break;
+  case(ADC_ch4):
+   TRISAbits.RA5=1;
+   break;
+  case(ADC_ch5):
+   TRISEbits.RE0=1;
+   break;
+  case(ADC_ch6):
+   TRISEbits.RE1=1;
+   break;
+  case(ADC_ch7):
+   TRISEbits.RE2=1;
+   break;
+  default:
+   ret = (STD_ReturnType)(0x00);
+   break;
+ }
+        return ret;
+}

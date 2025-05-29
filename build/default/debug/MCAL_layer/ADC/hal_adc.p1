@@ -1,36 +1,133 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"63 ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h
-[; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 63: typedef struct{
-[s S264 :3 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S264 . port pin logic ]
-"17 ECU_layer/DC_Motor/ecu_dc_motor.h
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.h: 17: typedef struct{
-[s S266 `S264 -> 2 `i ]
-[n S266 . dc_motor_arr ]
-"57 ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h
-[; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 57: typedef struct{
-[s S263 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S263 . port pin direction logic ]
-"21 ECU_layer/DC_Motor/ecu_dc_motor.h
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.h: 21: static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l,pin_config_t * llpin1,pin_config_t * llpin2);
-[v _dc_motor_linit `(uc ~T0 @X0 0 sf3`*CS266`*S263`*S263 ]
-"73 ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h
-[; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 73: STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config);
-[v _GPIO_check_access `(uc ~T0 @X0 0 ef1`*CS263 ]
-"75
-[; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 75: STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config);
-[v _GPIO_pin_initialize `(uc ~T0 @X0 0 ef1`*CS263 ]
-"44 ECU_layer/DC_Motor/ecu_dc_motor.c
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 44:   ret = GPIO_pin_write_logic(&(lpin1), GPIO_HIGH);
-[c E2776 0 1 .. ]
-[n E2776 . GPIO_LOW GPIO_HIGH  ]
-"78 ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h
-[; ;ECU_layer/DC_Motor/../../MCAL_layer/GPIO/hal_gpio.h: 78: STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t logic);
-[v _GPIO_pin_write_logic `(uc ~T0 @X0 0 ef2`*CS263`E2776 ]
-"96 ECU_layer/DC_Motor/ecu_dc_motor.c
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 96:   llpin1->direction= GPIO_OUT;
-[c E2780 0 1 .. ]
-[n E2780 . GPIO_OUT GPIO_IN  ]
+[v F2883 `(v ~T0 @X0 0 tf1`*us ]
+"16 MCAL_layer/ADC/hal_adc.c
+[; ;MCAL_layer/ADC/hal_adc.c: 16: STD_ReturnType ADC_init(const ADC_t * lADC){
+[c E2857 -1 0 1 2 3 4 5 6 7 .. ]
+[n E2857 . ADC_default ADC_ch0 ADC_ch1 ADC_ch2 ADC_ch3 ADC_ch4 ADC_ch5 ADC_ch6 ADC_ch7  ]
+[c E2868 0 1 2 3 4 5 6 .. ]
+[n E2868 . ADC_CCLOCK_FOSC_DIV_2 ADC_CCLOCK_FOSC_DIV_8 ADC_CCLOCK_FOSC_DIV_32 ADC_CCLOCK_FRC ADC_CCLOCK_FOSC_DIV_4 ADC_CCLOCK_FOSC_DIV_16 ADC_CCLOCK_FOSC_DIV_64  ]
+"102 MCAL_layer/ADC/hal_adc.h
+[; ;MCAL_layer/ADC/hal_adc.h: 102: typedef struct{
+[s S266 `*F2883 1 `uc 1 `E2857 1 `E2868 1 `uc 1 ]
+[n S266 . ADC_interrupt_handler priority channel conversion_clock combination ]
+"3663 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3663:     struct {
+[s S146 :2 `uc 1 :1 `uc 1 ]
+[n S146 . . GO_NOT_DONE ]
+"3667
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3667:     struct {
+[s S147 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :2 `uc 1 ]
+[n S147 . ADON . GO_nDONE CHS ADCS ]
+"3674
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3674:     struct {
+[s S148 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S148 . . GO CHS0 CHS1 CHS2 ADCS0 ADCS1 ]
+"3683
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3683:     struct {
+[s S149 :2 `uc 1 :1 `uc 1 ]
+[n S149 . . NOT_DONE ]
+"3687
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3687:     struct {
+[s S150 :2 `uc 1 :1 `uc 1 ]
+[n S150 . . nDONE ]
+"3691
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3691:     struct {
+[s S151 :2 `uc 1 :1 `uc 1 ]
+[n S151 . . DONE ]
+"3695
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3695:     struct {
+[s S152 :2 `uc 1 :1 `uc 1 ]
+[n S152 . . GO_DONE ]
+"3699
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3699:     struct {
+[s S153 :7 `uc 1 :1 `uc 1 ]
+[n S153 . . ADCAL ]
+"3703
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3703:     struct {
+[s S154 :2 `uc 1 :1 `uc 1 ]
+[n S154 . . GODONE ]
+"3662
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3662: typedef union {
+[u S145 `S146 1 `S147 1 `S148 1 `S149 1 `S150 1 `S151 1 `S152 1 `S153 1 `S154 1 ]
+[n S145 . . . . . . . . . . ]
+"3708
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3708: extern volatile ADCON0bits_t ADCON0bits __attribute__((address(0xFC2)));
+[v _ADCON0bits `VS145 ~T0 @X0 0 e@4034 ]
+"118 MCAL_layer/ADC/hal_adc.h
+[; ;MCAL_layer/ADC/hal_adc.h: 118: STD_ReturnType ADC_select_channel(ADC_CH_t lCH);
+[v _ADC_select_channel `(uc ~T0 @X0 0 ef1`E2857 ]
+"122
+[; ;MCAL_layer/ADC/hal_adc.h: 122: static STD_ReturnType ADC_set_pin_config(ADC_CH_t channel);
+[v _ADC_set_pin_config `(uc ~T0 @X0 0 sf1`E2857 ]
+"3595 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3595:     struct {
+[s S142 :4 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S142 . PCFG . ADCS2 ADFM ]
+"3601
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3601:     struct {
+[s S143 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S143 . PCFG0 PCFG1 PCFG2 PCFG3 ]
+"3607
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3607:     struct {
+[s S144 :3 `uc 1 :1 `uc 1 ]
+[n S144 . . CHSN3 ]
+"3594
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3594: typedef union {
+[u S141 `S142 1 `S143 1 `S144 1 ]
+[n S141 . . . . ]
+"3612
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3612: extern volatile ADCON1bits_t ADCON1bits __attribute__((address(0xFC1)));
+[v _ADCON1bits `VS141 ~T0 @X0 0 e@4033 ]
+"37 MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h
+[; ;MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h: 37: STD_ReturnType INT_ADC_init(uint8 priority);
+[v _INT_ADC_init `(uc ~T0 @X0 0 ef1`uc ]
+[v F2852 `(v ~T0 @X0 0 tf1`*us ]
+"39
+[; ;MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h: 39: STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result));
+[v _INT_ADC_set_callback_routine `(uc ~T0 @X0 0 ef1`*F2852 ]
+"38
+[; ;MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h: 38: STD_ReturnType INT_ADC_deinit(void);
+[v _INT_ADC_deinit `(uc ~T0 @X0 0 ef ]
+"3812 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3812: extern volatile unsigned char ADRESH __attribute__((address(0xFC4)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
+"3805
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3805: extern volatile unsigned char ADRESL __attribute__((address(0xFC3)));
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
+"139 MCAL_layer/ADC/hal_adc.c
+[; ;MCAL_layer/ADC/hal_adc.c: 139: STD_ReturnType ADC_status (const ADC_t * lADC, ADC_status_t * status){
+[c E2877 -1 0 .. ]
+[n E2877 . nDone Done  ]
+"1219 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 1219:     struct {
+[s S48 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S48 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 ]
+"1228
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 1228:     struct {
+[s S49 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S49 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 ]
+"1218
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 1218: typedef union {
+[u S47 `S48 1 `S49 1 ]
+[n S47 . . . ]
+"1238
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 1238: extern volatile TRISAbits_t TRISAbits __attribute__((address(0xF92)));
+[v _TRISAbits `VS47 ~T0 @X0 0 e@3986 ]
+"2119
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2119:     struct {
+[s S76 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S76 . TRISE0 TRISE1 TRISE2 . PSPMODE IBOV OBF IBF ]
+"2129
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2129:     struct {
+[s S77 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S77 . RE0 RE1 RE2 ]
+"2118
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2118: typedef union {
+[u S75 `S76 1 `S77 1 ]
+[n S75 . . . ]
+"2135
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2135: extern volatile TRISEbits_t TRISEbits __attribute__((address(0xF96)));
+[v _TRISEbits `VS75 ~T0 @X0 0 e@3990 ]
 "52 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -412,266 +509,400 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5761
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5761: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"14 ECU_layer/DC_Motor/ecu_dc_motor.c
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 14: STD_ReturnType dc_motor_initialize(const dc_motor_t * dc_motor_l){
-[v _dc_motor_initialize `(uc ~T0 @X0 1 ef1`*CS266 ]
+"16 MCAL_layer/ADC/hal_adc.c
+[; ;MCAL_layer/ADC/hal_adc.c: 16: STD_ReturnType ADC_init(const ADC_t * lADC){
+[v _ADC_init `(uc ~T0 @X0 1 ef1`*CS266 ]
 {
-[e :U _dc_motor_initialize ]
-[v _dc_motor_l `*CS266 ~T0 @X0 1 r1 ]
+[e :U _ADC_init ]
+[v _lADC `*CS266 ~T0 @X0 1 r1 ]
 [f ]
-"15
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 15:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+"17
+[; ;MCAL_layer/ADC/hal_adc.c: 17:  STD_ReturnType ret = (STD_ReturnType)(0x01);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
-"16
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 16:  pin_config_t lpin1, lpin2;
-[v _lpin1 `S263 ~T0 @X0 1 a ]
-[v _lpin2 `S263 ~T0 @X0 1 a ]
-"17
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 17:  if( ((void*)0) == dc_motor_l)
-[e $ ! == -> -> -> 0 `i `*v `*CS266 _dc_motor_l 268  ]
 "18
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 18:   ret = (STD_ReturnType)(0x00);
+[; ;MCAL_layer/ADC/hal_adc.c: 18:  if(((void*)0) == lADC || lADC -> channel == ADC_default)
+[e $ ! || == -> -> -> 0 `i `*v `*CS266 _lADC == -> . *U _lADC 2 `i -> . `E2857 0 `i 268  ]
+"19
+[; ;MCAL_layer/ADC/hal_adc.c: 19:   ret = (STD_ReturnType)(0x00);
 [e = _ret -> -> 0 `i `uc ]
 [e $U 269  ]
-"19
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 19:  else{
+"20
+[; ;MCAL_layer/ADC/hal_adc.c: 20:  else{
 [e :U 268 ]
 {
-"20
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 20:   dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-[e ( _dc_motor_linit (3 , , _dc_motor_l &U _lpin1 &U _lpin2 ]
-"21
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 21:   if((STD_ReturnType)(0x00) == GPIO_check_access(&(lpin1)) || (STD_ReturnType)(0x00) == GPIO_check_access(&(lpin2)))
-[e $ ! || == -> -> -> 0 `i `uc `i -> ( _GPIO_check_access (1 -> &U _lpin1 `*CS263 `i == -> -> -> 0 `i `uc `i -> ( _GPIO_check_access (1 -> &U _lpin2 `*CS263 `i 270  ]
 "22
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 22:    ret = (STD_ReturnType)(0x00);
-[e = _ret -> -> 0 `i `uc ]
-[e $U 271  ]
+[; ;MCAL_layer/ADC/hal_adc.c: 22:   (ADCON0bits.ADON=0);
+[e = . . _ADCON0bits 1 0 -> -> 0 `i `uc ]
 "24
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 24:   else{
-[e :U 270 ]
-{
-"25
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 25:    ret = GPIO_pin_initialize(&(lpin1));
-[e = _ret ( _GPIO_pin_initialize (1 -> &U _lpin1 `*CS263 ]
-"26
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 26:    ret = GPIO_pin_initialize(&(lpin2));
-[e = _ret ( _GPIO_pin_initialize (1 -> &U _lpin2 `*CS263 ]
-"27
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 27:   }
-}
-[e :U 271 ]
-"28
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 28:  }
+[; ;MCAL_layer/ADC/hal_adc.c: 24:   ret = ADC_select_channel(lADC -> channel) &&
+[e = _ret -> -> && != -> ( _ADC_select_channel (1 . *U _lADC 2 `i -> 0 `i != -> ( _ADC_set_pin_config (1 . *U _lADC 2 `i -> 0 `i `i `uc ]
+"29
+[; ;MCAL_layer/ADC/hal_adc.c: 29:   (ADCON1bits.ADFM=1);
+[e = . . _ADCON1bits 0 3 -> -> 1 `i `uc ]
+"36
+[; ;MCAL_layer/ADC/hal_adc.c: 36:   (ADCON1bits.ADCS2 = ((uint8)(lADC -> conversion_clock >> 2) & 0x01)); (ADCON0bits.ADCS1 = ((uint8)(lADC -> conversion_clock >> 1) & 0x01)); (ADCON0bits.ADCS0 = ((uint8)(lADC -> conversion_clock) & 0x01));;
+[e = . . _ADCON1bits 0 2 -> & -> -> >> -> . *U _lADC 3 `ui -> 2 `i `uc `i -> 1 `i `uc ]
+[e = . . _ADCON0bits 2 6 -> & -> -> >> -> . *U _lADC 3 `ui -> 1 `i `uc `i -> 1 `i `uc ]
+[e = . . _ADCON0bits 2 5 -> & -> -> . *U _lADC 3 `uc `i -> 1 `i `uc ]
+"41
+[; ;MCAL_layer/ADC/hal_adc.c: 41:   ret = ret && INT_ADC_init(lADC -> priority);
+[e = _ret -> -> && != -> _ret `i -> 0 `i != -> ( _INT_ADC_init (1 . *U _lADC 1 `i -> 0 `i `i `uc ]
+"49
+[; ;MCAL_layer/ADC/hal_adc.c: 49:   ret = ret && INT_ADC_set_callback_routine(lADC-> ADC_interrupt_handler) &&
+[e = _ret -> -> && && != -> _ret `i -> 0 `i != -> ( _INT_ADC_set_callback_routine (1 . *U _lADC 0 `i -> 0 `i != -> = . . _ADCON1bits 0 0 -> & -> -> - -> . *U _lADC 4 `i -> 1 `i `uc `i -> 15 `i `uc `i -> 0 `i `i `uc ]
+"56
+[; ;MCAL_layer/ADC/hal_adc.c: 56:   (ADCON0bits.ADON=1);
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+"57
+[; ;MCAL_layer/ADC/hal_adc.c: 57:  }
 }
 [e :U 269 ]
-"29
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 29:  return ret;
+"58
+[; ;MCAL_layer/ADC/hal_adc.c: 58:  return ret;
 [e ) _ret ]
 [e $UE 267  ]
-"30
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 30: }
+"59
+[; ;MCAL_layer/ADC/hal_adc.c: 59: }
 [e :UE 267 ]
 }
-"37
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 37: STD_ReturnType dc_motor_turn_right(const dc_motor_t * dc_motor_l){
-[v _dc_motor_turn_right `(uc ~T0 @X0 1 ef1`*CS266 ]
-{
-[e :U _dc_motor_turn_right ]
-[v _dc_motor_l `*CS266 ~T0 @X0 1 r1 ]
-[f ]
-"38
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 38:  STD_ReturnType ret = (STD_ReturnType)(0x01);
-[v _ret `uc ~T0 @X0 1 a ]
-[e = _ret -> -> 1 `i `uc ]
-"39
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 39:  pin_config_t lpin1,lpin2;
-[v _lpin1 `S263 ~T0 @X0 1 a ]
-[v _lpin2 `S263 ~T0 @X0 1 a ]
-"40
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 40:  if(((void*)0) == dc_motor_l)
-[e $ ! == -> -> -> 0 `i `*v `*CS266 _dc_motor_l 273  ]
-"41
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 41:   ret = (STD_ReturnType)(0x00);
-[e = _ret -> -> 0 `i `uc ]
-[e $U 274  ]
-"42
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 42:  else{
-[e :U 273 ]
-{
-"43
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 43:   dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-[e ( _dc_motor_linit (3 , , _dc_motor_l &U _lpin1 &U _lpin2 ]
-"44
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 44:   ret = GPIO_pin_write_logic(&(lpin1), GPIO_HIGH);
-[e = _ret ( _GPIO_pin_write_logic (2 , -> &U _lpin1 `*CS263 . `E2776 1 ]
-"45
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 45:   ret = GPIO_pin_write_logic(&(lpin2), GPIO_LOW);
-[e = _ret ( _GPIO_pin_write_logic (2 , -> &U _lpin2 `*CS263 . `E2776 0 ]
-"46
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 46:  }
-}
-[e :U 274 ]
-"48
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 48:  return ret;
-[e ) _ret ]
-[e $UE 272  ]
-"49
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 49: }
-[e :UE 272 ]
-}
-"56
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 56: STD_ReturnType dc_motor_turn_left(const dc_motor_t * dc_motor_l){
-[v _dc_motor_turn_left `(uc ~T0 @X0 1 ef1`*CS266 ]
-{
-[e :U _dc_motor_turn_left ]
-[v _dc_motor_l `*CS266 ~T0 @X0 1 r1 ]
-[f ]
-"57
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 57:  STD_ReturnType ret = (STD_ReturnType)(0x01);
-[v _ret `uc ~T0 @X0 1 a ]
-[e = _ret -> -> 1 `i `uc ]
-"58
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 58:  pin_config_t lpin1,lpin2;
-[v _lpin1 `S263 ~T0 @X0 1 a ]
-[v _lpin2 `S263 ~T0 @X0 1 a ]
-"59
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 59:  if(((void*)0) == dc_motor_l)
-[e $ ! == -> -> -> 0 `i `*v `*CS266 _dc_motor_l 276  ]
-"60
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 60:   ret = (STD_ReturnType)(0x00);
-[e = _ret -> -> 0 `i `uc ]
-[e $U 277  ]
-"61
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 61:  else{
-[e :U 276 ]
-{
-"62
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 62:   dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-[e ( _dc_motor_linit (3 , , _dc_motor_l &U _lpin1 &U _lpin2 ]
-"63
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 63:   ret = GPIO_pin_write_logic(&(lpin1), GPIO_LOW);
-[e = _ret ( _GPIO_pin_write_logic (2 , -> &U _lpin1 `*CS263 . `E2776 0 ]
 "64
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 64:   ret = GPIO_pin_write_logic(&(lpin2), GPIO_HIGH);
-[e = _ret ( _GPIO_pin_write_logic (2 , -> &U _lpin2 `*CS263 . `E2776 1 ]
+[; ;MCAL_layer/ADC/hal_adc.c: 64: STD_ReturnType ADC_deinit(const ADC_t * lADC){
+[v _ADC_deinit `(uc ~T0 @X0 1 ef1`*CS266 ]
+{
+[e :U _ADC_deinit ]
+[v _lADC `*CS266 ~T0 @X0 1 r1 ]
+[f ]
 "65
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 65:  }
-}
-[e :U 277 ]
+[; ;MCAL_layer/ADC/hal_adc.c: 65:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"66
+[; ;MCAL_layer/ADC/hal_adc.c: 66:  if(((void*)0) == lADC)
+[e $ ! == -> -> -> 0 `i `*v `*CS266 _lADC 271  ]
 "67
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 67:  return ret;
-[e ) _ret ]
-[e $UE 275  ]
+[; ;MCAL_layer/ADC/hal_adc.c: 67:   ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+[e $U 272  ]
 "68
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 68: }
-[e :UE 275 ]
-}
+[; ;MCAL_layer/ADC/hal_adc.c: 68:  else{
+[e :U 271 ]
+{
+"70
+[; ;MCAL_layer/ADC/hal_adc.c: 70:   (ADCON0bits.ADON=0);
+[e = . . _ADCON0bits 1 0 -> -> 0 `i `uc ]
+"72
+[; ;MCAL_layer/ADC/hal_adc.c: 72:   ret = INT_ADC_deinit();
+[e = _ret ( _INT_ADC_deinit ..  ]
 "73
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 73: STD_ReturnType dc_motor_stop(const dc_motor_t * dc_motor_l){
-[v _dc_motor_stop `(uc ~T0 @X0 1 ef1`*CS266 ]
-{
-[e :U _dc_motor_stop ]
-[v _dc_motor_l `*CS266 ~T0 @X0 1 r1 ]
-[f ]
+[; ;MCAL_layer/ADC/hal_adc.c: 73:  }
+}
+[e :U 272 ]
 "74
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 74:  STD_ReturnType ret = (STD_ReturnType)(0x01);
-[v _ret `uc ~T0 @X0 1 a ]
-[e = _ret -> -> 1 `i `uc ]
+[; ;MCAL_layer/ADC/hal_adc.c: 74:  return ret;
+[e ) _ret ]
+[e $UE 270  ]
 "75
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 75:  pin_config_t lpin1,lpin2;
-[v _lpin1 `S263 ~T0 @X0 1 a ]
-[v _lpin2 `S263 ~T0 @X0 1 a ]
-"76
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 76:  if(((void*)0) == dc_motor_l)
-[e $ ! == -> -> -> 0 `i `*v `*CS266 _dc_motor_l 279  ]
-"77
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 77:   ret = (STD_ReturnType)(0x00);
-[e = _ret -> -> 0 `i `uc ]
-[e $U 280  ]
-"78
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 78:  else{
-[e :U 279 ]
-{
-"79
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 79:   dc_motor_linit(dc_motor_l,&lpin1,&lpin2);
-[e ( _dc_motor_linit (3 , , _dc_motor_l &U _lpin1 &U _lpin2 ]
-"80
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 80:   ret = GPIO_pin_write_logic(&(lpin1), GPIO_LOW);
-[e = _ret ( _GPIO_pin_write_logic (2 , -> &U _lpin1 `*CS263 . `E2776 0 ]
+[; ;MCAL_layer/ADC/hal_adc.c: 75: }
+[e :UE 270 ]
+}
 "81
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 81:   ret = GPIO_pin_write_logic(&(lpin2), GPIO_LOW);
-[e = _ret ( _GPIO_pin_write_logic (2 , -> &U _lpin2 `*CS263 . `E2776 0 ]
-"82
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 82:  }
-}
-[e :U 280 ]
-"83
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 83:  return ret;
-[e ) _ret ]
-[e $UE 278  ]
-"84
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 84: }
-[e :UE 278 ]
-}
-"89
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 89: static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l, pin_config_t * llpin1, pin_config_t * llpin2){
-[v _dc_motor_linit `(uc ~T0 @X0 1 sf3`*CS266`*S263`*S263 ]
+[; ;MCAL_layer/ADC/hal_adc.c: 81: STD_ReturnType ADC_select_channel(ADC_CH_t lCH){
+[v _ADC_select_channel `(uc ~T0 @X0 1 ef1`E2857 ]
 {
-[e :U _dc_motor_linit ]
-[v _dc_motor_l `*CS266 ~T0 @X0 1 r1 ]
-[v _llpin1 `*S263 ~T0 @X0 1 r2 ]
-[v _llpin2 `*S263 ~T0 @X0 1 r3 ]
+[e :U _ADC_select_channel ]
+[v _lCH `E2857 ~T0 @X0 1 r1 ]
 [f ]
-"90
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 90:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+"82
+[; ;MCAL_layer/ADC/hal_adc.c: 82:  STD_ReturnType ret = (STD_ReturnType)(0x01);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
-"91
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 91:  if( ((void*)0) == dc_motor_l)
-[e $ ! == -> -> -> 0 `i `*v `*CS266 _dc_motor_l 282  ]
-"92
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 92:   ret = (STD_ReturnType)(0x00);
-[e = _ret -> -> 0 `i `uc ]
-[e $U 283  ]
-"93
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 93:  else{
-[e :U 282 ]
-{
-"94
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 94:   llpin1->port = dc_motor_l -> dc_motor_arr[0].port;
-[e = . *U _llpin1 0 . *U + &U . *U _dc_motor_l 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _dc_motor_l 0 `ui `ux 0 ]
-"95
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 95:   llpin1->pin= dc_motor_l -> dc_motor_arr[0].pin;
-[e = . *U _llpin1 1 . *U + &U . *U _dc_motor_l 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _dc_motor_l 0 `ui `ux 1 ]
-"96
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 96:   llpin1->direction= GPIO_OUT;
-[e = . *U _llpin1 2 -> . `E2780 0 `uc ]
-"97
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 97:   llpin1->logic= dc_motor_l -> dc_motor_arr[1].logic;
-[e = . *U _llpin1 3 . *U + &U . *U _dc_motor_l 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _dc_motor_l 0 `ui `ux 2 ]
-"98
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 98:   llpin2->port = dc_motor_l -> dc_motor_arr[1].port;
-[e = . *U _llpin2 0 . *U + &U . *U _dc_motor_l 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _dc_motor_l 0 `ui `ux 0 ]
-"99
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 99:   llpin2->pin= dc_motor_l -> dc_motor_arr[1].pin;
-[e = . *U _llpin2 1 . *U + &U . *U _dc_motor_l 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _dc_motor_l 0 `ui `ux 1 ]
-"100
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 100:   llpin2->direction= GPIO_OUT;
-[e = . *U _llpin2 2 -> . `E2780 0 `uc ]
-"101
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 101:   llpin2->logic= dc_motor_l -> dc_motor_arr[1].logic;
-[e = . *U _llpin2 3 . *U + &U . *U _dc_motor_l 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _dc_motor_l 0 `ui `ux 2 ]
-"102
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 102:  }
-}
-[e :U 283 ]
-"103
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 103:  return ret;
+"83
+[; ;MCAL_layer/ADC/hal_adc.c: 83:   (ADCON0bits.CHS=(uint8)lCH & 0x07);
+[e = . . _ADCON0bits 1 3 -> & -> -> _lCH `uc `i -> 7 `i `uc ]
+"84
+[; ;MCAL_layer/ADC/hal_adc.c: 84:   ret = ADC_set_pin_config(lCH);
+[e = _ret ( _ADC_set_pin_config (1 _lCH ]
+"85
+[; ;MCAL_layer/ADC/hal_adc.c: 85:  return ret;
 [e ) _ret ]
-[e $UE 281  ]
-"104
-[; ;ECU_layer/DC_Motor/ecu_dc_motor.c: 104: }
-[e :UE 281 ]
+[e $UE 273  ]
+"86
+[; ;MCAL_layer/ADC/hal_adc.c: 86: }
+[e :UE 273 ]
+}
+"94
+[; ;MCAL_layer/ADC/hal_adc.c: 94: STD_ReturnType ADC_convert(const ADC_t * lADC, ADC_CH_t lCH){
+[v _ADC_convert `(uc ~T0 @X0 1 ef2`*CS266`E2857 ]
+{
+[e :U _ADC_convert ]
+[v _lADC `*CS266 ~T0 @X0 1 r1 ]
+[v _lCH `E2857 ~T0 @X0 1 r2 ]
+[f ]
+"95
+[; ;MCAL_layer/ADC/hal_adc.c: 95:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"96
+[; ;MCAL_layer/ADC/hal_adc.c: 96:  if((((void*)0) == lADC) || (lADC -> channel == ADC_default) )
+[e $ ! || == -> -> -> 0 `i `*v `*CS266 _lADC == -> . *U _lADC 2 `i -> . `E2857 0 `i 275  ]
+"97
+[; ;MCAL_layer/ADC/hal_adc.c: 97:   ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+[e $U 276  ]
+"98
+[; ;MCAL_layer/ADC/hal_adc.c: 98:  else{
+[e :U 275 ]
+{
+"100
+[; ;MCAL_layer/ADC/hal_adc.c: 100:   if(lCH == ADC_default)
+[e $ ! == -> _lCH `i -> . `E2857 0 `i 277  ]
+"101
+[; ;MCAL_layer/ADC/hal_adc.c: 101:    ret = ADC_select_channel(lADC -> channel);
+[e = _ret ( _ADC_select_channel (1 . *U _lADC 2 ]
+[e $U 278  ]
+"102
+[; ;MCAL_layer/ADC/hal_adc.c: 102:   else
+[e :U 277 ]
+"103
+[; ;MCAL_layer/ADC/hal_adc.c: 103:    ret = ADC_select_channel(lCH);
+[e = _ret ( _ADC_select_channel (1 _lCH ]
+[e :U 278 ]
+"105
+[; ;MCAL_layer/ADC/hal_adc.c: 105:    (ADCON0bits.GO_nDONE=1);
+[e = . . _ADCON0bits 1 2 -> -> 1 `i `uc ]
+"106
+[; ;MCAL_layer/ADC/hal_adc.c: 106:  }
+}
+[e :U 276 ]
+"107
+[; ;MCAL_layer/ADC/hal_adc.c: 107:  return ret;
+[e ) _ret ]
+[e $UE 274  ]
+"108
+[; ;MCAL_layer/ADC/hal_adc.c: 108: }
+[e :UE 274 ]
+}
+"116
+[; ;MCAL_layer/ADC/hal_adc.c: 116: STD_ReturnType ADC_result(const ADC_t * lADC, ADC_result_size * result){
+[v _ADC_result `(uc ~T0 @X0 1 ef2`*CS266`*us ]
+{
+[e :U _ADC_result ]
+[v _lADC `*CS266 ~T0 @X0 1 r1 ]
+[v _result `*us ~T0 @X0 1 r2 ]
+[f ]
+"117
+[; ;MCAL_layer/ADC/hal_adc.c: 117:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"118
+[; ;MCAL_layer/ADC/hal_adc.c: 118:  if(((void*)0) == lADC || ((void*)0) == result)
+[e $ ! || == -> -> -> 0 `i `*v `*CS266 _lADC == -> -> -> 0 `i `*v `*us _result 280  ]
+"119
+[; ;MCAL_layer/ADC/hal_adc.c: 119:   ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+[e $U 281  ]
+"120
+[; ;MCAL_layer/ADC/hal_adc.c: 120:  else{
+[e :U 280 ]
+{
+"122
+[; ;MCAL_layer/ADC/hal_adc.c: 122:   while((ADCON0bits.GO_nDONE));
+[e $U 282  ]
+[e :U 283 ]
+[e :U 282 ]
+[e $ != -> . . _ADCON0bits 1 2 `i -> 0 `i 283  ]
+[e :U 284 ]
+"125
+[; ;MCAL_layer/ADC/hal_adc.c: 125:   *result = (ADC_result_size) ( (((ADC_result_size)(ADRESH)) << 8) | ((ADC_result_size) (ADRESL)) );
+[e = *U _result -> | << -> -> _ADRESH `us `ui -> 8 `i -> -> _ADRESL `us `ui `us ]
+"129
+[; ;MCAL_layer/ADC/hal_adc.c: 129:  }
+}
+[e :U 281 ]
+"130
+[; ;MCAL_layer/ADC/hal_adc.c: 130:  return ret;
+[e ) _ret ]
+[e $UE 279  ]
+"131
+[; ;MCAL_layer/ADC/hal_adc.c: 131: }
+[e :UE 279 ]
+}
+"139
+[; ;MCAL_layer/ADC/hal_adc.c: 139: STD_ReturnType ADC_status (const ADC_t * lADC, ADC_status_t * status){
+[v _ADC_status `(uc ~T0 @X0 1 ef2`*CS266`*E2877 ]
+{
+[e :U _ADC_status ]
+[v _lADC `*CS266 ~T0 @X0 1 r1 ]
+[v _status `*E2877 ~T0 @X0 1 r2 ]
+[f ]
+"140
+[; ;MCAL_layer/ADC/hal_adc.c: 140:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"141
+[; ;MCAL_layer/ADC/hal_adc.c: 141:  if(((void*)0) == lADC || ((void*)0) == status)
+[e $ ! || == -> -> -> 0 `i `*v `*CS266 _lADC == -> -> -> 0 `i `*v `*E2877 _status 286  ]
+"142
+[; ;MCAL_layer/ADC/hal_adc.c: 142:   ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+[e $U 287  ]
+"143
+[; ;MCAL_layer/ADC/hal_adc.c: 143:  else{
+[e :U 286 ]
+{
+"144
+[; ;MCAL_layer/ADC/hal_adc.c: 144:   if((ADCON0bits.GO_nDONE) == 1)
+[e $ ! == -> . . _ADCON0bits 1 2 `i -> 1 `i 288  ]
+"145
+[; ;MCAL_layer/ADC/hal_adc.c: 145:    *status = Done;
+[e = *U _status . `E2877 1 ]
+[e $U 289  ]
+"146
+[; ;MCAL_layer/ADC/hal_adc.c: 146:   else
+[e :U 288 ]
+"147
+[; ;MCAL_layer/ADC/hal_adc.c: 147:    *status = nDone;
+[e = *U _status . `E2877 0 ]
+[e :U 289 ]
+"148
+[; ;MCAL_layer/ADC/hal_adc.c: 148:  }
+}
+[e :U 287 ]
+"149
+[; ;MCAL_layer/ADC/hal_adc.c: 149:  return ret;
+[e ) _ret ]
+[e $UE 285  ]
+"150
+[; ;MCAL_layer/ADC/hal_adc.c: 150: }
+[e :UE 285 ]
+}
+"156
+[; ;MCAL_layer/ADC/hal_adc.c: 156: static STD_ReturnType ADC_set_pin_config(ADC_CH_t channel){
+[v _ADC_set_pin_config `(uc ~T0 @X0 1 sf1`E2857 ]
+{
+[e :U _ADC_set_pin_config ]
+[v _channel `E2857 ~T0 @X0 1 r1 ]
+[f ]
+"157
+[; ;MCAL_layer/ADC/hal_adc.c: 157:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"158
+[; ;MCAL_layer/ADC/hal_adc.c: 158:  switch(channel){
+[e $U 292  ]
+{
+"159
+[; ;MCAL_layer/ADC/hal_adc.c: 159:   case(ADC_default):
+[e :U 293 ]
+"160
+[; ;MCAL_layer/ADC/hal_adc.c: 160:    ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+"161
+[; ;MCAL_layer/ADC/hal_adc.c: 161:    break;
+[e $U 291  ]
+"162
+[; ;MCAL_layer/ADC/hal_adc.c: 162:   case(ADC_ch0):
+[e :U 294 ]
+"163
+[; ;MCAL_layer/ADC/hal_adc.c: 163:    TRISAbits.RA0=1;
+[e = . . _TRISAbits 1 0 -> -> 1 `i `uc ]
+"164
+[; ;MCAL_layer/ADC/hal_adc.c: 164:    break;
+[e $U 291  ]
+"165
+[; ;MCAL_layer/ADC/hal_adc.c: 165:   case(ADC_ch1):
+[e :U 295 ]
+"166
+[; ;MCAL_layer/ADC/hal_adc.c: 166:    TRISAbits.RA1=1;
+[e = . . _TRISAbits 1 1 -> -> 1 `i `uc ]
+"167
+[; ;MCAL_layer/ADC/hal_adc.c: 167:    break;
+[e $U 291  ]
+"168
+[; ;MCAL_layer/ADC/hal_adc.c: 168:   case(ADC_ch2):
+[e :U 296 ]
+"169
+[; ;MCAL_layer/ADC/hal_adc.c: 169:    TRISAbits.RA2=1;
+[e = . . _TRISAbits 1 2 -> -> 1 `i `uc ]
+"170
+[; ;MCAL_layer/ADC/hal_adc.c: 170:    break;
+[e $U 291  ]
+"171
+[; ;MCAL_layer/ADC/hal_adc.c: 171:   case(ADC_ch3):
+[e :U 297 ]
+"172
+[; ;MCAL_layer/ADC/hal_adc.c: 172:    TRISAbits.RA3=1;
+[e = . . _TRISAbits 1 3 -> -> 1 `i `uc ]
+"173
+[; ;MCAL_layer/ADC/hal_adc.c: 173:    break;
+[e $U 291  ]
+"174
+[; ;MCAL_layer/ADC/hal_adc.c: 174:   case(ADC_ch4):
+[e :U 298 ]
+"175
+[; ;MCAL_layer/ADC/hal_adc.c: 175:    TRISAbits.RA5=1;
+[e = . . _TRISAbits 1 5 -> -> 1 `i `uc ]
+"176
+[; ;MCAL_layer/ADC/hal_adc.c: 176:    break;
+[e $U 291  ]
+"177
+[; ;MCAL_layer/ADC/hal_adc.c: 177:   case(ADC_ch5):
+[e :U 299 ]
+"178
+[; ;MCAL_layer/ADC/hal_adc.c: 178:    TRISEbits.RE0=1;
+[e = . . _TRISEbits 1 0 -> -> 1 `i `uc ]
+"179
+[; ;MCAL_layer/ADC/hal_adc.c: 179:    break;
+[e $U 291  ]
+"180
+[; ;MCAL_layer/ADC/hal_adc.c: 180:   case(ADC_ch6):
+[e :U 300 ]
+"181
+[; ;MCAL_layer/ADC/hal_adc.c: 181:    TRISEbits.RE1=1;
+[e = . . _TRISEbits 1 1 -> -> 1 `i `uc ]
+"182
+[; ;MCAL_layer/ADC/hal_adc.c: 182:    break;
+[e $U 291  ]
+"183
+[; ;MCAL_layer/ADC/hal_adc.c: 183:   case(ADC_ch7):
+[e :U 301 ]
+"184
+[; ;MCAL_layer/ADC/hal_adc.c: 184:    TRISEbits.RE2=1;
+[e = . . _TRISEbits 1 2 -> -> 1 `i `uc ]
+"185
+[; ;MCAL_layer/ADC/hal_adc.c: 185:    break;
+[e $U 291  ]
+"186
+[; ;MCAL_layer/ADC/hal_adc.c: 186:   default:
+[e :U 302 ]
+"187
+[; ;MCAL_layer/ADC/hal_adc.c: 187:    ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+"188
+[; ;MCAL_layer/ADC/hal_adc.c: 188:    break;
+[e $U 291  ]
+"189
+[; ;MCAL_layer/ADC/hal_adc.c: 189:  }
+}
+[e $U 291  ]
+[e :U 292 ]
+[e [\ -> _channel `i , $ . `E2857 0 293
+ , $ . `E2857 1 294
+ , $ . `E2857 2 295
+ , $ . `E2857 3 296
+ , $ . `E2857 4 297
+ , $ . `E2857 5 298
+ , $ . `E2857 6 299
+ , $ . `E2857 7 300
+ , $ . `E2857 8 301
+ 302 ]
+[e :U 291 ]
+"190
+[; ;MCAL_layer/ADC/hal_adc.c: 190:         return ret;
+[e ) _ret ]
+[e $UE 290  ]
+"191
+[; ;MCAL_layer/ADC/hal_adc.c: 191: }
+[e :UE 290 ]
 }

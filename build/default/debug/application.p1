@@ -1,7 +1,21 @@
 Version 4.0 HI-TECH Software Intermediate Code
+[v F3139 `(v ~T0 @X0 0 tf1`*us ]
+"16 application.c
+[; ;application.c: 16: ADC_t ADC1 = {
+[c E3113 -1 0 1 2 3 4 5 6 7 .. ]
+[n E3113 . ADC_default ADC_ch0 ADC_ch1 ADC_ch2 ADC_ch3 ADC_ch4 ADC_ch5 ADC_ch6 ADC_ch7  ]
+[c E3124 0 1 2 3 4 5 6 .. ]
+[n E3124 . ADC_CCLOCK_FOSC_DIV_2 ADC_CCLOCK_FOSC_DIV_8 ADC_CCLOCK_FOSC_DIV_32 ADC_CCLOCK_FRC ADC_CCLOCK_FOSC_DIV_4 ADC_CCLOCK_FOSC_DIV_16 ADC_CCLOCK_FOSC_DIV_64  ]
+"102 ./MCAL_layer/ADC/hal_adc.h
+[; ;./MCAL_layer/ADC/hal_adc.h: 102: typedef struct{
+[s S275 `*F3139 1 `uc 1 `E3113 1 `E3124 1 `uc 1 ]
+[n S275 . ADC_interrupt_handler priority channel conversion_clock combination ]
+"34 ./application.h
+[; ;./application.h: 34: void __ADC(uint16 * result);
+[v ___ADC `(v ~T0 @X0 0 ef1`*us ]
 [p mainexit ]
-"26 ./application.h
-[; ;./application.h: 26: STD_ReturnType application_initialize();
+"27
+[; ;./application.h: 27: STD_ReturnType application_initialize();
 [v _application_initialize `(uc ~T0 @X0 0 e? ]
 "18 ./ECU_layer/LED/ecu_led.h
 [; ;./ECU_layer/LED/ecu_led.h: 18: typedef struct{
@@ -10,16 +24,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 "29
 [; ;./ECU_layer/LED/ecu_led.h: 29: STD_ReturnType LED_toggle(LED_t *led);
 [v _LED_toggle `(uc ~T0 @X0 0 ef1`*S266 ]
-"21 ./application.h
-[; ;./application.h: 21: extern LED_t LED_main;
+"22 ./application.h
+[; ;./application.h: 22: extern LED_t LED_main;
 [v _LED_main `S266 ~T0 @X0 0 e ]
-[v F205 `(v ~T0 @X0 1 tf1`ul ]
+[v F693 `(v ~T0 @X0 1 tf1`ul ]
 "20 /home/nour/programs/microchip/xc8/v3.00/pic/include/builtins.h
-[v __delay `JF205 ~T0 @X0 0 e ]
+[v __delay `JF693 ~T0 @X0 0 e ]
 [p i __delay ]
 "21 ./ECU_layer/ecu_init.h
 [; ;./ECU_layer/ecu_init.h: 21: STD_ReturnType ecu_init(void);
 [v _ecu_init `(uc ~T0 @X0 0 ef ]
+"116 ./MCAL_layer/ADC/hal_adc.h
+[; ;./MCAL_layer/ADC/hal_adc.h: 116: STD_ReturnType ADC_init(const ADC_t * lADC);
+[v _ADC_init `(uc ~T0 @X0 0 ef1`*CS275 ]
 "52 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -401,102 +418,131 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5761
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5761: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"9 application.c
-[; ;application.c: 9: uint8 Iflag;
+"11 application.c
+[; ;application.c: 11: uint8 Iflag;
 [v _Iflag `uc ~T0 @X0 1 e ]
-"14
-[; ;application.c: 14: STD_ReturnType ret;
+"16
+[; ;application.c: 16: ADC_t ADC1 = {
+[v _ADC1 `S275 ~T0 @X0 1 e ]
+[i _ADC1
+:U ..
+:U ..
+&U ___ADC
+-> -> 0 `i `uc
+. `E3113 2
+. `E3124 2
+-> -> 1 `i `uc
+..
+..
+]
+"24
+[; ;application.c: 24: STD_ReturnType ret;
 [v _ret `uc ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"15
-[; ;application.c: 15: int main(void){
+"25
+[; ;application.c: 25: int main(void){
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"16
-[; ;application.c: 16:         ret = application_initialize();
+"26
+[; ;application.c: 26:         ret = application_initialize();
 [e = _ret ( _application_initialize ..  ]
-"17
-[; ;application.c: 17:  if((STD_ReturnType)(0x00) == ret){
-[e $ ! == -> -> -> 0 `i `uc `i -> _ret `i 276  ]
+"27
+[; ;application.c: 27:  if((STD_ReturnType)(0x00) == ret){
+[e $ ! == -> -> -> 0 `i `uc `i -> _ret `i 277  ]
 {
-"18
-[; ;application.c: 18:   return -1;
+"28
+[; ;application.c: 28:   return -1;
 [e ) -U -> 1 `i ]
-[e $UE 275  ]
-"19
-[; ;application.c: 19:  }
-}
-[e :U 276 ]
-"20
-[; ;application.c: 20:     while(1){
-[e :U 278 ]
-{
-"21
-[; ;application.c: 21:   LED_toggle(&LED_main);
-[e ( _LED_toggle (1 &U _LED_main ]
-"22
-[; ;application.c: 22:   _delay((unsigned long)((1000)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"23
-[; ;application.c: 23:  }
+[e $UE 276  ]
+"29
+[; ;application.c: 29:  }
 }
 [e :U 277 ]
-[e $U 278  ]
+"30
+[; ;application.c: 30:     while(1){
 [e :U 279 ]
-"25
-[; ;application.c: 25: }
-[e :UE 275 ]
+{
+"31
+[; ;application.c: 31:   LED_toggle(&LED_main);
+[e ( _LED_toggle (1 &U _LED_main ]
+"32
+[; ;application.c: 32:   _delay((unsigned long)((1000)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"33
+[; ;application.c: 33:  }
 }
-"27
-[; ;application.c: 27: STD_ReturnType application_initialize(){
+[e :U 278 ]
+[e $U 279  ]
+[e :U 280 ]
+"35
+[; ;application.c: 35: }
+[e :UE 276 ]
+}
+"37
+[; ;application.c: 37: STD_ReturnType application_initialize(){
 [v _application_initialize `(uc ~T0 @X0 1 ef ]
 {
 [e :U _application_initialize ]
 [f ]
-"28
-[; ;application.c: 28:     STD_ReturnType ret = (STD_ReturnType)(0x01);
+"38
+[; ;application.c: 38:     STD_ReturnType ret = (STD_ReturnType)(0x01);
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 1 `i `uc ]
-"30
-[; ;application.c: 30:  ret = ecu_init();
-[e = _ret ( _ecu_init ..  ]
-"31
-[; ;application.c: 31:     return ret;
+"40
+[; ;application.c: 40:  ret = ecu_init() &&
+[e = _ret -> -> && != -> ( _ecu_init ..  `i -> 0 `i != -> ( _ADC_init (1 -> &U _ADC1 `*CS275 `i -> 0 `i `i `uc ]
+"42
+[; ;application.c: 42:     return ret;
 [e ) _ret ]
-[e $UE 280  ]
-"32
-[; ;application.c: 32: }
-[e :UE 280 ]
+[e $UE 281  ]
+"43
+[; ;application.c: 43: }
+[e :UE 281 ]
 }
-"34
-[; ;application.c: 34: void __INT0(void){
+"45
+[; ;application.c: 45: void __INT0(void){
 [v ___INT0 `(v ~T0 @X0 1 ef ]
 {
 [e :U ___INT0 ]
 [f ]
-"35
-[; ;application.c: 35: }
-[e :UE 281 ]
+"46
+[; ;application.c: 46: }
+[e :UE 282 ]
 }
-"36
-[; ;application.c: 36: void __INT1(void){
+"47
+[; ;application.c: 47: void __INT1(void){
 [v ___INT1 `(v ~T0 @X0 1 ef ]
 {
 [e :U ___INT1 ]
 [f ]
-"37
-[; ;application.c: 37: }
-[e :UE 282 ]
+"48
+[; ;application.c: 48: }
+[e :UE 283 ]
 }
-"38
-[; ;application.c: 38: void __INT2(void){
+"49
+[; ;application.c: 49: void __INT2(void){
 [v ___INT2 `(v ~T0 @X0 1 ef ]
 {
 [e :U ___INT2 ]
 [f ]
-"39
-[; ;application.c: 39: }
-[e :UE 283 ]
+"50
+[; ;application.c: 50: }
+[e :UE 284 ]
+}
+"51
+[; ;application.c: 51: void __ADC(uint16 * result){
+[v ___ADC `(v ~T0 @X0 1 ef1`*us ]
+{
+[e :U ___ADC ]
+[v _result `*us ~T0 @X0 1 r1 ]
+[f ]
+"54
+[; ;application.c: 54:  uint16 lresult = *result;
+[v _lresult `us ~T0 @X0 1 a ]
+[e = _lresult *U _result ]
+"57
+[; ;application.c: 57: }
+[e :UE 285 ]
 }

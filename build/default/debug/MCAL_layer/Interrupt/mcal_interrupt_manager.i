@@ -13,12 +13,14 @@
 
 
 
+
+
 # 1 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 1
 # 10 "MCAL_layer/Interrupt/mcal_interrupt_manager.h"
 # 1 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 1
-# 12 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 13 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
 # 1 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 1
-# 11 "MCAL_layer/Interrupt/mcal_interrupt_config.h"
+# 12 "MCAL_layer/Interrupt/mcal_interrupt_config.h"
 # 1 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 1 3
 # 18 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4079,7 +4081,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "/home/nour/programs/microchip/xc8/v3.00/pic/include/xc.h" 2 3
-# 12 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 13 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
 # 1 "MCAL_layer/Interrupt/../mcal_std_types.h" 1
 # 11 "MCAL_layer/Interrupt/../mcal_std_types.h"
 # 1 "MCAL_layer/Interrupt/../std_libs.h" 1
@@ -4307,16 +4309,15 @@ typedef signed char sint8;
 typedef signed int sint32;
 typedef signed short sint16;
 typedef uint8 STD_ReturnType;
-# 13 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
 # 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 1
 # 12 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
-# 1 "MCAL_layer/Interrupt/../GPIO/../device_config.h" 1
+# 1 "MCAL_layer/Interrupt/../GPIO/../mcal_drivers_config.h" 1
 # 13 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
 
-
 # 1 "MCAL_layer/Interrupt/../GPIO/hal_gpio_cfg.h" 1
-# 16 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
-# 32 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
+# 15 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h" 2
+# 31 "MCAL_layer/Interrupt/../GPIO/hal_gpio.h"
 typedef enum{
  GPIO_LOW,
  GPIO_HIGH
@@ -4373,9 +4374,9 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic);
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic);
 STD_ReturnType GPIO_port_toggle_logic(port_index port);
-# 14 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
-# 13 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
-# 73 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+# 15 "MCAL_layer/Interrupt/mcal_interrupt_config.h" 2
+# 14 "MCAL_layer/Interrupt/mcal_external_interrupt.h" 2
+# 76 "MCAL_layer/Interrupt/mcal_external_interrupt.h"
 typedef enum{
  falling,
  rising
@@ -4434,7 +4435,15 @@ static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint);
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint);
 static INTx_index INT_INTx_get_index(const INT_INTx_t *lint);
 # 11 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 2
-# 8 "MCAL_layer/Interrupt/mcal_interrupt_manager.c" 2
+# 1 "MCAL_layer/Interrupt/mcal_internal_interrupt.h" 1
+# 35 "MCAL_layer/Interrupt/mcal_internal_interrupt.h"
+void ADC_ISR(void);
+
+STD_ReturnType INT_ADC_init(uint8 priority);
+STD_ReturnType INT_ADC_deinit(void);
+STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result));
+# 12 "MCAL_layer/Interrupt/mcal_interrupt_manager.h" 2
+# 10 "MCAL_layer/Interrupt/mcal_interrupt_manager.c" 2
 
 static volatile uint8 RB4f=1,RB5f=1,RB6f=1,RB7f=1;
 
@@ -4457,6 +4466,11 @@ void __attribute__((picinterrupt(("")))) InterruptManager(void){
   do { if (PORTBbits.RB7 == GPIO_HIGH && RB7f == 1) { RB7f = 0; RB7_ISR(1); } else if (PORTBbits.RB7 == GPIO_LOW && RB7f == 0) { RB7f = 1; RB7_ISR(0); } } while (0);
  }
 
+
+
+ if((PIE1bits.ADIE) == 1 && (PIR1bits.ADIF) == 1)
+  ADC_ISR();
+
 }
 void __attribute__((picinterrupt(("low_priority")))) InterruptManagerLow(void){
 
@@ -4476,5 +4490,10 @@ void __attribute__((picinterrupt(("low_priority")))) InterruptManagerLow(void){
   do { if (PORTBbits.RB6 == GPIO_HIGH && RB6f == 1) { RB6f = 0; RB6_ISR(1); } else if (PORTBbits.RB6 == GPIO_LOW && RB6f == 0) { RB6f = 1; RB6_ISR(0); } } while (0);
   do { if (PORTBbits.RB7 == GPIO_HIGH && RB7f == 1) { RB7f = 0; RB7_ISR(1); } else if (PORTBbits.RB7 == GPIO_LOW && RB7f == 0) { RB7f = 1; RB7_ISR(0); } } while (0);
  }
+
+
+
+ if((PIE1bits.ADIE) == 1 && (PIR1bits.ADIF) == 1)
+  ADC_ISR();
 
 }

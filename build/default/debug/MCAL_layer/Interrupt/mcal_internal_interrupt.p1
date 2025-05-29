@@ -1,4 +1,118 @@
 Version 4.0 HI-TECH Software Intermediate Code
+[v F2858 `(v ~T0 @X0 0 tf1`*us ]
+[v F2860 `(v ~T0 @X0 0 tf1`*us ]
+"2343 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2343:     struct {
+[s S85 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S85 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
+"2353
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2353:     struct {
+[s S86 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S86 . . TX1IF RC1IF ]
+"2342
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2342: typedef union {
+[u S84 `S85 1 `S86 1 ]
+[n S84 . . . ]
+"2359
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2359: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
+[v _PIR1bits `VS84 ~T0 @X0 0 e@3998 ]
+[v F2864 `(v ~T0 @X0 0 tf1`*us ]
+"3812
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3812: extern volatile unsigned char ADRESH __attribute__((address(0xFC4)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
+"3805
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 3805: extern volatile unsigned char ADRESL __attribute__((address(0xFC3)));
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
+"2266
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2266:     struct {
+[s S82 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S82 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
+"2276
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2276:     struct {
+[s S83 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S83 . . TX1IE RC1IE ]
+"2265
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2265: typedef union {
+[u S81 `S82 1 `S83 1 ]
+[n S81 . . . ]
+"2282
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2282: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
+[v _PIE1bits `VS81 ~T0 @X0 0 e@3997 ]
+"4544
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4544:     struct {
+[s S197 :1 `uc 1 ]
+[n S197 . NOT_BOR ]
+"4547
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4547:     struct {
+[s S198 :1 `uc 1 :1 `uc 1 ]
+[n S198 . . NOT_POR ]
+"4551
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4551:     struct {
+[s S199 :2 `uc 1 :1 `uc 1 ]
+[n S199 . . NOT_PD ]
+"4555
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4555:     struct {
+[s S200 :3 `uc 1 :1 `uc 1 ]
+[n S200 . . NOT_TO ]
+"4559
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4559:     struct {
+[s S201 :4 `uc 1 :1 `uc 1 ]
+[n S201 . . NOT_RI ]
+"4563
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4563:     struct {
+[s S202 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S202 . nBOR nPOR nPD nTO nRI . IPEN ]
+"4572
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4572:     struct {
+[s S203 :7 `uc 1 :1 `uc 1 ]
+[n S203 . . NOT_IPEN ]
+"4576
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4576:     struct {
+[s S204 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S204 . BOR POR PD TO RI . nIPEN ]
+"4543
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4543: typedef union {
+[u S196 `S197 1 `S198 1 `S199 1 `S200 1 `S201 1 `S202 1 `S203 1 `S204 1 ]
+[n S196 . . . . . . . . . ]
+"4586
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 4586: extern volatile RCONbits_t RCONbits __attribute__((address(0xFD0)));
+[v _RCONbits `VS196 ~T0 @X0 0 e@4048 ]
+"2420
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2420:     struct {
+[s S88 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S88 . TMR1IP TMR2IP CCP1IP SSPIP TXIP RCIP ADIP PSPIP ]
+"2430
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2430:     struct {
+[s S89 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S89 . . TX1IP RC1IP ]
+"2419
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2419: typedef union {
+[u S87 `S88 1 `S89 1 ]
+[n S87 . . . ]
+"2436
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 2436: extern volatile IPR1bits_t IPR1bits __attribute__((address(0xF9F)));
+[v _IPR1bits `VS87 ~T0 @X0 0 e@3999 ]
+"5316
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5316:     struct {
+[s S227 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S227 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"5326
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5326:     struct {
+[s S228 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S228 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"5336
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5336:     struct {
+[s S229 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S229 . . GIEL GIEH ]
+"5315
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5315: typedef union {
+[u S226 `S227 1 `S228 1 `S229 1 ]
+[n S226 . . . . ]
+"5342
+[; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5342: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
+[v _INTCONbits `VS226 ~T0 @X0 0 e@4082 ]
+[v F2872 `(v ~T0 @X0 0 tf1`*us ]
+[v F2875 `(v ~T0 @X0 0 tf1`*us ]
 "52 /home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -380,3 +494,168 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5761
 [; ;/home/nour/programs/microchip/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171/xc8/pic/include/proc/pic18f452.h: 5761: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
+"10 MCAL_layer/Interrupt/mcal_internal_interrupt.c
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 10: void (*ADC_callback) (uint16 * result) = ((void*)0);
+[v _ADC_callback `*F2858 ~T0 @X0 1 e ]
+[i _ADC_callback
+-> -> -> 0 `i `*v `*F2860
+]
+"11
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 11: uint16 ADC_output;
+[v _ADC_output `us ~T0 @X0 1 e ]
+"13
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 13: void ADC_ISR(void){
+[v _ADC_ISR `(v ~T0 @X0 1 ef ]
+{
+[e :U _ADC_ISR ]
+[f ]
+"14
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 14:  (PIR1bits.ADIF=0);
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+"15
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 15:  if(ADC_callback){
+[e $ ! != _ADC_callback -> -> 0 `i `*F2864 267  ]
+{
+"16
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 16:   ADC_output = (uint16) ( (((uint16)(ADRESH)) << 8) | ((uint16) (ADRESL)) );
+[e = _ADC_output -> | << -> -> _ADRESH `us `ui -> 8 `i -> -> _ADRESL `us `ui `us ]
+"17
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 17:   ADC_callback(&ADC_output);
+[e ( *U _ADC_callback (1 &U _ADC_output ]
+"18
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 18:  }
+}
+[e :U 267 ]
+"19
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 19: }
+[e :UE 266 ]
+}
+"25
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 25: STD_ReturnType INT_ADC_init(uint8 priority){
+[v _INT_ADC_init `(uc ~T0 @X0 1 ef1`uc ]
+{
+[e :U _INT_ADC_init ]
+[v _priority `uc ~T0 @X0 1 r1 ]
+[f ]
+"26
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 26:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"27
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 27:   (PIR1bits.ADIF=0);
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+"28
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 28:   (PIE1bits.ADIE=0);
+[e = . . _PIE1bits 0 6 -> -> 0 `i `uc ]
+"30
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 30:   if(priority != 1 && priority != 0)
+[e $ ! && != -> _priority `i -> 1 `i != -> _priority `i -> 0 `i 269  ]
+"31
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 31:    ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+[e $U 270  ]
+"32
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 32:   else{
+[e :U 269 ]
+{
+"33
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 33:             RCONbits.IPEN=1;
+[e = . . _RCONbits 5 6 -> -> 1 `i `uc ]
+"35
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 35:    if(priority == 1){
+[e $ ! == -> _priority `i -> 1 `i 271  ]
+{
+"36
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 36:     (IPR1bits.ADIP=1);
+[e = . . _IPR1bits 0 6 -> -> 1 `i `uc ]
+"37
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 37:     INTCONbits.GIEH=1;
+[e = . . _INTCONbits 2 2 -> -> 1 `i `uc ]
+"38
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 38:    }
+}
+[e $U 272  ]
+"39
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 39:    else if(priority == 0){
+[e :U 271 ]
+[e $ ! == -> _priority `i -> 0 `i 273  ]
+{
+"40
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 40:     (IPR1bits.ADIP=0);
+[e = . . _IPR1bits 0 6 -> -> 0 `i `uc ]
+"41
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 41:     INTCONbits.GIEL=1;
+[e = . . _INTCONbits 2 1 -> -> 1 `i `uc ]
+"42
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 42:    }
+}
+[e $U 274  ]
+"44
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 44:    else
+[e :U 273 ]
+"45
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 45:     ret = (STD_ReturnType)(0x00);
+[e = _ret -> -> 0 `i `uc ]
+[e :U 274 ]
+[e :U 272 ]
+"47
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 47:            }
+}
+[e :U 270 ]
+"56
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 56:   (PIE1bits.ADIE=1);
+[e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
+"58
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 58:  return ret;
+[e ) _ret ]
+[e $UE 268  ]
+"59
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 59: }
+[e :UE 268 ]
+}
+"65
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 65: STD_ReturnType INT_ADC_deinit(void){
+[v _INT_ADC_deinit `(uc ~T0 @X0 1 ef ]
+{
+[e :U _INT_ADC_deinit ]
+[f ]
+"66
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 66:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"67
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 67:  (PIR1bits.ADIF=0);
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+"68
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 68:  (PIE1bits.ADIE=0);
+[e = . . _PIE1bits 0 6 -> -> 0 `i `uc ]
+"69
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 69:  return ret;
+[e ) _ret ]
+[e $UE 275  ]
+"70
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 70: }
+[e :UE 275 ]
+}
+"76
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 76: STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result)){
+[v _INT_ADC_set_callback_routine `(uc ~T0 @X0 1 ef1`*F2872 ]
+{
+[e :U _INT_ADC_set_callback_routine ]
+[v _callback `*F2875 ~T0 @X0 1 r1 ]
+[f ]
+"77
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 77:  STD_ReturnType ret = (STD_ReturnType)(0x01);
+[v _ret `uc ~T0 @X0 1 a ]
+[e = _ret -> -> 1 `i `uc ]
+"78
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 78:   ADC_callback = callback;
+[e = _ADC_callback _callback ]
+"79
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 79:  return ret;
+[e ) _ret ]
+[e $UE 276  ]
+"80
+[; ;MCAL_layer/Interrupt/mcal_internal_interrupt.c: 80: }
+[e :UE 276 ]
+}

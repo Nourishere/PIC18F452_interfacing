@@ -4,7 +4,7 @@ application.h  \
 ECU_layer/ecu_init.h  \
 ECU_layer/LED/ecu_led.h  \
 ECU_layer/LED/../../MCAL_layer/GPIO/hal_gpio.h  \
-ECU_layer/LED/../../MCAL_layer/GPIO/../device_config.h  \
+ECU_layer/LED/../../MCAL_layer/GPIO/../mcal_drivers_config.h  \
 ECU_layer/LED/../../MCAL_layer/GPIO/../mcal_std_types.h  \
 ECU_layer/LED/../../MCAL_layer/GPIO/../std_libs.h  \
 ECU_layer/LED/../../MCAL_layer/GPIO/../compiler.h  \
@@ -34,4 +34,9 @@ MCAL_layer/EEPROM/mcal_eeprom.h  \
 MCAL_layer/EEPROM/../Interrupt/mcal_interrupt_config.h  \
 MCAL_layer/EEPROM/../std_libs.h  \
 MCAL_layer/EEPROM/../mcal_std_types.h  \
-/home/nour/programs/microchip/xc8/v2.50/pic/include/builtins.h 
+/home/nour/programs/microchip/xc8/v2.50/pic/include/builtins.h  \
+MCAL_layer/ADC/hal_adc.h  \
+MCAL_layer/ADC/../GPIO/hal_gpio.h  \
+MCAL_layer/ADC/../Interrupt/mcal_internal_interrupt.h  \
+MCAL_layer/ADC/../Interrupt/mcal_interrupt_config.h  \
+MCAL_layer/Interrupt/mcal_internal_interrupt.h 
