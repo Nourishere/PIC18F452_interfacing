@@ -1,7 +1,8 @@
 /* 
  * File:   mcal_interrupt_config.h
  * Author: nour
- *
+ * Brief: This header file contains the common configurations
+ * 		  required for any interrupt module on the device.
  * Created on April 15, 2025, 2:24 PM
  */
 
@@ -16,14 +17,21 @@
 #define INT_DIS 0
 #define INT_ACTIVE 1
 #define INT_DEAD 0
+#define INT_LOW 0
+#define INT_HIGH 1
 #define INT_PEN 1
 #define INT_PDIS 0
 #define INT_PLOW 0
 #define INT_PHIGH 1
+/* Priority feature control */
+#define INT_PR INT_EN
+/******** Interrupt configuration macros *******/
 // External interrupt config
 #define INT_INTx INT_EN
 #define INT_PORTB INT_EN
-#define INT_PR INT_EN
+// Internal interrupt config
+/* ADC interrupt config */
+#define INT_ADC INT_EN
 
 
 /********* function-like macros ********/
@@ -48,7 +56,7 @@
 #define INT_PREN() RCONbits.IPEN=1
 /* priority feature disable */
 #define INT_PRDIS() RCONbits.IPEN=0
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 /* global high priority enable */
 #define INT_GHPEN() INTCONbits.GIEH=1
 /* global high priority disable */
