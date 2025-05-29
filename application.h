@@ -13,6 +13,7 @@
 #include "MCAL_layer/Interrupt/mcal_external_interrupt.h"
 #include "MCAL_layer/EEPROM/mcal_eeprom.h"
 /******** Data types ****************/
+extern uint16 ADC_output;
 extern seven_segment_t segment1;
 extern keypad_t keypad1;
 extern chr_LCD_t LCD1;
@@ -30,3 +31,4 @@ void __RB_LOW(void);
 void __INT0(void);
 void __INT1(void);
 void __INT2(void);
+void __ADC(uint16 * result);
