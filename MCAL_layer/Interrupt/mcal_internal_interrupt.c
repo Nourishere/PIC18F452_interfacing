@@ -34,27 +34,25 @@ STD_ReturnType INT_ADC_init(uint8 priority){
 	 		/* @ref: hal_interrupt_config.h -> INT_PHIGH & INT_PLOW */
 			if(priority == INT_PHIGH){
 				INT_ADC_HP(); /* Enable ADC as a high priority */
-				INT_GHPEN(); /* Enable global high interrupts */
+            	INT_GHPEN(); /* Enable global high interrupts */
 			}
 			else if(priority == INT_PLOW){
 				INT_ADC_LP();
-				INT_GLPEN();
+            	INT_GLPEN();
+				INT_GEN();	
 			}
-			
 			else
 				ret = E_NOT_OK;
-                        
            }
-		
+		INT_ADC_EN(); /* Enable the ADC peripheral */
 #elif (INT_PR == INT_DIS)
         INT_PRDIS(); /* disable the priority feature */
 		INT_GEN(); /* General interrupt enable */
 		INT_PEEN(); /* Peripheral interrupt enable */
+		INT_ADC_EN(); /* Enable the ADC peripheral */
 #else 
 		ret = E_NOT_OK;
 #endif
-		INT_ADC_EN(); /* Enable the ADC peripheral */
-
 	return ret;
 }
 
