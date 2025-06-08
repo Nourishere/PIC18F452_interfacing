@@ -13,15 +13,8 @@
 #include "MCAL_layer/Interrupt/mcal_external_interrupt.h"
 #include "MCAL_layer/EEPROM/mcal_eeprom.h"
 /******** Data types ****************/
+extern LED_t LED_arr[10];
 extern uint16 ADC_output;
-extern seven_segment_t segment1;
-extern keypad_t keypad1;
-extern chr_LCD_t LCD1;
-extern LED_t LED_OK;
-extern LED_t LED_NOK;
-extern LED_t LED_main;
-extern LED_t LED_INT_HIGHPR;
-extern LED_t LED_INT_LOWPR;
 /******* Function declarations ******/ 
 //I want to modify this for error checking later
 STD_ReturnType application_initialize();
