@@ -48,14 +48,29 @@
         } \
     } while (0)
 
-/* The bits GIEH and GIE are the same. GIEH is used when the priority feature is on (IPEN=1).
- * The bits GIEL and PEIE are the same. GIEL is used when the priority feature is on (IPEN=1).
- * If you wish to use the priority feature, set the macro INT_PR and use the macro function INT_PREN().
+/* The bits GIEH and GIE are the same. GIEH is used when the priority feature is on (IPEN=1)
+ * The bits GIEL and PEIE are the same. GIEL is used when the priority feature is on (IPEN=1)
+ * To ensure interrupts are working regardless of the priority state, GIE must be set.
+ *
+ * When the priority feature is disabled, GIE enabled all unmasked interrupts while PEIE 
+ * enables all peripheral interrupts. When the priority feature is used, such option to 
+ * control peripheral interrupts is not available.
+ *
+ * In the case the priority feature is enabled, setting GIEH will fire all high priority
+ * interrupts. Setting GIEL fires low priority interrupts. Note that the GIE (GIEH in this
+ * case) must be enabled for interrupts to work in general. 
+ * If you wish to use the priority feature, set the macro INT_PR and use the macro function
+ * INT_PREN().
 */
 /* priority feature enable */
 #define INT_PREN() RCONbits.IPEN=1
 /* priority feature disable */
 #define INT_PRDIS() RCONbits.IPEN=0
+/* global enable */
+#define INT_GEN() INTCONbits.GIE=1
+/* global disable */
+#define INT_GDIS() INTCONbits.GIE=0
+
 #if (INT_PR == INT_EN)
 /* global high priority enable */
 #define INT_GHPEN() INTCONbits.GIEH=1
@@ -66,10 +81,6 @@
 /* global low priority disable */
 #define INT_GLPDIS() INTCONbits.GIEL=0
 #else
-/* global enable */
-#define INT_GEN() INTCONbits.GIE=1
-/* global disable */
-#define INT_GDIS() INTCONbits.GIE=0
 /* peripheral interrupt enable */
 #define INT_PEEN() INTCONbits.PEIE=1
 /* peripheral interrupt disable */
