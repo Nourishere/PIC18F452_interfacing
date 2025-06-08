@@ -127,13 +127,18 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 	INTx_index ind = NA;
 	if(NULL == lint)
 		ret = E_NOT_OK;
+#if INT_PR == INT_EN
+	/* Check for invalid priority */
+	else if(lint -> priority != INT_PHIGH || lint -> priority != INT_PLOW)
+		ret = E_NOT_OK;
+#endif
 	else{
 		ind = INT_INTx_get_index(lint);
 		switch(ind) {
 			case(INT0_I):
 				INT_INT0_EN();	
 #if INT_PR == INT_EN
-                                INT_GHPEN();
+                INT_GHPEN();
 #else
 				INT_GEN();
 #endif
@@ -143,8 +148,11 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 #if INT_PR == INT_EN
 				if (lint -> priority == INT_PHIGH)
                                     INT_GHPEN();
-                                else
-                                    INT_GLPEN();
+                else{
+                    INT_GLPEN();
+					INT_GEN();
+				}
+				
 #else
 				INT_GEN();
 #endif
@@ -154,8 +162,10 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 #if INT_PR == INT_EN
 				if (lint -> priority == INT_PHIGH)
                                     INT_GHPEN();
-                                else
-                                    INT_GLPEN();
+                else{
+                    INT_GLPEN();
+					INT_GEN();
+				}
 #else
 				INT_GEN();
 #endif
@@ -167,6 +177,7 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 		} 
 	return ret;
 }
+
 /*@brief: Disable an INTx interrupt pin. 
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
@@ -206,20 +217,26 @@ STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
 		ret = E_NOT_OK;
+#if INT_PR == INT_EN
+	else if(lint -> priority != INT_PHIGH || lint -> priority != INT_PLOW)
+		ret = E_NOT_OK;
+#endif
 	else{
 		INT_RB_EN();
 #if INT_PR == INT_EN
 	if (lint -> priority == INT_PHIGH)
             INT_GHPEN();
-    else
+    else{
+			INT_GEN();
             INT_GLPEN();
+		}
 #else
 		INT_GEN();
-		/**/
 #endif
 		} 
 	return ret;
 }
+
 /*@brief: Disable RBx interrupt pins. 
  *@param: A pointer to a struct of type INT_RBx_t which describes the RBx interrupt pins.
  *@return: E_OK upon success and E_NOT_OK otherwise.
@@ -278,14 +295,14 @@ static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
             INT_PREN(); /* enable the priority feature */
 			ind = INT_INTx_get_index(lint);
 		switch(ind){  
-            case(INT0_I):/* INT0 does not support priority */ 
+            case(INT0_I):/* INT0 is always high priority */ 
                     break;       /* Do change nothing */ 
 			case(INT1_I):
 				switch(lint -> priority){
-					case(INT_EN):
+					case(INT_PHIGH):
 						INT_INT1_HP();
 						break;
-					case(INT_DIS):
+					case(INT_PLOW):
 						INT_INT1_LP();
 						break;
 					default:
@@ -295,10 +312,10 @@ static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
 				break;
 			case(INT2_I):
 				switch(lint -> priority){
-					case(INT_EN):
+					case(INT_PHIGH):
 						INT_INT2_HP();
 						break;
-					case(INT_DIS):
+					case(INT_PLOW):
 						INT_INT2_LP();
 						break;
 					default:
