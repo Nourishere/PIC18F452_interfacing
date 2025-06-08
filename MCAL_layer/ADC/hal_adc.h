@@ -67,6 +67,9 @@
  * Combination 14:   D   D   D   D   D   D   D   A   Vdd   Vss
  * Combination 15:   D   D   D   D   Vr+ Vr- D   A   AN3   AN2 
  */
+/* AN0 -> RA0, AN1 -> RA1, AN2 -> RA2, AN3 -> RA3
+ * AN4 -> RA5, AN5 -> RE0, AN6 -> RE1, AN7 -> RE2 */
+
 /* Choose 8,11,12,13, or 15 if you want a Vref defined by AN3 & AN2 */
 /* Choose 2,4,6, or 10 if you want only the a positve Vref (Vref+) 	*/
 /********************************************************************/
