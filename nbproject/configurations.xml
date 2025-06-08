@@ -51,6 +51,7 @@
         <itemPath>MCAL_layer/std_libs.h</itemPath>
         <itemPath>MCAL_layer/compiler.h</itemPath>
         <itemPath>MCAL_layer/mcal_drivers_config.h</itemPath>
+        <itemPath>MCAL_layer/device_config.h</itemPath>
       </logicalFolder>
       <itemPath>application.h</itemPath>
     </logicalFolder>
