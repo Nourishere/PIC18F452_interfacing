@@ -46,7 +46,7 @@ STD_ReturnType ADC_init(const ADC_t * lADC){
 #endif
 		/* Set the callback routine */	
 		/* @ref: mcal_internal_interrupt.h */
-		ret = ret && INT_ADC_set_callback_routine(lADC-> ADC_interrupt_handler) &&
+		ret = ret && INT_ADC_set_callback_routine(lADC-> ADC_interrupt_handler);
 #endif
 		/* Select A/D port combination
 		 * @ref: hal_adc.h -> A/D port configuration 
