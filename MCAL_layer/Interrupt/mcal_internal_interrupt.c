@@ -9,7 +9,7 @@
 #if (INT_ADC == INT_EN)
 void (*ADC_callback) (uint16 * result) = NULL;
 uint16 ADC_output;
-#endif
+
 void ADC_ISR(void){
 	INT_ADC_CLRF();
 	if(ADC_callback){
@@ -17,7 +17,7 @@ void ADC_ISR(void){
 		ADC_callback(&ADC_output);
 	}
 }
-#if (INT_ADC == INT_EN)
+
 /* @brief: Initialize the ADC interrupt.
  * @param: A pointer to an ADC_t type.
  * @return: E_OK upon success and E_NOT_OK otherwise.
