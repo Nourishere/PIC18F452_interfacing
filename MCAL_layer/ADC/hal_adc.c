@@ -69,7 +69,9 @@ STD_ReturnType ADC_deinit(const ADC_t * lADC){
 		/* Disable the ADC */
 		ADC_OFF();
 		/* Disable interrupts */
+#if (INT_ADC == INT_EN)
 		ret = INT_ADC_deinit();
+#endif
 	}
 	return ret;
 }
