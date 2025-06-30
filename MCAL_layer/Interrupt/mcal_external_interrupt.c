@@ -24,6 +24,21 @@ void (*RB6_handler_low)  (void) = NULL;
 void (*RB7_handler_high) (void) = NULL;
 void (*RB7_handler_low)  (void) = NULL;
 
+void (*TMR0_callback) (void) = NULL;
+extern volatile uint16 preloaded;
+
+#if (INT_TMR0== INT_EN)
+void TMR0_ISR(void){
+	/* Flag is already clear */
+	/* Preload the registers */
+	TMR0H = (uint8)(preloaded >> 8);
+	TMR0L = (uint8)(preloaded & 0x00FF);
+	if(TMR0_callback){
+		TMR0_callback();
+	}
+	T0CONbits.TMR0ON=1; // Turn on the module 
+}
+#endif
 #if INT_INTx == INT_EN
 void INT0_ISR(){
 	INT_INT0_CLRF();
@@ -574,4 +589,66 @@ static INTx_index INT_INTx_get_index(const INT_INTx_t *lint){
 	}
 	return ind;
 }
+#endif
+
+/************** TMR0 **********************/
+#if (INT_TMR0 == INT_EN)
+/* @Brief: This routine initializes the interrupt feature for the Timer0 module.
+ * @Param: A uint8 representing the priority of the Timer0 module.
+ * @Return: E_OK upon success and E_NOT_OK otherwise.
+ * @Notes: 
+ */
+STD_ReturnType INT_TMR0_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	/* Disable the interrupt */
+	INT_TMR0_DIS();	
+	/* Clear the flag */
+	INT_TMR0_CLRF();
+	/* Enable global interrupt */	
+	INT_GEN();
+	/* Set up priority */
+#if (INT_PR == INT_EN)
+    INT_PREN(); /* enable the priority feature */
+	if(priority == INT_PHIGH){
+		INT_TMR0_HP();	
+		INT_GHPEN();
+	}
+	else if(priority == INT_PLOW){
+		INT_TMR0_LP();	
+		INT_GLPEN();
+	}
+	else{
+		ret = E_NOT_OK;
+	}
+#else 
+	INT_PRDIS(); /* disable the priority feature */
+#endif
+	INT_TMR0_EN(); /* Enable the TMR0 peripheral */
+	return ret;
+}
+
+/* @Brief: Deinitialize the timer0 interrupt feature.
+ * @Param: None
+ * @Return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_TMR0_deinit(void){
+	STD_ReturnType ret = E_OK;
+	/* Disable the TMR0 interrupt */
+	INT_TMR0_DIS();
+	/* Clear the TMR0 interrupt flag */
+	INT_TMR0_CLRF();
+	return ret;
+}
+
+/* @Brief: Set a callback function.
+ * @Param: A pointer to a function with no input and no return.
+ * @Return: E_OK upcon success and E_NOT_OK otherwise
+ * @Notes:
+ */
+STD_ReturnType INT_TMR0_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+		TMR0_callback = callback;	
+	return ret;
+}
+
 #endif

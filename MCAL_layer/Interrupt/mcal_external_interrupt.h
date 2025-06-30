@@ -11,64 +11,81 @@
 
 /************ includes *****************/
 #include "mcal_interrupt_config.h"
-
-/************ Macros *******************/
-
-
+/************ macros *******************/
+#define INT_TMR0_STATUS (INTCONbits.TMR0IE)
+#define INT_TMR0_F (INTCONbits.TMR0IF)
+#define INT_INT0_STATUS (INTCONbits.INT0IE) 
+#define INT_INT1_STATUS (INTCON3bits.INT1IE) 
+#define INT_INT2_STATUS (INTCON3bits.INT2IE) 
 /********* function-like macros ********/
 #if INT_INTx == INT_EN
 /* Enable INT0 */
-#define INT_INT0_EN() INTCONbits.INT0IE=1
+#define INT_INT0_EN() (INTCONbits.INT0IE=1)
 /* Disable INT0 */
-#define INT_INT0_DIS() INTCONbits.INT0IE=0
+#define INT_INT0_DIS() (INTCONbits.INT0IE=0)
 /* Clear INT0 flag bit */
-#define INT_INT0_CLRF() INTCONbits.INT0IF=0
+#define INT_INT0_CLRF() (INTCONbits.INT0IF=0)
 /* Set INT0 to be rising edge triggered */
-#define INT_INT0_RIS() INTCON2bits.INTEDG0=1
+#define INT_INT0_RIS() (INTCON2bits.INTEDG0=1)
 /* Set INT0 to be falling edge triggered */
-#define INT_INT0_FALL() INTCON2bits.INTEDG0=0
+#define INT_INT0_FALL() (INTCON2bits.INTEDG0=0)
 
 /* Enable INT1 */
-#define INT_INT1_EN() INTCON3bits.INT1IE=1
+#define INT_INT1_EN() (INTCON3bits.INT1IE=1)
 /* Disables INT1 */
-#define INT_INT1_DIS() INTCON3bits.INT1IE=0
+#define INT_INT1_DIS() (INTCON3bits.INT1IE=0)
 /* Clear INT1 flag bit */
-#define INT_INT1_CLRF() INTCON3bits.INT1IF=0
+#define INT_INT1_CLRF() (INTCON3bits.INT1IF=0)
 /* Set INT1 to be rising edge triggered */
-#define INT_INT1_RIS() INTCON2bits.INTEDG1=1
+#define INT_INT1_RIS() (INTCON2bits.INTEDG1=1)
 /* Set INT1 to be falling edge triggered */
-#define INT_INT1_FALL() INTCON2bits.INTEDG1=0
+#define INT_INT1_FALL() (INTCON2bits.INTEDG1=0)
 
 /* Enable INT2 */
-#define INT_INT2_EN() INTCON3bits.INT2IE=1
+#define INT_INT2_EN() (INTCON3bits.INT2IE=1)
 /* Disable INT2 */
-#define INT_INT2_DIS() INTCON3bits.INT2IE=0
+#define INT_INT2_DIS() (INTCON3bits.INT2IE=0)
 /* Clear INT2 flag bit */
-#define INT_INT2_CLRF() INTCON3bits.INT2IF=0
+#define INT_INT2_CLRF() (INTCON3bits.INT2IF=0)
 /* Set INT2 to be rising edge triggered */
-#define INT_INT2_RIS() INTCON2bits.INTEDG2=1
+#define INT_INT2_RIS() (INTCON2bits.INTEDG2=1)
 /* Set INT2 to be falling edge triggered */
-#define INT_INT2_FALL() INTCON2bits.INTEDG2=0
+#define INT_INT2_FALL() (INTCON2bits.INTEDG2=0)
 /* Set INTx priority level (INT0 does not have a priority bit.) */
 #if INT_PR == INT_EN
-#define INT_INT1_HP() INTCON3bits.INT1IP=1 
-#define INT_INT1_LP() INTCON3bits.INT1IP=0
-#define INT_INT2_HP() INTCON3bits.INT2IP=1
-#define INT_INT2_LP() INTCON3bits.INT2IP=0
+#define INT_INT1_HP() (INTCON3bits.INT1IP=1) 
+#define INT_INT1_LP() (INTCON3bits.INT1IP=0)
+#define INT_INT2_HP() (INTCON3bits.INT2IP=1)
+#define INT_INT2_LP() (INTCON3bits.INT2IP=0)
 #endif
 #endif
 
 #if INT_PORTB == INT_EN
 /* Enables the PORTB (RB(4-7)) change interrupt */
-#define INT_RB_EN() INTCONbits.RBIE=1
+#define INT_RB_EN() (INTCONbits.RBIE=1)
 /* Disables the PORTB (RB(4-7)) change interrupt */
-#define INT_RB_DIS() INTCONbits.RBIE=0
+#define INT_RB_DIS() (INTCONbits.RBIE=0)
 /* Clears the PORTB (RB(4-7)) change interrupt flag */
-#define INT_RB_CLRF() INTCONbits.RBIF=0
+#define INT_RB_CLRF() (INTCONbits.RBIF=0)
 #if INT_PR == INT_EN
 /* Sets the PORTB (RB(4-7)) change interrupt priority level */
-#define INT_RB_HP() INTCON2bits.RBIP=1
-#define INT_RB_LP() INTCON2bits.RBIP=0
+#define INT_RB_HP() (INTCON2bits.RBIP=1)
+#define INT_RB_LP() (INTCON2bits.RBIP=0)
+#endif
+#endif
+
+/****** TMR0 interrupt ********/
+#if (INT_TMR0 == INT_EN)
+/* Enable/Disable the TMR0 interrupt */
+#define INT_TMR0_EN() (INTCONbits.TMR0IE=1)
+#define INT_TMR0_DIS() (INTCONbits.TMR0IE=0)
+/* Clear the TMR0 interrupt flag */
+#define INT_TMR0_CLRF() (INTCONbits.TMR0IF=0)
+#if (INT_PR == INT_EN)
+/* Set TMR0 as high priority */
+#define INT_TMR0_HP() (INTCON2bits.TMR0IP=1)
+/* Set TMR0 as low priority */
+#define INT_TMR0_LP() (INTCON2bits.TMR0IP=0)
 #endif
 #endif
 
@@ -104,13 +121,14 @@ typedef struct{/* Index is given in Ipin */
 }INT_RBx_t;
 
 /******** function declarations ********/
-void INT0_ISR();
-void INT1_ISR();
-void INT2_ISR();
+void INT0_ISR(void);
+void INT1_ISR(void);
+void INT2_ISR(void);
 void RB4_ISR(uint8 fl);
 void RB5_ISR(uint8 fl);
 void RB6_ISR(uint8 fl);
 void RB7_ISR(uint8 fl);
+void TMR0_ISR(void);
 
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint);
 STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint);
@@ -119,6 +137,12 @@ STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint);
 STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_disable(const INT_RBx_t *lint);
 STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
+/****** TMR0 interrupt ********/
+#if (INT_TMR0== INT_EN)
+STD_ReturnType INT_TMR0_init(uint8 priority);
+STD_ReturnType INT_TMR0_deinit(void);
+STD_ReturnType INT_TMR0_set_callback_routine(void (*callback) (void));
+#endif
 
 static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
 static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint);
