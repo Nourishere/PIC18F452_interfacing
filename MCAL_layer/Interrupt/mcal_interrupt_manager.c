@@ -9,8 +9,16 @@
 #include "mcal_interrupt_manager.h"
 
 static volatile uint8 RB4f=1,RB5f=1,RB6f=1,RB7f=1;
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 void __interrupt() InterruptManager(void){
+	#if (INT_TMR0 == INT_EN)
+		if(INT_TMR0_STATUS == INT_EN && INT_TMR0_F == INT_HIGH){
+			INT_TMR0_CLRF();
+			T0CONbits.TMR0ON=0; // Turn off the module 
+			TMR0_ISR(); 
+		}
+	
+	#endif
 	/* INTx checking */
 	#if INT_INTx == INT_EN
 	if(INTCONbits.INT0IF == INT_HIGH && INTCONbits.INT0IE == INT_EN)
@@ -35,7 +43,18 @@ void __interrupt() InterruptManager(void){
 		ADC_ISR();
 #endif
 }
+
+
+
 void __interrupt(low_priority) InterruptManagerLow(void){
+	#if (INT_TMR0 == INT_EN)
+		if(INT_TMR0_STATUS == INT_EN && INT_TMR0_F == INT_HIGH){
+			INT_TMR0_CLRF();
+			T0CONbits.TMR0ON=0; // Turn off the module 
+			TMR0_ISR(); 
+		}
+	
+	#endif
 	/* INTx checking */
 	#if INT_INTx == INT_EN
 	if(INTCONbits.INT0IF == INT_HIGH && INTCONbits.INT0IE == INT_EN)
@@ -60,9 +79,20 @@ void __interrupt(low_priority) InterruptManagerLow(void){
 		ADC_ISR();
 #endif
 }
+
 #else
+
+
 /* No priority */
 void __interrupt() InterruptManager(void){
+	#if (INT_TMR0 == INT_EN)
+		if(INT_TMR0_STATUS == INT_EN && INT_TMR0_F == INT_HIGH){
+			INT_TMR0_CLRF();
+			T0CONbits.TMR0ON=0; // Turn off the module 
+			TMR0_ISR(); 
+		}
+	
+	#endif
 	/* INTx checking */
 	#if INT_INTx == INT_EN
 	if(INTCONbits.INT0IF == INT_HIGH && INTCONbits.INT0IE == INT_EN)
@@ -87,4 +117,6 @@ void __interrupt() InterruptManager(void){
 		ADC_ISR();
 }
 #endif
+}
+
 #endif
