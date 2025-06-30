@@ -31,7 +31,9 @@
 #define INT_PORTB INT_EN
 // Internal interrupt config
 /* ADC interrupt config */
-#define INT_ADC INT_EN
+#define INT_ADC INT_DIS
+/* TMR0 interrupt config */
+#define INT_TMR0 INT_EN
 
 
 /********* function-like macros ********/
