@@ -50,11 +50,14 @@
         <logicalFolder name="Timer0" displayName="Timer0" projectFiles="true">
           <itemPath>MCAL_layer/Timer0/hal_tmr0.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="Timer1" displayName="Timer1" projectFiles="true">
+          <itemPath>MCAL_layer/Timer1/hal_tmr1.h</itemPath>
+        </logicalFolder>
         <itemPath>MCAL_layer/mcal_std_types.h</itemPath>
         <itemPath>MCAL_layer/std_libs.h</itemPath>
         <itemPath>MCAL_layer/compiler.h</itemPath>
-        <itemPath>MCAL_layer/mcal_drivers_config.h</itemPath>
         <itemPath>MCAL_layer/device_config.h</itemPath>
+        <itemPath>MCAL_layer/hal_tmr_cfg.h</itemPath>
       </logicalFolder>
       <itemPath>application.h</itemPath>
     </logicalFolder>
@@ -109,6 +112,9 @@
           <itemPath>MCAL_layer/Interrupt/mcal_external_interrupt.c</itemPath>
           <itemPath>MCAL_layer/Interrupt/mcal_interrupt_manager.c</itemPath>
           <itemPath>MCAL_layer/Timer0/hal_tmr0.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="Timer1" displayName="Timer1" projectFiles="true">
+          <itemPath>MCAL_layer/Timer1/hal_tmr1.c</itemPath>
         </logicalFolder>
         <itemPath>MCAL_layer/device_config.c</itemPath>
       </logicalFolder>
