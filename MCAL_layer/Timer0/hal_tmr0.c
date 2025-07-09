@@ -12,6 +12,15 @@
  */
 uint16 volatile preloaded;
 
+/* @Brief: A pin_config_t struct to be used to 
+ * 		   initialize the counter mode pin 
+ */
+pin_config_t T0CLKI_pin = {
+	PORTC_I,
+	PIN0,
+	GPIO_IN,
+	GPIO_LOW, // garbage
+};
 /* @Brief: This routine initializes the Timer0 module.
  * @Param: A pointer to a stuct of type TMR0_t representing the Timer0 module.
  * @Return: E_OK upon success and E_NOT_OK otherwise.
@@ -35,7 +44,7 @@ STD_ReturnType TMR0_initialize(const TMR0_t * tmr0){
 		INT_TMR0_set_callback_routine(tmr0 -> TMR0_interrupt_handler); 
 #endif
 		/* Configure the prescaler */
-		if(tmr0 -> prescaler == TMR0_PRESC_NONE)
+		if(tmr0 -> prescaler == TMR_PRESC_1_1)
 			TMR0_PRESC_OFF(); // Turn off the prescaler	
 		else{	
 			TMR0_PRESC_ON(); // Turn on the prescaler
@@ -56,8 +65,10 @@ STD_ReturnType TMR0_initialize(const TMR0_t * tmr0){
 		else
 			ret = ret && E_NOT_OK;
 		/* Set clock source*/  
-		if(tmr0 -> clk_source == EXT)
+		if(tmr0 -> clk_source == EXT){
 			TMR0_EXT(); // Used as a counter
+			GPIO_pin_direction_initialize(&T0CLKI_pin);
+		}
 		else if(tmr0 -> clk_source == INT)
 			TMR0_INT(); // Used as a timer
 		else
@@ -67,7 +78,6 @@ STD_ReturnType TMR0_initialize(const TMR0_t * tmr0){
 		/* Save a copy of the preloaded value */
 		preloaded = tmr0 -> preloaded_value;
 	}
-
 	return ret;
 }
 
