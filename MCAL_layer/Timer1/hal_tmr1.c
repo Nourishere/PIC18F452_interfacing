@@ -43,7 +43,7 @@ STD_ReturnType TMR1_initialize(const TMR1_t * tmr1){
 		INT_TMR1_set_callback_routine(tmr1 -> TMR1_interrupt_handler); 
 #endif
 		/* Configure the prescaler */
-		TMR_PRESC_WR(tmr1 -> prescaler);
+		TMR1_PRESC_WR(tmr1 -> prescaler);
 		/* Set clock source*/  
 		if(tmr1 -> clk_source == EXT){
 			TMR1_EXT(); // Used as a counter
