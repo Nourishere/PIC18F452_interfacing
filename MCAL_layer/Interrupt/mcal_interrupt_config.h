@@ -29,11 +29,12 @@
 // External interrupt config
 #define INT_INTx INT_EN
 #define INT_PORTB INT_EN
+#define INT_TMR0 INT_EN
 // Internal interrupt config
 /* ADC interrupt config */
 #define INT_ADC INT_DIS
-/* TMR0 interrupt config */
-#define INT_TMR0 INT_EN
+/* TMR1 interrupt config */
+#define INT_TMR1 INT_EN
 
 
 /********* function-like macros ********/
