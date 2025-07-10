@@ -22,8 +22,8 @@
 
 /********* function-like macros ******/
 /* Configure prescaler */
-#define TMR0_PRESC_WR(x) T0CONbits.T0PS=((x-1) & 0x07)
-#define TMR1_PRESC_WR(x) T1CONbits.T1CKPS=(x & 0x03)
+#define TMR0_PRESC_WR(x) (T0CONbits.T0PS=((x-1) & 0x07))
+#define TMR1_PRESC_WR(x) (T1CONbits.T1CKPS=(x & 0x03))
 
 /********* Data types ***********/
 typedef enum{
