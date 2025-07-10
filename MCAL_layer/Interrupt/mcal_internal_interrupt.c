@@ -17,17 +17,6 @@ void ADC_ISR(void){
 		ADC_callback(&ADC_output);
 	}
 }
-extern uint16 preloaded_tmr1;
-void TMR0_ISR(void){
-	/* Flag is already clear */
-	/* Preload the registers */
-	TMR1H = (uint8)(preloaded >> 8);
-	TMR1L = (uint8)(preloaded & 0x00FF);
-	if(TMR1_callback){
-		TMR1_callback();
-	}
-	T0CONbits.TMR0ON=1; // Turn on the module
-}
 
 /* @brief: Initialize the ADC interrupt.
  * @param: A pointer to an ADC_t type.
@@ -90,6 +79,18 @@ STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result)){
 #endif
 #if (INT_TMR1 == INT_EN)
 void (*TMR1_callback) (void) = NULL;
+extern uint16 preloaded_tmr1;
+void TMR1_ISR(void){
+	/* Flag is already clear */
+	/* Preload the registers */
+	TMR1H = (uint8)(preloaded_tmr1 >> 8);
+	TMR1L = (uint8)(preloaded_tmr1 & 0x00FF);
+	if(TMR1_callback){
+		TMR1_callback();
+	}
+	T1CONbits.TMR1ON=1; // Turn on the module
+}
+
 /* @brief: Initialize the interrupt feature for the Timer1 module.
  * @param: A uint8 specifying interrupt priority.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -137,6 +138,70 @@ STD_ReturnType INT_TMR1_deinit(void){
 STD_ReturnType INT_TMR1_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	TMR1_callback = callback;
+	return ret;
+}
+#endif
+
+#if (INT_TMR2 == INT_EN)
+void (*TMR2_callback) (void) = NULL;
+extern uint8 preloaded_tmr2;
+void TMR2_ISR(void){
+	/* Flag is already clear */
+	/* Preload the registers */
+	TMR2 = (preloaded_tmr2);
+	if(TMR2_callback){
+		TMR2_callback();
+	}
+	T2CONbits.TMR2ON=1; // Turn on the module
+}
+
+/* @brief: Initialize the interrupt feature for the Timer2 module.
+ * @param: A uint8 specifying interrupt priority.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_TMR2_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	INT_GEN(); // Enable the interupt feature
+	/* Disable the interrupt */
+	INT_TMR2_DIS();
+	#if (INT_PR == INT_EN)
+	INT_PREN(); // Enable priority feature
+	if(priority == INT_PHIGH){
+		INT_GHPEN();
+		INT_TMR2_HP();
+	}
+	else if (priority == INT_PLOW){
+		INT_GLPEN();
+		INT_TMR2_LP();
+	}
+	#elif (INT_PR == INT_DIS)
+	INT_PRDIS();
+	INT_PEEN();  // Enable peripheral interupts
+	#else
+	ret = E_NOT_OK;
+	#endif
+	INT_TMR2_EN();
+	return ret;
+}
+
+/* @brief: Deinitialize the Timer2 module.
+ * @param: None.
+ * @return: E_OK.
+ */
+STD_ReturnType INT_TMR2_deinit(void){
+	STD_ReturnType ret = E_OK;
+	INT_TMR2_CLRF();
+	INT_TMR2_DIS();
+	return ret;
+}
+
+/* @brief: Set a callback routine for the Timer2 module.
+ * @param: A pointer to a function with void parameters and void return.
+ * @return: E_OK;
+ */
+STD_ReturnType INT_TMR2_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+	TMR2_callback = callback;
 	return ret;
 }
 #endif
