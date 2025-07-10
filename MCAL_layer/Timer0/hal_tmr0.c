@@ -74,7 +74,7 @@ STD_ReturnType TMR0_initialize(const TMR0_t * tmr0){
 		else
 			ret = ret && E_NOT_OK;
 		/* Set up preloaded value */
-		TMR0_write(&tmr0, &(tmr0 -> preloaded_value));
+		TMR0_write(tmr0, &(tmr0 -> preloaded_value));
 		/* Save a copy of the preloaded value */
 		preloaded = tmr0 -> preloaded_value;
 	}
