@@ -6,10 +6,11 @@
  */
 #include "hal_tmr1.h"
 
-uint16  preloaded_tmr1;
+/* @Brief: Preloaded value in the initialization.*/
+uint16 preloaded_tmr1;
 
 /* @Brief: A pin_config_t struct to be used to 
- * 		   initialize the counter mode pin 
+ * 		   initialize the counter mode pin.
  */
 pin_config_t T1CLKI_pin = {
 	PORTC_I,
