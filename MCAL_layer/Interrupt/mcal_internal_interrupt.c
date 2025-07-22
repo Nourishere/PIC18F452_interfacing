@@ -205,3 +205,53 @@ STD_ReturnType INT_TMR2_set_callback_routine(void (*callback) (void)){
 	return ret;
 }
 #endif
+
+#if (INT_TMR3 == INT_EN)
+void (*TMR3_callback) (void) = NULL;
+extern uint16 preloaded_tmr3;
+void TMR3_ISR(void){
+	/* Flag is already clear */
+	/* Preload the registers */
+	TMR3 = (preloaded_tmr3);
+	if(TMR3_callback){
+		TMR3_callback();
+	}
+	T3CONbits.TMR3ON=1; // Turn on the module
+}
+
+STD_ReturnType INT_TMR3_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	INT_GEN(); // Enable the interupt feature
+	/* Disable the interrupt */
+	INT_TMR3_DIS();
+	#if (INT_PR == INT_EN)
+	INT_PREN(); // Enable priority feature
+	if(priority == INT_PHIGH){
+		INT_GHPEN();
+		INT_TMR3_HP();
+	}
+	else if (priority == INT_PLOW){
+		INT_GLPEN();
+		INT_TMR3_LP();
+	}
+	#elif (INT_PR == INT_DIS)
+	INT_PRDIS();
+	INT_PEEN();  // Enable peripheral interupts
+	#else
+	ret = E_NOT_OK;
+	#endif
+	INT_TMR3_EN();
+	return ret;
+}
+STD_ReturnType INT_TMR3_deinit(void){
+	STD_ReturnType ret = E_OK;
+	INT_TMR2_CLRF();
+	INT_TMR2_DIS();
+	return ret;
+}
+STD_ReturnType INT_TMR3_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+	TMR3_callback = callback;
+	return ret;
+}
+#endif
