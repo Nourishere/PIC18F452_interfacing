@@ -35,6 +35,13 @@ void __interrupt() InterruptManager(void){
 		}
 	#endif
 
+	#if (INT_TMR3 == INT_EN)
+		if(INT_TMR3_STATUS == INT_EN && INT_TMR3_F == INT_HIGH){
+			INT_TMR3_CLRF();
+			T3CONbits.TMR3ON=0; // Turn off the module
+			TMR3_ISR();
+		}
+	#endif
 	/* INTx checking */
 	#if INT_INTx == INT_EN
 	if(INTCONbits.INT0IF == INT_HIGH && INTCONbits.INT0IE == INT_EN)
@@ -88,6 +95,13 @@ void __interrupt(low_priority) InterruptManagerLow(void){
 		}
 	#endif
 
+	#if (INT_TMR3 == INT_EN)
+		if(INT_TMR3_STATUS == INT_EN && INT_TMR3_F == INT_HIGH){
+			INT_TMR3_CLRF();
+			T3CONbits.TMR3ON=0; // Turn off the module
+			TMR3_ISR();
+		}
+	#endif
 	/* INTx checking */
 	#if INT_INTx == INT_EN
 	if(INTCONbits.INT0IF == INT_HIGH && INTCONbits.INT0IE == INT_EN)
@@ -142,6 +156,13 @@ void __interrupt() InterruptManager(void){
 		}
 	#endif
 
+	#if (INT_TMR3 == INT_EN)
+		if(INT_TMR3_STATUS == INT_EN && INT_TMR3_F == INT_HIGH){
+			INT_TMR3_CLRF();
+			T3CONbits.TMR3ON=0; // Turn off the module
+			TMR3_ISR();
+		}
+	#endif
 	/* INTx checking */
 	#if INT_INTx == INT_EN
 	if(INTCONbits.INT0IF == INT_HIGH && INTCONbits.INT0IE == INT_EN)
