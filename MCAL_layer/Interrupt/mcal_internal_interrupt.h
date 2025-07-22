@@ -24,9 +24,9 @@
 /* The value of the TMR2 flag */
 #define INT_TMR2_F (PIR1bits.TMR2IF)
 /* status of the TMR3 (EN/DIS) */
-#define INT_TMR3_STATUS (PIE2bits.TMR2IE)
+#define INT_TMR3_STATUS (PIE2bits.TMR3IE)
 /* The value of the TMR3 flag */
-#define INT_TMR3_F (PIR2bits.TMR2IF)
+#define INT_TMR3_F (PIR2bits.TMR3IF)
 /****** function-like macros ******/
 #if (INT_ADC == INT_EN)
 /* Enable/Disable the ADC interrupt */
