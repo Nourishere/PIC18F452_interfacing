@@ -37,6 +37,8 @@
 #define INT_TMR1 INT_EN
 /* TMR2 interrupt config */
 #define INT_TMR2 INT_EN
+/* TMR3 interrupt config */
+#define INT_TMR3 INT_EN
 
 /********* function-like macros ********/
 
