@@ -34,6 +34,9 @@
         <logicalFolder name="ADC" displayName="ADC" projectFiles="true">
           <itemPath>MCAL_layer/ADC/hal_adc.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="CCP" displayName="CCP" projectFiles="true">
+          <itemPath>MCAL_layer/CCP/hal_ccp.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="EEPROM" displayName="EEPROM" projectFiles="true">
           <itemPath>MCAL_layer/EEPROM/mcal_eeprom.h</itemPath>
         </logicalFolder>
@@ -58,6 +61,10 @@
         </logicalFolder>
         <logicalFolder name="Timer3" displayName="Timer3" projectFiles="true">
           <itemPath>MCAL_layer/Timer3/hal_tmr3.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="USART" displayName="USART" projectFiles="true">
+          <itemPath>MCAL_layer/USART/hal_usart.h</itemPath>
+          <itemPath>MCAL_layer/USART/hal_usart_cfg.h</itemPath>
         </logicalFolder>
         <itemPath>MCAL_layer/mcal_std_types.h</itemPath>
         <itemPath>MCAL_layer/std_libs.h</itemPath>
@@ -107,6 +114,9 @@
         <logicalFolder name="ADC" displayName="ADC" projectFiles="true">
           <itemPath>MCAL_layer/ADC/hal_adc.c</itemPath>
         </logicalFolder>
+        <logicalFolder name="CCP" displayName="CCP" projectFiles="true">
+          <itemPath>MCAL_layer/CCP/hal_ccp.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="EEPROM" displayName="EEPROM" projectFiles="true">
           <itemPath>MCAL_layer/EEPROM/mcal_eeprom.c</itemPath>
         </logicalFolder>
@@ -128,7 +138,11 @@
         <logicalFolder name="Timer3" displayName="Timer3" projectFiles="true">
           <itemPath>MCAL_layer/Timer3/hal_tmr3.c</itemPath>
         </logicalFolder>
+        <logicalFolder name="USART" displayName="USART" projectFiles="true">
+          <itemPath>MCAL_layer/USART/hal_usart.c</itemPath>
+        </logicalFolder>
         <itemPath>MCAL_layer/device_config.c</itemPath>
+        <itemPath>MCAL_layer/hal_tmr_config.c</itemPath>
       </logicalFolder>
       <itemPath>application.c</itemPath>
     </logicalFolder>
