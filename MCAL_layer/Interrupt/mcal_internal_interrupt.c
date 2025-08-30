@@ -44,7 +44,7 @@ STD_ReturnType INT_ADC_init(uint8 priority){
 			else
 				ret = E_NOT_OK;
            }
-		INT_ADC_EN(); /* Enable the ADC peripheral */
+		INT_ADC_EN(); /* Enable the ADC interrupt */
 #elif (INT_PR == INT_DIS)
         INT_PRDIS(); /* disable the priority feature */
 		INT_GEN(); /* General interrupt enable */
@@ -218,7 +218,11 @@ void TMR3_ISR(void){
 	}
 	T3CONbits.TMR3ON=1; // Turn on the module
 }
-
+/* @brief: Initialize the interrupt feature for the TMR3 module.
+ * @param: A uint8 specifying the priority. 
+ *  @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
 STD_ReturnType INT_TMR3_init(uint8 priority){
 	STD_ReturnType ret = E_OK;
 	INT_GEN(); // Enable the interupt feature
@@ -243,15 +247,133 @@ STD_ReturnType INT_TMR3_init(uint8 priority){
 	INT_TMR3_EN();
 	return ret;
 }
+/* @brief: Deinitialize the TMR3 module.
+ * @param:  Nothing.
+ * @return: E_OK.
+ */
 STD_ReturnType INT_TMR3_deinit(void){
 	STD_ReturnType ret = E_OK;
 	INT_TMR2_CLRF();
 	INT_TMR2_DIS();
 	return ret;
 }
+/* @brief: Set the callback function for the TMR3 interrupt module.
+ * @param: A pointer to a function that takes void and returns void.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
 STD_ReturnType INT_TMR3_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	TMR3_callback = callback;
+	return ret;
+}
+#endif
+#if (INT_CCP1 == INT_EN)
+void (*CCP1_callback) (void) = NULL;
+void CCP1_ISR(void){
+	if(CCP1_callback)
+		CCP1_callback();
+}
+/* @brief: Initialize the interrupt feature for the CCP1 module.
+ * @param: A uint8 specifying the priority. 
+ *  @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_CCP1_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	/* Enable the interrupt feature */
+	INT_GEN();	
+	/* Disable the device interrupt */
+	INT_CCP1_EN();	
+#if (INT_PR == INT_EN)
+	INT_PREN(); // Enable priority feature
+	if(priority == INT_PHIGH){
+		INT_GHPEN();
+		INT_CCP1_HP();
+	}
+	else if (priority == INT_PLOW){
+		INT_GLPEN();
+		INT_CCP1_LP();
+	}
+#elif (INT_PR == INT_DIS)
+	INT_PRDIS();
+	INT_PEEN();  // Enable peripheral interupts
+#else
+	ret = E_NOT_OK;
+#endif 
+	return ret;
+}
+/* @brief: Deinitialize the CCP1 interrupt feature.
+ * @param: Nothing
+ * @return: E_OK
+ */
+STD_ReturnType INT_CCP1_deinit(void){
+	STD_ReturnType ret = E_OK;
+	INT_CCP1_CLRF();
+	INT_CCP1_DIS();
+	return ret;
+}
+/* @brief: Set the callback function for the CCP1 interrupt module.
+ * @param: A pointer to a function that takes void and returns void.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_CCP1_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+	CCP1_callback = callback;
+	return ret;
+}
+#endif
+#if (INT_CCP2 == INT_EN)
+void (*CCP2_callback) (void) = NULL;
+void CCP2_ISR(void){
+	if(CCP2_callback)
+		CCP2_callback();
+}
+/* @brief: Initialize the interrupt feature for the CCP1 module.
+ * @param: A uint8 specifying the priority. 
+ *  @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_CCP2_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	/* Enable the interrupt feature */
+	INT_GEN();	
+	/* Disable the device interrupt */
+	INT_CCP2_EN();	
+#if (INT_PR == INT_EN)
+	INT_PREN(); // Enable priority feature
+	if(priority == INT_PHIGH){
+		INT_GHPEN();
+		INT_CCP2_HP();
+	}
+	else if (priority == INT_PLOW){
+		INT_GLPEN();
+		INT_CCP2_LP();
+	}
+#elif (INT_PR == INT_DIS)
+	INT_PRDIS();
+	INT_PEEN();  // Enable peripheral interupts
+#else
+	ret = E_NOT_OK;
+#endif
+	return ret;
+}
+/* @brief: Deinitialize the CCP2 interrupt module.
+ * @param: Nothing
+ * @return: E_OK
+ */
+STD_ReturnType INT_CCP2_deinit(void){
+	STD_ReturnType ret = E_OK;
+	INT_CCP1_CLRF();
+	INT_CCP1_DIS();
+	return ret;
+}
+/* @brief: Set the callback function for the CCP2 interrupt module.
+ * @param: A pointer to a function that takes void and returns void.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_CCP2_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+	CCP2_callback = callback;
 	return ret;
 }
 #endif
