@@ -39,6 +39,10 @@
 #define INT_TMR2 INT_EN
 /* TMR3 interrupt config */
 #define INT_TMR3 INT_EN
+/* CCP1 interrupt config */
+#define INT_CCP1 INT_EN
+/* CCP2 interrupt config */
+#define INT_CCP2 INT_EN
 
 /********* function-like macros ********/
 
