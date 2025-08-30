@@ -25,3 +25,5 @@ void __INT0(void);
 void __INT1(void);
 void __INT2(void);
 void __ADC(uint16 * result);
+void __TMR0(void);
+void __CCP1(void);
