@@ -6,7 +6,6 @@
  */
 #ifndef ECU_7_SEGMENT_H
 #define	ECU_7_SEGMENT_H
-#define _XTAL_FREQ 8000000
 /***************** includes ***************************/
 #include "../../MCAL_layer/GPIO/hal_gpio.h"
 /******************** macros **************************/
