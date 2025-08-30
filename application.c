@@ -6,47 +6,60 @@
  */
 #include "application.h"
 #include "/home/nour/programs/microchip/xc8/v2.50/pic/include/builtins.h"   
+#include "MCAL_layer/CCP/hal_ccp.h"
 #include "MCAL_layer/ADC/hal_adc.h"
+#include "MCAL_layer/Timer0/hal_tmr0.h"
 #include "MCAL_layer/Interrupt/mcal_internal_interrupt.h"
 #include "MCAL_layer/Interrupt/mcal_external_interrupt.h"
+#include "MCAL_layer/USART/hal_usart.h"
 volatile uint8 Iflag;
+#define MYREG (*(volatile unsigned char*)0xF81)
+
 /* We are operating in the HS configuration of the internal oscillator which has
   an clock speed of 8MHz/16MHz */
- //#define _XTAL_FREQ 8000000
+//#define _XTAL_FREQ 8000000
 //This macro is used in the __delay_ms() function
-ADC_t ADC1 = {
-	__ADC,
-	//INT_PLOW, 	
-	ADC_ch7,
-	ADC_CCLOCK_FOSC_DIV_32,
-	1
-};
-INT_INTx_t INT_1 = {
-    __INT1,
-    {PORTB_I,PIN1,GPIO_IN,GPIO_LOW},
-    rising,
-   // INT_PLOW
-};
 
+CCP1_t ccp1 = {
+	__CCP1,
+	INT_PLOW,	
+	CCP_PWM,
+	{
+		.pwm={
+				40000,
+				50,
+				{/* Timer */
+                                        NULL,
+					INT_PLOW, /* @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH */	
+					TMR_PRESC_1_1, 
+					0xAA, // Initial preloaded value   
+					TMR2_POSTSC_1_1
+				}
+			}
+	}	
+};
 STD_ReturnType ret;
+uint16 value=0xAA;
+USART_Tx_t usar;
 int main(void){
-        ret = application_initialize();
+    //MYREG = 0xAA;
+    *(long*)0xF82 = 0x11;
+    ret = application_initialize();
 	if(E_NOT_OK == ret){
 		return -1; 
 	}
-        
     while(1){
-    	ADC_convert(&ADC1,ADC_default); 
-        __delay_us(10); /* Delay for acquisition */
+    //    USART_baud_initialize(& usar);
 	}
     
 }
 
 STD_ReturnType application_initialize(){
     STD_ReturnType ret = E_OK;
+	//CCP1_initialize(&ccp1);
+//	ret = ecu_init();
     /* If you may initialize types that are locally defined */
-	ret = ecu_init();
-       ret = ret && ADC_init(&ADC1);
+
     return ret;
 }
 
@@ -68,5 +81,10 @@ void __ADC(uint16 * result){
           	else
             		LED_off(&LED_arr[i]); 
 	}
-
+}
+void __TMR0(void){
+	Iflag++;
+}
+void __CCP1(void){
+	Iflag++;
 }
