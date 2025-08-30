@@ -59,9 +59,10 @@ STD_ReturnType TMR2_deinitialize(const TMR2_t * tmr2){
 	if(NULL == tmr2)
 		ret = E_NOT_OK;
 	else{
-
-		
-
+		/* Turn off the interrupt */
+		ret = INT_TMR2_deinit();	
+		/* Turn off the module */
+		TMR2_OFF();	
 	}
 	return ret;
 }
