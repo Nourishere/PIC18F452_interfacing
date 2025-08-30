@@ -10,6 +10,7 @@
 #ifndef TMR_CFG_H
 #define	TMR_CFG_H
 
+#include "mcal_std_types.h"
 /************** Macros ***************/
 #define RISING 1
 #define FALLING 0
@@ -38,5 +39,7 @@ typedef enum{
 	TMR_PRESC_1_256
 }TMR_PRESC_SEL;
 
+/********* Functions ********/
+STD_ReturnType TMR_PRESC2VAL(TMR_PRESC_SEL prescaler, uint16* val);
 #endif	/* TMR_CFG_H */
 
