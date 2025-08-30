@@ -27,6 +27,14 @@
 #define INT_TMR3_STATUS (PIE2bits.TMR3IE)
 /* The value of the TMR3 flag */
 #define INT_TMR3_F (PIR2bits.TMR3IF)
+/* status of the CCP1 (EN/DIS) */
+#define INT_CCP1_STATUS (PIE1bits.CCP1IE)
+/* The value of the CCP1 flag */
+#define INT_CCP1_F (IPR1bits.CCP1IP)
+/* status of the CCP2 (EN/DIS) */
+#define INT_CCP2_STATUS (PIE2bits.CCP2IE)
+/* The value of the CCP2 flag */
+#define INT_CCP2_F (IPR2bits.CCP2IP)
 /****** function-like macros ******/
 #if (INT_ADC == INT_EN)
 /* Enable/Disable the ADC interrupt */
@@ -80,6 +88,31 @@
 #endif
 #endif
 
+#if (INT_CCP1 == INT_EN)
+/* Enable/Disable the CCP1 interrupt */
+#define INT_CCP1_EN() (PIE1bits.CCP1IE=1)
+#define INT_CCP1_DIS() (PIE1bits.CCP1IE=0)
+/* Clear the CCP1 interrupt flag */
+#define INT_CCP1_CLRF() (PIR1bits.CCP1IF=0)
+/* Set the CCP1 interrupt priority */
+#if (INT_PR == INT_EN)
+#define INT_CCP1_HP() (IPR1bits.CCP1IP=1)
+#define INT_CCP1_LP() (IPR1bits.CCP1IP=0)
+#endif
+#endif
+
+#if (INT_CCP2 == INT_EN)
+/* Enable/Disable the CCP2 interrupt */
+#define INT_CCP2_EN() (PIE2bits.CCP2IE=1)
+#define INT_CCP2_DIS() (PIE2bits.CCP2IE=0)
+/* Clear the CCP2 interrupt flag */
+#define INT_CCP2_CLRF() (PIR2bits.CCP2IF=0)
+/* Set the CCP2 interrupt priority */
+#if (INT_PR == INT_EN)
+#define INT_CCP2_HP() (IPR2bits.CCP2IP=1)
+#define INT_CCP2_LP() (IPR2bits.CCP2IP=0)
+#endif
+#endif
 /***** Function prototypes *****/
 void ADC_ISR(void);
 #if (INT_ADC == INT_EN)
@@ -107,4 +140,19 @@ STD_ReturnType INT_TMR3_init(uint8 priority);
 STD_ReturnType INT_TMR3_deinit(void);
 STD_ReturnType INT_TMR3_set_callback_routine(void (*callback) (void));
 #endif
+
+void CCP1_ISR(void);
+#if (INT_CCP1 == INT_EN)
+STD_ReturnType INT_CCP1_init(uint8 priority);
+STD_ReturnType INT_CCP1_deinit(void);
+STD_ReturnType INT_CCP1_set_callback_routine(void (*callback) (void));
+#endif
+
+void CCP2_ISR(void);
+#if (INT_CCP2 == INT_EN)
+STD_ReturnType INT_CCP2_init(uint8 priority);
+STD_ReturnType INT_CCP2_deinit(void);
+STD_ReturnType INT_CCP2_set_callback_routine(void (*callback) (void));
+#endif
+
 #endif	/* MCAL_INTERNAL_INTERRUPT_H */
