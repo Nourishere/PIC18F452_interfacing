@@ -11,6 +11,19 @@
 static volatile uint8 RB4f=1,RB5f=1,RB6f=1,RB7f=1;
 #if (INT_PR == INT_EN)
 void __interrupt() InterruptManager(void){
+	#if (INT_CCP1 == INT_EN)
+		if(INT_CCP1_STATUS == INT_EN && INT_CCP1_F == INT_HIGH){
+			INT_CCP1_CLRF();
+			CCP1_ISR();
+		}
+	#endif
+	#if (INT_CCP2 == INT_EN)
+		if(INT_CCP2_STATUS == INT_EN && INT_CCP2_F == INT_HIGH){
+			INT_CCP2_CLRF();
+			CCP2_ISR();
+		}
+	#endif
+	
 	#if (INT_TMR0 == INT_EN)
 		if(INT_TMR0_STATUS == INT_EN && INT_TMR0_F == INT_HIGH){
 			INT_TMR0_CLRF();
@@ -78,6 +91,18 @@ void __interrupt(low_priority) InterruptManagerLow(void){
 		}
 	
 	#endif
+	#if (INT_CCP1 == INT_EN)
+		if(INT_CCP1_STATUS == INT_EN && INT_CCP1_F == INT_HIGH){
+			INT_CCP1_CLRF();
+			CCP1_ISR();
+		}
+	#endif
+	#if (INT_CCP2 == INT_EN)
+		if(INT_CCP2_STATUS == INT_EN && INT_CCP2_F == INT_HIGH){
+			INT_CCP2_CLRF();
+			CCP2_ISR();
+		}
+	#endif
 
 	#if (INT_TMR1 == INT_EN)
 		if(INT_TMR1_STATUS == INT_EN && INT_TMR1_F == INT_HIGH){
@@ -137,6 +162,18 @@ void __interrupt() InterruptManager(void){
 			INT_TMR0_CLRF();
 			T0CONbits.TMR0ON=0; // Turn off the module
 			TMR0_ISR();
+		}
+	#endif
+	#if (INT_CCP1 == INT_EN)
+		if(INT_CCP1_STATUS == INT_EN && INT_CCP1_F == INT_HIGH){
+			INT_CCP1_CLRF();
+			CCP1_ISR();
+		}
+	#endif
+	#if (INT_CCP2 == INT_EN)
+		if(INT_CCP2_STATUS == INT_EN && INT_CCP2_F == INT_HIGH){
+			INT_CCP2_CLRF();
+			CCP2_ISR();
 		}
 	#endif
 	
