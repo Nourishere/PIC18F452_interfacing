@@ -11,6 +11,12 @@
 static volatile uint8 RB4f=1,RB5f=1,RB6f=1,RB7f=1;
 #if (INT_PR == INT_EN)
 void __interrupt() InterruptManager(void){
+	#if (INT_MSSP == INT_EN)
+		if(INT_MSSP_STATUS == INT_EN && INT_MSSP_F == INT_HIGH){
+			INT_MSSP_CLRF();
+			MSSP_ISR();
+		}
+	#endif
 	#if (INT_CCP1 == INT_EN)
 		if(INT_CCP1_STATUS == INT_EN && INT_CCP1_F == INT_HIGH){
 			INT_CCP1_CLRF();
