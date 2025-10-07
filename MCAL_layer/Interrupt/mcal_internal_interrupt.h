@@ -35,6 +35,19 @@
 #define INT_CCP2_STATUS (PIE2bits.CCP2IE)
 /* The value of the CCP2 flag */
 #define INT_CCP2_F (IPR2bits.CCP2IP)
+/* status of the MSSP (EN/DIS) */
+#define INT_MSSP_STATUS (PIE1bits.SSPIE)
+/* The value of the MSSP flag */
+#define INT_MSSP_F (PIR1bits.SSPIF)
+/* status of the USART_Tx (EN/DIS) */
+#define INT_USART_TX_STATUS (PIE1bits.TXIE)
+/* The value of the USART_Tx flag */
+#define INT_USART_TX_F (PIR1bits.TXIF)
+/* status of the USART_Rx (EN/DIS) */
+#define INT_USART_RX_STATUS (PIE1bits.RCIE)
+/* The value of the USART_Rx flag */
+#define INT_USART_RX_F (PIR1bits.RCIF)
+
 /****** function-like macros ******/
 #if (INT_ADC == INT_EN)
 /* Enable/Disable the ADC interrupt */
@@ -113,6 +126,45 @@
 #define INT_CCP2_LP() (IPR2bits.CCP2IP=0)
 #endif
 #endif
+
+#if (INT_MSSP == INT_EN)
+/* Enable/Disable the MSSP interrupt */
+#define INT_MSSP_EN() (PIE1bits.SSPIE=1)
+#define INT_MSSP_DIS() (PIE1bits.SSPIE=0)
+/* Clear the MSSP interrupt flag */
+#define INT_MSSP_CLRF() (PIR1bits.SSPIF=0)
+/* Set the MSSP interrupt priority */
+#if (INT_PR == INT_EN)
+#define INT_MSSP_HP() (IPR1bits.SSPIP=1)
+#define INT_MSSP_LP() (IPR1bits.SSPIP=0)
+#endif
+#endif
+
+#if (INT_USART_TX == INT_EN)
+/* Enable/Disable the USART Tx interrupt */
+#define INT_USART_TX_EN() (PIE1bits.TXIE=1)
+#define INT_USART_TX_DIS() (PIE1bits.TXIE=0)
+/* Clear the USART Tx interrupt flag */
+#define INT_USART_TX_CLRF() (PIR1bits.TXIF=0)
+/* Set the USART Tx interrupt priority */
+#if (INT_PR == INT_EN)
+#define INT_USART_TX_HP() (IPR1bits.TXIP=1)
+#define INT_USART_TX_LP() (IPR1bits.TXIP=0)
+#endif
+#endif
+
+#if (INT_USART_RX == INT_EN)
+/* Enable/Disable the USART Rx interrupt */
+#define INT_USART_RX_EN() (PIE1bits.RCIE=1)
+#define INT_USART_RX_DIS() (PIE1bits.RCIE=0)
+/* Clear the USART Rx interrupt flag */
+#define INT_USART_RX_CLRF() (PIR1bits.RCIF=0)
+/* Set the USART Rx interrupt priority */
+#if (INT_PR == INT_EN)
+#define INT_USART_RX_HP() (IPR1bits.RCIP=1)
+#define INT_USART_RX_LP() (IPR1bits.RCIP=0)
+#endif
+#endif
 /***** Function prototypes *****/
 void ADC_ISR(void);
 #if (INT_ADC == INT_EN)
@@ -153,6 +205,27 @@ void CCP2_ISR(void);
 STD_ReturnType INT_CCP2_init(uint8 priority);
 STD_ReturnType INT_CCP2_deinit(void);
 STD_ReturnType INT_CCP2_set_callback_routine(void (*callback) (void));
+#endif
+
+void MSSP_ISR(void);
+#if(INT_MSSP == INT_EN)
+STD_ReturnType INT_MSSP_init(uint8 priority);
+STD_ReturnType INT_MSSP_deinit(void);
+STD_ReturnType INT_MSSP_set_callback_routine(void (*callback) (void));
+#endif
+
+void USART_Tx_ISR(void);
+#if(INT_MSSP == INT_EN)
+STD_ReturnType INT_USART_Tx_init(uint8 priority);
+STD_ReturnType INT_USART_Tx_deinit(void);
+STD_ReturnType INT_USART_Tx_set_callback_routine(void (*callback) (void));
+#endif
+
+void USART_Tx_ISR(void);
+#if(INT_MSSP == INT_EN)
+STD_ReturnType INT_USART_Rx_init(uint8 priority);
+STD_ReturnType INT_USART_Rx_deinit(void);
+STD_ReturnType INT_USART_Rx_set_callback_routine(void (*callback) (void));
 #endif
 
 #endif	/* MCAL_INTERNAL_INTERRUPT_H */
