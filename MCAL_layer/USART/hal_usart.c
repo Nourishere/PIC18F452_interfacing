@@ -18,6 +18,11 @@ static STD_ReturnType USART_parity_checker(USART_parity parity, uint8 data, uint
  */
 STD_ReturnType USART_Tx_initialize(const USART_Tx_t* usart_tx){
 	STD_ReturnType ret = E_OK;  
+#if (INT_USART_TX == INT_EN && INT_PR == INT_EN)
+	INT_USART_Tx_init(usart_tx -> priority);
+#elif(INT_USART_TX == INT_EN && INT_PR == INT_DIS)
+	INT_USART_Tx_init(1); //Garbage value
+#endif
 	if(NULL== usart_tx)
 		ret = E_NOT_OK;
 	else{
@@ -68,6 +73,11 @@ STD_ReturnType USART_Rx_initialize(const USART_Rx_t* usart_rx){
 	if(NULL== usart_rx)
 		ret = E_NOT_OK;
 	else{
+#if (INT_USART_TX == INT_EN && INT_PR == INT_EN)
+		INT_USART_Rx_init(usart_rx -> priority);
+#elif(INT_USART_TX == INT_EN && INT_PR == INT_DIS)
+		INT_USART_Tx_init(1); //Garbage value
+#endif
 		/* Set up baud rate */
 		ret = USART_baud_initialize(usart_rx);
 		/* Set up pin RC6&RC7 as serial */	
