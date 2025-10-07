@@ -328,7 +328,7 @@ void CCP2_ISR(void){
 	if(CCP2_callback)
 		CCP2_callback();
 }
-/* @brief: Initialize the interrupt feature for the CCP1 module.
+/* @brief: Initialize the interrupt feature for the CCP2 module.
  * @param: A uint8 specifying the priority. 
  *  @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -363,8 +363,8 @@ STD_ReturnType INT_CCP2_init(uint8 priority){
  */
 STD_ReturnType INT_CCP2_deinit(void){
 	STD_ReturnType ret = E_OK;
-	INT_CCP1_CLRF();
-	INT_CCP1_DIS();
+	INT_CCP2_CLRF();
+	INT_CCP2_DIS();
 	return ret;
 }
 /* @brief: Set the callback function for the CCP2 interrupt module.
@@ -374,6 +374,176 @@ STD_ReturnType INT_CCP2_deinit(void){
 STD_ReturnType INT_CCP2_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	CCP2_callback = callback;
+	return ret;
+}
+#endif
+
+#if (INT_MSSP == INT_EN)
+void (*MSSP_callback) (void) = NULL;
+void MSSP_ISR(void){
+	if(MSSP_callback)
+		MSSP_callback();
+}
+
+/* @brief: Initialize the interrupt feature for the MSSP module.
+ * @param: A uint8 specifying the priority. 
+ *  @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_MSSP_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	/* Enable the interrupt feature */
+	INT_GEN();	
+	/* Disable the device interrupt */
+	INT_MSSP_EN();	
+#if (INT_PR == INT_EN)
+	INT_PREN(); // Enable priority feature
+	if(priority == INT_PHIGH){
+		INT_GHPEN();
+		INT_MSSP_HP();
+	}
+	else if (priority == INT_PLOW){
+		INT_GLPEN();
+		INT_MSSP_LP();
+	}
+#elif (INT_PR == INT_DIS)
+	INT_PRDIS();
+	INT_PEEN();  // Enable peripheral interupts
+#else
+	ret = E_NOT_OK;
+#endif
+	return ret;
+}
+/* @brief: Deinitialize the MSSP interrupt module.
+ * @param: Nothing
+ * @return: E_OK
+ */
+STD_ReturnType INT_MSSP_deinit(void){
+	STD_ReturnType ret = E_OK;
+	INT_MSSP_CLRF();
+	INT_MSSP_DIS();
+	return ret;
+}
+/* @brief: Set the callback function for the MSSP interrupt module.
+ * @param: A pointer to a function that takes void and returns void.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_MSSP_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+	MSSP_callback = callback;
+	return ret;
+}
+#endif
+#if (INT_USART_TX == INT_EN)
+void (*USART_Tx_callback) (void) = NULL;
+void USART_Tx_ISR(void){
+	if(USART_Tx_callback)
+		USART_Tx_callback();
+}
+
+/* @brief: Initialize the transmit interrupt feature for the USART module.
+ * @param: A uint8 specifying the priority. 
+ *  @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_USART_Tx_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	/* Enable the interrupt feature */
+	INT_GEN();	
+	/* Disable the device interrupt */
+	INT_USART_TX_EN();	
+#if (INT_PR == INT_EN)
+	INT_PREN(); // Enable priority feature
+	if(priority == INT_PHIGH){
+		INT_GHPEN();
+		INT_USART_TX_HP();
+	}
+	else if (priority == INT_PLOW){
+		INT_GLPEN();
+		INT_USART_TX_LP();
+	}
+#elif (INT_PR == INT_DIS)
+	INT_PRDIS();
+	INT_PEEN();  // Enable peripheral interupts
+#else
+	ret = E_NOT_OK;
+#endif
+	return ret;
+}
+/* @brief: Deinitialize the USART Tx interrupt module.
+ * @param: Nothing
+ * @return: E_OK
+ */
+STD_ReturnType INT_USART_Tx_deinit(void){
+	STD_ReturnType ret = E_OK;
+	INT_USART_TX_CLRF();
+	INT_USART_TX_DIS();
+	return ret;
+}
+/* @brief: Set the callback function for the USART Tx interrupt module.
+ * @param: A pointer to a function that takes void and returns void.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_USART_Tx_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+	USART_Tx_callback = callback;
+	return ret;
+}
+#endif
+
+#if (INT_USART_RX == INT_EN)
+void (*USART_Rx_callback) (void) = NULL;
+void USART_Rx_ISR(void){
+	if(USART_Rx_callback)
+		USART_Rx_callback();
+}
+
+/* @brief: Initialize the receive interrupt feature for the USART module.
+ * @param: A uint8 specifying the priority. 
+ *  @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_USART_Rx_init(uint8 priority){
+	STD_ReturnType ret = E_OK;
+	/* Enable the interrupt feature */
+	INT_GEN();	
+	/* Disable the device interrupt */
+	INT_USART_RX_EN();	
+#if (INT_PR == INT_EN)
+	INT_PREN(); // Enable priority feature
+	if(priority == INT_PHIGH){
+		INT_GHPEN();
+		INT_USART_RX_HP();
+	}
+	else if (priority == INT_PLOW){
+		INT_GLPEN();
+		INT_USART_RX_LP();
+	}
+#elif (INT_PR == INT_DIS)
+	INT_PRDIS();
+	INT_PEEN();  // Enable peripheral interupts
+#else
+	ret = E_NOT_OK;
+#endif
+	return ret;
+}
+/* @brief: Deinitialize the USART Rx interrupt module.
+ * @param: Nothing
+ * @return: E_OK
+ */
+STD_ReturnType INT_USART_Rx_deinit(void){
+	STD_ReturnType ret = E_OK;
+	INT_USART_RX_CLRF();
+	INT_USART_RX_DIS();
+	return ret;
+}
+/* @brief: Set the callback function for the USART Rx interrupt module.
+ * @param: A pointer to a function that takes void and returns void.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType INT_USART_Rx_set_callback_routine(void (*callback) (void)){
+	STD_ReturnType ret = E_OK;
+	USART_Rx_callback = callback;
 	return ret;
 }
 #endif
