@@ -1,3 +1,4 @@
 # Ignore all build output
 build/
 dist/
+MCAL_layer/notes
