@@ -105,6 +105,12 @@ typedef enum{
  * 	      consistensy, identical values are adviced for each unit. 
  */ 
 typedef struct{
+#if(INT_USART_TX == INT_EN)
+	void (*USART_Tx_interrupt_handler) (void); // Use NULL if not needed
+#if(INT_PR == INT_EN)
+	uint8 priority; /* @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH */	
+#endif
+#endif
 	USART_baud_mode baud_mode; /* @note: High speed / Low speed */
 	/* @note: Common baud rates are 4800, 9600, 19200, 
      * 		  57600, and 115200. */
@@ -117,6 +123,12 @@ typedef struct{
 #endif
 }USART_Tx_t;
 typedef struct{
+#if(INT_USART_RX == INT_EN)
+	void (*USART_Rx_interrupt_handler) (void); // Use NULL if not needed
+#if(INT_PR == INT_EN)
+	uint8 priority; /* @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH */	
+#endif
+#endif
 	USART_baud_mode baud_mode; /* @note: High speed / Low speed */
 	uint32 baud_rate;
 	/* @note: Common values for the baud rate are 4800, 9600, 19200, 
