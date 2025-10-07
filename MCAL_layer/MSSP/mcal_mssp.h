@@ -12,7 +12,7 @@
 
 /****************** include **********************/
 #include "mcal_mssp_cfg.h"
-#include "../GPIO/hal_gpio.hk"
+#include "../GPIO/hal_gpio.h"
 #include "../Timer2/hal_tmr2.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 #include "../Interrupt/mcal_interrupt_config.h"
