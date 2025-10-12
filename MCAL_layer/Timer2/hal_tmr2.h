@@ -10,6 +10,7 @@
 #define	HAL_TMR2_H
 
 /******* includes ****************/
+#include <xc.h>
 #include "../hal_tmr_cfg.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 

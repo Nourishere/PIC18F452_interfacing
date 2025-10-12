@@ -8,6 +8,7 @@
 #ifndef HAL_TMR3_H
 #define	HAL_TMR3_H
 /*********** includes ***************/
+#include <xc.h>
 #include "../hal_tmr_cfg.h"
 #include "../GPIO/hal_gpio.h"
 #include "../Interrupt/mcal_internal_interrupt.h"

@@ -11,6 +11,7 @@
 #define	HAL_TMR0_H
 
 /******* includes ****************/
+#include <xc.h>
 #include "../hal_tmr_cfg.h"
 #include "../GPIO/hal_gpio.h"
 #include "../Interrupt/mcal_external_interrupt.h"
