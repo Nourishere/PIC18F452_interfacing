@@ -3,10 +3,14 @@
  * Author: nour
  *
  * Created on October 23, 2024, 6:42 AM
+ * @note: This file contains implementation of the GPIO module.
+ * 	      The PIC18F452 contains five ports that can be programmed as
+ * 	      digital inputs or digital outputs.
  */
 
 #include "hal_gpio.h"
 
+#if(GPIO_MODULE == STD_ON)
 /*reference to data direction registers*/
 volatile uint8 * _TRIS_registers[] = {&TRISA,&TRISB,&TRISC,&TRISD,&TRISE};
 /*reference to data latch register*/
@@ -29,7 +33,7 @@ STD_ReturnType GPIO_check_access(const pin_config_t * _pin_config){
 	else{}
 	return ret;
 }
-#if PIN_CONFIGURATION == ENABLED
+#if (PIN_CONFIGURATION == STD_ON)
 /*@brief: Initializes a GPIO pin by setting its initial port, pin, direction, and logic.
  *@param: A pointer to a pin_config_t type which specifies a GPIO pin.
  *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
@@ -45,8 +49,7 @@ STD_ReturnType GPIO_pin_initialize(const pin_config_t * _pin_config){
 	}
     return ret;
 }
-#endif
-#if PIN_CONFIGURATION == ENABLED
+
 /*@brief: Initializes only the direction of the GPIO pin.
  *@param: A pointer to a pin_config_t type which specifies a GPIO pin.
  *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
@@ -62,7 +65,7 @@ STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config){
 				CLR_BIT(*(_TRIS_registers[_pin_config->port]), _pin_config -> pin);
 				break;
 			case GPIO_IN :
-				SET_BIT(*(_TRIS_registers[_pin_config-> port]),_pin_config -> pin);	
+				SET_BIT(*(_TRIS_registers[_pin_config-> port]), _pin_config -> pin);	
 				break;
 			default : 
 				ret = E_NOT_OK;
@@ -70,12 +73,13 @@ STD_ReturnType GPIO_pin_direction_initialize(const pin_config_t * _pin_config){
 	}
 	return ret;
 }
-#endif
-#if PIN_CONFIGURATION == ENABLED
+
 /*@brief: Checks on the direction of a GPIO pin.
  *@param: A pointer to a pin_config_t type which specifies a GPIO pin and a pointer to a direction_t 
  *		  type which specifies GPIO pin direction.
  *@return: E_OK if operation is successful and E_NOT_OK otherwise.
+ * 		   The dic_status is 1 if the pin is input.
+ * 		   The dic_status is 0 is the pin is output.
  */       
 STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, direction_t* dic_status ){
 	STD_ReturnType ret = E_OK;
@@ -87,8 +91,7 @@ STD_ReturnType GPIO_pin_get_direction_status(const pin_config_t * _pin_config, d
 	}
 	return ret;
 }
-#endif
-#if PIN_CONFIGURATION == ENABLED
+
 /*@brief: Writes logic on a GPIO pin.
  *@param: A pointer to a pin_config_t type which specifies a GPIO pin and a value of type 
  * 		  logic_t which specifies the logic on the pin. 
@@ -113,12 +116,13 @@ STD_ReturnType GPIO_pin_write_logic(const pin_config_t * _pin_config, logic_t lo
 	}
 	return ret;
 }
-#endif
-#if PIN_CONFIGURATION == ENABLED
+
 /*@brief: Reads the logic on a pin.
  *@param: A pointer to a pin_config_t type which specifies a GPIO pin and a pointer to
  * 		  a logic_t type which specifies the logic on the pin. 
  *@return: E_OK if operation is successful and E_NOT_OK otherwise.
+ * 		   logic is 1 if the pin digital value is HIGH.
+ * 		   logic is 0 if the pin digital value is LOW.
  */       
 STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* logic){
 	STD_ReturnType ret = E_OK;
@@ -130,8 +134,7 @@ STD_ReturnType GPIO_pin_read_logic(const pin_config_t * _pin_config, logic_t* lo
 	}
 	return ret;
 }
-#endif
-#if PIN_CONFIGURATION == ENABLED
+
 /*@brief: Toggles the logic on the pin. 
  *@param: A pointer to a pin_config_t type which specifies a GPIO pin.
  *@return: E_OK if operation is successful and E_NOT_OK otherwise.
@@ -147,11 +150,11 @@ STD_ReturnType GPIO_pin_toggle_logic(const pin_config_t * _pin_config){
 	return ret;
 }
 #endif
-#if PORT_CONFIGURATION == ENABLED
+#if (PORT_CONFIGURATION == STD_ON)
 /*@brief: Initializes the direction of a GPIO port.
- *@param: A port index from the tyep port_index and an uint8 integer that specifies the direction 
-		  of each of the port's pins. For example 0x07 sets the first three pins to high and the
-		  the rest to low.
+ *@param: A port index from the type port_index and an uint8 integer that specifies the direction 
+ *		  of each of the port's pins. For example 0x07 sets the first three pins to high and the
+ *	 	  the rest to low.
  *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
  */       
 STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 direction){
@@ -159,7 +162,7 @@ STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 direction){
 	//portA is indexed 0
 	if ( (port > PORT_MAX_NUMBER - 1) || ((port == PORTA_I) && (direction > 0x7F)) || 
        ((port == PORTE_I) && (direction > 0x07)) || 
-       ((port >= PORTB_I && port <= PORTD_I) && (direction > 0x7F)) ){
+       ((port >= PORTB_I && port <= PORTD_I) && (direction > 0xFF)) ){
 		ret = E_NOT_OK;
 	}
 	else{
@@ -167,11 +170,10 @@ STD_ReturnType GPIO_port_direction_initialize(port_index port, uint8 direction){
     }
     return ret;
 }
-#endif
-#if PORT_CONFIGURATION == ENABLED
+
 /*@brief: Reads the direction of port.
- *@param: A port index from the type port_index and a pointer to an uin8 integer that will hold
-		  the direction of the port.
+ *@param: A port index from the type port_index and a pointer to an uint8 integer that will hold
+ *		  the direction of the port.
  *@return: E_OK if operation is successful and E_NOT_OK otherwise.
  */       
 STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_status){
@@ -181,21 +183,19 @@ STD_ReturnType GPIO_port_get_direction_status(port_index port, uint8 *direction_
 	}
 	else{
 		*direction_status = *_TRIS_registers[port];	
-	
 	}
 	return ret;
 }
-#endif
-#if PORT_CONFIGURATION == ENABLED
+
 /*@brief: Writes logic to a port.
- *@param: A port index from the type port_index and an uin8 integer that will hold the port's logic.
+ *@param: A port index from the type port_index and an uint8 integer that will hold the port's logic.
  *@return: E_OK if operation is successful and E_NOT_OK otherwise.
  */       
 STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic){
 	STD_ReturnType ret = E_OK;
 	if ( (port > PORT_MAX_NUMBER - 1) || ((port == PORTA_I) && (logic > 0x7F)) || 
        ((port == PORTE_I) && (logic > 0x07)) || 
-       ((port >= PORTB_I && port <= PORTD_I) && (logic > 0x7F)) ){
+       ((port >= PORTB_I && port <= PORTD_I) && (logic > 0xFF)) ){
 		ret = E_NOT_OK;
 	}
 	else{
@@ -203,10 +203,9 @@ STD_ReturnType GPIO_port_write_logic(port_index port, uint8 logic){
 	}
 	return ret;
 }
-#endif
-#if PORT_CONFIGURATION == ENABLED
-/*@brief: Reads logic on a port.
- *@param: A port index from the type port_index and a pointer to an uin8 integer that will hold the port's logic. 
+
+/*@brief: Read logic on a port.
+ *@param: A port index from the type port_index and a pointer to an uint8 integer that will hold the port's logic. 
  *@return: E_OK if operation is successful and E_NOT_OK otherwise.
  */       
 STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic){
@@ -220,9 +219,8 @@ STD_ReturnType GPIO_port_read_logic(port_index port, uint8* logic){
 	}
 	return ret;
 }
-#endif
-#if PORT_CONFIGURATION == ENABLED
-/*@brief: Toggles the logic on a port.
+
+/*@brief: Toggle the logic on a port.
  *@param: A port index of type port_index.
  *@return: E_OK if operation is successful and E_NOT_OK otherwise.
  */       
@@ -237,4 +235,5 @@ STD_ReturnType GPIO_port_toggle_logic(port_index port){
 	}
 	return ret;
 }
+#endif
 #endif
