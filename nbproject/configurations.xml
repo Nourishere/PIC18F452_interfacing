@@ -33,12 +33,15 @@
       <logicalFolder name="MCAL_layer" displayName="MCAL_layer" projectFiles="true">
         <logicalFolder name="ADC" displayName="ADC" projectFiles="true">
           <itemPath>MCAL_layer/ADC/hal_adc.h</itemPath>
+          <itemPath>MCAL_layer/ADC/mcal_adc_cfg.h</itemPath>
         </logicalFolder>
         <logicalFolder name="CCP" displayName="CCP" projectFiles="true">
           <itemPath>MCAL_layer/CCP/hal_ccp.h</itemPath>
+          <itemPath>MCAL_layer/CCP/mcal_ccp_cfg.h</itemPath>
         </logicalFolder>
         <logicalFolder name="EEPROM" displayName="EEPROM" projectFiles="true">
           <itemPath>MCAL_layer/EEPROM/mcal_eeprom.h</itemPath>
+          <itemPath>MCAL_layer/EEPROM/mcal_eeprom_cfg.h</itemPath>
         </logicalFolder>
         <logicalFolder name="GPIO" displayName="GPIO" projectFiles="true">
           <itemPath>MCAL_layer/GPIO/hal_gpio.h</itemPath>
@@ -72,7 +75,6 @@
         </logicalFolder>
         <itemPath>MCAL_layer/mcal_std_types.h</itemPath>
         <itemPath>MCAL_layer/std_libs.h</itemPath>
-        <itemPath>MCAL_layer/compiler.h</itemPath>
         <itemPath>MCAL_layer/device_config.h</itemPath>
         <itemPath>MCAL_layer/hal_tmr_cfg.h</itemPath>
       </logicalFolder>
@@ -131,10 +133,12 @@
           <itemPath>MCAL_layer/Interrupt/mcal_internal_interrupt.c</itemPath>
           <itemPath>MCAL_layer/Interrupt/mcal_external_interrupt.c</itemPath>
           <itemPath>MCAL_layer/Interrupt/mcal_interrupt_manager.c</itemPath>
-          <itemPath>MCAL_layer/Timer0/hal_tmr0.c</itemPath>
         </logicalFolder>
         <logicalFolder name="MSSP" displayName="MSSP" projectFiles="true">
           <itemPath>MCAL_layer/MSSP/mcal_mssp.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="Timer0" displayName="Timer0" projectFiles="true">
+          <itemPath>MCAL_layer/Timer0/hal_tmr0.c</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer1" displayName="Timer1" projectFiles="true">
           <itemPath>MCAL_layer/Timer1/hal_tmr1.c</itemPath>
@@ -149,7 +153,7 @@
           <itemPath>MCAL_layer/USART/hal_usart.c</itemPath>
         </logicalFolder>
         <itemPath>MCAL_layer/device_config.c</itemPath>
-        <itemPath>MCAL_layer/hal_tmr_config.c</itemPath>
+        <itemPath>MCAL_layer/hal_tmr_cfg.c</itemPath>
       </logicalFolder>
       <itemPath>application.c</itemPath>
     </logicalFolder>
