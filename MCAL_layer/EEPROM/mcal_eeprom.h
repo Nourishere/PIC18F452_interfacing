@@ -9,6 +9,8 @@
 #define	MCAL_EEPROM_H
 
 /****** includes **********/
+#include <xc.h>
+#include "mcal_eeprom_cfg.h"
 #include "../Interrupt/mcal_interrupt_config.h"
 #include "../std_libs.h"
 #include "../mcal_std_types.h"

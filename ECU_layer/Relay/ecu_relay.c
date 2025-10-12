@@ -7,6 +7,7 @@
 
 #include "ecu_relay.h"
 
+#if (RELAY_MODLUE == STD_ON)
 /*@brief: Initializes a relay. 
  *@param: A pointer to a relay of type relay_t.
  *@return: E_OK if initialization is successful.
@@ -59,3 +60,4 @@ STD_ReturnType relay_turn_off(const relay_t * lrelay){
 	}
 	return ret;
 }
+#endif

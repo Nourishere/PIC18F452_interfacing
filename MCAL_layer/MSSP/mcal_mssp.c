@@ -7,6 +7,8 @@
  * 	       The MSSP module can work as an SPI module or as an I2C module.
  */
 #include "mcal_mssp.h"
+
+#if (MSSP_MODULE == STD_ON)
 //Practical tip: If you're only ever using the MSSP as master, configure the SS̅ pin as a digital output high. That way, it never accidentally pulls low and disables your SPI master.
 uint8 I2C_initialized=0;
 uint8 SPI_initialized=0;
@@ -764,5 +766,6 @@ uint8 MSSP_I2C_BRG_cfg(MSSP_I2C_speed SCL_freq){
 }
 #elif(MSSP_I2C_MODE == MSSP_I2C_SLAVE)
 
+#endif
 #endif
 #endif

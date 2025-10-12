@@ -7,6 +7,7 @@
  */
 #include "hal_tmr0.h"
 
+#if (TMR0_MODULE == STD_ON)
 /* @Brief: A copy of the preloaded value defined in TMR0_t 
  * 		   used to preloaded the register on overflow.
  */
@@ -259,3 +260,4 @@ static STD_ReturnType TMR0_scale2ratio(TMR0_PRESC_SEL prescale, uint16 * val){
 	return ret;
 } 
 */
+#endif

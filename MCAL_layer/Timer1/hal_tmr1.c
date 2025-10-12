@@ -6,6 +6,7 @@
  */
 #include "hal_tmr1.h"
 
+#if (TMR1_MODULE == STD_ON)
 /* @Brief: Preloaded value in the initialization.*/
 uint16 preloaded_tmr1;
 
@@ -159,4 +160,5 @@ STD_ReturnType TMR1_write(const TMR1_t * tmr1, uint16 * value){
 	}
 	return ret;
 }
+#endif
 

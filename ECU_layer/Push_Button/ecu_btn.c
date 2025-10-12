@@ -6,6 +6,7 @@
  */
 #include "ecu_btn.h"
 
+#if (BTN_MODULE == STD_ON)
 /*@brief: Initializes a push button.
  *@param: A pointer to a type btn_t.
  *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
@@ -60,3 +61,4 @@ STD_ReturnType btn_read_state(const btn_t* btn, btn_status *btn_s){
 	}
 	return ret;
 }
+#endif

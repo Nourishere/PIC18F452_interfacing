@@ -10,6 +10,8 @@
 #define	HAL_CCP_H
 
 /****************** include **********************/
+#include <xc.h>
+#include "mcal_ccp_cfg.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 #include "../Interrupt/mcal_interrupt_config.h"
 #include "../GPIO/hal_gpio.h"

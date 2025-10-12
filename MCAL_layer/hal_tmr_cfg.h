@@ -12,6 +12,12 @@
 
 #include "mcal_std_types.h"
 /************** Macros ***************/
+/* Control all the timers */
+#define TMR0_MODULE  STD_OFF
+#define TMR1_MODULE  STD_OFF
+#define TMR2_MODULE  STD_OFF
+#define TMR3_MODULE  STD_OFF
+
 #define RISING 1
 #define FALLING 0
 #define _8BIT 0

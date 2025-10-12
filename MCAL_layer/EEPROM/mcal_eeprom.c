@@ -7,6 +7,7 @@
 
 #include "mcal_eeprom.h"
 
+#if (EEPROM_MODULE == STD_ON)
 /* @Brief: Read data from the EEPROM.
  * @Param: Addr stores the 1-byte long address, and a pointer to a 
  * 		   a uint8 data stores the read data.
@@ -104,3 +105,4 @@ STD_ReturnType EEPROM_erase(void){
 	}
 	return ret;
 }
+#endif

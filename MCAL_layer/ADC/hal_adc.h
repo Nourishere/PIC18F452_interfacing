@@ -11,6 +11,7 @@
 #define	HAL_ACD_H
 /*** includes *****/
 #include <xc.h>
+#include "mcal_adc_cfg.h"
 #include "../GPIO/hal_gpio.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 #include "../Interrupt/mcal_interrupt_config.h"  

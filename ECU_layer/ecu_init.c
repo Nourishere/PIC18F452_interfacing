@@ -6,6 +6,7 @@
  */
 #include "ecu_init.h"
 
+#if (__ECU == STD_ON)
 LED_t LED_arr[10] = {
 	{PORTD_I,PIN7,GPIO_LOW},	
 	{PORTD_I,PIN6,GPIO_LOW},	
@@ -25,3 +26,5 @@ STD_ReturnType ecu_init(void){
 		ret = ret && LED_initialize(&(LED_arr[i]));
     return ret;
 }
+#endif
+

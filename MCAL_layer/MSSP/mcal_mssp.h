@@ -11,7 +11,7 @@
 #define	MCAL_MSSP_H
 
 /****************** include **********************/
-#include "mcal_mssp_cfg.h"
+#include "mcal_mssp_cfg.h" 
 #include "../GPIO/hal_gpio.h"
 #include "../Timer2/hal_tmr2.h"
 #include "../Interrupt/mcal_internal_interrupt.h"

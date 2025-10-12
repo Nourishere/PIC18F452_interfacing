@@ -7,6 +7,7 @@
 
 #include "ecu_dc_motor.h"
 
+#if (DC_MOTOR_MODULE == STD_ON)
 /*@brief: Initializes a DC motor. 
  *@param: A pointer to a dc_motor_t type specifying a DC motor.
  *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
@@ -102,3 +103,4 @@ static STD_ReturnType dc_motor_linit(const dc_motor_t * dc_motor_l, pin_config_t
 	}
 	return ret;
 }
+#endif

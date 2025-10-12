@@ -7,6 +7,7 @@
 
 #include "hal_tmr3.h"
 
+#if (TMR3_MODULE == STD_ON)
 extern pin_config_t T1CLKI_pin; // Defined in hal_tmr3.c
 uint16 preloaded_tmr3;
 
@@ -149,3 +150,4 @@ STD_ReturnType TMR3_write(const TMR3_t * tmr3, uint16 * value){
 	}
 	return ret;
 }
+#endif

@@ -10,7 +10,9 @@
 #define	HAL_GPIO_CFG_H
 /********* includes *********/
 #include "../mcal_std_types.h"
+
 /********* macros ***********/
+#define GPIO_MODULE STD_ON
 #define PIN_CONFIGURATION STD_ON 
 #define PORT_CONFIGURATION STD_ON 
 

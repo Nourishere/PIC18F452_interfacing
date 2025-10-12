@@ -6,6 +6,7 @@
  */
 #include "mcal_external_interrupt.h"
 
+#if (EXT_INTERRUPT_MODULE == STD_ON)
 /* Locally defined interrupt handling functions */
 void (*INT0_handler) (void) = NULL;
 void (*INT1_handler) (void) = NULL;
@@ -651,4 +652,5 @@ STD_ReturnType INT_TMR0_set_callback_routine(void (*callback) (void)){
 	return ret;
 }
 
+#endif
 #endif

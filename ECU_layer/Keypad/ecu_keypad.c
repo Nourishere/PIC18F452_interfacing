@@ -7,6 +7,7 @@
 
 #include "ecu_keypad.h"
 
+#if (KEYPAD_MODULE == STD_ON)
 /* Note on March 25, 2025, 23:28:08.
    (This driver is still under testing and development. Many better features will be added in the near future.)
 */
@@ -120,3 +121,4 @@ STD_ReturnType keypad_read_number(const keypad_t *keypad, uint8 * value){
 	}
 	return ret;
 }
+#endif

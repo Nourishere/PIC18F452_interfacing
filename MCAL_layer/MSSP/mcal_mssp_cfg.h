@@ -10,6 +10,8 @@
 #ifndef MCAL_MSSP_CFG_H
 #define	MCAL_MSSP_CFG_H
 #include "../mcal_std_types.h"
+
+#define MSSP_MODULE STD_OFF /* Turn the whole off */
 /* @note: As for the purposes for such driver, the MSSP module is pre-configured to utilize
  *        either the SPI protocol or the I2C protocol. Multiplexing such features is difficult and 
  *        might prove inconsistent.

@@ -6,6 +6,7 @@
  */
 #include "mcal_internal_interrupt.h"
 
+#if(INT_INTERRUPT_MODULE == STD_ON)
 #if (INT_ADC == INT_EN)
 void (*ADC_callback) (uint16 * result) = NULL;
 uint16 ADC_output;
@@ -546,4 +547,5 @@ STD_ReturnType INT_USART_Rx_set_callback_routine(void (*callback) (void)){
 	USART_Rx_callback = callback;
 	return ret;
 }
+#endif
 #endif

@@ -6,6 +6,7 @@
  */
 #include "ecu_LCD.h"
 
+#if (LCD_MODULE == STD_ON)
 /* Note on March 25, 2025, 23:56:52.
    (This driver is still under testing and debugging.)
 */
@@ -311,3 +312,4 @@ static STD_ReturnType lcd_set_cursor(const chr_LCD_t *lcd, uint8 row, uint8 col)
 	}
 	return ret;
 }
+#endif

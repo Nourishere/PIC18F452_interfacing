@@ -8,6 +8,7 @@
  */
 #include "hal_adc.h"
 
+#if (ADC_MODULE == STD_ON)
 /* @brief: Initialize the ADC module.
  * @param: A pointer to a struct of type ADC_t.
  * @return: E_OK if initialization is successful and
@@ -191,3 +192,4 @@ static STD_ReturnType ADC_set_pin_config(ADC_CH_t channel){
 	}
         return ret;
 }
+#endif

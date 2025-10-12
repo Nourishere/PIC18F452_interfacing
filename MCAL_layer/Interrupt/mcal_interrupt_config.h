@@ -13,6 +13,8 @@
 #include "../mcal_std_types.h"
 #include "../GPIO/hal_gpio.h"
 /************ Macros *******************/
+#define EXT_INTERRUPT_MODULE STD_OFF /* Turns off all external interrupts */
+#define INT_INTERRUPT_MODULE STD_OFF /* Turns off all internal interrupts */
 #define INT_EN 1
 #define INT_DIS 0
 #define INT_ACTIVE 1

@@ -8,6 +8,7 @@
 
 #include "hal_tmr2.h"
 
+#if (TMR2_MODULE == STD_ON)
 uint8 preloaded_tmr2;
 
 /* @brief: Initialize the Timer2 module.
@@ -142,3 +143,4 @@ STD_ReturnType TMR2_write_PR_reg(const TMR2_t * tmr2, uint8 * wr_value){
 	}
 	return ret;
 }
+#endif

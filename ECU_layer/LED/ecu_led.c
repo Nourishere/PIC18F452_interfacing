@@ -7,6 +7,7 @@
 
 #include "ecu_led.h"
 
+#if (LED_MODULE == STD_ON)
 /*@brief: Initializes an LED.
  *@param: A pointer to a LED of type LED_t.
  *@return: E_OK if initialization is successful and E_NOT_Ok otherwise.
@@ -80,3 +81,4 @@ STD_ReturnType LED_toggle(LED_t *led){
 	}
 	return ret;
 }
+#endif

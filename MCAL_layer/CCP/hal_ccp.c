@@ -7,17 +7,11 @@
  */
 #include "hal_ccp.h"
 
+#if (CCP1_MODULE == STD_ON)
 /* The pin used in the ccp1 module */
 pin_config_t CCP1_pin = {
 	PORTC_I,
 	PIN2,
-	GPIO_OUT,	
-	GPIO_LOW	
-};
-/* The pin used in the ccp2 module */
-pin_config_t CCP2_pin = {
-	PORTB_I,
-	PIN3,
 	GPIO_OUT,	
 	GPIO_LOW	
 };
@@ -34,12 +28,14 @@ STD_ReturnType CCP1_initialize(const CCP1_t * ccp1){
 		/* Turn off the device */
 		CCP1_DIS();
 		/* Configure the interrupt */
+		#if (INT_CCP1== INT_EN && INT_INTERRUPT_MODULE == STD_ON)
 		#if (INT_PR == INT_EN)
 		ret = ret && INT_CCP1_init(ccp1 -> priority);
 		#elif (INT_PR == INT_DIS)
 		ret = ret && INT_CCP1_initialize(1); // Garbage value
 		#else 
 		ret = E_NOT_OK;
+		#endif
 		#endif
 		/* Configure the mode */
 		/** Capture mode **/
@@ -148,6 +144,140 @@ STD_ReturnType CCP1_initialize(const CCP1_t * ccp1){
 	return ret;
 }
 
+/* @brief: Deinitialize the CCP1 module.
+ * @param: A pointer to a struct of type CCP1_t.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType CCP1_deinitialize(const CCP1_t * ccp1){
+	STD_ReturnType ret = E_OK;
+	if(NULL == ccp1)
+		ret = E_NOT_OK;
+	else{
+		/* Turn off the module */
+		CCP1_DIS();	
+		/* Zero the PR2 and CCPR1L registers */
+		PR2 = 0x00;
+		CCPR1L = 0x00;
+		CCP1CON=0x00; /* reset the CCP1 control register */
+		/* Deinitialize the interrupt */
+		INT_CCP1_deinit();
+	}
+	return ret;
+}
+
+/* @brief: Set the duty cycle of the CCP1 module working in PWM mode. 
+ * @param: A pointer to a struct of type CCP1_t and a uint8 specifying the 
+ * 		   duty cycle as a percent (0% - 100%).
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType CCP1_PWM_set_duty_cycle(const CCP1_t * ccp1, uint8 duty_cycle){
+	STD_ReturnType ret = E_OK;
+	if(ccp1 == NULL|| ccp1 -> mode != CCP_PWM || duty_cycle > 100)
+		ret = E_NOT_OK;
+	else{
+		uint16 CCP1PR_val = (duty_cycle) / ( (ccp1 -> op_mode.pwm.timer2.prescaler) * (1/_XTAL_FREQ));		
+		CCPR1L = (uint8) (CCP1PR_val >> 2) ;
+		CCP1CONbits.DC1B0 = CCP1PR_val & 0x01;	
+		CCP1CONbits.DC1B1 = (CCP1PR_val >> 1) & 0x01;
+	}
+	return ret;
+}
+
+/* @brief: Set the PWM frequency for the CCP1 module.
+ * @param: A pointer to a struct of type CCP1_t and a uint32 for the frequency.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType CCP1_PWM_set_frequency(const CCP1_t * ccp1, uint32 freq){
+	STD_ReturnType ret = E_OK;
+	if(ccp1 == NULL || ccp1 -> mode != CCP_PWM)
+		ret = E_NOT_OK;
+	else{
+		PR2 = ((1/freq)/  (4 * (1/_XTAL_FREQ) * (ccp1 -> op_mode.pwm.timer2.prescaler))) - 1;
+	}
+	return ret;
+}
+
+/* @brief: Start the CCP1 timer by starting the corresponding timer. 
+ * @param: A pointer to a struct specifying the CCP1 module.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType CCP1_start(const CCP1_t * ccp1){
+	STD_ReturnType ret = E_OK;
+	if(NULL == ccp1)
+		ret = E_NOT_OK;
+	else{
+		switch(ccp1 -> mode){
+			case(CCP_Capture):
+				/* Turn off TMR1 or TMR3 */
+				if(ccp1 -> op_mode.cap.timer == TMR1)
+					TMR1_ON();
+				else if(ccp1 -> op_mode.cap.timer == TMR3)
+					TMR3_ON();
+				break;
+			case(CCP_Compare):
+				/* Turn off TMR1 or TMR3 */
+				if(ccp1 -> op_mode.comp.timer == TMR1)
+					TMR1_ON();
+				else if(ccp1 -> op_mode.comp.timer == TMR3)
+					TMR3_ON();
+				break;
+			case(CCP_PWM):
+				/* Turn off TMR2 */
+				TMR2_ON();
+				break;
+			default:
+				ret = E_NOT_OK;
+				break;
+		}	
+	}
+	return ret;
+}
+
+/* @brief: Stop the CCP1 module by stopping the 
+ * 		   timer used in either of the three modes.
+ * @param: A pointer to a struct of type CCP1_t.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType CCP1_stop(const CCP1_t * ccp1){
+	STD_ReturnType ret = E_OK;
+	if(NULL == ccp1)
+		ret = E_NOT_OK;
+	else{
+		switch(ccp1 -> mode){
+			case(CCP_Capture):
+				/* Turn off TMR1 or TMR3 */
+				if(ccp1 -> op_mode.cap.timer == TMR1)
+					TMR1_OFF();
+				else if(ccp1 -> op_mode.cap.timer == TMR3)
+					TMR3_OFF();
+				break;
+			case(CCP_Compare):
+				/* Turn off TMR1 or TMR3 */
+				if(ccp1 -> op_mode.comp.timer == TMR1)
+					TMR1_OFF();
+				else if(ccp1 -> op_mode.comp.timer == TMR3)
+					TMR3_OFF();
+				break;
+			case(CCP_PWM):
+				/* Turn off TMR2 */
+				TMR2_OFF();
+				break;
+			default:
+				ret = E_NOT_OK;
+				break;
+		}	
+	}
+	return ret;
+}
+#endif
+#if (CCP2_MODULE == STD_ON)
+/* The pin used in the ccp2 module */
+pin_config_t CCP2_pin = {
+	PORTB_I,
+	PIN3,
+	GPIO_OUT,	
+	GPIO_LOW	
+};
 /* @brief: Initialize the CCP2 module for a specified mode.
  * @param: A pointer to a struct of type CCP2_t.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -272,26 +402,6 @@ STD_ReturnType CCP2_initialize(const CCP2_t * ccp2){
 	}
 	return ret;
 }
-/* @brief: Deinitialize the CCP1 module.
- * @param: A pointer to a struct of type CCP1_t.
- * @return: E_OK upon success and E_NOT_OK otherwise.
- */
-STD_ReturnType CCP1_deinitialize(const CCP1_t * ccp1){
-	STD_ReturnType ret = E_OK;
-	if(NULL == ccp1)
-		ret = E_NOT_OK;
-	else{
-		/* Turn off the module */
-		CCP1_DIS();	
-		/* Zero the PR2 and CCPR1L registers */
-		PR2 = 0x00;
-		CCPR1L = 0x00;
-		CCP1CON=0x00; /* reset the CCP1 control register */
-		/* Deinitialize the interrupt */
-		INT_CCP1_deinit();
-	}
-	return ret;
-}
 /* @brief: Deinitialize the CCP2 module.
  * @param: A pointer to a struct of type CCP2_t.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -312,23 +422,6 @@ STD_ReturnType CCP2_deinitialize(const CCP2_t * ccp2){
 	}
 	return ret;
 }
-/* @brief: Set the duty cycle of the CCP1 module working in PWM mode. 
- * @param: A pointer to a struct of type CCP1_t and a uint8 specifying the 
- * 		   duty cycle as a percent (0% - 100%).
- * @return: E_OK upon success and E_NOT_OK otherwise.
- */
-STD_ReturnType CCP1_PWM_set_duty_cycle(const CCP1_t * ccp1, uint8 duty_cycle){
-	STD_ReturnType ret = E_OK;
-	if(ccp1 == NULL|| ccp1 -> mode != CCP_PWM || duty_cycle > 100)
-		ret = E_NOT_OK;
-	else{
-		uint16 CCP1PR_val = (duty_cycle) / ( (ccp1 -> op_mode.pwm.timer2.prescaler) * (1/_XTAL_FREQ));		
-		CCPR1L = (uint8) (CCP1PR_val >> 2) ;
-		CCP1CONbits.DC1B0 = CCP1PR_val & 0x01;	
-		CCP1CONbits.DC1B1 = (CCP1PR_val >> 1) & 0x01;
-	}
-	return ret;
-}
 /* @brief: Set the duty cycle of the CCP2 module working in PWM mode. 
  * @param: A pointer to a struct of type CCP2_t and a uint8 specifying the 
  * 		   duty cycle as a percent (0% - 100%).
@@ -346,19 +439,6 @@ STD_ReturnType CCP2_PWM_set_duty_cycle(const CCP2_t * ccp2, uint8 duty_cycle){
 	}
 	return ret;
 }
-/* @brief: Set the PWM frequency for the CCP1 module.
- * @param: A pointer to a struct of type CCP1_t and a uint32 for the frequency.
- * @return: E_OK upon success and E_NOT_OK otherwise.
- */
-STD_ReturnType CCP1_PWM_set_frequency(const CCP1_t * ccp1, uint32 freq){
-	STD_ReturnType ret = E_OK;
-	if(ccp1 == NULL || ccp1 -> mode != CCP_PWM)
-		ret = E_NOT_OK;
-	else{
-		PR2 = ((1/freq)/  (4 * (1/_XTAL_FREQ) * (ccp1 -> op_mode.pwm.timer2.prescaler))) - 1;
-	}
-	return ret;
-}
 /* @brief: Set the PWM frequency for the CCP2 module.
  * @param: A pointer to a struct of type CCP2_t and a uint32 for the frequency.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -369,41 +449,6 @@ STD_ReturnType CCP2_PWM_set_frequency(const CCP2_t * ccp2, uint32 freq){
 		ret = E_NOT_OK;
 	else{
 		PR2 = ((1/freq)/ (4 * (1/_XTAL_FREQ) * (ccp2 -> op_mode.pwm.timer2.prescaler))) - 1;
-	}
-	return ret;
-}
-/* @brief: Start the CCP1 timer by starting the corresponding timer. 
- * @param: A pointer to a struct specifying the CCP1 module.
- * @return: E_OK upon success and E_NOT_OK otherwise.
- */
-STD_ReturnType CCP1_start(const CCP1_t * ccp1){
-	STD_ReturnType ret = E_OK;
-	if(NULL == ccp1)
-		ret = E_NOT_OK;
-	else{
-		switch(ccp1 -> mode){
-			case(CCP_Capture):
-				/* Turn off TMR1 or TMR3 */
-				if(ccp1 -> op_mode.cap.timer == TMR1)
-					TMR1_ON();
-				else if(ccp1 -> op_mode.cap.timer == TMR3)
-					TMR3_ON();
-				break;
-			case(CCP_Compare):
-				/* Turn off TMR1 or TMR3 */
-				if(ccp1 -> op_mode.comp.timer == TMR1)
-					TMR1_ON();
-				else if(ccp1 -> op_mode.comp.timer == TMR3)
-					TMR3_ON();
-				break;
-			case(CCP_PWM):
-				/* Turn off TMR2 */
-				TMR2_ON();
-				break;
-			default:
-				ret = E_NOT_OK;
-				break;
-		}	
 	}
 	return ret;
 }
@@ -442,42 +487,7 @@ STD_ReturnType CCP2_start(const CCP2_t * ccp2){
 	}
 	return ret;
 }
-/* @brief: Stop the CCP1 module by stopping the 
- * 		   timer used in either of the three modes.
- * @param: A pointer to a struct of type CCP1_t.
- * @return: E_OK upon success and E_NOT_OK otherwise.
- */
-STD_ReturnType CCP1_stop(const CCP1_t * ccp1){
-	STD_ReturnType ret = E_OK;
-	if(NULL == ccp1)
-		ret = E_NOT_OK;
-	else{
-		switch(ccp1 -> mode){
-			case(CCP_Capture):
-				/* Turn off TMR1 or TMR3 */
-				if(ccp1 -> op_mode.cap.timer == TMR1)
-					TMR1_OFF();
-				else if(ccp1 -> op_mode.cap.timer == TMR3)
-					TMR3_OFF();
-				break;
-			case(CCP_Compare):
-				/* Turn off TMR1 or TMR3 */
-				if(ccp1 -> op_mode.comp.timer == TMR1)
-					TMR1_OFF();
-				else if(ccp1 -> op_mode.comp.timer == TMR3)
-					TMR3_OFF();
-				break;
-			case(CCP_PWM):
-				/* Turn off TMR2 */
-				TMR2_OFF();
-				break;
-			default:
-				ret = E_NOT_OK;
-				break;
-		}	
-	}
-	return ret;
-}
+
 /* @brief: Stop the CCP2 module by stopping the 
  * 		   timer used in either of the three modes.
  * @param: A pointer to a struct of type CCP2_t.
@@ -514,3 +524,4 @@ STD_ReturnType CCP2_stop(const CCP2_t * ccp2){
 	}
 	return ret;
 }
+#endif

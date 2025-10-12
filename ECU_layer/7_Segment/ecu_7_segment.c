@@ -6,6 +6,7 @@
  */
 #include "ecu_7_segment.h"
 
+#if (_7_SEGMENT_MODULE == STD_ON)
 /*@brief: Initializes a seven segment display.
  *@param: A pointer to a seven_segment_t type specifying a seven segment.
  *@return: E_OK if initialization is successful and E_NOT_OK otherwise.
@@ -93,3 +94,4 @@ static STD_ReturnType seven_segment_linit(const seven_segment_t *seg, pin_config
 	}
 	return ret;
 }
+#endif

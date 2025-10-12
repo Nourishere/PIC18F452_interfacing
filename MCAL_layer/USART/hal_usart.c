@@ -8,6 +8,7 @@
  */
 #include "hal_usart.h"
 
+#if (USART_MODULE == STD_ON)
 static STD_ReturnType USART_baud_initialize(const USART_Tx_t* usart_tx); 
 static STD_ReturnType USART_parity_generator(USART_parity parity, uint8 data, uint8* k);
 static STD_ReturnType USART_parity_checker(USART_parity parity, uint8 data, uint8* status);
@@ -445,3 +446,5 @@ static STD_ReturnType USART_parity_checker(USART_parity parity, uint8 data, uint
 	}
 	return ret;
 }
+#endif
+
