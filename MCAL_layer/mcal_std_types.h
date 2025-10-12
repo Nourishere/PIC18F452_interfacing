@@ -9,7 +9,7 @@
 #define	MCAL_STD_TYPES_H
 /**************** includes ******************/
 #include "std_libs.h"
-#include "compiler.h"
+
 /*************** macros ********************/
 #define _XTAL_FREQ 8000000 /* The defined crystal clock frequency */
 #define STD_HIGH 0x01
