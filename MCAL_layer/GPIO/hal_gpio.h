@@ -9,7 +9,6 @@
 #define	HAL_GPIO_H
 
 /**************** Includes ***********************/
-#include "../device_config.h"
 #include <xc.h>
 #include "../mcal_std_types.h"
 #include "hal_gpio_cfg.h"
@@ -26,7 +25,7 @@
 #define SET_BIT(REG,BIT_POS) (REG |= (1 << BIT_POS))
 #define CLR_BIT(REG,BIT_POS) (REG &= ~(1 << BIT_POS))
 #define TOGG_BIT(REG,BIT_POS) (REG ^= (1 << BIT_POS))
-#define READ_BIT(REG,BIT_POS) ((REG  >> BIT_POS) & BIT_MASK)
+#define READ_BIT(REG,BIT_POS) ((REG >> BIT_POS) & BIT_MASK)
 
 /*************** Data types **********************/
 typedef enum{
@@ -54,7 +53,6 @@ typedef enum{
 	 PIN6,
 	 PIN7
 }pins;
-
 typedef struct{
 	uint8 port :3;
 	uint8 pin  :3;
