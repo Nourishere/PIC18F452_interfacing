@@ -13,11 +13,9 @@
 #include "MCAL_layer/Interrupt/mcal_external_interrupt.h"
 #include "MCAL_layer/EEPROM/mcal_eeprom.h"
 /******** Data types ****************/
-extern LED_t LED_arr[10];
-extern uint16 ADC_output;
 /******* Function declarations ******/ 
 //I want to modify this for error checking later
-STD_ReturnType application_initialize();
+STD_ReturnType application_initialize(void);
 #endif	/* APPLICATION_H */
 void __RB_HIGH(void);
 void __RB_LOW(void);
