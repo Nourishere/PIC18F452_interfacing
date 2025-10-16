@@ -10,6 +10,7 @@
 #define	MCAL_INTERNAL_INTERRUPT_H
 /***** includes ********/
 #include "mcal_interrupt_config.h"
+
 /***** macros *********/
 /* Status of the ADC (EN/DIS) */
 #define INT_ADC_STATUS (PIE1bits.ADIE)
@@ -77,14 +78,14 @@
 
 #if (INT_TMR2 == INT_EN)
 /* Enable/Disable the TMR2 interrupt */
-#define INT_TMR2_EN() (PIE1bits.TMR1IE=1)
-#define INT_TMR2_DIS() (PIE1bits.TMR1IE=0)
+#define INT_TMR2_EN() (PIE1bits.TMR2IE=1)
+#define INT_TMR2_DIS() (PIE1bits.TMR2IE=0)
 /* Clear the TMR2 interrupt flag */
 #define INT_TMR2_CLRF() (PIR1bits.TMR2IF=0)
 /* Set the TMR2 priority */
 #if (INT_PR == INT_EN)
-#define INT_TMR2_HP() (IPR1bits.TMR1IP=1)
-#define INT_TMR2_LP() (IPR1bits.TMR1IP=0)
+#define INT_TMR2_HP() (IPR1bits.TMR2IP=1)
+#define INT_TMR2_LP() (IPR1bits.TMR2IP=0)
 #endif
 #endif
 
@@ -165,64 +166,67 @@
 #define INT_USART_RX_LP() (IPR1bits.RCIP=0)
 #endif
 #endif
+
 /***** Function prototypes *****/
-void ADC_ISR(void);
+
 #if (INT_ADC == INT_EN)
+void ADC_ISR(void);
 STD_ReturnType INT_ADC_init(uint8 priority);
 STD_ReturnType INT_ADC_deinit(void);
 STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result));
 #endif
-void TMR1_ISR(void);
+
 #if (INT_TMR1 == INT_EN)
+void TMR1_ISR(void);
 STD_ReturnType INT_TMR1_init(uint8 priority);
 STD_ReturnType INT_TMR1_deinit(void);
 STD_ReturnType INT_TMR1_set_callback_routine(void (*callback) (void));
 #endif
 
-void TMR2_ISR(void);
 #if (INT_TMR2 == INT_EN)
+void TMR2_ISR(void);
 STD_ReturnType INT_TMR2_init(uint8 priority);
 STD_ReturnType INT_TMR2_deinit(void);
 STD_ReturnType INT_TMR2_set_callback_routine(void (*callback) (void));
 #endif
 
-void TMR3_ISR(void);
 #if (INT_TMR3 == INT_EN)
+void TMR3_ISR(void);
 STD_ReturnType INT_TMR3_init(uint8 priority);
 STD_ReturnType INT_TMR3_deinit(void);
 STD_ReturnType INT_TMR3_set_callback_routine(void (*callback) (void));
 #endif
 
-void CCP1_ISR(void);
 #if (INT_CCP1 == INT_EN)
+void CCP1_ISR(void);
 STD_ReturnType INT_CCP1_init(uint8 priority);
 STD_ReturnType INT_CCP1_deinit(void);
 STD_ReturnType INT_CCP1_set_callback_routine(void (*callback) (void));
 #endif
 
-void CCP2_ISR(void);
 #if (INT_CCP2 == INT_EN)
+void CCP2_ISR(void);
 STD_ReturnType INT_CCP2_init(uint8 priority);
 STD_ReturnType INT_CCP2_deinit(void);
 STD_ReturnType INT_CCP2_set_callback_routine(void (*callback) (void));
 #endif
 
-void MSSP_ISR(void);
 #if(INT_MSSP == INT_EN)
+void MSSP_ISR(void);
 STD_ReturnType INT_MSSP_init(uint8 priority);
 STD_ReturnType INT_MSSP_deinit(void);
 STD_ReturnType INT_MSSP_set_callback_routine(void (*callback) (void));
 #endif
 
-void USART_Tx_ISR(void);
 #if(INT_MSSP == INT_EN)
+void USART_Tx_ISR(void);
 STD_ReturnType INT_USART_Tx_init(uint8 priority);
 STD_ReturnType INT_USART_Tx_deinit(void);
 STD_ReturnType INT_USART_Tx_set_callback_routine(void (*callback) (void));
 #endif
 
-void USART_Tx_ISR(void);
 #if(INT_MSSP == INT_EN)
+void USART_Tx_ISR(void);
 STD_ReturnType INT_USART_Rx_init(uint8 priority);
 STD_ReturnType INT_USART_Rx_deinit(void);
 STD_ReturnType INT_USART_Rx_set_callback_routine(void (*callback) (void));
