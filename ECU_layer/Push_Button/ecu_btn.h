@@ -9,7 +9,7 @@
 #define	ECU_BTN_H
 /* ******** includes ********* */
 #include "ecu_btn_cfg.h"
-#include "../../MCAL_layer/GPIO/hal_gpio.h"
+#include "../../MCAL_layer/GPIO/mcal_gpio.h"
 /* ******** data types ******* */
 typedef enum{
 	btn_pressed,

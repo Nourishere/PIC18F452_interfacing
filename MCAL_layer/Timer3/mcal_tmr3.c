@@ -1,11 +1,11 @@
 /* 
- * File:   hal_tmr3.c
+ * File:   mcal_tmr3.c
  * Author: nour
  *
  * Created on July 11, 2025, 11:11 PM
  */
 
-#include "hal_tmr3.h"
+#include "mcal_tmr3.h"
 
 #if (TMR3_MODULE == STD_ON)
 extern pin_config_t T1CLKI_pin; // Defined in hal_tmr3.c

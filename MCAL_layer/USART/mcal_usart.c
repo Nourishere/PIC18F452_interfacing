@@ -1,12 +1,12 @@
 /* 
- * File:   hal_usart.c
+ * File:   mcal_usart.c
  * Author: nour
  *
  * Created on August 16, 2025, 11:41 AM
  * @Brief: This source contains driver implementations
  * 		   for the USART module. 
  */
-#include "hal_usart.h"
+#include "mcal_usart.h"
 
 #if (USART_MODULE == STD_ON)
 static STD_ReturnType USART_baud_initialize(const USART_Tx_t* usart_tx); 

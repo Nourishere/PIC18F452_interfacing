@@ -1,12 +1,12 @@
 /* 
- * File:   hal_acd.c
+ * File:   mcal_acd.c
  * Brief: This is the device driver implementation for the ADC module.
  * ref: Check the header file hal_adc.h
  * Author: nour
  *
  * Created on May 16, 2025, 2:51 PM
  */
-#include "hal_adc.h"
+#include "mcal_adc.h"
 
 #if (ADC_MODULE == STD_ON)
 /* @brief: Initialize the ADC module.

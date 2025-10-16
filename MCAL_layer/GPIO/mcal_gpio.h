@@ -1,5 +1,5 @@
 /* 
- * File:   hal_gpio.h
+ * File:   mcal_gpio.h
  * Author: nour
  *
  * Created on October 23, 2024, 7:06 AM
@@ -11,7 +11,7 @@
 /**************** Includes ***********************/
 #include <xc.h>
 #include "../mcal_std_types.h"
-#include "hal_gpio_cfg.h"
+#include "mcal_gpio_cfg.h"
 
 /*************** Macros **************************/
 #define PORT_MAX_NUMBER 5

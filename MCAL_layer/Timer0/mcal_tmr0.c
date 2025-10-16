@@ -1,11 +1,11 @@
 /* 
- * File:   hal_tmr0.h
+ * File:   mcal_tmr0.c
  * Author: nour
  *
  * Created on June 27, 2025, 10:20 AM
  * @Brief: This source file contains the Timer0 driver implementation.
  */
-#include "hal_tmr0.h"
+#include "mcal_tmr0.h"
 
 #if (TMR0_MODULE == STD_ON)
 /* @Brief: A copy of the preloaded value defined in TMR0_t 

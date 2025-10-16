@@ -1,5 +1,5 @@
 /* 
- * File:   hal_tmr_cfg.h
+ * File:   mcal_tmr_cfg.h
  * Author: nour
  *
  * Created on July 3, 2025, 2:09 PM

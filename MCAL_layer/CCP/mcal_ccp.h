@@ -1,5 +1,5 @@
 /* 
- * File:   hal_ccp.h
+ * File:   mcal_ccp.h
  * Author: nour
  *
  * Created on July 23, 2025, 4:18 PM
@@ -14,10 +14,10 @@
 #include "mcal_ccp_cfg.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 #include "../Interrupt/mcal_interrupt_config.h"
-#include "../GPIO/hal_gpio.h"
-#include "../Timer1/hal_tmr1.h"
-#include "../Timer2/hal_tmr2.h"
-#include "../Timer3/hal_tmr3.h"
+#include "../GPIO/mcal_gpio.h"
+#include "../Timer1/mcal_tmr1.h"
+#include "../Timer2/mcal_tmr2.h"
+#include "../Timer3/mcal_tmr3.h"
 
 /**************** function macros **************/
 /* Disable the CCP1 module */

@@ -11,7 +11,7 @@
 /************ includes *****************/
 #include <xc.h>
 #include "../mcal_std_types.h"
-#include "../GPIO/hal_gpio.h"
+#include "../GPIO/mcal_gpio.h"
 /************ Macros *******************/
 #define EXT_INTERRUPT_MODULE STD_OFF /* Turns off all external interrupts */
 #define INT_INTERRUPT_MODULE STD_OFF /* Turns off all internal interrupts */

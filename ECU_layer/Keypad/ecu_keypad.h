@@ -8,7 +8,7 @@
 #ifndef ECU_KEYPAD_H
 #define	ECU_KEYPAD_H
 
-#include "../../MCAL_layer/GPIO/hal_gpio.h"
+#include "../../MCAL_layer/GPIO/mcal_gpio.h"
 
 /****** Macros *****************/
 #define KEY_ROWS 4

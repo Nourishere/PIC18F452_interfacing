@@ -1,5 +1,5 @@
 /* 
- * File:   hal_gpio_cfg.h
+ * File:   mcal_gpio_cfg.h
  * Author: nour
  *
  * Created on November 1, 2024, 6:56 AM

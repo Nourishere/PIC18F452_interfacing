@@ -1,5 +1,5 @@
 /* 
- * File:   hal_adc.h
+ * File:   mcal_adc.h
  * Brief: This is the header file for the ADC module.
  * 		  The PIC18F452 device contains only one ADC.
  * Author: nour
@@ -12,7 +12,7 @@
 /*** includes *****/
 #include <xc.h>
 #include "mcal_adc_cfg.h"
-#include "../GPIO/hal_gpio.h"
+#include "../GPIO/mcal_gpio.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 #include "../Interrupt/mcal_interrupt_config.h"  
 /*** macros *****/

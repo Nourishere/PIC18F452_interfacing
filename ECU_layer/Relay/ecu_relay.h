@@ -8,7 +8,7 @@
 #ifndef ECU_RELAY_H
 #define	ECU_RELAY_H
 /************ includes ****************/
-#include "../../MCAL_layer/GPIO/hal_gpio.h" 
+#include "../../MCAL_layer/GPIO/mcal_gpio.h" 
 #include "ecu_relay_cfg.h"
 /************ data types **************/
 typedef enum {

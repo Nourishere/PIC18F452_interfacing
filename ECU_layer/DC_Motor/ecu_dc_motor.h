@@ -8,7 +8,7 @@
 #ifndef ECU_DC_MOTOR_H
 #define	ECU_DC_MOTOR_H
 /******** includes *********/
-#include "../../MCAL_layer/GPIO/hal_gpio.h"
+#include "../../MCAL_layer/GPIO/mcal_gpio.h"
 /******** data types ******/
 typedef enum{
 	dc_motor_off,

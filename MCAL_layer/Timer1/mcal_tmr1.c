@@ -1,10 +1,10 @@
 /* 
- * File:   hal_tmr1.c
+ * File:   mcal_tmr1.c
  * Author: nour
  *
  * Created on July 3, 2025, 2:09 PM
  */
-#include "hal_tmr1.h"
+#include "mcal_tmr1.h"
 
 #if (TMR1_MODULE == STD_ON)
 /* @Brief: Preloaded value in the initialization.*/

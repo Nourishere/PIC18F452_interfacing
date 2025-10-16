@@ -1,5 +1,5 @@
 /* 
- * File:   hal_gpio.c
+ * File:   mcal_gpio.c
  * Author: nour
  *
  * Created on October 23, 2024, 6:42 AM
@@ -8,7 +8,7 @@
  * 	      digital inputs or digital outputs.
  */
 
-#include "hal_gpio.h"
+#include "mcal_gpio.h"
 
 #if(GPIO_MODULE == STD_ON)
 /*reference to data direction registers*/

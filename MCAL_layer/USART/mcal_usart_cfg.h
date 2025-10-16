@@ -1,5 +1,5 @@
 /* 
- * File:   hal_usart_cfg.h
+ * File:   mcal_usart_cfg.h
  * Author: nour
  *
  * Created on August 22, 2025, 7:56 PM

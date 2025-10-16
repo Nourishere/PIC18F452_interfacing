@@ -1,5 +1,5 @@
 /* 
- * File:   hal_tmr3.h
+ * File:   mcal_tmr3.h
  * Author: nour
  *
  * Created on July 11, 2025, 11:10 PM
@@ -9,8 +9,8 @@
 #define	HAL_TMR3_H
 /*********** includes ***************/
 #include <xc.h>
-#include "../hal_tmr_cfg.h"
-#include "../GPIO/hal_gpio.h"
+#include "../mcal_tmr_cfg.h"
+#include "../GPIO/mcal_gpio.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 #include "../Interrupt/mcal_interrupt_config.h" //includes other crucial headers 
 

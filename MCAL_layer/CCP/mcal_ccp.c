@@ -1,11 +1,11 @@
 /* 
- * File:   hal_ccp.c
+ * File:   mcal_ccp.c
  * Author: nour
  *
  * Created on July 23, 2025, 4:18 PM
  * @Brief: This source file contains the CCP module implementation.
  */
-#include "hal_ccp.h"
+#include "mcal_ccp.h"
 
 #if (CCP1_MODULE == STD_ON)
 /* The pin used in the ccp1 module */

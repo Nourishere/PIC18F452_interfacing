@@ -1,5 +1,5 @@
 /* 
- * File:   hal_usart.h
+ * File:   mcal_usart.h
  * Author: nour
  *
  * Created on August 16, 2025, 11:41 AM
@@ -15,8 +15,8 @@
 #define	HAL_USART_H
 
 /****************** include **********************/
-#include "hal_usart_cfg.h"
-#include "../GPIO/hal_gpio.h"
+#include "mcal_usart_cfg.h"
+#include "../GPIO/mcal_gpio.h"
 #include "../Interrupt/mcal_interrupt_config.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 

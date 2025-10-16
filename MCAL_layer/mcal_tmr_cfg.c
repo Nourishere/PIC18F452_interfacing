@@ -1,12 +1,12 @@
 /* 
- * File:   hal_tmr_cfg.c
+ * File:   mcal_tmr_cfg.c
  * Author: nour
  *
  * Created on August 15, 2025, 8:17 PM
  * @Brief: This source contains implementation of common
  * 		   routines used by all timer modules.
  */
-#include "hal_tmr_cfg.h"
+#include "mcal_tmr_cfg.h"
 
 /* @brief: Convert prescaler enum value to integer multiple value.
  * @param: A timer TMR_PRESC_SEL specifying the enum value and a pointer 

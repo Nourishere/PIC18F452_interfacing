@@ -1,12 +1,12 @@
 /* 
- * File:   hal_tmr2.c
+ * File:   mcal_tmr2.c
  * Author: nour
  *
  * Created on July 9, 2025, 6:46 PM
  * @note: Timer2 can only operate as a timer.
  */
 
-#include "hal_tmr2.h"
+#include "mcal_tmr2.h"
 
 #if (TMR2_MODULE == STD_ON)
 uint8 preloaded_tmr2;

@@ -9,6 +9,7 @@
 #define	ECU_LCD_H
 /********* includes *************/
 #include "../ecu_init.h"
+#include "../../MCAL_layer/GPIO/mcal_gpio.h"
 /*********  macros  *************/
 #define _4BIT_MODE 0
 #define _8BIT_MODE 1

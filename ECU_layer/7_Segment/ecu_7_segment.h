@@ -7,7 +7,7 @@
 #ifndef ECU_7_SEGMENT_H
 #define	ECU_7_SEGMENT_H
 /***************** includes ***************************/
-#include "../../MCAL_layer/GPIO/hal_gpio.h"
+#include "../../MCAL_layer/GPIO/mcal_gpio.h"
 /******************** macros **************************/
 #define OFF 0
 #define ON 1

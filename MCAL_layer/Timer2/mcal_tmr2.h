@@ -1,5 +1,5 @@
 /* 
- * File:   hal_tmr2.h
+ * File:   mcal_tmr2.h
  * Author: nour
  *
  * Created on July 9, 2025, 6:45 PM
@@ -11,7 +11,7 @@
 
 /******* includes ****************/
 #include <xc.h>
-#include "../hal_tmr_cfg.h"
+#include "../mcal_tmr_cfg.h"
 #include "../Interrupt/mcal_internal_interrupt.h"
 
 /******* macros ******************/
