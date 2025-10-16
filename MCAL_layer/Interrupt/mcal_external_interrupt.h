@@ -103,7 +103,7 @@ typedef enum{
 }INTx_index;
 
 typedef struct{
-	void (*ext_interrupt_handler) (void); /* use NULL if you do not want a callback */
+	volatile void (*ext_interrupt_handler) (void); /* use NULL if you do not want a callback */
 	pin_config_t Ipin;
 	INTx_edge edge;
 #if INT_PR == INT_EN
@@ -112,8 +112,8 @@ typedef struct{
 }INT_INTx_t;
 
 typedef struct{/* Index is given in Ipin */
-	void (*ext_interrupt_handler_high) (void); /* use NULL if you do not want a high-triggered (rising) callback */
-	void (*ext_interrupt_handler_low) (void); /* use NULL if you do not want a low-triggered (falling) callback */
+	volatile void (*ext_interrupt_handler_high) (void); /* use NULL if you do not want a high-triggered (rising) callback */
+	volatile void (*ext_interrupt_handler_low) (void); /* use NULL if you do not want a low-triggered (falling) callback */
 	pin_config_t Ipin;
 #if INT_PR == INT_EN
 	uint8 priority; /* macro defined */	
@@ -141,7 +141,7 @@ STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint);
 #if (INT_TMR0== INT_EN)
 STD_ReturnType INT_TMR0_init(uint8 priority);
 STD_ReturnType INT_TMR0_deinit(void);
-STD_ReturnType INT_TMR0_set_callback_routine(void (*callback) (void));
+STD_ReturnType INT_TMR0_set_callback_routine(volatile void (*callback) (void));
 #endif
 
 static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint);
