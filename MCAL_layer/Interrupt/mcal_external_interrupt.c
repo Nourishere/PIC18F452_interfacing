@@ -8,27 +8,27 @@
 
 #if (EXT_INTERRUPT_MODULE == STD_ON)
 /* Locally defined interrupt handling functions */
-void (*INT0_handler) (void) = NULL;
-void (*INT1_handler) (void) = NULL;
-void (*INT2_handler) (void) = NULL;
-/* low handlers are for rising edges while
- * low are for falling edges 
+volatile void (*INT0_handler) (void) = NULL;
+volatile void (*INT1_handler) (void) = NULL;
+volatile void (*INT2_handler) (void) = NULL;
+/* @note: High handlers are for rising edges while
+ * low are for falling edges.
+ *
  * If you wish to use the RB interrupts as
- * change interrupts, use NULL for both callback
+ * change interrupts, use NULL for both callback.
  */
-void (*RB4_handler_low)  (void) = NULL;
-void (*RB4_handler_high) (void) = NULL;
-void (*RB5_handler_high) (void) = NULL;
-void (*RB5_handler_low)  (void) = NULL;
-void (*RB6_handler_high) (void) = NULL;
-void (*RB6_handler_low)  (void) = NULL;
-void (*RB7_handler_high) (void) = NULL;
-void (*RB7_handler_low)  (void) = NULL;
-
-void (*TMR0_callback) (void) = NULL;
-extern volatile uint16 preloaded;
+volatile void (*RB4_handler_low)  (void) = NULL;
+volatile void (*RB4_handler_high) (void) = NULL;
+volatile void (*RB5_handler_high) (void) = NULL;
+volatile void (*RB5_handler_low)  (void) = NULL;
+volatile void (*RB6_handler_high) (void) = NULL;
+volatile void (*RB6_handler_low)  (void) = NULL;
+volatile void (*RB7_handler_high) (void) = NULL;
+volatile void (*RB7_handler_low)  (void) = NULL;
 
 #if (INT_TMR0== INT_EN)
+volatile void (*TMR0_callback) (void) = NULL;
+extern volatile uint16 preloaded;
 void TMR0_ISR(void){
 	/* Flag is already clear */
 	/* Preload the registers */
@@ -40,7 +40,7 @@ void TMR0_ISR(void){
 	T0CONbits.TMR0ON=1; // Turn on the module 
 }
 #endif
-#if INT_INTx == INT_EN
+#if (INT_INTx == INT_EN)
 void INT0_ISR(){
 	INT_INT0_CLRF();
 	if(INT0_handler)
@@ -57,7 +57,7 @@ void INT2_ISR(){
 		INT2_handler(); 
 }
 #endif
-#if INT_PORTB == INT_EN
+#if (INT_PORTB == INT_EN)
 void RB4_ISR(uint8 fl){
 	INT_RB_CLRF();
 	if(fl){
@@ -108,28 +108,28 @@ void RB7_ISR(uint8 fl){
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_INTx == INT_EN
+#if (INT_INTx == INT_EN)
 STD_ReturnType INT_INTx_initialize(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint || E_NOT_OK == INT_INTx_check_access(lint))
 		ret = E_NOT_OK;
 	else{
 		/* disables INTx */
-		ret = INT_INTx_disable(lint)&&
+		ret = INT_INTx_disable(lint);
 		/* clear flag */
-		INT_INTx_clear_flag(lint)&&
+		ret &= INT_INTx_clear_flag(lint);
 		/* initialize interrupt pin */
-		GPIO_pin_direction_initialize(&(lint -> Ipin))&&
+		ret &= GPIO_pin_direction_initialize(&(lint -> Ipin));
 		/* initialize interrupt callback routine */
-		INT_INTx_set_callback_routine(lint)&& 
+		ret &= INT_INTx_set_callback_routine(lint);
 		/* initialize priority */
 #if (INT_PR == INT_EN)
-		INT_INTx_priority_initialize(lint)&&
+		ret &= INT_INTx_priority_initialize(lint);
 #endif
 		/* initialize edge */
-		INT_INTx_edge_initialize(lint)&&
+		ret &= INT_INTx_edge_initialize(lint);
 		/* enable INTx */
-		INT_INTx_enable(lint);
+		ret &= INT_INTx_enable(lint);
 	}
 	return ret;
 }
@@ -143,9 +143,9 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 	INTx_index ind = NA;
 	if(NULL == lint)
 		ret = E_NOT_OK;
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 	/* Check for invalid priority */
-	else if(lint -> priority != INT_PHIGH || lint -> priority != INT_PLOW)
+	else if((lint -> priority != INT_PHIGH) && (lint -> priority != INT_PLOW))
 		ret = E_NOT_OK;
 #endif
 	else{
@@ -153,7 +153,7 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 		switch(ind) {
 			case(INT0_I):
 				INT_INT0_EN();	
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
                 INT_GHPEN();
 #else
 				INT_GEN();
@@ -161,7 +161,7 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 				break;	
 			case(INT1_I):
 				INT_INT1_EN();	
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 				if (lint -> priority == INT_PHIGH)
                                     INT_GHPEN();
                 else{
@@ -175,7 +175,7 @@ STD_ReturnType INT_INTx_enable(const INT_INTx_t *lint){
 				break;	
 			case(INT2_I):
 				INT_INT2_EN();
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 				if (lint -> priority == INT_PHIGH)
                                     INT_GHPEN();
                 else{
@@ -228,18 +228,18 @@ STD_ReturnType INT_INTx_disable(const INT_INTx_t *lint){
  *@param: A pointer to a struct of type INT_RBx_t which describes the RBx interrupt pins.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_PORTB == INT_EN
+#if (INT_PORTB == INT_EN)
 STD_ReturnType INT_RBx_enable(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
 		ret = E_NOT_OK;
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 	else if(lint -> priority != INT_PHIGH || lint -> priority != INT_PLOW)
 		ret = E_NOT_OK;
 #endif
 	else{
 		INT_RB_EN();
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 	if (lint -> priority == INT_PHIGH)
             INT_GHPEN();
     else{
@@ -294,14 +294,15 @@ STD_ReturnType INT_RBx_initialize(const INT_RBx_t *lint){
 	return ret;
 }
 #endif
+
 /** Helper functions **/
-#if INT_PR == INT_EN
+#if (INT_PR == INT_EN)
 /*@brief:(H) Initialize the priority bits of a INTx interrupt pin.
  *		 (Priority preconfiguration should be enabled)
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_INTx == INT_EN
+#if (INT_INTx == INT_EN)
 static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	INTx_index ind = NA;
@@ -353,7 +354,7 @@ static STD_ReturnType INT_INTx_priority_initialize(const INT_INTx_t *lint){
  *@param: A pointer to a struct of type INT_RBx_t which describes an RBx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_PORTB == INT_EN
+#if (INT_PORTB == INT_EN)
 static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
@@ -380,7 +381,7 @@ static STD_ReturnType INT_RBx_priority_initialize(const INT_RBx_t *lint){
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_INTx == INT_EN
+#if (INT_INTx == INT_EN)
 static STD_ReturnType INT_INTx_edge_initialize(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	INTx_index ind = NA;
@@ -483,7 +484,7 @@ static STD_ReturnType INT_INTx_check_access(const INT_INTx_t *lint){
  *@param: A pointer to a struct of type INT_RBx_t which describes an RBx change interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_PORTB == INT_EN
+#if (INT_PORTB == INT_EN)
 static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint || (lint -> Ipin.port != PORTB_I) || (lint -> Ipin.pin < PIN3)
@@ -493,12 +494,13 @@ static STD_ReturnType INT_RBx_check_access(const INT_RBx_t *lint){
 	return ret;
 }
 #endif
+
 /*@brief:(H) Checks on the callback function within the INT_INTx_t struct. If there is a function
  * 		  given, it is aliased with one of the three predefined functions in this source file's header.
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_INTx == INT_EN
+#if (INT_INTx == INT_EN)
 static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
 	STD_ReturnType ret = E_OK;
 	INTx_index ind = NA;
@@ -526,12 +528,13 @@ static STD_ReturnType INT_INTx_set_callback_routine(const INT_INTx_t *lint){
 	return ret;
 }
 #endif
+
 /*@brief:(H) Checks on the callback function within the INT_RBx_t struct. If there is a function
  * 		  given, it is aliased with one of the three predefined functions in this source file's header.
  *@param: A pointer to a struct of type INT_RBx_t which describes an RBx change interrupt pin.
  *@return: E_OK upon success and E_NOT_OK otherwise.
 */
-#if INT_PORTB == INT_EN
+#if (INT_PORTB == INT_EN)
 static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lint)
@@ -562,11 +565,12 @@ static STD_ReturnType INT_RBx_set_callback_routine(const INT_RBx_t *lint){
 	return ret;
 }
 #endif
+
 /*@brief:(H) Find the index of an INTx interrupt from its pin configuration. 
  *@param: A pointer to a struct of type INT_INTx_t which describes an INTx interrupt pin.
  *@return: Returns the index of the INTx interrupt upon success and NA (-1) otherwise. 
 */
-#if INT_INTx == INT_EN
+#if (INT_INTx == INT_EN)
 static INTx_index INT_INTx_get_index(const INT_INTx_t *lint){
 	INTx_index ind = NA;	
 	if(NULL == lint){
@@ -592,7 +596,6 @@ static INTx_index INT_INTx_get_index(const INT_INTx_t *lint){
 }
 #endif
 
-/************** TMR0 **********************/
 #if (INT_TMR0 == INT_EN)
 /* @Brief: This routine initializes the interrupt feature for the Timer0 module.
  * @Param: A uint8 representing the priority of the Timer0 module.
@@ -628,7 +631,7 @@ STD_ReturnType INT_TMR0_init(uint8 priority){
 	return ret;
 }
 
-/* @Brief: Deinitialize the timer0 interrupt feature.
+/* @Brief: Deinitialize the Timer0 interrupt feature.
  * @Param: None
  * @Return: E_OK upon success and E_NOT_OK otherwise.
  */
@@ -646,11 +649,10 @@ STD_ReturnType INT_TMR0_deinit(void){
  * @Return: E_OK upcon success and E_NOT_OK otherwise
  * @Notes:
  */
-STD_ReturnType INT_TMR0_set_callback_routine(void (*callback) (void)){
+STD_ReturnType INT_TMR0_set_callback_routine(volatile void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 		TMR0_callback = callback;	
 	return ret;
 }
-
 #endif
 #endif
