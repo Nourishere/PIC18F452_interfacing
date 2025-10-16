@@ -32,20 +32,20 @@
       </logicalFolder>
       <logicalFolder name="MCAL_layer" displayName="MCAL_layer" projectFiles="true">
         <logicalFolder name="ADC" displayName="ADC" projectFiles="true">
-          <itemPath>MCAL_layer/ADC/hal_adc.h</itemPath>
           <itemPath>MCAL_layer/ADC/mcal_adc_cfg.h</itemPath>
+          <itemPath>MCAL_layer/ADC/mcal_adc.h</itemPath>
         </logicalFolder>
         <logicalFolder name="CCP" displayName="CCP" projectFiles="true">
-          <itemPath>MCAL_layer/CCP/hal_ccp.h</itemPath>
           <itemPath>MCAL_layer/CCP/mcal_ccp_cfg.h</itemPath>
+          <itemPath>MCAL_layer/CCP/mcal_ccp.h</itemPath>
         </logicalFolder>
         <logicalFolder name="EEPROM" displayName="EEPROM" projectFiles="true">
           <itemPath>MCAL_layer/EEPROM/mcal_eeprom.h</itemPath>
           <itemPath>MCAL_layer/EEPROM/mcal_eeprom_cfg.h</itemPath>
         </logicalFolder>
         <logicalFolder name="GPIO" displayName="GPIO" projectFiles="true">
-          <itemPath>MCAL_layer/GPIO/hal_gpio.h</itemPath>
-          <itemPath>MCAL_layer/GPIO/hal_gpio_cfg.h</itemPath>
+          <itemPath>MCAL_layer/GPIO/mcal_gpio.h</itemPath>
+          <itemPath>MCAL_layer/GPIO/mcal_gpio_cfg.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Interrupt" displayName="Interrupt" projectFiles="true">
           <itemPath>MCAL_layer/Interrupt/mcal_interrupt_config.h</itemPath>
@@ -58,25 +58,25 @@
           <itemPath>MCAL_layer/MSSP/mcal_mssp_cfg.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer0" displayName="Timer0" projectFiles="true">
-          <itemPath>MCAL_layer/Timer0/hal_tmr0.h</itemPath>
+          <itemPath>MCAL_layer/Timer0/mcal_tmr0.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer1" displayName="Timer1" projectFiles="true">
-          <itemPath>MCAL_layer/Timer1/hal_tmr1.h</itemPath>
+          <itemPath>MCAL_layer/Timer1/mcal_tmr1.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer2" displayName="Timer2" projectFiles="true">
-          <itemPath>MCAL_layer/Timer2/hal_tmr2.h</itemPath>
+          <itemPath>MCAL_layer/Timer2/mcal_tmr2.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer3" displayName="Timer3" projectFiles="true">
-          <itemPath>MCAL_layer/Timer3/hal_tmr3.h</itemPath>
+          <itemPath>MCAL_layer/Timer3/mcal_tmr3.h</itemPath>
         </logicalFolder>
         <logicalFolder name="USART" displayName="USART" projectFiles="true">
-          <itemPath>MCAL_layer/USART/hal_usart.h</itemPath>
-          <itemPath>MCAL_layer/USART/hal_usart_cfg.h</itemPath>
+          <itemPath>MCAL_layer/USART/mcal_usart_cfg.h</itemPath>
+          <itemPath>MCAL_layer/USART/mcal_usart.h</itemPath>
         </logicalFolder>
         <itemPath>MCAL_layer/mcal_std_types.h</itemPath>
         <itemPath>MCAL_layer/std_libs.h</itemPath>
         <itemPath>MCAL_layer/device_config.h</itemPath>
-        <itemPath>MCAL_layer/hal_tmr_cfg.h</itemPath>
+        <itemPath>MCAL_layer/mcal_tmr_cfg.h</itemPath>
       </logicalFolder>
       <itemPath>application.h</itemPath>
     </logicalFolder>
@@ -118,16 +118,16 @@
       </logicalFolder>
       <logicalFolder name="MCAL_layer" displayName="MCAL_layer" projectFiles="true">
         <logicalFolder name="ADC" displayName="ADC" projectFiles="true">
-          <itemPath>MCAL_layer/ADC/hal_adc.c</itemPath>
+          <itemPath>MCAL_layer/ADC/mcal_adc.c</itemPath>
         </logicalFolder>
         <logicalFolder name="CCP" displayName="CCP" projectFiles="true">
-          <itemPath>MCAL_layer/CCP/hal_ccp.c</itemPath>
+          <itemPath>MCAL_layer/CCP/mcal_ccp.c</itemPath>
         </logicalFolder>
         <logicalFolder name="EEPROM" displayName="EEPROM" projectFiles="true">
           <itemPath>MCAL_layer/EEPROM/mcal_eeprom.c</itemPath>
         </logicalFolder>
         <logicalFolder name="GPIO" displayName="GPIO" projectFiles="true">
-          <itemPath>MCAL_layer/GPIO/hal_gpio.c</itemPath>
+          <itemPath>MCAL_layer/GPIO/mcal_gpio.c</itemPath>
         </logicalFolder>
         <logicalFolder name="Interrupt" displayName="Interrupt" projectFiles="true">
           <itemPath>MCAL_layer/Interrupt/mcal_internal_interrupt.c</itemPath>
@@ -138,22 +138,22 @@
           <itemPath>MCAL_layer/MSSP/mcal_mssp.c</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer0" displayName="Timer0" projectFiles="true">
-          <itemPath>MCAL_layer/Timer0/hal_tmr0.c</itemPath>
+          <itemPath>MCAL_layer/Timer0/mcal_tmr0.c</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer1" displayName="Timer1" projectFiles="true">
-          <itemPath>MCAL_layer/Timer1/hal_tmr1.c</itemPath>
+          <itemPath>MCAL_layer/Timer1/mcal_tmr1.c</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer2" displayName="Timer2" projectFiles="true">
-          <itemPath>MCAL_layer/Timer2/hal_tmr2.c</itemPath>
+          <itemPath>MCAL_layer/Timer2/mcal_tmr2.c</itemPath>
         </logicalFolder>
         <logicalFolder name="Timer3" displayName="Timer3" projectFiles="true">
-          <itemPath>MCAL_layer/Timer3/hal_tmr3.c</itemPath>
+          <itemPath>MCAL_layer/Timer3/mcal_tmr3.c</itemPath>
         </logicalFolder>
         <logicalFolder name="USART" displayName="USART" projectFiles="true">
-          <itemPath>MCAL_layer/USART/hal_usart.c</itemPath>
+          <itemPath>MCAL_layer/USART/mcal_usart.c</itemPath>
         </logicalFolder>
         <itemPath>MCAL_layer/device_config.c</itemPath>
-        <itemPath>MCAL_layer/hal_tmr_cfg.c</itemPath>
+        <itemPath>MCAL_layer/mcal_tmr_cfg.c</itemPath>
       </logicalFolder>
       <itemPath>application.c</itemPath>
     </logicalFolder>
