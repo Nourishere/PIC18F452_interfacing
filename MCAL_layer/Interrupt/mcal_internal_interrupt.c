@@ -74,7 +74,7 @@ STD_ReturnType INT_ADC_deinit(void){
  */
 STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result)){
 	STD_ReturnType ret = E_OK;
-		ADC_callback = callback;	
+	ADC_callback = callback;	
 	return ret;
 }
 #endif
@@ -358,6 +358,7 @@ STD_ReturnType INT_CCP2_init(uint8 priority){
 #endif
 	return ret;
 }
+
 /* @brief: Deinitialize the CCP2 interrupt module.
  * @param: Nothing
  * @return: E_OK
@@ -368,6 +369,7 @@ STD_ReturnType INT_CCP2_deinit(void){
 	INT_CCP2_DIS();
 	return ret;
 }
+
 /* @brief: Set the callback function for the CCP2 interrupt module.
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -415,6 +417,7 @@ STD_ReturnType INT_MSSP_init(uint8 priority){
 #endif
 	return ret;
 }
+
 /* @brief: Deinitialize the MSSP interrupt module.
  * @param: Nothing
  * @return: E_OK
@@ -425,6 +428,7 @@ STD_ReturnType INT_MSSP_deinit(void){
 	INT_MSSP_DIS();
 	return ret;
 }
+
 /* @brief: Set the callback function for the MSSP interrupt module.
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -434,6 +438,7 @@ STD_ReturnType INT_MSSP_set_callback_routine(void (*callback) (void)){
 	MSSP_callback = callback;
 	return ret;
 }
+
 #endif
 #if (INT_USART_TX == INT_EN)
 void (*USART_Tx_callback) (void) = NULL;
@@ -471,6 +476,7 @@ STD_ReturnType INT_USART_Tx_init(uint8 priority){
 #endif
 	return ret;
 }
+
 /* @brief: Deinitialize the USART Tx interrupt module.
  * @param: Nothing
  * @return: E_OK
@@ -481,6 +487,7 @@ STD_ReturnType INT_USART_Tx_deinit(void){
 	INT_USART_TX_DIS();
 	return ret;
 }
+
 /* @brief: Set the callback function for the USART Tx interrupt module.
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
@@ -528,6 +535,7 @@ STD_ReturnType INT_USART_Rx_init(uint8 priority){
 #endif
 	return ret;
 }
+
 /* @brief: Deinitialize the USART Rx interrupt module.
  * @param: Nothing
  * @return: E_OK
@@ -538,6 +546,7 @@ STD_ReturnType INT_USART_Rx_deinit(void){
 	INT_USART_RX_DIS();
 	return ret;
 }
+
 /* @brief: Set the callback function for the USART Rx interrupt module.
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
