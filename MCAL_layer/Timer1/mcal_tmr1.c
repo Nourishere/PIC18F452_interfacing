@@ -6,9 +6,10 @@
  */
 #include "mcal_tmr1.h"
 
-#if (TMR1_MODULE == STD_ON)
 /* @Brief: Preloaded value in the initialization.*/
 uint16 preloaded_tmr1;
+
+#if (TMR1_MODULE == STD_ON)
 
 /* @Brief: A pin_config_t struct to be used to 
  * 		   initialize the counter mode pin.

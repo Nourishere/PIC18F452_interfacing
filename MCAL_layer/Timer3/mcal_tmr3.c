@@ -7,9 +7,10 @@
 
 #include "mcal_tmr3.h"
 
+uint16 preloaded_tmr3;
+
 #if (TMR3_MODULE == STD_ON)
 extern pin_config_t T1CLKI_pin; // Defined in hal_tmr3.c
-uint16 preloaded_tmr3;
 
 /* @Brief: This routine initializes the Timer3 module.
  * @Param: A pointer to a stuct of type TMR3_t representing the Timer0 module.

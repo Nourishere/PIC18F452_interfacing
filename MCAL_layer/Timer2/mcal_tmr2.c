@@ -8,8 +8,9 @@
 
 #include "mcal_tmr2.h"
 
-#if (TMR2_MODULE == STD_ON)
 uint8 preloaded_tmr2;
+
+#if (TMR2_MODULE == STD_ON)
 
 /* @brief: Initialize the Timer2 module.
  * @param: A pointer to a struct of type TMR2_t.

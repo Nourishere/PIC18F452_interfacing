@@ -7,11 +7,12 @@
  */
 #include "mcal_tmr0.h"
 
+uint16 volatile preloaded;
+
 #if (TMR0_MODULE == STD_ON)
 /* @Brief: A copy of the preloaded value defined in TMR0_t 
  * 		   used to preloaded the register on overflow.
  */
-uint16 volatile preloaded;
 
 /* @Brief: A pin_config_t struct to be used to 
  * 		   initialize the counter mode pin 
