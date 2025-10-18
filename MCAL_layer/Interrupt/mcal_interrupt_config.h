@@ -46,9 +46,9 @@
 /* CCP2 interrupt config */
 #define INT_CCP2 INT_EN
 /* USART Tx interrupt config */
-#define INT_USART_TX INT_EN
+#define INT_USART_TX INT_DIS
 /* USART Rx interrupt config */
-#define INT_USART_RX INT_EN
+#define INT_USART_RX INT_DIS
 /* MSSP interrupt config */
 #define INT_MSSP INT_EN
 /********* function-like macros ********/
