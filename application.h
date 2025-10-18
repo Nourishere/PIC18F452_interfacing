@@ -10,9 +10,9 @@
 /******** Includes ******************/
 #include "ECU_layer/ecu_init.h"
 #include "MCAL_layer/std_libs.h"
-#include "MCAL_layer/Interrupt/mcal_external_interrupt.h"
-#include "MCAL_layer/EEPROM/mcal_eeprom.h"
+
 /******** Data types ****************/
+
 /******* Function declarations ******/ 
 //I want to modify this for error checking later
 STD_ReturnType application_initialize(void);
