@@ -6,9 +6,9 @@
  * @Brief: This header contains driver configurations 
  * 		   for the Universal Synchronous Asynchronous 
  * 		   Receiver Transmitter (USART) module.
- * 		   The USART can work in asynchronous mode, for 
+ * 		   The USART can work in asynchronous mode for 
  * 		   connections with outside devices and in synchronous mode
- * 		   for connections with peripherals
+ * 		   for connections with peripherals.
  */
 
 #ifndef HAL_USART_H
@@ -82,15 +82,20 @@
 
 /*************** data types *******************/
 typedef enum{
-	USART_even,
+	USART_even=0x0A,
 	USART_odd
 }USART_parity;
 typedef enum{
-	USART_single,
+	USART_single=0x0A,
 	USART_continous
 }USART_reception_mode;
+/* @note: Low speed and high speed modes use different formulas.
+ * 	      
+ * 	      It might be better to use high speed mode even for low
+ * 	      baud rate as it offers higher accuracy.
+ */
 typedef enum{
-	USART_low_speed,
+	USART_low_speed=0x0A,
 	USART_high_speed
 }USART_baud_mode;
 typedef enum{
@@ -122,6 +127,7 @@ typedef struct{
 #endif
 #endif
 }USART_Tx_t;
+
 typedef struct{
 #if(INT_USART_RX == INT_EN)
 	void (*USART_Rx_interrupt_handler) (void); // Use NULL if not needed
@@ -133,7 +139,9 @@ typedef struct{
 	uint32 baud_rate;
 	/* @note: Common values for the baud rate are 4800, 9600, 19200, 
      * 		  57600, and 115200. */
+#if (USART_MODE == _SYNC_MASTER || USART_MOD == _SYNC_SLAVE)
 	USART_reception_mode reception;
+#endif
 #if (_9BIT == EN)
 	uint8 _9th:1;
 #if (USART_PARITY == _ON)
@@ -148,6 +156,7 @@ STD_ReturnType USART_Rx_initialize(const USART_Rx_t* usart_rx);
 STD_ReturnType USART_send_raw(const USART_Tx_t* usart_tx, uint16 data);
 STD_ReturnType USART_send_string(const USART_Tx_t* usart_tx, char* str);
 STD_ReturnType USART_send_char(const USART_Tx_t* usart_tx, char character);
+STD_ReturnType USART_receive_raw(const USART_Rx_t* usart_rx, uint16* data);
 STD_ReturnType USART_receive_string(USART_Rx_t* usart_rx, char* str);
 STD_ReturnType USART_receive_char(USART_Rx_t* usart_rx, char* character);
 
