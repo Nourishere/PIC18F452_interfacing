@@ -50,7 +50,7 @@
 /* USART Rx interrupt config */
 #define INT_USART_RX INT_DIS
 /* MSSP interrupt config */
-#define INT_MSSP INT_EN
+#define INT_MSSP INT_DIS
 /********* function-like macros ********/
 
 /* Macro to check on RBx flags and choose ISR */
