@@ -9,14 +9,49 @@
 #include "mcal_interrupt_manager.h"
 
 static volatile uint8 RB4f=1,RB5f=1,RB6f=1,RB7f=1;
+volatile uint8 Next_Transmit_Byte;
+volatile uint8 I2C_Received_Byte;
+volatile uint8 I2C_Transmit_Byte;
+
 #if (INT_PR == INT_EN)
 void __interrupt() InterruptManager(void){
 #if (INT_INTERRUPT_MODULE == STD_ON)
 	#if (INT_MSSP == INT_EN)
-		if(INT_MSSP_STATUS == INT_EN && INT_MSSP_F == INT_HIGH){
-			INT_MSSP_CLRF();
-			MSSP_ISR();
+	if(INT_MSSP_STATUS == INT_EN && INT_MSSP_F == INT_HIGH){
+		if (!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+			// MASTER WRITE → Address + Write received
+			volatile uint8_t dummy = SSPBUF; // Clear BF
+			SSPCON1bits.CKP = 1;            // Release clock
 		}
+		else if (SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+			// MASTER WRITE → Data byte received
+			uint8_t received = SSPBUF;
+			SSPCON1bits.CKP = 1; // Release clock
+
+			// Store or handle the received byte
+			I2C_Received_Byte = received;
+		}
+		else if (!SSPSTATbits.D_nA && SSPSTATbits.R_nW) {
+			// MASTER READ → Master requests data
+			volatile uint8_t dummy = SSPBUF; // Clear BF
+			SSPBUF = I2C_Transmit_Byte;      // Load data to send
+			SSPCON1bits.CKP = 1;             // Release clock
+		}
+		else if (SSPSTATbits.D_nA && SSPSTATbits.R_nW) {
+			// MASTER READ → Data sent, prepare next byte if needed
+			if (!SSPSTATbits.BF)
+				SSPBUF = Next_Transmit_Byte; // Optional: stream more data
+			SSPCON1bits.CKP = 1;
+		}
+		// Handle overflow/collision if any
+		if (SSPCON1bits.SSPOV || SSPCON1bits.WCOL) {
+			volatile uint8_t dummy = SSPBUF;
+			SSPCON1bits.SSPOV = 0;
+			SSPCON1bits.WCOL = 0;
+			SSPCON1bits.CKP = 1;
+		}
+    }
+
 	#endif
 	#if (INT_CCP1 == INT_EN)
 		if(INT_CCP1_STATUS == INT_EN && INT_CCP1_F == INT_HIGH){
