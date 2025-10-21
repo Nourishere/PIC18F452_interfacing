@@ -359,6 +359,13 @@ STD_ReturnType MSSP_I2C_initialize(const MSSP_I2C_t * i2c){
 		SSPADD = MSSP_I2C_BRG_cfg(i2c -> clk_speed);
 
 #elif (MSSP_I2C_MODE == MSSP_I2C_SLAVE)
+		/* Set the configuration for slave mode */
+		if(i2c -> bit_mode == _7BIT)
+			MSSP_7BIT();
+		else if(i2c -> bit_mode == _10BIT)
+			MSSP_10BIT();
+		/* Set the address */
+		SSPADD = (uint8)(i2c->address << 1);
 		/* Set SCL and SDA as inputs */
 		ret = gpio_pin_direction_initialize(&(SCL_in));
 		ret = ret && gpio_pin_direction_initialize(&(SDA_in));
@@ -752,6 +759,7 @@ STD_ReturnType MSSP_I2C_MasterWriteRead(const MSSP_I2C_t* i2c, uint16 addr, cons
 	}
 	return ret;
 }
+
 /* @brief:(H) Calculate the Baud rate generator (BRG) value given  
  * 	      the intended SCL frequency.  
  * @param: A type MSSP_I2C_speed specifying all possible frequencies
@@ -764,8 +772,79 @@ uint8 MSSP_I2C_BRG_cfg(MSSP_I2C_speed SCL_freq){
 	BRG_val = (_XTAL_FREQ / (SCL_freq * 4.0)) - 1.0; 		
 	return ((uint8) BRG_val);	
 }
-#elif(MSSP_I2C_MODE == MSSP_I2C_SLAVE)
 
+#elif(MSSP_I2C_MODE == MSSP_I2C_SLAVE)
+/* @brief: Read a byte as a slave from a master.
+ * @param: A pointer to a struct of type MSSP_I2C_t.
+ * 	       A pointer to a uint8 to hold the read data.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType MSSP_I2C_SlaveRead(const MSSP_I2C_t* i2c, uint8* read){
+	STD_ReturnType ret = E_OK;
+	int dummy;
+    if (NULL == i2c || NULL == read)
+        return E_NOT_OK;
+    // Wait for flag (Address or Data received)
+    while (!I2C_FLAG);
+    I2C_FLAG = 0;
+    if (!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+        // MASTER Writes → Master sends address 
+        // Address + Write
+        dummy = SSPBUF;      // Clear BF
+        SSPCON1bits.CKP = 1;         // Release clock
+    }
+    else if (SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+        // Data received from master
+        *read = SSPBUF;              // Read byte
+        SSPCON1bits.CKP = 1;         // Release clock
+    }
+    // Handle overflow/collision
+    if (SSPCON1bits.SSPOV || SSPCON1bits.WCOL) {
+        dummy = SSPBUF;
+        SSPCON1bits.SSPOV = 0;
+        SSPCON1bits.WCOL = 0;
+        SSPCON1bits.CKP = 1;
+    }
+    return E_OK;
+}
+
+/* @brief: Read a byte as a slave from a master.
+ * @param: A pointer to a struct of type MSSP_I2C_t.
+ * 	       A pointer to a uint8 to hold the read data.
+ * @return: E_OK upon success and E_NOT_OK otherwise.
+ */
+STD_ReturnType MSSP_I2C_SlaveWrite(const MSSP_I2C_t* i2c, uint8 write){
+	int dummy;
+	STD_ReturnType ret = E_OK;
+    if (NULL == i2c || NULL == read)
+        return E_NOT_OK;
+    // Wait for flag (Address or Data received)
+    while (!I2C_FLAG);
+    I2C_FLAG = 0;
+    if (!SSPSTATbits.D_nA && SSPSTATbits.R_nW) {
+        // MASTER READ → Master requests data
+        dummy = SSPBUF; // Clear BF
+        SSPBUF = write;      // Load data to send
+        SSPCON1bits.CKP = 1;             // Release clock
+    }
+    else if (SSPSTATbits.D_nA && SSPSTATbits.R_nW) {
+        // MASTER READ → Data sent, prepare next byte if needed
+        if (!SSPSTATbits.BF)
+            SSPBUF = write; // Optional: stream more data
+        SSPCON1bits.CKP = 1;
+    }
+    // Handle overflow/collision if any
+    if (SSPCON1bits.SSPOV)
+		ret = E_BUS_COLL;
+	else if(SSPCON1bits.WCOL)
+		ret = E_WR_COLL;
+    dummy = SSPBUF;
+    SSPCON1bits.SSPOV = 0;
+    SSPCON1bits.WCOL = 0;
+    SSPCON1bits.CKP = 1;
+	}
+	return ret;
+}
 #endif
 #endif
 #endif
