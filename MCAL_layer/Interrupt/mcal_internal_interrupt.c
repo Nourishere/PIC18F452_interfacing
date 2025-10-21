@@ -398,7 +398,7 @@ STD_ReturnType INT_MSSP_init(uint8 priority){
 	/* Enable the interrupt feature */
 	INT_GEN();	
 	/* Disable the device interrupt */
-	INT_MSSP_EN();	
+	INT_MSSP_DIS();	
 #if (INT_PR == INT_EN)
 	INT_PREN(); // Enable priority feature
 	if(priority == INT_PHIGH){
@@ -415,6 +415,8 @@ STD_ReturnType INT_MSSP_init(uint8 priority){
 #else
 	ret = E_NOT_OK;
 #endif
+	/* Enable it back */
+	INT_MSSP_EN();	
 	return ret;
 }
 
