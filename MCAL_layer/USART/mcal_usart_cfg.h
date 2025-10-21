@@ -9,7 +9,7 @@
 #ifndef HAL_USART_CFG_H
 #define	HAL_USART_CFG_H
 
-#define USART_MODULE STD_ON
+#define USART_MODULE STD_OFF
 #define _ASYNC 0 
 #define _SYNC_MASTER 1 
 #define _SYNC_SLAVE 2
