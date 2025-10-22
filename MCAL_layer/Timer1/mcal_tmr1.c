@@ -134,12 +134,22 @@ STD_ReturnType TMR1_stop(const TMR1_t * tmr1){
  */
 STD_ReturnType TMR1_read(const TMR1_t * tmr1, uint16 * value){ 
 	STD_ReturnType ret = E_OK;
+	uint8 low = 0;
+	uint8 high = 0;
 	if(tmr1 == NULL || value == NULL)
 		ret = E_NOT_OK;
 	else{
-		uint8 low = TMR1L; /*TMR1H is updated after this read */
-		uint8 high = TMR1H; 
-		*value = ((uint16)(high << 8)) | low;	
+		if (tmr1 -> rdwr_mode == _16BIT){
+			low = TMR1L; /*TMR1H is updated after this read */
+			high = TMR1H; 
+			*value = ((uint16)(high << 8)) | low;	
+		}
+		else if(tmr1 -> rdwr_mode == _16BIT){
+			/* Safer to read high byte first */
+		 	high = TMR1H;
+			low = TMR1L;
+			*value = ((uint16)(high << 8)) | low;	
+		}
 	}
 	return ret;
 }
