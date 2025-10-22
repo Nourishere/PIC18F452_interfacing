@@ -8,26 +8,26 @@
 
 #if (EXT_INTERRUPT_MODULE == STD_ON)
 /* Locally defined interrupt handling functions */
-volatile void (*INT0_handler) (void) = NULL;
-volatile void (*INT1_handler) (void) = NULL;
-volatile void (*INT2_handler) (void) = NULL;
+void (*INT0_handler) (void) = NULL;
+void (*INT1_handler) (void) = NULL;
+void (*INT2_handler) (void) = NULL;
 /* @note: High handlers are for rising edges while
  * low are for falling edges.
  *
  * If you wish to use the RB interrupts as
  * change interrupts, use NULL for both callback.
  */
-volatile void (*RB4_handler_low)  (void) = NULL;
-volatile void (*RB4_handler_high) (void) = NULL;
-volatile void (*RB5_handler_high) (void) = NULL;
-volatile void (*RB5_handler_low)  (void) = NULL;
-volatile void (*RB6_handler_high) (void) = NULL;
-volatile void (*RB6_handler_low)  (void) = NULL;
-volatile void (*RB7_handler_high) (void) = NULL;
-volatile void (*RB7_handler_low)  (void) = NULL;
+void (*RB4_handler_low)  (void) = NULL;
+void (*RB4_handler_high) (void) = NULL;
+void (*RB5_handler_high) (void) = NULL;
+void (*RB5_handler_low)  (void) = NULL;
+void (*RB6_handler_high) (void) = NULL;
+void (*RB6_handler_low)  (void) = NULL;
+void (*RB7_handler_high) (void) = NULL;
+void (*RB7_handler_low)  (void) = NULL;
 
 #if (INT_TMR0== INT_EN)
-volatile void (*TMR0_callback) (void) = NULL;
+void (*TMR0_callback) (void) = NULL;
 extern volatile uint16 preloaded;
 void TMR0_ISR(void){
 	/* Flag is already clear */
@@ -649,7 +649,7 @@ STD_ReturnType INT_TMR0_deinit(void){
  * @Return: E_OK upcon success and E_NOT_OK otherwise
  * @Notes:
  */
-STD_ReturnType INT_TMR0_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_TMR0_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 		TMR0_callback = callback;	
 	return ret;
