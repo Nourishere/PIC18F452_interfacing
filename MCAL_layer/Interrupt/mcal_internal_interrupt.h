@@ -180,56 +180,56 @@ STD_ReturnType INT_ADC_set_callback_routine(volatile void (*callback) (uint16 * 
 void TMR1_ISR(void);
 STD_ReturnType INT_TMR1_init(uint8 priority);
 STD_ReturnType INT_TMR1_deinit(void);
-STD_ReturnType INT_TMR1_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_TMR1_set_callback_routine(void (*callback) (void));
 #endif
 
 #if (INT_TMR2 == INT_EN)
 void TMR2_ISR(void);
 STD_ReturnType INT_TMR2_init(uint8 priority);
 STD_ReturnType INT_TMR2_deinit(void);
-STD_ReturnType INT_TMR2_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_TMR2_set_callback_routine(void (*callback) (void));
 #endif
 
 #if (INT_TMR3 == INT_EN)
 void TMR3_ISR(void);
 STD_ReturnType INT_TMR3_init(uint8 priority);
 STD_ReturnType INT_TMR3_deinit(void);
-STD_ReturnType INT_TMR3_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_TMR3_set_callback_routine(void (*callback) (void));
 #endif
 
 #if (INT_CCP1 == INT_EN)
 void CCP1_ISR(void);
 STD_ReturnType INT_CCP1_init(uint8 priority);
 STD_ReturnType INT_CCP1_deinit(void);
-STD_ReturnType INT_CCP1_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_CCP1_set_callback_routine(void (*callback) (void));
 #endif
 
 #if (INT_CCP2 == INT_EN)
 void CCP2_ISR(void);
 STD_ReturnType INT_CCP2_init(uint8 priority);
 STD_ReturnType INT_CCP2_deinit(void);
-STD_ReturnType INT_CCP2_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_CCP2_set_callback_routine(void (*callback) (void));
 #endif
 
 #if(INT_MSSP == INT_EN)
 void MSSP_ISR(void);
 STD_ReturnType INT_MSSP_init(uint8 priority);
 STD_ReturnType INT_MSSP_deinit(void);
-STD_ReturnType INT_MSSP_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_MSSP_set_callback_routine(void (*callback) (void));
 #endif
 
 #if(INT_MSSP == INT_EN)
 void USART_Tx_ISR(void);
 STD_ReturnType INT_USART_Tx_init(uint8 priority);
 STD_ReturnType INT_USART_Tx_deinit(void);
-STD_ReturnType INT_USART_Tx_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_USART_Tx_set_callback_routine(void (*callback) (void));
 #endif
 
 #if(INT_MSSP == INT_EN)
 void USART_Tx_ISR(void);
 STD_ReturnType INT_USART_Rx_init(uint8 priority);
 STD_ReturnType INT_USART_Rx_deinit(void);
-STD_ReturnType INT_USART_Rx_set_callback_routine(volatile void (*callback) (void));
+STD_ReturnType INT_USART_Rx_set_callback_routine(void (*callback) (void));
 #endif
 
 #endif	/* MCAL_INTERNAL_INTERRUPT_H */
