@@ -76,7 +76,7 @@ STD_ReturnType TMR0_initialize(const TMR0_t * tmr0){
 		else
 			ret = ret && E_NOT_OK;
 		/* Set up preloaded value */
-		TMR0_write(tmr0, &(tmr0 -> preloaded_value));
+		TMR0_write(tmr0, tmr0 -> preloaded_value);
 		/* Save a copy of the preloaded value */
 		preloaded = tmr0 -> preloaded_value;
 	}
@@ -133,17 +133,17 @@ STD_ReturnType TMR0_read(const TMR0_t * tmr0, uint16 * value){
  * @Notes: The value in the TMR0H register is updated after a write happens to the 
  * 		   TMR0L register.
  */
-STD_ReturnType TMR0_write(const TMR0_t * tmr0, uint16 * value){ 
+STD_ReturnType TMR0_write(const TMR0_t * tmr0, uint16 value){ 
 	STD_ReturnType ret = E_OK;
-	if(tmr0 == NULL || value == NULL)
+	if(tmr0 == NULL)
 		ret = E_NOT_OK;
 	else{
 		if(tmr0 -> mode == _8BIT)
-			TMR0L = (uint8)(*value & 0x00FF); 
+			TMR0L = (uint8)(value & 0x00FF); 
 			
 		else if (tmr0 -> mode == _16BIT){
-			TMR0H = (uint8)((*value >> 8) & 0x00FF);
-			TMR0L = (uint8)(*value & 0x00FF); /* TMR0H will be updated after this write */ 
+			TMR0H = (uint8)((value >> 8) & 0x00FF);
+			TMR0L = (uint8)(value & 0x00FF); /* TMR0H will be updated after this write */ 
 		}
 		else
 			ret = E_NOT_OK;
@@ -181,84 +181,4 @@ STD_ReturnType TMR0_stop(const TMR0_t * tmr0){
 	return ret;
 }
 
-/* @Brief: (Beta) Delay time in ms using the timer0 module.
- * @Param: A pointer to a TMR0_t struct representing a timer, a delay time in ms
- * 		   and a pointer to a uint8 to return the accuacy of the operation.
- * @Return: E_OK upon success and accuracy is bigger than 90%  and E_NOT_OK otherwise.
- */
-/*
-STD_ReturnType TMR0_delayms(const TMR0_t * tmr0, uint16 delay, uint8* accuracy){
-	STD_ReturnType ret = E_OK;
-	if(NULL == tmr0)
-		ret = E_NOT_OK;
-	else{
-		double val = 0;	
-		uint16 ratio = 0;
-		uint64 fosc = 8000000;
-		ret = TMR0_scale2ratio(tmr0 -> prescaler, &ratio);
-		if(tmr0 -> mode == _8BIT){
-			val = (256 - ((delay * fosc) / (ratio * 4000)));	
-			ret = ret & TMR0_write(&tmr0, &((uint16)val)); 	
-			*accuracy = (uint8)((uint16) val / val)  * 100; 
-		}
-		else if(tmr0 -> mode == _16BIT){
-			val = (65536 - ((delay * fosc) / (ratio * 4000)));	
-			ret = ret & TMR0_write(&tmr0, &(val)); 	
-			*accuracy = (uint8)((uint16) val / val)  * 100; 
-		}
-		else
-			ret = E_NOT_OK;
-	}
-	if(*accuracy < 90)
-		ret = E_NOT_OK;
-	return ret;
-}
-
-/* @Brief: Convert a prescale type to a ratio.
- * @Param: A type TMR0_PRESC_SEL representing a precaler
- * 		   and a pointer to a uint16 to store the output.
- * @Return: E_OK upon success and E_NOT_OK otherwise.
- */
-/*
-static STD_ReturnType TMR0_scale2ratio(TMR0_PRESC_SEL prescale, uint16 * val){
-	STD_ReturnType ret = E_OK;
-	if(NULL == val)
-		ret = E_NOT_OK;
-	else{
-	switch(prescale){
-		case(TMR0_PRESC_NONE):
-			*val = 1;
-			break;
-		case(TMR0_PRESC_1_2):
-			*val = 2;
-			break;
-		case(TMR0_PRESC_1_4):
-			*val = 4;
-			break;
-		case(TMR0_PRESC_1_8):
-			*val = 8;
-			break;
-		case(TMR0_PRESC_1_16):
-			*val = 16;
-			break;
-		case(TMR0_PRESC_1_32):
-			*val = 32;
-			break;
-		case(TMR0_PRESC_1_64):
-			*val = 64;
-			break;
-		case(TMR0_PRESC_1_128):
-			*val = 128;
-			break;
-		case(TMR0_PRESC_1_256):
-			*val = 256;
-			break;
-		default:	
-			ret = E_NOT_OK;
-			break;
-		}
-	}
-	return ret;
-} 
-*/
 #endif
