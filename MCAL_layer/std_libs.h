@@ -7,9 +7,12 @@
 
 #ifndef STD_LIBS_H
 #define	STD_LIBS_H
+
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 
 #endif	/* STD_LIBS_H */
