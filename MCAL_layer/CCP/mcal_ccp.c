@@ -7,7 +7,7 @@
  */
 #include "mcal_ccp.h"
 
-#if (CCP1_MODULE == STD_ON)
+#if (CCP1_MODULE == STD_ON && TMR1_MODULE == STD_ON && TMR2_MODULE == STD_ON && TMR3_MODULE == STD_ON)
 /* The pin used in the ccp1 module */
 pin_config_t CCP1_pin = {
 	PORTC_I,
@@ -123,23 +123,31 @@ STD_ReturnType CCP1_initialize(const CCP1_t * ccp1){
 					break;
 			}
 		}
-		else{/** PWM mode **/
-			/* Set the CCP1 pin for output */
-			TRISCbits.RC2=0;
-			/* Initialize the Timer2 module */
-			ret = ret && TMR2_initialize(&(ccp1 -> op_mode.pwm.timer2));
-			/* Set preloaded value in the CCPR1L:DC1B[1-0] bits and PR2 bits */
-			uint16 presc_val=0;
-			ret = ret && TMR_PRESC2VAL(ccp1 -> op_mode.pwm.timer2.prescaler, &presc_val);
+                else { /** PWM mode **/
+                    /* Set configuration bits */
+                    CCP1_PWM();
+                    /* Set the CCP1 pin for output */
+                    TRISCbits.RC2 = 0;
 
-			PR2 = (uint8) (((_XTAL_FREQ)/(4.0f * (ccp1 -> op_mode.pwm.PWM_freq) * (presc_val)))-1);
-			float DC_dec = (ccp1 -> op_mode.pwm.PWM_duty_cycle) / 100.0f; /* Convert percentage to decimal */
-			float high_time = ((DC_dec) / (ccp1 -> op_mode.pwm.PWM_freq)); /* Calculate high time */
-			uint16 CCP1PR_val = (uint16) (( (high_time) * (_XTAL_FREQ)) / ( (presc_val) ));		
-			CCPR1L = (uint8) (CCP1PR_val >> 2) ;
-			CCP1CONbits.DC1B0 = CCP1PR_val & 0x01;	
-			CCP1CONbits.DC1B1 = (CCP1PR_val >> 1) & 0x01;
-		}
+                    /* Initialize the Timer2 module */
+                    ret = ret && TMR2_initialize(&(ccp1->op_mode.pwm.timer2));
+
+                    /* Get prescaler value */
+                    uint16 presc_val = 0;
+                    ret = ret && TMR_PRESC2VAL(ccp1->op_mode.pwm.timer2.prescaler, &presc_val);
+
+                    /* Compute PWM period register */
+                    PR2 = (uint8)((_XTAL_FREQ / (4.0f * ccp1->op_mode.pwm.PWM_freq * presc_val)) - 1);
+
+                    /* Compute duty register value (hardware-accurate) */
+                    float duty_ratio = (ccp1->op_mode.pwm.PWM_duty_cycle) / 100.0f;
+                    uint16 duty_val = (uint16)(duty_ratio * 4.0f * (PR2 + 1));
+
+                    /* Write to registers */
+                    CCPR1L = (uint8)(duty_val >> 2);
+                    CCP1CONbits.DC1B = duty_val & 0x03;
+                }
+
 	}
 	return ret;
 }
@@ -171,16 +179,20 @@ STD_ReturnType CCP1_deinitialize(const CCP1_t * ccp1){
  * @return: E_OK upon success and E_NOT_OK otherwise.
  */
 STD_ReturnType CCP1_PWM_set_duty_cycle(const CCP1_t * ccp1, uint8 duty_cycle){
-	STD_ReturnType ret = E_OK;
-	if(ccp1 == NULL|| ccp1 -> mode != CCP_PWM || duty_cycle > 100)
-		ret = E_NOT_OK;
-	else{
-		uint16 CCP1PR_val = (duty_cycle) / ( (ccp1 -> op_mode.pwm.timer2.prescaler) * (1/_XTAL_FREQ));		
-		CCPR1L = (uint8) (CCP1PR_val >> 2) ;
-		CCP1CONbits.DC1B0 = CCP1PR_val & 0x01;	
-		CCP1CONbits.DC1B1 = (CCP1PR_val >> 1) & 0x01;
-	}
-	return ret;
+    STD_ReturnType ret = E_OK;
+    uint16 duty_reg;
+    if(ccp1 == NULL || ccp1->mode != CCP_PWM || duty_cycle > 100){
+        ret = E_NOT_OK;
+    }
+    else{
+        /* Duty register value calculation */
+        duty_reg = ((uint32)(duty_cycle) * (PR2 + 1) * 4) / 100;
+
+        /* Write to registers */
+        CCPR1L = (uint8)(duty_reg >> 2);              // Upper 8 bits
+        CCP1CONbits.DC1B = duty_reg & 0x03;           // Lower 2 bits
+    }
+    return ret;
 }
 
 /* @brief: Set the PWM frequency for the CCP1 module.
