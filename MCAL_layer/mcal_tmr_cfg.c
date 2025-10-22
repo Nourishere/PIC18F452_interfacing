@@ -28,6 +28,9 @@ STD_ReturnType TMR_PRESC2VAL(TMR_PRESC_SEL prescaler, uint16* val){
 			case(TMR_PRESC_1_4):
 				*val = 4;
 				break;
+                        case(TMR_PRESC_1_8):
+				*val = 8;
+				break;
 			case(TMR_PRESC_1_16):
 				*val = 16;
 				break;
