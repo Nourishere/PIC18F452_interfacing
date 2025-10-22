@@ -10,6 +10,7 @@
 /******** Includes ******************/
 #include "ECU_layer/ecu_init.h"
 #include "MCAL_layer/std_libs.h"
+#include "Service/delay.h"
 
 /******** Data types ****************/
 
