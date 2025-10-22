@@ -59,9 +59,7 @@ STD_ReturnType TMR0_deinitialize(const TMR0_t * tmr0);
 STD_ReturnType TMR0_start(const TMR0_t * tmr0);
 STD_ReturnType TMR0_stop(const TMR0_t * tmr0);
 STD_ReturnType TMR0_read(const TMR0_t * tmr0, uint16 * value); 
-STD_ReturnType TMR0_write(const TMR0_t * tmr0, uint16 * value); 
-STD_ReturnType TMR0_delayms(const TMR0_t * tmr0, uint16 delay, uint8* accuracy);
-static STD_ReturnType TMR0_scale2ratio(TMR_PRESC_SEL prescale, uint16 * val);
+STD_ReturnType TMR0_write(const TMR0_t * tmr0, uint16 value); 
 
 #endif	/* HAL_TMR0_H */
 
