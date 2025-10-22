@@ -1,8 +1,7 @@
 # Ignore all build output
 build/
 dist/
+nbproject/
 MCAL_layer/notes
 defmplabxtrace.log
 defmplabxtrace.log.inx
-nbproject/
-
