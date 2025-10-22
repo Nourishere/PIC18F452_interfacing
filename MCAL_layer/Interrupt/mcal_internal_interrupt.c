@@ -8,7 +8,7 @@
 
 #if(INT_INTERRUPT_MODULE == STD_ON)
 #if (INT_ADC == INT_EN)
-volatile void (*ADC_callback) (uint16 * result) = NULL;
+void (*ADC_callback) (uint16 * result) = NULL;
 uint16 ADC_output;
 
 void ADC_ISR(void){
@@ -72,14 +72,14 @@ STD_ReturnType INT_ADC_deinit(void){
  * @param: A pointer to a ADC_t type.
  * @return: E_OK.
  */
-STD_ReturnType INT_ADC_set_callback_routine(volatile void (*callback) (uint16 * result)){
+STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result)){
 	STD_ReturnType ret = E_OK;
 	ADC_callback = callback;	
 	return ret;
 }
 #endif
 #if (INT_TMR1 == INT_EN)
-volatile void (*TMR1_callback) (void) = NULL;
+void (*TMR1_callback) (void) = NULL;
 extern uint16 preloaded_tmr1;
 void TMR1_ISR(void){
 	/* Flag is already clear */
@@ -136,7 +136,7 @@ STD_ReturnType INT_TMR1_deinit(void){
  * @param: A pointer to a function with void parameters and void return.
  * @return: E_OK;
  */
-STD_ReturnType INT_TMR1_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_TMR1_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	TMR1_callback = callback;
 	return ret;
@@ -144,7 +144,7 @@ STD_ReturnType INT_TMR1_set_callback_routine(volatile void (*callback) (void)){
 #endif
 
 #if (INT_TMR2 == INT_EN)
-volatile void (*TMR2_callback) (void) = NULL;
+void (*TMR2_callback) (void) = NULL;
 extern uint8 preloaded_tmr2;
 void TMR2_ISR(void){
 	/* Flag is already clear */
@@ -200,7 +200,7 @@ STD_ReturnType INT_TMR2_deinit(void){
  * @param: A pointer to a function with void parameters and void return.
  * @return: E_OK;
  */
-STD_ReturnType INT_TMR2_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_TMR2_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	TMR2_callback = callback;
 	return ret;
@@ -208,7 +208,7 @@ STD_ReturnType INT_TMR2_set_callback_routine(volatile void (*callback) (void)){
 #endif
 
 #if (INT_TMR3 == INT_EN)
-volatile void (*TMR3_callback) (void) = NULL;
+void (*TMR3_callback) (void) = NULL;
 extern uint16 preloaded_tmr3;
 void TMR3_ISR(void){
 	/* Flag is already clear */
@@ -262,14 +262,14 @@ STD_ReturnType INT_TMR3_deinit(void){
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
  */
-STD_ReturnType INT_TMR3_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_TMR3_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	TMR3_callback = callback;
 	return ret;
 }
 #endif
 #if (INT_CCP1 == INT_EN)
-volatile void (*CCP1_callback) (void) = NULL;
+void (*CCP1_callback) (void) = NULL;
 void CCP1_ISR(void){
 	if(CCP1_callback)
 		CCP1_callback();
@@ -317,14 +317,14 @@ STD_ReturnType INT_CCP1_deinit(void){
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
  */
-STD_ReturnType INT_CCP1_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_CCP1_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	CCP1_callback = callback;
 	return ret;
 }
 #endif
 #if (INT_CCP2 == INT_EN)
-volatile void (*CCP2_callback) (void) = NULL;
+void (*CCP2_callback) (void) = NULL;
 void CCP2_ISR(void){
 	if(CCP2_callback)
 		CCP2_callback();
@@ -374,7 +374,7 @@ STD_ReturnType INT_CCP2_deinit(void){
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
  */
-STD_ReturnType INT_CCP2_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_CCP2_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	CCP2_callback = callback;
 	return ret;
@@ -382,7 +382,7 @@ STD_ReturnType INT_CCP2_set_callback_routine(volatile void (*callback) (void)){
 #endif
 
 #if (INT_MSSP == INT_EN)
-volatile void (*MSSP_callback) (void) = NULL;
+void (*MSSP_callback) (void) = NULL;
 void MSSP_ISR(void){
 	if(MSSP_callback)
 		MSSP_callback();
@@ -435,7 +435,7 @@ STD_ReturnType INT_MSSP_deinit(void){
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
  */
-STD_ReturnType INT_MSSP_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_MSSP_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	MSSP_callback = callback;
 	return ret;
@@ -443,7 +443,7 @@ STD_ReturnType INT_MSSP_set_callback_routine(volatile void (*callback) (void)){
 
 #endif
 #if (INT_USART_TX == INT_EN)
-volatile void (*USART_Tx_callback) (void) = NULL;
+void (*USART_Tx_callback) (void) = NULL;
 void USART_Tx_ISR(void){
 	if(USART_Tx_callback)
 		USART_Tx_callback();
@@ -495,7 +495,7 @@ STD_ReturnType INT_USART_Tx_deinit(void){
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
  */
-STD_ReturnType INT_USART_Tx_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_USART_Tx_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	USART_Tx_callback = callback;
 	return ret;
@@ -503,7 +503,7 @@ STD_ReturnType INT_USART_Tx_set_callback_routine(volatile void (*callback) (void
 #endif
 
 #if (INT_USART_RX == INT_EN)
-volatile void (*USART_Rx_callback) (void) = NULL;
+void (*USART_Rx_callback) (void) = NULL;
 void USART_Rx_ISR(void){
 	if(USART_Rx_callback)
 		USART_Rx_callback();
@@ -555,7 +555,7 @@ STD_ReturnType INT_USART_Rx_deinit(void){
  * @param: A pointer to a function that takes void and returns void.
  * @return: E_OK upon success and E_NOT_OK otherwise.
  */
-STD_ReturnType INT_USART_Rx_set_callback_routine(volatile void (*callback) (void)){
+STD_ReturnType INT_USART_Rx_set_callback_routine(void (*callback) (void)){
 	STD_ReturnType ret = E_OK;
 	USART_Rx_callback = callback;
 	return ret;
