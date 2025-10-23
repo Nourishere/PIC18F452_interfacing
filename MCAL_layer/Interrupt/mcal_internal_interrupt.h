@@ -173,7 +173,7 @@
 void ADC_ISR(void);
 STD_ReturnType INT_ADC_init(uint8 priority);
 STD_ReturnType INT_ADC_deinit(void);
-STD_ReturnType INT_ADC_set_callback_routine(volatile void (*callback) (uint16 * result));
+STD_ReturnType INT_ADC_set_callback_routine(void (*callback) (uint16 * result));
 #endif
 
 #if (INT_TMR1 == INT_EN)
