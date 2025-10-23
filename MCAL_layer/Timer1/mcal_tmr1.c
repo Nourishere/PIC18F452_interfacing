@@ -58,7 +58,12 @@ STD_ReturnType TMR1_initialize(const TMR1_t * tmr1){
 		else
 			ret = ret && E_NOT_OK;
 	    /* Set up oscillator */
-			
+		if(STD_ON == tmr1 -> osc)
+			TMR1_OSC_ON();
+		else if(STD_OFF == tmr1 -> osc)
+			TMR1_OSC_OFF();
+		else 
+			ret = E_NOT_OK;
 		/* Set the clock synchronization */
 		/* @note: only available in counter mode */
 		if(tmr1 -> clk_source == EXT){ 	
@@ -72,7 +77,7 @@ STD_ReturnType TMR1_initialize(const TMR1_t * tmr1){
 		else
 			ret = E_NOT_OK; 
 		/* Set up preloaded value */
-		TMR1_write(tmr1, &(tmr1 -> preloaded_value));
+		TMR1_write(tmr1, tmr1 -> preloaded_value);
 		/* Save a copy of the preloaded value */
 		preloaded_tmr1 = tmr1 -> preloaded_value;
 	}
@@ -161,13 +166,13 @@ STD_ReturnType TMR1_read(const TMR1_t * tmr1, uint16 * value){
  * @Notes: The value in the TMR1H register is updated after a write happens to the 
  * 		   TMR1L register.
  */
-STD_ReturnType TMR1_write(const TMR1_t * tmr1, uint16 * value){ 
+STD_ReturnType TMR1_write(const TMR1_t * tmr1, uint16 value){ 
 	STD_ReturnType ret = E_OK;
-	if(tmr1 == NULL || value == NULL)
+	if(tmr1 == NULL)
 		ret = E_NOT_OK;
 	else{
-		TMR1H = (uint8)((*value >> 8) & 0x00FF);
-		TMR1L = (uint8)(*value & 0x00FF); /* TMR1H will be updated after this write */ 
+		TMR1H = (uint8)((value >> 8) & 0x00FF);
+		TMR1L = (uint8)(value & 0x00FF); /* TMR1H will be updated after this write */ 
 	}
 	return ret;
 }
