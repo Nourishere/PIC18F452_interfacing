@@ -56,7 +56,7 @@ STD_ReturnType TMR3_deinitialize(const TMR3_t * tmr3);
 STD_ReturnType TMR3_start(const TMR3_t * tmr3);
 STD_ReturnType TMR3_stop(const TMR3_t * tmr3);
 STD_ReturnType TMR3_read(const TMR3_t * tmr3, uint16 * value); 
-STD_ReturnType TMR3_write(const TMR3_t * tmr3, uint16 * value); 
+STD_ReturnType TMR3_write(const TMR3_t * tmr3, uint16 value); 
 
 
 #endif	/* HAL_TMR3_H */

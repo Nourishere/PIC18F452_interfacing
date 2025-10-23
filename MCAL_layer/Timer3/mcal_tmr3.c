@@ -64,7 +64,7 @@ STD_ReturnType TMR3_initialize(const TMR3_t * tmr3){
 		else
 			ret = E_NOT_OK; 
 		/* Set up preloaded value */
-		TMR3_write(tmr3, &(tmr3 -> preloaded_value));
+		TMR3_write(tmr3, tmr3 -> preloaded_value);
 		/* Save a copy of the preloaded value */
 		preloaded_tmr3 = tmr3 -> preloaded_value;
 	}
@@ -141,13 +141,13 @@ STD_ReturnType TMR3_read(const TMR3_t * tmr3, uint16 * value){
  * @Notes: The value in the TMR3H register is updated after a write happens to the 
  * 		   TMR3L register.
  */
-STD_ReturnType TMR3_write(const TMR3_t * tmr3, uint16 * value){ 
+STD_ReturnType TMR3_write(const TMR3_t * tmr3, uint16 value){ 
 	STD_ReturnType ret = E_OK;
-	if(tmr3 == NULL || value == NULL)
+	if(tmr3 == NULL)
 		ret = E_NOT_OK;
 	else{
-		TMR3H = (uint8)((*value >> 8) & 0x00FF);
-		TMR3L = (uint8)(*value & 0x00FF); /* TMR3H will be updated after this write */ 
+		TMR3H = (uint8)((value >> 8) & 0x00FF);
+		TMR3L = (uint8)(value & 0x00FF); /* TMR3H will be updated after this write */ 
 	}
 	return ret;
 }

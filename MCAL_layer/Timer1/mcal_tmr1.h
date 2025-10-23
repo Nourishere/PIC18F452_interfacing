@@ -44,6 +44,9 @@
 
 /******* data types **************/
 typedef struct{
+	/* Timer1 can be used to drive a low power (LP) oscillator of value 
+     * less than 200 MHz (Typically 32.768 KHz */
+	uint8 osc; /* Use STD_ON or STD_OFF */
 #if (INT_TMR1== INT_EN)
 	void (*TMR1_interrupt_handler) (void); // use NULL if unwanted
 #if (INT_PR == INT_EN)
@@ -63,7 +66,7 @@ STD_ReturnType TMR1_deinitialize(const TMR1_t * tmr1);
 STD_ReturnType TMR1_start(const TMR1_t * tmr1);
 STD_ReturnType TMR1_stop(const TMR1_t * tmr1);
 STD_ReturnType TMR1_read(const TMR1_t * tmr1, uint16 * value); 
-STD_ReturnType TMR1_write(const TMR1_t * tmr1, uint16 * value); 
+STD_ReturnType TMR1_write(const TMR1_t * tmr1, uint16 value); 
 
 
 #endif	/* HAL_TMR1_H */

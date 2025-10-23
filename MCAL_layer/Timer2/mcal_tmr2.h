@@ -60,7 +60,7 @@ STD_ReturnType TMR2_deinitialize(const TMR2_t * tmr2);
 STD_ReturnType TMR2_start(const TMR2_t * tmr2);
 STD_ReturnType TMR2_stop(const TMR2_t * tmr2);
 STD_ReturnType TMR2_read(const TMR2_t * tmr2, uint8 * rd_value);
-STD_ReturnType TMR2_write(const TMR2_t * tmr2, uint8 * wr_value);
-STD_ReturnType TMR2_write_PR_reg(const TMR2_t * tmr2, uint8 * wr_value);
+STD_ReturnType TMR2_write(const TMR2_t * tmr2, uint8 wr_value);
+STD_ReturnType TMR2_write_PR_reg(const TMR2_t * tmr2, uint8 wr_value);
 
 #endif	/* HAL_TMR2_H */

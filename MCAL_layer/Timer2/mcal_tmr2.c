@@ -45,7 +45,7 @@ STD_ReturnType TMR2_initialize(const TMR2_t * tmr2){
 		/* Configure the postscaler */
 		TMR2_POSTSC_WR(tmr2 -> postscaler);		
 		/* Set up preloaded value */
-		TMR2_write(tmr2, &(tmr2 -> preloaded_value));
+		TMR2_write(tmr2, tmr2 -> preloaded_value);
 		/* Save a copy of the preloaded value */
 		preloaded_tmr2 = tmr2 -> preloaded_value;
 	}
@@ -113,34 +113,34 @@ STD_ReturnType TMR2_read(const TMR2_t * tmr2, uint8 * rd_value){
 
 /* @brief: Write to the TMR2 register.
  * @param: A pointer to a TMR2_t struct
- * 		   and a pointer to a uint8 for the value to be written. 
+ * 		   and a uint8 for the value to be written. 
  * @return: E_OK upon success and E_NOT_OK otherwise.
  * @note: The TMR2 register is compared to the PR2 register for the interrupt 
  * 	      flag to be asserted. The PR register is initialized with 0xFF upon reset.
  */
-STD_ReturnType TMR2_write(const TMR2_t * tmr2, uint8 * wr_value){
+STD_ReturnType TMR2_write(const TMR2_t * tmr2, uint8 wr_value){
 	STD_ReturnType ret = E_OK;
-	if(NULL == tmr2 || wr_value == NULL)
+	if(NULL == tmr2)
 		ret = E_NOT_OK;
 	else{
-		TMR2 = (uint8)(*wr_value & 0xFF); 
+		TMR2 = (uint8)(wr_value & 0xFF); 
 	}
 	return ret;
 }
 
 /* @brief: Write to the PR2 register.
  * @param: A pointer to a TMR2_t struct
- * 		   and a pointer to a uint8 for the value to be written. 
+ * 		   and a uint8 for the value to be written. 
  * @return: E_OK upon success and E_NOT_OK otherwise.
  * @note: The PR2 register is used to comparison with the TMR2 register
  * 		  for which the interrupt flag is to be set when they are equal. 
  */
-STD_ReturnType TMR2_write_PR_reg(const TMR2_t * tmr2, uint8 * wr_value){
+STD_ReturnType TMR2_write_PR_reg(const TMR2_t * tmr2, uint8 wr_value){
 	STD_ReturnType ret = E_OK;
-	if(NULL == tmr2 || wr_value == NULL)
+	if(NULL == tmr2)
 		ret = E_NOT_OK;
 	else{
-		PR2 = (uint8)(*wr_value & 0xFF); 
+		PR2 = (uint8)(wr_value & 0xFF); 
 	}
 	return ret;
 }
