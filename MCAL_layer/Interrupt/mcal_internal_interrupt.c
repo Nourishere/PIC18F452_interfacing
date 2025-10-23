@@ -12,7 +12,6 @@ void (*ADC_callback) (uint16 * result) = NULL;
 uint16 ADC_output;
 
 void ADC_ISR(void){
-	INT_ADC_CLRF();
 	if(ADC_callback){
 		ADC_output = (uint16) ( (((uint16)(ADRESH)) << 8) | ((uint16) (ADRESL)) );
 		ADC_callback(&ADC_output);

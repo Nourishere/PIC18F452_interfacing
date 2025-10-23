@@ -93,6 +93,7 @@ void __interrupt() InterruptManager(void){
 	/* ADC internal interrupt checking */
 	#if (INT_ADC == INT_EN)
 		if(INT_ADC_STATUS == INT_EN && INT_ADC_F == INT_HIGH)
+                    	INT_ADC_CLRF();
 			ADC_ISR();
 	#endif
 	#endif 
