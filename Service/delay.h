@@ -10,6 +10,7 @@
 #define	DELAY_H
 
 /****************** include **********************/
+#include "oscillator.h"
 #include "../MCAL_layer/Timer0/mcal_tmr0.h"
 #include "../MCAL_layer/Timer1/mcal_tmr1.h"
 #include "../MCAL_layer/Timer2/mcal_tmr2.h"

@@ -43,7 +43,7 @@ static TMR1_t tmr1_local = {
 
 static TMR2_t tmr2_local = {
 #if (INT_TMR2== INT_EN)
-	.TMR2_interrupt_handler = __TMR2_delay,// use NULL if unwanted
+	.TMR2_interrupt_handler = __TMR2_delay,
 #if (INT_PR == INT_EN)
 	.priority = INT_PHIGH, /* @ref: mcal_interrupt_config.h -> INT_PLOW & INT_PHIGH */	
 #endif
@@ -222,4 +222,12 @@ static STD_ReturnType TMR_find_presc(uint32 delay, uint8 timer){
 		ret = E_NOT_OK;
 
 	return ret;
+}
+void __TMR0_delay(void){
+}
+void __TMR1_delay(void){
+}
+void __TMR2_delay(void){
+}
+void __TMR3_delay(void){
 }
