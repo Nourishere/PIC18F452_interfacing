@@ -5,15 +5,17 @@
  * Created on October 23, 2024, 7:36 AM
  */
 
-#include "device_config.h"
-/*This header file includes the main configurations of the PIC*/
 // PIC18F452 Configuration Bit Settings
 
 // 'C' source line config statements
+// #pragma config statements should precede project file includes.
+// Use project enums instead of #define for ON and OFF.
+
+#include <xc.h>
 
 // CONFIG1H
-#pragma config OSC = HS         // Oscillator Selection bits (HS oscillator)
-#pragma config OSCS = OFF       // Oscillator System Clock Switch Enable bit (Oscillator system clock switch option is disabled (main oscillator is source))
+#pragma config OSC = LP         // Oscillator Selection bits (HS oscillator)
+#pragma config OSCS = ON        // Oscillator System Clock Switch Enable bit (Oscillator system clock switch option is enabled (oscillator switching is enabled))
 
 // CONFIG2L
 #pragma config PWRT = OFF       // Power-up Timer Enable bit (PWRT disabled)
@@ -60,9 +62,6 @@
 
 // CONFIG7H
 #pragma config EBTRB = OFF      // Boot Block Table Read Protection bit (Boot Block (000000-0001FFh) not protected from Table Reads executed in other blocks)
-
-// #pragma config statements should precede project file includes.
-// Use project enums instead of #define for ON and OFF.
 
 
 
