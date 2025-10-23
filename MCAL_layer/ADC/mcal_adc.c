@@ -8,13 +8,15 @@
  */
 #include "mcal_adc.h"
 
+static STD_ReturnType ADC_set_pin_config(ADC_CH_t channel);
+
 #if (ADC_MODULE == STD_ON)
 /* @brief: Initialize the ADC module.
  * @param: A pointer to a struct of type ADC_t.
  * @return: E_OK if initialization is successful and
  * 			E_NOT_OK otherwise.
  */
-STD_ReturnType ADC_init(const ADC_t * lADC){
+STD_ReturnType ADC_initialize(const ADC_t * lADC){
 	STD_ReturnType ret = E_OK;
 	if(NULL == lADC || lADC -> channel == ADC_default)
 		ret = E_NOT_OK;
