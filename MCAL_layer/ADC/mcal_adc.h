@@ -76,8 +76,12 @@
 /********************************************************************/
 /* Choose a combination from 1 to 15 */
 #define ADC_CHOOSE_COMB(n) \
-	(ADCON1bits.PCFG = ((uint8)(n-1) & 0x0F))
-
+    do{ \
+        if (n >= 7) \
+        (ADCON1bits.PCFG = ((uint8)(n) & 0x0F)); \
+         else \
+        (ADCON1bits.PCFG = ((uint8)(n-1) & 0x0F)); \
+    }while (0)
 /*** data types ***/
 typedef enum{
 	ADC_default=-1,
@@ -117,13 +121,12 @@ typedef struct{
 
 typedef uint16 ADC_result_size;
 /*** prototypes ***/
-STD_ReturnType ADC_init(const ADC_t * lADC);
+STD_ReturnType ADC_initialize(const ADC_t * lADC);
 STD_ReturnType ADC_deinit(const ADC_t * lADC);
 STD_ReturnType ADC_select_channel(ADC_CH_t lCH);
 STD_ReturnType ADC_convert(const ADC_t * lADC, ADC_CH_t lCH);
 STD_ReturnType ADC_result(const ADC_t * lADC, ADC_result_size * result);
 STD_ReturnType ADC_status(const ADC_t * lADC, ADC_status_t * status);
-static STD_ReturnType ADC_set_pin_config(ADC_CH_t channel);
 
 #endif	/* HAL_ACD_H */
 
