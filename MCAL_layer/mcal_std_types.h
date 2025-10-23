@@ -11,7 +11,6 @@
 #include "std_libs.h"
 
 /*************** macros ********************/
-#define _XTAL_FREQ 8000000 /* The defined crystal clock frequency */
 #define STD_HIGH 0x01
 #define STD_LOW  0x00
 #define STD_ON  0x01
